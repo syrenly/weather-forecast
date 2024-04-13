@@ -8,16 +8,18 @@ import {
 	RouterStateSnapshot,
 } from "@angular/router";
 import { CityService } from "./city.service";
+import { WEATHER_API_LICENSE } from "./tokens";
 
 export const weatherDetailsGuard: CanActivateFn = (
 	route: ActivatedRouteSnapshot,
 	state: RouterStateSnapshot
 ): MaybeAsync<GuardResult> => {
 	const cityService = inject(CityService);
-	const hasCity = !!cityService.city;
-	if (!hasCity) {
+	const licenseToken = inject(WEATHER_API_LICENSE);
+	const canProceed = !!cityService.city && !!licenseToken;
+	if (!canProceed) {
 		const router = inject(Router);
 		router.navigate(["home"]);
 	}
-	return hasCity;
+	return canProceed;
 };

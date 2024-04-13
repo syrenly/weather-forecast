@@ -1,0 +1,26 @@
+:host {
+	display: block;
+	padding: 1rem;
+	overflow-y: auto;
+	overflow-x: hidden;
+	height: calc(100% - 2rem);
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: end;
+	height: 50px;
+}
+
+.content {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: calc(100% - 50px);
+	mat-card {
+		h1 {
+			margin: 0;
+		}
+	}
+}

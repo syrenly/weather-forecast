@@ -10,6 +10,7 @@ import { routeTransitionAnimations } from "./route-transition-animations";
 	templateUrl: "./app.component.html",
 	styleUrl: "./app.component.scss",
 	animations: [routeTransitionAnimations],
+	providers: [],
 })
 export class AppComponent {
 	title = "weather-forecast";
