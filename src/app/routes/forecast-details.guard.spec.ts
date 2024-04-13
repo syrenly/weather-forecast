@@ -1,11 +1,11 @@
 import { TestBed } from "@angular/core/testing";
 import { CanActivateFn } from "@angular/router";
-import { weatherDetailsGuard } from "./weather-details.guard";
+import { forecastDetailsGuard } from "./forecast-details.guard";
 
-describe("weatherDetailsGuard", () => {
+describe("forecastDetailsGuard", () => {
 	const executeGuard: CanActivateFn = (...guardParameters) =>
 		TestBed.runInInjectionContext(() =>
-			weatherDetailsGuard(...guardParameters)
+			forecastDetailsGuard(...guardParameters)
 		);
 
 	beforeEach(() => {

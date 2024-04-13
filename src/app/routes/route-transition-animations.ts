@@ -9,7 +9,7 @@ import {
 } from "@angular/animations";
 
 export const routeTransitionAnimations = trigger("triggerName", [
-	transition("homeState => weatherState, weatherState => homeState", [
+	transition("homeState => forecastState, forecastState => homeState", [
 		style({ position: "relative" }),
 		query(":enter, :leave", [
 			style({

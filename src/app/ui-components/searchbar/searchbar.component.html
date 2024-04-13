@@ -20,11 +20,14 @@
 		@for (option of options$ | async; track option) {
 		<mat-option [value]="option">
 			<div class="weather-option">
+				@if(option.weather.length > 0){
 				<img
-					width="24"
-					height="24"
+					[matTooltip]="option.weather[0].description"
+					width="36"
+					height="36"
 					[ngSrc]="option.weather[0].icon | weather"
 				/>
+				}
 				<span class="city-name">
 					{{ option.name }},&nbsp;{{ option.sys?.country }}
 				</span>

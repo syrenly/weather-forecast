@@ -12,6 +12,7 @@ export interface IWeatherCity {
 	visibility: number;
 	clouds: ICloud | null;
 	weather: IWeather[];
+	cod: number;
 }
 
 export interface ICitySearchResult {
@@ -53,6 +54,11 @@ export interface IWeather {
 
 export interface ICountry {
 	country: string;
+	type: number;
+	id: number;
+	message: number;
+	sunrise: number;
+	sunset: number;
 }
 
 interface IPrecipitationH {

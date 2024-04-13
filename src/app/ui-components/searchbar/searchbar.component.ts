@@ -15,6 +15,8 @@ import {
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { Router } from "@angular/router";
 import { Observable, catchError, debounceTime, map, of, switchMap } from "rxjs";
 import {
 	DEFAULT_DEBOUNCE_DELAY_MILLISECONDS,
@@ -36,6 +38,7 @@ import { ICitySearchResult, IWeatherCity } from "../../types";
 		MatFormFieldModule,
 		MatIconModule,
 		MatInputModule,
+		MatTooltipModule,
 		ReactiveFormsModule,
 		NgIf,
 		NgFor,
@@ -57,7 +60,8 @@ export class SearchbarComponent implements AfterViewInit {
 	constructor(
 		@Inject(WEATHER_API_LICENSE) private readonly licenseApi: string,
 		private readonly searchService: SearchService,
-		private readonly cityService: CityService
+		private readonly cityService: CityService,
+		private readonly router: Router
 	) {}
 
 	ngAfterViewInit(): void {
@@ -99,6 +103,7 @@ export class SearchbarComponent implements AfterViewInit {
 		const selectedValue = event?.option?.value;
 		if (selectedValue) {
 			this.cityService.city = selectedValue;
+			this.router.navigate(["forecast"]);
 		}
 	}
 }
