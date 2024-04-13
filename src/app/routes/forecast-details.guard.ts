@@ -10,7 +10,7 @@ import {
 import { CityService } from "../services/city.service";
 import { WEATHER_API_LICENSE } from "../tokens";
 
-export const weatherDetailsGuard: CanActivateFn = (
+export const forecastDetailsGuard: CanActivateFn = (
 	route: ActivatedRouteSnapshot,
 	state: RouterStateSnapshot
 ): MaybeAsync<GuardResult> => {
