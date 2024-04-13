@@ -30,6 +30,21 @@
 }
 
 .content {
-	margin-top: 50px;
-	height: calc(100% - 50px);
+	margin-top: 90px;
+	height: calc(100% - 90px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+
+	// TODO ADD breakpoints with media queries
+	mat-card {
+		width: 60%;
+		max-height: 70%;
+		height: fit-content;
+		min-height: 400px;
+		h1 {
+			margin-top: 0;
+		}
+	}
 }

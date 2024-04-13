@@ -7,4 +7,30 @@
 	<app-searchbar></app-searchbar>
 	<div>bottone per cambiare tema</div>
 </div>
-<div class="content"></div>
+<div class="content">
+	@if(city){
+	<mat-card>
+		<div class="card-header"></div>
+		<mat-card-header>
+			@if(mainWeather){
+			<img
+				mat-card-avatar
+				alt="{{ mainWeather.description }}"
+				width="40"
+				height="40"
+				[ngSrc]="mainWeather.icon | weather"
+			/>
+			}
+			<mat-card-title
+				>{{ city.name }}
+				<img width="16" height="11" [ngSrc]="city.sys?.country | flag"
+			/></mat-card-title>
+			@if(mainWeather){
+			<mat-card-subtitle>
+				{{ mainWeather.description }}
+			</mat-card-subtitle>
+			}
+		</mat-card-header>
+	</mat-card>
+	}
+</div>

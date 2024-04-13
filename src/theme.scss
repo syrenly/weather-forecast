@@ -1,19 +1,20 @@
-@use "@angular/material" as mat;
-@use "@angular/material-experimental" as matx;
+// @use "@angular/material" as mat;
+// @use "@angular/material-experimental" as matx;
 
-$theme: matx.define-theme(
-	(
-		color: (
-			theme-type: light,
-			primary: matx.$m3-azure-palette,
-			tertiary: matx.$m3-blue-palette,
-		),
-	)
-);
+// $theme: matx.define-theme(
+// 	(
+// 		color: (
+// 			theme-type: light,
+// 			primary: matx.$m3-azure-palette,
+// 			tertiary: matx.$m3-blue-palette,
+// 		),
+// 	)
+// );
 
-@include mat.core();
-@include matx.color-variants-back-compat($theme);
+// @include mat.core();
+// @include matx.color-variants-back-compat($theme);
 
-:root {
-	@include mat.all-component-themes($theme);
-}
+// :root {
+// 	@include mat.all-component-themes($theme);
+// }
+// "node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css"
