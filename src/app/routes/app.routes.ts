@@ -1,6 +1,7 @@
 import { Routes } from "@angular/router";
+import { ForecastComponent } from "../forecast/forecast.component";
 import { HomeComponent } from "../home/home.component";
-import { WeatherComponent } from "../weather/weather.component";
+import { cityResolver } from "./city.resolver";
 import { forecastDetailsGuard } from "./forecast-details.guard";
 
 export const routes: Routes = [
@@ -15,10 +16,18 @@ export const routes: Routes = [
 		data: { animationState: "homeState" },
 	},
 	{
-		path: "forecast",
-		component: WeatherComponent,
+		path: "forecast/:id",
+		component: ForecastComponent,
 		data: { animationState: "forecastState" },
 		canActivate: [forecastDetailsGuard],
+		resolve: [cityResolver],
+	},
+	{
+		path: "forecast/:id",
+		component: ForecastComponent,
+		data: { animationState: "forecastState" },
+		canActivate: [forecastDetailsGuard],
+		resolve: [cityResolver],
 	},
 	{
 		path: "**",

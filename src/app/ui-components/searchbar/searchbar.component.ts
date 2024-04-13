@@ -27,7 +27,7 @@ import { WeatherPipe } from "../../pipes/weather.pipe";
 import { CityService } from "../../services/city.service";
 import { SearchService } from "../../services/search.service";
 import { WEATHER_API_LICENSE } from "../../tokens";
-import { ICitySearchResult, IWeatherCity } from "../../types";
+import { ICityResult, ICitySearchResult } from "../../types";
 
 @Component({
 	selector: "app-searchbar",
@@ -51,7 +51,7 @@ import { ICitySearchResult, IWeatherCity } from "../../types";
 })
 export class SearchbarComponent implements AfterViewInit {
 	autocompleteControl = new FormControl<string>("");
-	options$!: Observable<IWeatherCity[]>;
+	options$!: Observable<ICityResult[]>;
 	@ViewChild("filterInput", { static: false })
 	filterInput!: ElementRef<HTMLInputElement>;
 	@ViewChild("autoTrigger", { static: false })
@@ -87,23 +87,23 @@ export class SearchbarComponent implements AfterViewInit {
 				(): Observable<ICitySearchResult> => of(EMPTY_SEARCH_RESULT)
 			),
 			switchMap(
-				(value: ICitySearchResult): Observable<IWeatherCity[]> =>
+				(value: ICitySearchResult): Observable<ICityResult[]> =>
 					of(value.list)
 			)
 		);
 	}
 
-	displayFn = (value: IWeatherCity): string => {
+	displayFn = (value: ICityResult): string => {
 		const { name, sys } = value;
 		// todo more strict
 		return value ? `${name}, ${sys?.country || "N.A"}` : "";
 	};
 
 	itemSelected(event: MatAutocompleteSelectedEvent): void {
-		const selectedValue = event?.option?.value;
+		const selectedValue: ICityResult = event?.option?.value;
 		if (selectedValue) {
 			this.cityService.city = selectedValue;
-			this.router.navigate(["forecast"]);
+			this.router.navigate(["forecast", selectedValue.id]);
 		}
 	}
 }
