@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { WEATHER_API_LICENSE } from "../tokens";
-import { ICitySearchResult, IWeatherCity } from "../types";
+import { ICity, ICitySearchResult } from "../types";
 
 @Injectable({
 	providedIn: "root",
@@ -32,9 +32,9 @@ export class SearchService {
 			`https://api.openweathermap.org/data/2.5/find?q=${queryArg}&type=like&appid=${this.licenseApi}&lang=it`
 		);
 	}
-	getCountry(cityId: number): Observable<IWeatherCity> {
-		return this.httpClient.get<IWeatherCity>(
-			`https://api.openweathermap.org/data/2.5/weather?id={cityId}&appid=${this.licenseApi}&lang=it`
+	getCountry(cityId: number): Observable<ICity> {
+		return this.httpClient.get<ICity>(
+			`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${this.licenseApi}&lang=it`
 		);
 	}
 }
