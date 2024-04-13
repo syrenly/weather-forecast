@@ -2,7 +2,7 @@ import { provideHttpClient } from "@angular/common/http";
 import { ApplicationConfig } from "@angular/core";
 import { provideAnimations } from "@angular/platform-browser/animations";
 import { provideRouter } from "@angular/router";
-import { routes } from "./app.routes";
+import { routes } from "./routes/app.routes";
 import { WEATHER_API_LICENSE } from "./tokens";
 
 export const appConfig: ApplicationConfig = {

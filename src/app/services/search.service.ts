@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { WEATHER_API_LICENSE } from "./tokens";
-import { ICity } from "./types";
+import { WEATHER_API_LICENSE } from "../tokens";
+import { ICitySearchResult } from "../types";
 
 @Injectable({
 	providedIn: "root",
@@ -27,9 +27,9 @@ export class SearchService {
 		const lowerCaseCountry = country.toLowerCase();
 		return `http://openweathermap.org/images/flags/${lowerCaseCountry}.png`;
 	}
-	searchCountry(queryArg: string): Observable<ICity[]> {
-		return this.httpClient.get<ICity[]>(
-			`https://openweathermap.org/data/2.5/find?q=${queryArg}&type=like&sort=population&cnt=30&appid=${this.licenseApi}`
+	searchCountry(queryArg: string): Observable<ICitySearchResult> {
+		return this.httpClient.get<ICitySearchResult>(
+			`https://api.openweathermap.org/data/2.5/find?q=${queryArg}&type=like&sort=population&cnt=30&appid=${this.licenseApi}`
 		);
 	}
 }

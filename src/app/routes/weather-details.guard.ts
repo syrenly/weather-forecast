@@ -7,8 +7,8 @@ import {
 	Router,
 	RouterStateSnapshot,
 } from "@angular/router";
-import { CityService } from "./city.service";
-import { WEATHER_API_LICENSE } from "./tokens";
+import { CityService } from "../services/city.service";
+import { WEATHER_API_LICENSE } from "../tokens";
 
 export const weatherDetailsGuard: CanActivateFn = (
 	route: ActivatedRouteSnapshot,
