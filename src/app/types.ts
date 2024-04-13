@@ -66,7 +66,7 @@ interface IWind {
 interface ICloud {
 	all: number;
 }
-interface IWeather {
+export interface IWeather {
 	id: number;
 	main: string;
 	description: string;

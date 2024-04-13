@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf, NgOptimizedImage } from "@angular/common";
+import { AsyncPipe, NgOptimizedImage } from "@angular/common";
 import {
 	AfterViewInit,
 	Component,
@@ -40,8 +40,6 @@ import { ICityResult, ICitySearchResult } from "../../types";
 		MatInputModule,
 		MatTooltipModule,
 		ReactiveFormsModule,
-		NgIf,
-		NgFor,
 		NgOptimizedImage,
 		FlagPipe,
 		WeatherPipe,
