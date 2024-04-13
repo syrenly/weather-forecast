@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { MatCardModule } from "@angular/material/card";
-import { CitySuggestionsComponent } from "../city-suggestions/city-suggestions.component";
-import { SearchbarComponent } from "../searchbar/searchbar.component";
+import { CitySuggestionsComponent } from "../ui-components/city-suggestions/city-suggestions.component";
+import { SearchbarComponent } from "../ui-components/searchbar/searchbar.component";
 
 @Component({
 	selector: "app-home",

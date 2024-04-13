@@ -18,9 +18,16 @@
 	align-items: center;
 	justify-content: center;
 	height: calc(100% - 50px);
+	width: 100%;
+
+	// TODO ADD breakpoints with media queries
 	mat-card {
+		width: 60%;
+		max-height: 70%;
+		height: fit-content;
+		min-height: 400px;
 		h1 {
-			margin: 0;
+			margin-top: 0;
 		}
 	}
 }

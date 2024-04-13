@@ -1,0 +1,48 @@
+<mat-form-field #matFormField class="autocomplete">
+	<mat-label>Search city</mat-label>
+	<mat-icon matPrefix color="primary">search</mat-icon>
+	<input
+		#filterInput
+		matInput
+		placeholder="Rome, IT"
+		aria-label="city name"
+		[matAutocomplete]="auto"
+		#autoTrigger="matAutocompleteTrigger"
+		[formControl]="autocompleteControl"
+	/>
+	<mat-autocomplete
+		#auto="matAutocomplete"
+		autoActiveFirstOption
+		[displayWith]="displayFn"
+		(optionSelected)="itemSelected($event)"
+		class="custom-option"
+	>
+		@for (option of options$ | async; track option) {
+		<mat-option [value]="option">
+			<div class="weather-option">
+				<img
+					width="24"
+					height="24"
+					[ngSrc]="option.weather[0].icon | weather"
+				/>
+				<span class="city-name">
+					{{ option.name }},&nbsp;{{ option.sys?.country }}
+				</span>
+				<img
+					width="16"
+					height="11"
+					[ngSrc]="option.sys?.country | flag"
+				/>
+			</div>
+		</mat-option>
+		} @empty {
+		<!-- Option that works as a placeholder -->
+		<mat-option disabled> No results </mat-option>
+		}
+	</mat-autocomplete>
+	<mat-hint>
+		Use the city name, better if followed by a comma and 2-letter country
+		code (ISO3166)
+	</mat-hint>
+	<!-- TODO add mat hint and mat error -->
+</mat-form-field>

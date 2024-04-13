@@ -1,22 +1,22 @@
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
-import { ICity } from "./types";
+import { IWeatherCity } from "../types";
 
 @Injectable({
 	providedIn: "root",
 })
 export class CityService {
-	private _city!: ICity;
-	private readonly citySubscription = new Subject<ICity>();
-	city$: Observable<ICity> = this.citySubscription.asObservable();
+	private _city!: IWeatherCity;
+	private readonly citySubscription = new Subject<IWeatherCity>();
+	city$: Observable<IWeatherCity> = this.citySubscription.asObservable();
 
-	set city(value: ICity) {
+	set city(value: IWeatherCity) {
 		// TODO add check to avoid unwanted behaviors
 		this._city = value;
 		this.citySubscription.next(value);
 	}
 
-	get city(): ICity {
+	get city(): IWeatherCity {
 		return this._city;
 	}
 
