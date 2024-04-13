@@ -1,6 +1,13 @@
 <button routerLink="home">Home</button>
 <button routerLink="weather">weather</button>
 
-<div [@triggerName]="prepareRoute(outlet)">
+<div [@triggerName]="getRouteTransition(outlet)">
 	<router-outlet #outlet="outlet"></router-outlet>
 </div>
+
+<mat-icon
+	aria-hidden="false"
+	aria-label="Example home icon"
+	fontIcon="home"
+	color="primary"
+></mat-icon>
