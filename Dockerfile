@@ -4,7 +4,7 @@
 # If you need more help, visit the Dockerfile reference guide at
 # https://docs.docker.com/go/dockerfile-reference/
 
-ARG NODE_VERSION=20.9.0
+ARG NODE_VERSION=20.12.2
 
 FROM node:${NODE_VERSION}-alpine
 
