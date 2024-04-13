@@ -1,0 +1,35 @@
+:host {
+	display: block;
+	overflow-y: auto;
+	overflow-x: hidden;
+	height: 100%;
+	width: 100%;
+}
+
+.header {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	height: 50px;
+	position: fixed;
+	width: 100%;
+	padding: 1rem;
+	app-searchbar {
+		flex-grow: 1;
+		margin: 0 1rem;
+		// TODO change with media query
+		max-width: 50%;
+	}
+	.title {
+		display: flex;
+		align-items: center;
+		h3 {
+			margin: 0 1rem;
+		}
+	}
+}
+
+.content {
+	margin-top: 50px;
+	height: calc(100% - 50px);
+}
