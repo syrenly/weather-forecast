@@ -2,6 +2,7 @@ import { DatePipe } from "@angular/common";
 import {
 	AfterViewInit,
 	Component,
+	DestroyRef,
 	Inject,
 	Input,
 	LOCALE_ID,
@@ -10,7 +11,10 @@ import {
 } from "@angular/core";
 import { MatCardModule } from "@angular/material/card";
 import Chart from "chart.js/auto";
+import { BehaviorSubject } from "rxjs";
+import { CURRENT_THEME, Theme } from "../../tokens";
 import { IFiveDaysForecast } from "../../types/forecast-types";
+import { ChartBase } from "../chart.base";
 
 @Component({
 	selector: "app-temperature-chart",
@@ -19,16 +23,27 @@ import { IFiveDaysForecast } from "../../types/forecast-types";
 	templateUrl: "./temperature-chart.component.html",
 	styleUrl: "./temperature-chart.component.scss",
 })
-export class TemperatureChartComponent implements OnChanges, AfterViewInit {
+export class TemperatureChartComponent
+	extends ChartBase
+	implements OnChanges, AfterViewInit
+{
 	@Input() forecastResult: IFiveDaysForecast | undefined;
-	chart: Chart = null;
 	canvasId = "temperatureChart";
 	meanTemperature: number[] = [];
 	maxTemperature: number[] = [];
 	minTemperature: number[] = [];
 	xAxis: string[] = [];
+
 	datePipe: DatePipe;
-	constructor(@Inject(LOCALE_ID) private readonly localeId: string) {}
+
+	constructor(
+		@Inject(LOCALE_ID) private readonly localeId: string,
+		@Inject(CURRENT_THEME)
+		themeSubject: BehaviorSubject<Theme>,
+		destroyRef: DestroyRef
+	) {
+		super(themeSubject, destroyRef);
+	}
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if (
@@ -40,10 +55,10 @@ export class TemperatureChartComponent implements OnChanges, AfterViewInit {
 			this.createChart();
 		}
 	}
-	ngAfterViewInit(): void {
+	override ngAfterViewInit(): void {
 		this.datePipe = new DatePipe(this.localeId);
 		this.calculateDataSets();
-		this.createChart();
+		super.ngAfterViewInit();
 	}
 
 	private calculateDataSets(): void {
@@ -52,7 +67,7 @@ export class TemperatureChartComponent implements OnChanges, AfterViewInit {
 		this.maxTemperature = [];
 		this.minTemperature = [];
 		this.xAxis = [];
-		list.forEach((l) => {
+		list.forEach((l): void => {
 			const {
 				main: { temp, temp_max, temp_min },
 				dt,
@@ -65,23 +80,25 @@ export class TemperatureChartComponent implements OnChanges, AfterViewInit {
 		});
 	}
 
-	private createChart(): void {
+	createChart(): void {
+		const data = {
+			labels: this.xAxis,
+			datasets: [
+				{ data: this.meanTemperature, label: "Mean" },
+				{ data: this.maxTemperature, label: "Max" },
+				{ data: this.minTemperature, label: "Min" },
+			],
+		};
+		if (this.chart) {
+			this.chart.data = data;
+			this.chart.update();
+			return;
+		}
 		this.chart = new Chart(this.canvasId, {
 			type: "line",
-
-			data: {
-				labels: this.xAxis,
-				datasets: [
-					{ data: this.meanTemperature, label: "Mean" },
-					{ data: this.maxTemperature, label: "Max" },
-					{ data: this.minTemperature, label: "Min" },
-				],
-			},
-			options: {
-				elements: { line: { tension: 0 } },
-				maintainAspectRatio: false,
-				responsive: true,
-			},
+			data,
+			options: {},
 		});
+		this.updateColors();
 	}
 }
