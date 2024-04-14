@@ -1,144 +1,11 @@
 @use "@angular/material" as mat;
-@use "sass:map";
+@use "_palettes.scss" as palettes;
 // Include non-theme styles for core.
 @include mat.core();
 
-$primary: #252ab7;
-$accent: #ee6002;
-$dark-primary: #2196f3;
-
-$light-primary-palette: (
-	50: #e5e5f6,
-	100: #bebfe9,
-	200: #9295db,
-	300: #666acd,
-	400: #464ac2,
-	500: #252ab7,
-	600: #2125b0,
-	700: #1b1fa7,
-	800: #16199f,
-	900: #0d0f90,
-	A100: #c0c1ff,
-	A200: #8d8eff,
-	A400: #5a5bff,
-	A700: #4142ff,
-	contrast: (
-		50: #000000,
-		100: #000000,
-		200: #000000,
-		300: #ffffff,
-		400: #ffffff,
-		500: #ffffff,
-		600: #ffffff,
-		700: #ffffff,
-		800: #ffffff,
-		900: #ffffff,
-		A100: #000000,
-		A200: #000000,
-		A400: #ffffff,
-		A700: #ffffff,
-	),
-);
-
-$light-accent-palette: (
-	50: #fdece1,
-	100: #facfb3,
-	200: #f7b081,
-	300: #f3904e,
-	400: #f17828,
-	500: #ee6002,
-	600: #ec5802,
-	700: #e94e01,
-	800: #e74401,
-	900: #e23301,
-	A100: #ffffff,
-	A200: #ffddd6,
-	A400: #ffb2a3,
-	A700: #ff9d8a,
-	contrast: (
-		50: #000000,
-		100: #000000,
-		200: #000000,
-		300: #000000,
-		400: #000000,
-		500: #ffffff,
-		600: #ffffff,
-		700: #ffffff,
-		800: #ffffff,
-		900: #ffffff,
-		A100: #000000,
-		A200: #000000,
-		A400: #000000,
-		A700: #000000,
-	),
-);
-
-$dark-primary-palette: (
-	100: #bbdefb,
-	200: #90caf9,
-	300: #64b5f6,
-	400: #42a5f5,
-	500: #2196f3,
-	600: #1e88e5,
-	700: #1976d2,
-	800: #1565c0,
-	900: #0d47a1,
-	A100: #82b1ff,
-	A200: #448aff,
-	A400: #2979ff,
-	A700: #2962ff,
-	contrast: (
-		50: #000000,
-		100: #000000,
-		200: #000000,
-		300: #000000,
-		400: #000000,
-		500: #000000,
-		600: #000000,
-		700: #000000,
-		800: #000000,
-		900: #ffffff,
-		A100: #000000,
-		A200: #000000,
-		A400: #000000,
-		A700: #000000,
-	),
-);
-
-$dark-accent-palette: (
-	50: #f1eff8,
-	100: #ddd8ed,
-	200: #c7bee1,
-	300: #b0a3d5,
-	400: #9f90cc,
-	500: #8e7cc3,
-	600: #8674bd,
-	700: #7b69b5,
-	800: #715fae,
-	900: #5f4ca1,
-	A100: #fefeff,
-	A200: #d6cbff,
-	A400: #ae98ff,
-	A700: #9a7fff,
-	contrast: (
-		50: #000000,
-		100: #000000,
-		200: #000000,
-		300: #000000,
-		400: #000000,
-		500: #000000,
-		600: #000000,
-		700: #ffffff,
-		800: #ffffff,
-		900: #ffffff,
-		A100: #000000,
-		A200: #000000,
-		A400: #000000,
-		A700: #000000,
-	),
-);
-$light-primary: mat.define-palette($light-primary-palette);
-$light-accent: mat.define-palette($light-accent-palette);
+//#region Light theme
+$light-primary: mat.define-palette(palettes.$light-primary-palette);
+$light-accent: mat.define-palette(palettes.$light-accent-palette);
 $light-warn: mat.define-palette(mat.$red-palette);
 $light-theme: mat.define-light-theme(
 	(
@@ -149,9 +16,11 @@ $light-theme: mat.define-light-theme(
 		),
 	)
 );
+// #endregion
 
-$dark-primary: mat.define-palette($dark-primary-palette);
-$dark-accent: mat.define-palette($dark-accent-palette);
+//#region Dark theme
+$dark-primary: mat.define-palette(palettes.$dark-primary-palette);
+$dark-accent: mat.define-palette(palettes.$dark-accent-palette);
 $dark-warn: mat.define-palette(mat.$red-palette);
 $dark-theme: mat.define-dark-theme(
 	(
@@ -162,16 +31,20 @@ $dark-theme: mat.define-dark-theme(
 		),
 	)
 );
+// #endregion
 
+// define custom typography
 $custom-typography: mat.define-typography-config(
-	// Specify "Lato sans-serif" as the default font family for all levels.
-	$font-family: '"Lato", sans-serif;'
+	// Specify "Roboto" as the default font family for all levels.
+	$font-family: "Roboto"
 );
+
 // apply typography
 @include mat.all-component-typographies($custom-typography);
 
 // Apply the dark theme by default
 @include mat.all-component-themes($dark-theme);
+
 // make a specific class for light theme
 .dark-theme {
 	background-color: #303030;
