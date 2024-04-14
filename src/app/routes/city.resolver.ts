@@ -2,9 +2,9 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { ResolveFn, Router } from "@angular/router";
 import { Observable, catchError, forkJoin, of } from "rxjs";
-import { ICityWeather } from "../city-types";
-import { IFiveDaysForecast } from "../forecast-types";
 import { SearchService } from "../services/search.service";
+import { ICityWeather } from "../types/city-types";
+import { IFiveDaysForecast } from "../types/forecast-types";
 
 export type CityResolverType =
 	| { errorStatus: number }

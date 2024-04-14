@@ -1,10 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { ICitySearchResult, ICityWeather } from "../city-types";
-import { IFiveDaysForecast } from "../forecast-types";
-import { WEATHER_API_LICENSE } from "../tokens";
-import { city, forecastResult } from "../utils.mock";
+import { WEATHER_API_LICENSE } from "../consts";
+import { ICitySearchResult, ICityWeather } from "../types/city-types";
+import { IFiveDaysForecast } from "../types/forecast-types";
+import { city, forecastResult } from "../unit-test-utils/utils.mock";
 
 @Injectable({
 	providedIn: "root",
@@ -22,22 +22,23 @@ export class SearchService {
 		const lowerCaseCountry = country.toLowerCase();
 		return `http://openweathermap.org/images/flags/${lowerCaseCountry}.png`;
 	}
+	//&lang=it
 	searchCountry(queryArg: string): Observable<ICitySearchResult> {
 		return this.httpClient.get<ICitySearchResult>(
-			`https://api.openweathermap.org/data/2.5/find?q=${queryArg}&type=like&appid=${this.licenseApi}&units=metric&lang=it`
+			`https://api.openweathermap.org/data/2.5/find?q=${queryArg}&type=like&appid=${this.licenseApi}&units=metric`
 		);
 	}
 	getCityWeather(cityId: number): Observable<ICityWeather> {
 		return of(city);
 		// return this.httpClient.get<ICityWeather>(
-		// 	`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${this.licenseApi}`
+		// 	`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${this.licenseApi}&units=metric`
 		// );
 	}
 
 	getFiveDaysForecast(cityId: number): Observable<IFiveDaysForecast> {
 		return of(forecastResult);
 		// return this.httpClient.get<IFiveDaysForecast>(
-		// 	`https://api.openweathermap.org/data/2.5/forecast?id=${cityId}&appid=${this.licenseApi}&units=metric&lang=it`
+		// 	`https://api.openweathermap.org/data/2.5/forecast?id=${cityId}&appid=${this.licenseApi}&units=metric`
 		// );
 	}
 }

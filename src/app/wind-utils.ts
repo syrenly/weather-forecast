@@ -16,3 +16,5 @@ export const windDirectionMapping = {
 	"15": "NW",
 	"16": "NNW",
 };
+
+// TODO REMOVE

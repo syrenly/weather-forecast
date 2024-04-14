@@ -11,9 +11,9 @@ import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { Observable, map } from "rxjs";
-import { ICityWeather, IMainInfo, IWeather } from "../../city-types";
 import { FlagPipe } from "../../pipes/flag.pipe";
 import { WeatherPipe } from "../../pipes/weather.pipe";
+import { ICityWeather, IMainInfo, IWeather } from "../../types/city-types";
 
 @Component({
 	selector: "app-current-weather",

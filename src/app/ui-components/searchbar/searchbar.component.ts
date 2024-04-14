@@ -18,15 +18,15 @@ import { MatInputModule } from "@angular/material/input";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { Router } from "@angular/router";
 import { Observable, catchError, debounceTime, map, of, switchMap } from "rxjs";
-import { ICitySearchResult, ICityWeather } from "../../city-types";
 import {
 	DEFAULT_DEBOUNCE_DELAY_MILLISECONDS,
 	EMPTY_SEARCH_RESULT,
+	WEATHER_API_LICENSE,
 } from "../../consts";
 import { FlagPipe } from "../../pipes/flag.pipe";
 import { WeatherPipe } from "../../pipes/weather.pipe";
 import { SearchService } from "../../services/search.service";
-import { WEATHER_API_LICENSE } from "../../tokens";
+import { ICitySearchResult, ICityWeather } from "../../types/city-types";
 
 @Component({
 	selector: "app-searchbar",

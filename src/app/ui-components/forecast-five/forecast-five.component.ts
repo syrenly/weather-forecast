@@ -21,11 +21,13 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { Observable, map } from "rxjs";
-import { IMainInfo, IWeather } from "../../city-types";
-import { IFiveDaysForecast } from "../../forecast-types";
 import { FlagPipe } from "../../pipes/flag.pipe";
 import { WeatherPipe } from "../../pipes/weather.pipe";
-import { IThreeHoursForecast } from "./../../forecast-types";
+import { IMainInfo, IWeather } from "../../types/city-types";
+import {
+	IFiveDaysForecast,
+	IThreeHoursForecast,
+} from "../../types/forecast-types";
 import { SearchService } from "./../../services/search.service";
 @Component({
 	selector: "app-forecast-five",

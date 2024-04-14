@@ -1,5 +1,5 @@
-import { ICityWeather } from "./city-types";
-import { IFiveDaysForecast } from "./forecast-types";
+import { ICityWeather } from "../types/city-types";
+import { IFiveDaysForecast } from "../types/forecast-types";
 
 export const forecastResult: IFiveDaysForecast = {
 	cod: "200",
