@@ -30,7 +30,6 @@
 			</mat-card-subtitle>
 		</mat-card-header>
 	</div>
-	<!-- <mat-divider></mat-divider> -->
 	<div class="additional-data">
 		<div class="data">
 			<div class="info-data">
@@ -41,73 +40,41 @@
 				<span>/</span>
 				<span>{{ mainInfo.temp_max | number : "1.0-0" }} C°</span>
 			</div>
-			<!-- <mat-card-subtitle class="label-data">
-				Min/Max Temperature
-			</mat-card-subtitle> -->
 		</div>
 
 		<div class="data">
-			<div class="info-data">
-				<mat-icon color="primary" matTooltip="Clouds">
-					filter_drama
-				</mat-icon>
-				<span>&nbsp;{{ city.clouds?.all | number : "1.0-0" }}%</span>
-			</div>
-			<!-- <mat-card-subtitle class="label-data">
-				Clouds
-			</mat-card-subtitle> -->
+			<mat-icon color="primary" matTooltip="Clouds">
+				filter_drama
+			</mat-icon>
+			<span>&nbsp;{{ city.clouds?.all | number : "1.0-0" }}%</span>
 		</div>
 	</div>
 	<div class="additional-data">
 		<div class="data">
-			<div class="info-data">
-				<mat-icon color="primary" matTooltip="Humidity"
-					>opacity</mat-icon
-				>
-				<span> &nbsp;{{ mainInfo.humidity | number : "1.0-0" }}% </span>
-			</div>
-			<!-- <mat-card-subtitle class="label-data">
-				Humidity
-			</mat-card-subtitle> -->
+			<mat-icon color="primary" matTooltip="Humidity">opacity</mat-icon>
+			<span> &nbsp;{{ mainInfo.humidity | number : "1.0-0" }}% </span>
 		</div>
 		<div class="data">
-			<div class="info-data">
-				<mat-icon color="primary" matTooltip="Pressure"
-					>speed
-				</mat-icon>
-				<span> &nbsp;{{ mainInfo.pressure }} hPa </span>
-			</div>
-			<!-- <mat-card-subtitle class="label-data">
-				Pressure
-			</mat-card-subtitle> -->
+			<mat-icon color="primary" matTooltip="Pressure">speed </mat-icon>
+			<span> &nbsp;{{ mainInfo.pressure }} hPa </span>
 		</div>
 	</div>
 	<div class="additional-data">
-		<!-- [class.small-device]="(isHandset$ | async) === true" -->
 		<div class="data">
-			<div class="info-data">
-				<mat-icon color="primary" matTooltip="Wind">air </mat-icon>
-				<span>
-					&nbsp;{{ city.wind?.speed | number : "1.0-0" }} Km/h
-				</span>
-			</div>
-			<!-- <mat-card-subtitle class="label-data"> Wind </mat-card-subtitle> -->
+			<mat-icon color="primary" matTooltip="Wind">air </mat-icon>
+			<span> &nbsp;{{ city.wind?.speed | number : "1.0-0" }} Km/h </span>
 		</div>
 
 		<div class="data">
-			<div class="info-data">
-				<mat-icon
-					color="primary"
-					matTooltip="Wind direction"
-					[style.rotate.deg]="city.wind.deg"
-				>
-					north
-				</mat-icon>
-				<span>&nbsp;{{ city.wind.deg | number : "1.0-0" }}°</span>
-			</div>
-			<!-- <mat-card-subtitle class="label-data">
-				Wind direction
-			</mat-card-subtitle> -->
+			<mat-icon
+				color="primary"
+				matTooltip="Wind direction"
+				[style.rotate.deg]="city.wind.deg"
+			>
+				north
+			</mat-icon>
+			<span>&nbsp;{{ city.wind.deg | number : "1.0-0" }}°</span>
 		</div>
-	</div> </mat-card
->}
+	</div>
+</mat-card>
+}

@@ -1,25 +1,25 @@
-@use "sass:math";
+$header: 90px;
 
 :host {
-	display: block;
-	overflow-y: auto;
-	overflow-x: hidden;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
 	height: 100%;
 	width: 100%;
+	background-color: inherit;
 }
 
 .header {
 	display: flex;
 	align-items: baseline;
 	justify-content: space-between;
-	height: 50px;
-	position: fixed;
+	height: $header;
 	width: calc(100% - 2rem);
 	padding: 1rem;
+	background-color: inherit;
 	app-searchbar {
 		flex-grow: 1;
 		margin: 0 1rem;
-		// TODO change with media query
 		max-width: 50%;
 	}
 	.title {
@@ -30,47 +30,64 @@
 		}
 	}
 }
-
+h1 {
+	text-align: center;
+}
 .content {
-	margin-top: 90px;
-	height: calc(100% - 90px);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	flex-wrap: wrap;
-	width: 100%;
-	.widgets {
+	height: calc(100% - #{$header});
+	align-self: center;
+	overflow: auto;
+	padding: 0 15%;
+	margin-bottom: 1rem;
+	.widget {
+		margin: 0.5rem;
+	}
+
+	.widget-wrapper {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		flex-wrap: wrap;
+		width: 100%;
+		height: 100%;
+	}
+}
 
+@media (min-width: 1200px) {
+	.content {
+		width: 70%;
 		.widget {
-			margin: 1rem;
+			-ms-flex-preferred-size: 0;
+			flex-basis: 0;
+			-webkit-box-flex: 1;
+			-ms-flex-positive: 1;
+			flex-grow: 1;
+			max-width: calc(50% - 1rem);
+		}
+		app-current-weather,
+		app-forecast-five {
+			height: calc(370px - 1rem);
+		}
+		app-temperature-chart,
+		app-precipitation-chart {
+			height: calc(400px - 1rem);
 		}
 	}
-
-	// TODO ADD breakpoints with media queries
-	app-current-weather {
-		// width: 60%;
-		// max-height: 70%;
-		// height: fit-content;
-		// min-height: 400px;
-	}
 }
-
-@media (min-width: 576px) {
-	.widget {
-		-ms-flex-preferred-size: 0;
-		flex-basis: 0;
-		-webkit-box-flex: 1;
-		-ms-flex-positive: 1;
-		flex-grow: 1;
-		max-width: 50%;
-	}
-}
-@media (max-width: 576px) {
-	.widget {
-		width: 100%;
+@media (max-width: 1200px) {
+	.content {
+		width: calc(100% - 1rem);
+		.widget {
+			width: 100%;
+		}
+		app-current-weather,
+		app-forecast-five {
+			height: fit-content;
+		}
+		app-temperature-chart,
+		app-precipitation-chart {
+			height: fit-content;
+			height: 100vw;
+		}
 	}
 }

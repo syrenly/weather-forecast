@@ -7,18 +7,21 @@
 	<app-switch-theme></app-switch-theme>
 </div>
 
+@if(city){
+<h1>
+	<span>{{ city.name }}</span>
+	@if(city.sys?.country){
+	<span>,&nbsp;{{ city.sys?.country }}&nbsp;</span>
+	<!-- NB aspect-ratio: 1.45 -->
+	<img width="30" height="20" [ngSrc]="city.sys?.country | flag" />
+	}
+</h1>
+}
+
 <!-- Main content -->
 @if(city){
 <div class="content">
-	<h1>
-		<span>{{ city.name }}</span>
-		@if(city.sys?.country){
-		<span>,&nbsp;{{ city.sys?.country }}&nbsp;</span>
-		<!-- NB aspect-ratio: 1.45 -->
-		<img width="30" height="20" [ngSrc]="city.sys?.country | flag" />
-		}
-	</h1>
-	<div class="widgets">
+	<div class="widget-wrapper">
 		<!-- current weather -->
 		<app-current-weather class="widget" [city]="city"></app-current-weather>
 		@if(forecastResult){
