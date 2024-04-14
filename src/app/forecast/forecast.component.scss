@@ -1,4 +1,4 @@
-$header: 90px;
+$header: 40px;
 
 :host {
 	display: flex;
@@ -17,11 +17,6 @@ $header: 90px;
 	width: calc(100% - 2rem);
 	padding: 1rem;
 	background-color: inherit;
-	app-searchbar {
-		flex-grow: 1;
-		margin: 0 1rem;
-		max-width: 50%;
-	}
 	.title {
 		display: flex;
 		align-items: center;
@@ -30,19 +25,19 @@ $header: 90px;
 		}
 	}
 }
+
 h1 {
 	text-align: center;
+	margin-bottom: 0;
 }
 .content {
 	height: calc(100% - #{$header});
 	align-self: center;
 	overflow: auto;
-	padding: 0 15%;
 	margin-bottom: 1rem;
 	.widget {
 		margin: 0.5rem;
 	}
-
 	.widget-wrapper {
 		display: flex;
 		align-items: center;
@@ -54,8 +49,12 @@ h1 {
 }
 
 @media (min-width: 1200px) {
+	app-searchbar,
 	.content {
 		width: 70%;
+		padding: 0 15%;
+	}
+	.content {
 		.widget {
 			-ms-flex-preferred-size: 0;
 			flex-basis: 0;
@@ -75,8 +74,11 @@ h1 {
 	}
 }
 @media (max-width: 1200px) {
+	app-searchbar,
 	.content {
-		width: calc(100% - 1rem);
+		width: calc(100% - 2rem);
+	}
+	.content {
 		.widget {
 			width: 100%;
 		}
@@ -89,5 +91,11 @@ h1 {
 			height: fit-content;
 			height: 100vw;
 		}
+	}
+}
+@media (max-width: 700px) {
+	.header .title h3 {
+		display: none;
+		width: 0px;
 	}
 }
