@@ -23,6 +23,14 @@ import { PrecipitationChartComponent } from "../ui-components/precipitation-char
 import { SearchbarComponent } from "../ui-components/searchbar/searchbar.component";
 import { SwitchThemeComponent } from "../ui-components/switch-theme/switch-theme.component";
 import { TemperatureChartComponent } from "../ui-components/temperature-chart/temperature-chart.component";
+/**
+ * ForecastComponent is the main component for the application. It shows specific information about the weather for a city.
+ * - header with title (link to return to home), searchbar (to change the current selected city), toggle button to switch between light and dark theme
+ * - info about current weather of the selected city
+ * - forecasts about the next 5 days
+ * - chart for temperature
+ * - chart for precipitation (snow and rain)
+ */
 @Component({
 	selector: "app-forecast",
 	standalone: true,
