@@ -1,22 +1,22 @@
 <div class="header">
 	<div class="title c-pointer" routerLink="home">
-		<mat-icon color="primary">home</mat-icon>
-		<h3>What's the weather like?</h3>
+		<mat-icon color="primary" matTooltip="Return home">home</mat-icon>
+		<h3 class="app-name">What's the weather like?</h3>
 	</div>
-	<app-searchbar></app-searchbar>
+	@if(city){
+	<h1>
+		<span>{{ city.name }}</span>
+		@if(city.sys?.country){
+		<span>,&nbsp;{{ city.sys?.country }}&nbsp;</span>
+		<!-- NB aspect-ratio: 1.45 -->
+		<img width="30" height="20" [ngSrc]="city.sys?.country | flag" />
+		}
+	</h1>
+	}
 	<app-switch-theme></app-switch-theme>
 </div>
 
-@if(city){
-<h1>
-	<span>{{ city.name }}</span>
-	@if(city.sys?.country){
-	<span>,&nbsp;{{ city.sys?.country }}&nbsp;</span>
-	<!-- NB aspect-ratio: 1.45 -->
-	<img width="30" height="20" [ngSrc]="city.sys?.country | flag" />
-	}
-</h1>
-}
+<app-searchbar></app-searchbar>
 
 <!-- Main content -->
 @if(city){
