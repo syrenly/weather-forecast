@@ -34,7 +34,7 @@ export class SwitchThemeComponent implements OnInit {
 		this.themeSubject
 			.asObservable()
 			.pipe(takeUntilDestroyed(this.destroyRef))
-			.subscribe((currentTheme) => {
+			.subscribe((currentTheme): void => {
 				if (this.currentTheme == undefined) {
 					this.currentTheme = currentTheme;
 				}

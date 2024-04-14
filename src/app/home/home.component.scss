@@ -1,3 +1,8 @@
+$headerHeight: 50px;
+$padding: 1rem;
+$widthMinusPadding: calc(100% - 2 * #{$padding});
+$licenseHeight: 57px;
+
 :host {
 	display: block;
 	overflow-y: auto;
@@ -9,9 +14,9 @@
 	display: flex;
 	align-items: center;
 	justify-content: end;
-	height: 50px;
-	padding: 1rem;
-	width: calc(100% - 2rem);
+	height: $headerHeight;
+	padding: $padding;
+	width: $widthMinusPadding;
 }
 
 .content {
@@ -19,18 +24,39 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-
-	height: calc(100% - 50px);
+	height: calc(90% - #{$headerHeight} - #{$licenseHeight});
 	width: 100%;
 
-	// TODO ADD breakpoints with media queries
 	mat-card {
-		width: 60%;
-		max-height: 70%;
 		height: fit-content;
-		min-height: 400px;
 		h1 {
 			margin-top: 0;
 		}
+		h3 {
+			text-align: justify;
+		}
+		.suggestions {
+			margin-top: 2rem;
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+			justify-content: space-around;
+			button {
+				margin: 0 0.5rem 1rem;
+				min-width: 120px;
+			}
+		}
+	}
+}
+@media (min-width: 590px) {
+	mat-card {
+		width: 60%;
+		max-height: 70%;
+	}
+}
+@media (max-width: 590px) {
+	mat-card {
+		width: $widthMinusPadding;
+		height: fit-content;
 	}
 }
