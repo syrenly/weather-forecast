@@ -15,6 +15,7 @@ export interface IThreeHoursForecast {
 	visibility: number;
 	pop: number;
 	rain?: Rain;
+	snow?: Rain;
 	sys: Sys;
 	dt_txt: string;
 }
@@ -49,7 +50,8 @@ export interface Wind {
 }
 
 export interface Rain {
-	"3h": number;
+	"3h"?: number;
+	"1h"?: number;
 }
 
 export interface Sys {
