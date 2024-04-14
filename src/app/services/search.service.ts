@@ -10,21 +10,14 @@ import { city, forecastResult } from "../utils.mock";
 	providedIn: "root",
 })
 export class SearchService {
-	// license!: string;
 	constructor(
 		private httpClient: HttpClient,
 		@Inject(WEATHER_API_LICENSE) private readonly licenseApi: string
-	) {
-		// licenseObs.subscribe((l: string): void => {
-		// 	this.license = l;
-		// 	console.log(this.license);
-		// });
-	}
+	) {}
 
 	getIconUrl(icon: string): string {
 		return `http://openweathermap.org/img/w/${icon}.png`;
 	}
-	//weather.sys.country
 	getCountryFlagUrl(country: string): string {
 		const lowerCaseCountry = country.toLowerCase();
 		return `http://openweathermap.org/images/flags/${lowerCaseCountry}.png`;
@@ -36,6 +29,9 @@ export class SearchService {
 	}
 	getCityWeather(cityId: number): Observable<ICityWeather> {
 		return of(city);
+		// return this.httpClient.get<ICityWeather>(
+		// 	`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${this.licenseApi}`
+		// );
 	}
 
 	getFiveDaysForecast(cityId: number): Observable<IFiveDaysForecast> {

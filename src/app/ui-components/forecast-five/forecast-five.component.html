@@ -1,36 +1,9 @@
-<!-- @if(city && forecast){
-	<mat-card>
-		<ng-container *ngTemplateOutlet="oneday; context: { $implicit: { item } }"></ng-container>
-	</mat-card>
-}
-
-
-
-<ng-template #oneday let-item>
-
-</ng-template>
-
-
-
-<ng-template #oneday let-item>
-
-</ng-template> -->
 @if(forecastResult && days.length > 0) {
 <mat-card>
 	<mat-tab-group>
 		@for (day of days; track day) {
 		<mat-tab [label]="day | date : 'MMM d'">
-			<!-- <ng-template mat-tab-label>
-
-			  </ng-template> -->
 			<ng-template matTabContent>
-				<!-- <div class="header">
-					<div>hours</div>
-					<div>image</div>
-					<div>temp</div>
-					<div>pop</div>
-					<div>wind</div>
-				</div> -->
 				@for (forecast of daysDictionary[day]; track forecast.dt) {
 				<ng-container
 					*ngTemplateOutlet="

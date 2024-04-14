@@ -1,23 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ForecastFiveComponent } from "./forecast-five.component";
 
-import { ForecastFiveComponent } from './forecast-five.component';
+describe("ForecastFiveComponent", () => {
+	let component: ForecastFiveComponent;
+	let fixture: ComponentFixture<ForecastFiveComponent>;
 
-describe('ForecastFiveComponent', () => {
-  let component: ForecastFiveComponent;
-  let fixture: ComponentFixture<ForecastFiveComponent>;
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			imports: [ForecastFiveComponent],
+		}).compileComponents();
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [ForecastFiveComponent]
-    })
-    .compileComponents();
-    
-    fixture = TestBed.createComponent(ForecastFiveComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+		fixture = TestBed.createComponent(ForecastFiveComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it("should create", () => {
+		expect(component).toBeTruthy();
+	});
 });
