@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { WEATHER_API_LICENSE } from "../consts";
+import { WEATHER_API_LICENSE } from "../tokens";
 import { ICitySearchResult, ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
 import { city, forecastResult } from "../unit-test-utils/utils.mock";
@@ -15,13 +15,6 @@ export class SearchService {
 		@Inject(WEATHER_API_LICENSE) private readonly licenseApi: string
 	) {}
 
-	getIconUrl(icon: string): string {
-		return `http://openweathermap.org/img/w/${icon}.png`;
-	}
-	getCountryFlagUrl(country: string): string {
-		const lowerCaseCountry = country.toLowerCase();
-		return `http://openweathermap.org/images/flags/${lowerCaseCountry}.png`;
-	}
 	//&lang=it
 	searchCountry(queryArg: string): Observable<ICitySearchResult> {
 		return this.httpClient.get<ICitySearchResult>(

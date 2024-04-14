@@ -1,0 +1,22 @@
+<mat-button-toggle-group
+	name="ThemeColor"
+	aria-label="theme color"
+	(change)="onSwitchChanged($event)"
+>
+	<mat-button-toggle
+		value="dark"
+		[checked]="currentTheme === 'dark'"
+		aria-label="dark theme"
+		matTooltip="Dark theme"
+	>
+		<mat-icon>dark_mode</mat-icon>
+	</mat-button-toggle>
+	<mat-button-toggle
+		value="light"
+		[checked]="currentTheme === 'light'"
+		aria-label="light theme"
+		matTooltip="Light theme"
+	>
+		<mat-icon>light_mode</mat-icon>
+	</mat-button-toggle>
+</mat-button-toggle-group>

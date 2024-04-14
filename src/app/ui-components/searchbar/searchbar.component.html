@@ -15,7 +15,7 @@
 		autoActiveFirstOption
 		[displayWith]="displayFn"
 		(optionSelected)="itemSelected($event)"
-		class="custom-option"
+		class="autocomplete-panel"
 	>
 		@for (option of options$ | async; track option) {
 		<mat-option [value]="option">
