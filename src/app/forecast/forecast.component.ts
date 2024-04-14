@@ -1,4 +1,3 @@
-import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import {
 	AsyncPipe,
 	DatePipe,
@@ -10,10 +9,10 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { MatCardModule } from "@angular/material/card";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatIconModule } from "@angular/material/icon";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ActivatedRoute, Data, RouterLink } from "@angular/router";
-import { Observable, map } from "rxjs";
 import { FlagPipe } from "../pipes/flag.pipe";
 import { WeatherPipe } from "../pipes/weather.pipe";
 import { ICityWeather, IWeather } from "../types/city-types";
@@ -37,50 +36,50 @@ import { SearchService } from "./../services/search.service";
 	selector: "app-forecast",
 	standalone: true,
 	imports: [
-		SearchbarComponent,
+		AsyncPipe,
 		CurrentWeatherComponent,
+		DecimalPipe,
+		DatePipe,
+		FlagPipe,
 		ForecastFiveComponent,
-		TemperatureChartComponent,
-		PrecipitationChartComponent,
-		SwitchThemeComponent,
-		RouterLink,
 		MatIconModule,
 		MatCardModule,
 		MatDividerModule,
+		MatProgressBarModule,
 		MatToolbarModule,
-		NgOptimizedImage,
 		MatTooltipModule,
-		FlagPipe,
+		NgOptimizedImage,
+		PrecipitationChartComponent,
+		RouterLink,
+		SearchbarComponent,
+		SwitchThemeComponent,
+		TemperatureChartComponent,
 		WeatherPipe,
-		DatePipe,
-		DecimalPipe,
-		AsyncPipe,
 	],
 	templateUrl: "./forecast.component.html",
 	styleUrl: "./forecast.component.scss",
 })
 export class ForecastComponent implements OnInit {
 	city: ICityWeather | undefined;
-	breakpoints = 2;
 	get mainWeather(): IWeather | undefined {
 		return this.city?.weather ? this.city.weather[0] : undefined;
 	}
-	isHandset$: Observable<boolean> = this.breakpointObserver
-		.observe(Breakpoints.Handset)
-		.pipe(map((res): boolean => res.matches));
-
 	forecastResult: IFiveDaysForecast | undefined;
+	errorStatus!: number;
 	constructor(
-		private readonly breakpointObserver: BreakpointObserver,
 		private readonly route: ActivatedRoute,
 		private readonly destroyRef: DestroyRef,
-		private readonly searchService: SearchService
+		public readonly searchService: SearchService
 	) {}
 	ngOnInit(): void {
 		this.route.data
 			.pipe(takeUntilDestroyed(this.destroyRef))
 			.subscribe((value: Data): void => {
-				console.log(value);
+				this.searchService.navigationStarted = false;
+				if (value && value[0] && value[0]["errorStatus"]) {
+					this.errorStatus = value[0]["errorStatus"];
+					return;
+				}
 				const routeData: {
 					countryInfo: ICityWeather;
 					forecastResult: IFiveDaysForecast;
@@ -88,7 +87,7 @@ export class ForecastComponent implements OnInit {
 				delete routeData["animationState"];
 				this.city = routeData.countryInfo;
 				this.forecastResult = routeData.forecastResult;
-				this.searchService.navigationStarted = false;
+				this.errorStatus = null;
 			});
 	}
 }

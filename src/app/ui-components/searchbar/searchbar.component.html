@@ -21,11 +21,14 @@
 		>error_outline</mat-icon
 	>
 	} @else if (searchStatus === 429) {
-	<mat-icon matSuffix color="warn" matTooltip="Too many requests. Retry later"
+	<mat-icon
+		matSuffix
+		color="accent"
+		matTooltip="Too many requests. Retry later"
 		>event_repeat</mat-icon
 	>
 	}@else if (searchStatus === "serverError") {
-	<mat-icon matSuffix color="warn" matTooltip="A server error occurred"
+	<mat-icon matSuffix color="warn" matTooltip="An internal error occurred"
 		>error_outline</mat-icon
 	>
 	} @else if(searchStatus === "loading") {
@@ -74,7 +77,7 @@
 		} @else if (searchStatus === 429) {
 		<span>Too many requests. Wait some time or extend your license</span>
 		} @else if (searchStatus === "serverError"){
-		<span>A server error occurred</span>
+		<span>An internal error occurred</span>
 		} @else if (searchStatus === "loading"){
 		<span>Searching... </span>
 		} @else {
