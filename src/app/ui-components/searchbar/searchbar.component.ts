@@ -18,6 +18,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { Router } from "@angular/router";
 import { Observable, catchError, debounceTime, map, of, switchMap } from "rxjs";
+import { ICity, ICitySearchResult } from "../../city-types";
 import {
 	DEFAULT_DEBOUNCE_DELAY_MILLISECONDS,
 	EMPTY_SEARCH_RESULT,
@@ -27,7 +28,6 @@ import { WeatherPipe } from "../../pipes/weather.pipe";
 import { CityService } from "../../services/city.service";
 import { SearchService } from "../../services/search.service";
 import { WEATHER_API_LICENSE } from "../../tokens";
-import { ICity, ICitySearchResult } from "../../types";
 
 @Component({
 	selector: "app-searchbar",

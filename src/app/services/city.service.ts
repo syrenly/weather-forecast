@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
-import { ICity } from "../types";
+import { ICity } from "../city-types";
 
 @Injectable({
 	providedIn: "root",

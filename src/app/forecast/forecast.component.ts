@@ -13,9 +13,10 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ActivatedRoute, Data, Router, RouterLink } from "@angular/router";
 import { Observable, map } from "rxjs";
+import { ICity, IWeather } from "../city-types";
+import { IFiveDaysForecast } from "../forecast-types";
 import { FlagPipe } from "../pipes/flag.pipe";
 import { WeatherPipe } from "../pipes/weather.pipe";
-import { ICity, IWeather, RouteData } from "../types";
 import { CurrentWeatherComponent } from "../ui-components/current-weather/current-weather.component";
 import { ForecastFiveComponent } from "../ui-components/forecast-five/forecast-five.component";
 import { SearchbarComponent } from "../ui-components/searchbar/searchbar.component";
@@ -52,6 +53,7 @@ export class ForecastComponent implements OnInit {
 		.observe(Breakpoints.Handset)
 		.pipe(map((res) => res.matches));
 
+	forecastResult: IFiveDaysForecast | undefined;
 	constructor(
 		private readonly breakpointObserver: BreakpointObserver,
 		private readonly route: ActivatedRoute,
@@ -64,9 +66,13 @@ export class ForecastComponent implements OnInit {
 			.pipe(takeUntilDestroyed(this.destroyRef))
 			.subscribe((value: Data) => {
 				console.log(value);
-				const routeData: RouteData = value[0];
+				const routeData: {
+					countryInfo: ICity;
+					forecastResult: IFiveDaysForecast;
+				} & { animationState: string } = value[0];
 				delete routeData["animationState"];
-				this.city = routeData;
+				this.city = routeData.countryInfo;
+				this.forecastResult = routeData.forecastResult;
 
 				// this.searchService.
 			});

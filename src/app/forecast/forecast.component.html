@@ -19,7 +19,12 @@
 	</h1>
 	<div class="widgets">
 		<app-current-weather class="widget" [city]="city"></app-current-weather>
-		<app-forecast-five class="widget" [city]="city"></app-forecast-five>
+		@if(forecastResult){
+		<app-forecast-five
+			class="widget"
+			[forecastResult]="forecastResult"
+		></app-forecast-five>
+		}
 	</div>
 </div>
 }
