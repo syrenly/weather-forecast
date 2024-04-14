@@ -23,13 +23,6 @@ export const routes: Routes = [
 		resolve: [cityResolver],
 	},
 	{
-		path: "forecast/:id",
-		component: ForecastComponent,
-		data: { animationState: "forecastState" },
-		canActivate: [forecastDetailsGuard],
-		resolve: [cityResolver],
-	},
-	{
 		path: "**",
 		redirectTo: "home",
 	},

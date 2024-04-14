@@ -3,10 +3,10 @@ import { Component, DestroyRef, OnInit } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
-import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+import { ActivatedRoute, Data, Router, RouterLink } from "@angular/router";
 import { FlagPipe } from "../pipes/flag.pipe";
 import { WeatherPipe } from "../pipes/weather.pipe";
-import { ICity, IWeather } from "../types";
+import { ICity, IWeather, RouteData } from "../types";
 import { SearchbarComponent } from "../ui-components/searchbar/searchbar.component";
 import { SearchService } from "./../services/search.service";
 
@@ -40,9 +40,12 @@ export class ForecastComponent implements OnInit {
 	ngOnInit(): void {
 		this.route.data
 			.pipe(takeUntilDestroyed(this.destroyRef))
-			.subscribe((value) => {
+			.subscribe((value: Data) => {
 				console.log(value);
-				this.city = value[0] as ICity;
+				const routeData: RouteData = value[0];
+				delete routeData["animationState"];
+				this.city = routeData;
+
 				// this.searchService.
 			});
 	}
