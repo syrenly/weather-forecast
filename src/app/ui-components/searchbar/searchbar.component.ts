@@ -1,10 +1,10 @@
 import { AsyncPipe, NgClass, NgOptimizedImage } from "@angular/common";
+import { HttpErrorResponse } from "@angular/common/http";
 import {
 	AfterViewInit,
 	Component,
 	DestroyRef,
 	ElementRef,
-	Inject,
 	ViewChild,
 } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
@@ -17,9 +17,18 @@ import {
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
+import { MatProgressSpinner } from "@angular/material/progress-spinner";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { Router } from "@angular/router";
-import { Observable, catchError, debounceTime, map, of, switchMap } from "rxjs";
+import {
+	Observable,
+	catchError,
+	debounceTime,
+	map,
+	of,
+	switchMap,
+	tap,
+} from "rxjs";
 import {
 	DEFAULT_DEBOUNCE_DELAY_MILLISECONDS,
 	EMPTY_SEARCH_RESULT,
@@ -27,7 +36,7 @@ import {
 import { FlagPipe } from "../../pipes/flag.pipe";
 import { WeatherPipe } from "../../pipes/weather.pipe";
 import { SearchService } from "../../services/search.service";
-import { Theme, WEATHER_API_LICENSE } from "../../tokens";
+import { Theme } from "../../tokens";
 import { ICitySearchResult, ICityWeather } from "../../types/city-types";
 /**
  * Search for the city to know which weather conditions there are. It will navigate to the ForecastComponent to show details.
@@ -41,6 +50,7 @@ import { ICitySearchResult, ICityWeather } from "../../types/city-types";
 		MatFormFieldModule,
 		MatIconModule,
 		MatInputModule,
+		MatProgressSpinner,
 		MatTooltipModule,
 		ReactiveFormsModule,
 		NgOptimizedImage,
@@ -58,42 +68,61 @@ export class SearchbarComponent implements AfterViewInit {
 	filterInput!: ElementRef<HTMLInputElement>;
 	@ViewChild("autoTrigger", { static: false })
 	autoTrigger!: MatAutocompleteTrigger;
-	hasLicense = false;
 	currentTheme: Theme;
+	searchStatus:
+		| "loading"
+		| 400
+		| 401
+		| 429
+		| 404
+		| "serverError"
+		| "completed"
+		| "pristine" = "pristine";
 	constructor(
-		@Inject(WEATHER_API_LICENSE) private readonly licenseApi: string,
 		private readonly searchService: SearchService,
 		private readonly router: Router,
 		private readonly destroyRef: DestroyRef
 	) {}
 
 	ngAfterViewInit(): void {
-		this.hasLicense = !!this.licenseApi;
-		if (!this.hasLicense) {
-			this.autocompleteControl.disable();
-			// TODO add message of warning
-			return;
-		}
 		this.options$ = this.autocompleteControl.valueChanges.pipe(
 			takeUntilDestroyed(this.destroyRef),
 			debounceTime(DEFAULT_DEBOUNCE_DELAY_MILLISECONDS),
 			map((value: string | null): string =>
 				typeof value !== "string" ? "" : value
 			),
+			tap((): void => {
+				this.searchStatus = "loading";
+			}),
 			switchMap(
 				(value: string): Observable<ICitySearchResult> =>
 					value.length >= 3
 						? this.searchService.searchCountry(value)
 						: of(EMPTY_SEARCH_RESULT)
 			),
-			// TODO error handling
 			catchError(
-				(): Observable<ICitySearchResult> => of(EMPTY_SEARCH_RESULT)
+				(error: HttpErrorResponse): Observable<ICitySearchResult> => {
+					if (
+						error.status === 400 ||
+						error.status === 401 ||
+						error.status === 429
+					) {
+						this.searchStatus = error.status;
+					} else {
+						this.searchStatus = "serverError";
+					}
+					return of(EMPTY_SEARCH_RESULT);
+				}
 			),
 			switchMap(
 				(value: ICitySearchResult): Observable<ICityWeather[]> =>
 					of(value.list)
-			)
+			),
+			tap((): void => {
+				if (this.searchStatus === "loading") {
+					this.searchStatus = "completed";
+				}
+			})
 		);
 	}
 

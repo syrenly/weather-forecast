@@ -35,62 +35,56 @@ h1 {
 	align-self: center;
 	overflow: auto;
 	margin-bottom: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	width: 100%;
+	height: 100%;
 	.widget {
 		margin: 0.5rem;
 	}
-	.widget-wrapper {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		flex-wrap: wrap;
-		width: 100%;
-		height: 100%;
-	}
 }
-
-@media (min-width: 1200px) {
+@media (min-width: 1580px) {
 	app-searchbar,
 	.content {
 		width: 70%;
 		padding: 0 15%;
 	}
-	.content {
-		.widget {
-			-ms-flex-preferred-size: 0;
-			flex-basis: 0;
-			-webkit-box-flex: 1;
-			-ms-flex-positive: 1;
-			flex-grow: 1;
-			max-width: calc(50% - 1rem);
-		}
-		app-current-weather,
-		app-forecast-five {
-			height: calc(370px - 1rem);
-		}
-		app-temperature-chart,
-		app-precipitation-chart {
-			height: calc(400px - 1rem);
-		}
-	}
 }
-@media (max-width: 1200px) {
+
+@media (min-width: 1000px) {
 	app-searchbar,
 	.content {
 		width: calc(100% - 2rem);
 	}
+	.widget {
+		width: calc(50% - 1rem);
+	}
+	app-current-weather,
+	app-forecast-five {
+		height: calc(370px - 1rem);
+	}
+	app-temperature-chart,
+	app-precipitation-chart {
+		height: fit-content;
+	}
+}
+@media (max-width: 1000px) {
+	app-searchbar,
 	.content {
-		.widget {
-			width: 100%;
-		}
-		app-current-weather,
-		app-forecast-five {
-			height: fit-content;
-		}
-		app-temperature-chart,
-		app-precipitation-chart {
-			height: fit-content;
-			height: 100vw;
-		}
+		width: calc(100% - 2rem);
+	}
+	.widget {
+		width: 100%;
+	}
+	app-current-weather,
+	app-forecast-five {
+		height: fit-content;
+	}
+	app-temperature-chart,
+	app-precipitation-chart {
+		height: 100vw;
 	}
 }
 @media (max-width: 700px) {
