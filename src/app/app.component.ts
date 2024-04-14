@@ -1,13 +1,14 @@
+import { NgOptimizedImage } from "@angular/common";
 import { Component } from "@angular/core";
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
-import { MatIconModule } from "@angular/material/icon";
-import { RouterLink, RouterOutlet } from "@angular/router";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { RouterOutlet } from "@angular/router";
 import { routeTransitionAnimations } from "./routes/route-transition-animations";
 
 @Component({
 	selector: "app-root",
 	standalone: true,
-	imports: [RouterOutlet, RouterLink, MatIconModule],
+	imports: [RouterOutlet, NgOptimizedImage, MatTooltipModule],
 	templateUrl: "./app.component.html",
 	styleUrl: "./app.component.scss",
 	animations: [routeTransitionAnimations],

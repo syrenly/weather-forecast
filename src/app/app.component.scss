@@ -1,4 +1,14 @@
+:host {
+	position: relative;
+}
+
 div {
 	height: 100%;
 	width: 100%;
+}
+
+.attribution {
+	position: absolute;
+	bottom: 0;
+	right: 0;
 }

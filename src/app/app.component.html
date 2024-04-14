@@ -1,13 +1,15 @@
-<!-- <button routerLink="home">Home</button>
-<button routerLink="weather">weather</button> -->
-
 <div [@triggerName]="getRouteTransition(outlet)">
 	<router-outlet #outlet="outlet"></router-outlet>
 </div>
 
-<!-- <mat-icon
-	aria-hidden="false"
-	aria-label="Example home icon"
-	fontIcon="home"
-	color="primary"
-></mat-icon> -->
+<a
+	href="https://openweathermap.org/"
+	class="attribution c-pointer"
+	matTooltip="Weather data provided by OpenWeather"
+	><!-- NB ratio w/h of this image is 1.76 -->
+	<img
+		alt="attribution to https://openweathermap.org"
+		width="100"
+		height="57"
+		ngSrc="./assets/OpenWeatherLogo.png"
+/></a>
