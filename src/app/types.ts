@@ -1,50 +1,33 @@
-// #region models for generic SEARCH in autocomplete
 export interface ICitySearchResult {
 	message: string;
 	cod: string;
 	count: number;
-	list: ICityResult[];
+	list: ICity[];
 }
-export interface ICityResult extends ICityBase {
-	sys: ICountry | null;
-}
-
-interface ICountry {
-	country: string;
-}
-// #endregion
-
-// #region models for SPECIFIC retrieve of city
-export interface ICity extends ICityBase {
-	base: string;
-	sys: ICountryData | null;
+export interface ICity {
+	base?: string;
+	sys?: ICountryData | null;
 	cod: number;
-}
-
-interface ICountryData extends ICountry {
-	country: string;
-	type: number;
-	id: number;
-	message: number;
-	sunrise: number;
-	sunset: number;
-}
-// #endregion
-
-//#region common interfaces between ICityResult and ICity
-
-interface ICityBase {
 	id: number;
 	name: string;
 	coord: ICoordinate | null;
 	main: IMainInfo | null;
 	dt: number;
 	wind: IWind | null;
-	rain: IPrecipitationH;
-	snow: IPrecipitationH;
+	rain: IPrecipitationH | null;
+	snow: IPrecipitationH | null;
 	visibility: number;
 	clouds: ICloud | null;
 	weather: IWeather[];
+}
+
+interface ICountryData {
+	country: string;
+	type?: number;
+	id?: number;
+	message?: number;
+	sunrise?: number;
+	sunset?: number;
 }
 
 interface ICoordinate {
@@ -75,5 +58,8 @@ export interface IWeather {
 
 interface IPrecipitationH {
 	//Precipitation, mm/h
-	"1h": number;
+	"1h"?: number;
+	"3h"?: number;
 }
+
+export type RouteData = ICity & { animationState?: string };
