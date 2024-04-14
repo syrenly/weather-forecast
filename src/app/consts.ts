@@ -1,4 +1,4 @@
-import { ICitySearchResult } from "./types";
+import { ICitySearchResult } from "./city-types";
 
 export const DEFAULT_DEBOUNCE_DELAY_MILLISECONDS = 250;
 

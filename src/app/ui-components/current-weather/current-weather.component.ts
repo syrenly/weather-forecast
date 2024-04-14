@@ -4,15 +4,16 @@ import {
 	DatePipe,
 	DecimalPipe,
 	NgOptimizedImage,
+	TitleCasePipe,
 } from "@angular/common";
 import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
 import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { Observable, map } from "rxjs";
+import { ICity, IMainInfo, IWeather } from "../../city-types";
 import { FlagPipe } from "../../pipes/flag.pipe";
 import { WeatherPipe } from "../../pipes/weather.pipe";
-import { ICity, IMainInfo, IWeather } from "../../types";
 
 @Component({
 	selector: "app-current-weather",
@@ -27,6 +28,7 @@ import { ICity, IMainInfo, IWeather } from "../../types";
 		DatePipe,
 		DecimalPipe,
 		AsyncPipe,
+		TitleCasePipe,
 	],
 	templateUrl: "./current-weather.component.html",
 	styleUrl: "./current-weather.component.scss",
@@ -47,8 +49,13 @@ export class CurrentWeatherComponent implements OnChanges {
 			this.mainWeather =
 				this.city?.weather && this.city.weather[0]
 					? this.city.weather[0]
-					: undefined;
-			this.mainInfo = this.city?.main ? this.city.main : undefined;
+					: {
+							description: "",
+							icon: "",
+							id: null,
+							main: "",
+					  };
+			this.mainInfo = this.city?.main;
 		}
 	}
 }

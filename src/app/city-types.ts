@@ -6,19 +6,20 @@ export interface ICitySearchResult {
 }
 export interface ICity {
 	base?: string;
-	sys?: ICountryData | null;
+	sys: ICountryData;
 	cod: number;
 	id: number;
 	name: string;
 	coord: ICoordinate | null;
-	main: IMainInfo | null;
+	main: IMainInfo;
 	dt: number;
 	wind: IWind | null;
-	rain: IPrecipitationH | null;
-	snow: IPrecipitationH | null;
+	rain?: IPrecipitationH | null;
+	snow?: IPrecipitationH | null;
 	visibility: number;
 	clouds: ICloud | null;
 	weather: IWeather[];
+	timezone: number;
 }
 
 interface ICountryData {

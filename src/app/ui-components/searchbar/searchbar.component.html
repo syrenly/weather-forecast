@@ -29,12 +29,12 @@
 				/>
 				}
 				<span class="city-name">
-					{{ option.name }},&nbsp;{{ option.sys?.country }}
+					{{ option.name }},&nbsp;{{ option.sys.country }}
 				</span>
 				<img
 					width="16"
 					height="11"
-					[ngSrc]="option.sys?.country | flag"
+					[ngSrc]="option.sys.country | flag"
 				/>
 			</div>
 		</mat-option>
