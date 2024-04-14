@@ -15,7 +15,9 @@ import { BehaviorSubject } from "rxjs";
 import { CURRENT_THEME, Theme } from "../../tokens";
 import { IFiveDaysForecast } from "../../types/forecast-types";
 import { ChartBase } from "../chart.base";
-
+/**
+ * TemperatureChartComponent shows with a ChartJS instance the linear graphic of the temperature (mean, max and min) in 5 days
+ */
 @Component({
 	selector: "app-temperature-chart",
 	standalone: true,

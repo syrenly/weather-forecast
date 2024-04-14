@@ -3,7 +3,9 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { Chart } from "chart.js";
 import { BehaviorSubject } from "rxjs";
 import { CURRENT_THEME, Theme } from "../tokens";
-
+/**
+ * Base class for the components that implement a ChartJS object
+ */
 @Directive()
 export abstract class ChartBase implements AfterViewInit {
 	abstract canvasId: string;
