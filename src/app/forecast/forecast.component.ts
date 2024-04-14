@@ -13,7 +13,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ActivatedRoute, Data, Router, RouterLink } from "@angular/router";
 import { Observable, map } from "rxjs";
-import { ICity, IWeather } from "../city-types";
+import { ICityWeather, IWeather } from "../city-types";
 import { IFiveDaysForecast } from "../forecast-types";
 import { FlagPipe } from "../pipes/flag.pipe";
 import { WeatherPipe } from "../pipes/weather.pipe";
@@ -46,7 +46,7 @@ import { SearchService } from "./../services/search.service";
 	styleUrl: "./forecast.component.scss",
 })
 export class ForecastComponent implements OnInit {
-	city: ICity | undefined;
+	city: ICityWeather | undefined;
 	breakpoints = 2;
 	get mainWeather(): IWeather | undefined {
 		return this.city?.weather ? this.city.weather[0] : undefined;
@@ -69,7 +69,7 @@ export class ForecastComponent implements OnInit {
 			.subscribe((value: Data) => {
 				console.log(value);
 				const routeData: {
-					countryInfo: ICity;
+					countryInfo: ICityWeather;
 					forecastResult: IFiveDaysForecast;
 				} & { animationState: string } = value[0];
 				delete routeData["animationState"];

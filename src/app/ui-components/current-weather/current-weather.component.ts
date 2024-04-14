@@ -11,7 +11,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { Observable, map } from "rxjs";
-import { ICity, IMainInfo, IWeather } from "../../city-types";
+import { ICityWeather, IMainInfo, IWeather } from "../../city-types";
 import { FlagPipe } from "../../pipes/flag.pipe";
 import { WeatherPipe } from "../../pipes/weather.pipe";
 
@@ -34,7 +34,7 @@ import { WeatherPipe } from "../../pipes/weather.pipe";
 	styleUrl: "./current-weather.component.scss",
 })
 export class CurrentWeatherComponent implements OnChanges {
-	@Input() city: ICity | undefined;
+	@Input() city: ICityWeather | undefined;
 	breakpoints = 2;
 	mainWeather: IWeather | undefined;
 	mainInfo: IMainInfo | undefined;
