@@ -10,7 +10,7 @@ import {
 } from "@angular/core";
 import { MatCardModule } from "@angular/material/card";
 import Chart from "chart.js/auto";
-import { IFiveDaysForecast } from "../forecast-types";
+import { IFiveDaysForecast } from "../types/forecast-types";
 
 @Component({
 	selector: "app-precipitation-chart",
@@ -25,7 +25,6 @@ export class PrecipitationChartComponent implements OnChanges, AfterViewInit {
 	canvasId = "precipitationChart";
 	rainPrecipitations: number[] = [];
 	snowPrecipitations: number[] = [];
-	// pop: number[] = [];
 	xAxis: string[] = [];
 	datePipe: DatePipe;
 	constructor(@Inject(LOCALE_ID) private readonly localeId: string) {}
@@ -50,7 +49,6 @@ export class PrecipitationChartComponent implements OnChanges, AfterViewInit {
 		const list = this.forecastResult.list;
 		this.rainPrecipitations = [];
 		this.snowPrecipitations = [];
-		// this.pop = [];
 		this.xAxis = [];
 		list.forEach((l) => {
 			const snow = l["snow.?3h"] ?? 0;
@@ -60,20 +58,17 @@ export class PrecipitationChartComponent implements OnChanges, AfterViewInit {
 			this.xAxis.push(date);
 			this.rainPrecipitations.push(rain);
 			this.snowPrecipitations.push(snow);
-			// this.pop.push(pop * 100);
 		});
 	}
 
 	private createChart(): void {
 		this.chart = new Chart(this.canvasId, {
 			type: "line",
-
 			data: {
 				labels: this.xAxis,
 				datasets: [
 					{ data: this.rainPrecipitations, label: "Rain" },
 					{ data: this.snowPrecipitations, label: "Snow" },
-					// { data: this.pop, label: "Probability of precipitations" },
 				],
 			},
 			options: {
