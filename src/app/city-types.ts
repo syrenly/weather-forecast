@@ -2,9 +2,9 @@ export interface ICitySearchResult {
 	message: string;
 	cod: string;
 	count: number;
-	list: ICity[];
+	list: ICityWeather[];
 }
-export interface ICity {
+export interface ICityWeather {
 	base?: string;
 	sys: ICountryData;
 	cod: number;
@@ -64,4 +64,4 @@ interface IPrecipitationH {
 	"3h"?: number;
 }
 
-export type RouteData = ICity & { animationState?: string };
+export type RouteData = ICityWeather & { animationState?: string };

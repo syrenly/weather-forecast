@@ -1,4 +1,4 @@
-import { ICity } from "./city-types";
+import { ICityWeather } from "./city-types";
 import { IFiveDaysForecast } from "./forecast-types";
 
 export const forecastResult: IFiveDaysForecast = {
@@ -1483,7 +1483,7 @@ export const forecastResult: IFiveDaysForecast = {
 	},
 };
 
-export const city: ICity = {
+export const city: ICityWeather = {
 	coord: {
 		lon: 12.4839,
 		lat: 41.8947,

@@ -2,13 +2,13 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { ResolveFn, Router } from "@angular/router";
 import { Observable, catchError, forkJoin, of } from "rxjs";
-import { ICity } from "../city-types";
+import { ICityWeather } from "../city-types";
 import { IFiveDaysForecast } from "../forecast-types";
 import { SearchService } from "../services/search.service";
 
 export type CityResolverType =
 	| { errorStatus: number }
-	| { countryInfo: ICity; forecastResult: IFiveDaysForecast };
+	| { countryInfo: ICityWeather; forecastResult: IFiveDaysForecast };
 
 export const cityResolver: ResolveFn<Observable<CityResolverType>> = (
 	route,
@@ -22,9 +22,10 @@ export const cityResolver: ResolveFn<Observable<CityResolverType>> = (
 	}
 	const searchService = inject(SearchService);
 	const router = inject(Router);
-	const city: ICity = router.getCurrentNavigation()?.extras?.state as ICity;
+	const city: ICityWeather = router.getCurrentNavigation()?.extras
+		?.state as ICityWeather;
 	const cityObs =
-		city && city.id === id ? of(city) : searchService.getCountry(id);
+		city && city.id === id ? of(city) : searchService.getCityWeather(id);
 	return forkJoin({
 		countryInfo: cityObs,
 		forecastResult: searchService.getFiveDaysForecast(id),

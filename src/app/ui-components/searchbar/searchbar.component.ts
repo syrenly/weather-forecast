@@ -18,14 +18,13 @@ import { MatInputModule } from "@angular/material/input";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { Router } from "@angular/router";
 import { Observable, catchError, debounceTime, map, of, switchMap } from "rxjs";
-import { ICity, ICitySearchResult } from "../../city-types";
+import { ICitySearchResult, ICityWeather } from "../../city-types";
 import {
 	DEFAULT_DEBOUNCE_DELAY_MILLISECONDS,
 	EMPTY_SEARCH_RESULT,
 } from "../../consts";
 import { FlagPipe } from "../../pipes/flag.pipe";
 import { WeatherPipe } from "../../pipes/weather.pipe";
-import { CityService } from "../../services/city.service";
 import { SearchService } from "../../services/search.service";
 import { WEATHER_API_LICENSE } from "../../tokens";
 
@@ -49,7 +48,7 @@ import { WEATHER_API_LICENSE } from "../../tokens";
 })
 export class SearchbarComponent implements AfterViewInit {
 	autocompleteControl = new FormControl<string>("");
-	options$!: Observable<ICity[]>;
+	options$!: Observable<ICityWeather[]>;
 	@ViewChild("filterInput", { static: false })
 	filterInput!: ElementRef<HTMLInputElement>;
 	@ViewChild("autoTrigger", { static: false })
@@ -58,7 +57,6 @@ export class SearchbarComponent implements AfterViewInit {
 	constructor(
 		@Inject(WEATHER_API_LICENSE) private readonly licenseApi: string,
 		private readonly searchService: SearchService,
-		private readonly cityService: CityService,
 		private readonly router: Router
 	) {}
 
@@ -85,26 +83,24 @@ export class SearchbarComponent implements AfterViewInit {
 				(): Observable<ICitySearchResult> => of(EMPTY_SEARCH_RESULT)
 			),
 			switchMap(
-				(value: ICitySearchResult): Observable<ICity[]> =>
+				(value: ICitySearchResult): Observable<ICityWeather[]> =>
 					of(value.list)
 			)
 		);
 	}
 
-	displayFn = (value: ICity): string => {
+	displayFn = (value: ICityWeather): string => {
 		const { name, sys } = value;
 		// todo more strict
 		return value ? `${name}, ${sys?.country || "N.A"}` : "";
 	};
 
 	itemSelected(event: MatAutocompleteSelectedEvent): void {
-		const selectedValue: ICity = event?.option?.value;
+		const selectedValue: ICityWeather = event?.option?.value;
 		if (selectedValue) {
-			this.cityService.city = selectedValue;
 			this.router.navigateByUrl(`/forecast/${selectedValue.id}`, {
 				state: selectedValue,
 			});
-			// this.router.navigate(["forecast", selectedValue.id]);
 		}
 	}
 }
