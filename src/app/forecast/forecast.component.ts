@@ -17,6 +17,7 @@ import { ICity, IWeather } from "../city-types";
 import { IFiveDaysForecast } from "../forecast-types";
 import { FlagPipe } from "../pipes/flag.pipe";
 import { WeatherPipe } from "../pipes/weather.pipe";
+import { TemperatureChartComponent } from "../temperature-chart/temperature-chart.component";
 import { CurrentWeatherComponent } from "../ui-components/current-weather/current-weather.component";
 import { ForecastFiveComponent } from "../ui-components/forecast-five/forecast-five.component";
 import { SearchbarComponent } from "../ui-components/searchbar/searchbar.component";
@@ -28,6 +29,7 @@ import { SearchService } from "./../services/search.service";
 		SearchbarComponent,
 		CurrentWeatherComponent,
 		ForecastFiveComponent,
+		TemperatureChartComponent,
 		RouterLink,
 		MatIconModule,
 		MatCardModule,

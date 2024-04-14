@@ -31,7 +31,8 @@
 						"stylePreprocessorOptions": {
 							"includePaths": ["node_modules/"]
 						},
-						"scripts": []
+						"scripts": [],
+						"allowedCommonJsDependencies": ["chart.js"]
 					},
 					"configurations": {
 						"production": {
