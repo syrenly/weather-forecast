@@ -10,6 +10,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { MatCardModule } from "@angular/material/card";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatIconModule } from "@angular/material/icon";
+import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ActivatedRoute, Data, RouterLink } from "@angular/router";
 import { Observable, map } from "rxjs";
@@ -45,6 +46,7 @@ import { TemperatureChartComponent } from "../ui-components/temperature-chart/te
 		MatIconModule,
 		MatCardModule,
 		MatDividerModule,
+		MatToolbarModule,
 		NgOptimizedImage,
 		MatTooltipModule,
 		FlagPipe,

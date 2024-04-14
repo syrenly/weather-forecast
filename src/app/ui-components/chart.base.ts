@@ -39,18 +39,6 @@ export abstract class ChartBase implements AfterViewInit {
 			};
 		} else {
 			const color = "#FFFFFF";
-			const scaleConfig = {
-				display: true,
-
-				ticks: {
-					display: true,
-					color,
-				},
-				grid: {
-					display: true,
-					color,
-				},
-			};
 			this.chart.options = {
 				elements: { line: { tension: 0 } },
 				maintainAspectRatio: false,
@@ -63,8 +51,29 @@ export abstract class ChartBase implements AfterViewInit {
 					},
 				},
 				scales: {
-					x: scaleConfig,
-					y: scaleConfig,
+					x: {
+						display: true,
+						ticks: {
+							display: true,
+							color,
+						},
+						grid: {
+							display: true,
+							color,
+						},
+					},
+					y: {
+						display: true,
+						ticks: {
+							display: true,
+							color,
+							stepSize: 1,
+						},
+						grid: {
+							display: true,
+							color,
+						},
+					},
 				},
 			};
 		}

@@ -22,9 +22,9 @@
 <ng-template #threeHours let-forecast>
 	<mat-divider></mat-divider>
 	<div class="row">
-		<div>{{ forecast.dt * 1000 | date : "HH:mm" }}</div>
+		<div class="hours">{{ forecast.dt * 1000 | date : "HH:mm" }}</div>
 		@if(forecast.weather && forecast.weather[0]){
-		<div>
+		<div class="icon">
 			<img
 				matTooltip="{{ forecast.weather[0].description | titlecase }}"
 				alt="{{ forecast.weather[0].description }}"

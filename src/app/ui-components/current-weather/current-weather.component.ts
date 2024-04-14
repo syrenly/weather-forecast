@@ -1,4 +1,3 @@
-import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import {
 	AsyncPipe,
 	DatePipe,
@@ -10,40 +9,35 @@ import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
 import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { Observable, map } from "rxjs";
 import { FlagPipe } from "../../pipes/flag.pipe";
 import { WeatherPipe } from "../../pipes/weather.pipe";
 import { ICityWeather, IMainInfo, IWeather } from "../../types/city-types";
-
+/**
+ * CurrentWeatherComponent shows the current weather conditions (pressure, temperature, max/min temperature, clouds, etc)
+ */
 @Component({
 	selector: "app-current-weather",
 	standalone: true,
 	imports: [
+		AsyncPipe,
+		DatePipe,
+		DecimalPipe,
+		FlagPipe,
 		MatIconModule,
 		MatCardModule,
 		NgOptimizedImage,
 		MatTooltipModule,
-		FlagPipe,
-		WeatherPipe,
-		DatePipe,
-		DecimalPipe,
-		AsyncPipe,
 		TitleCasePipe,
+		WeatherPipe,
 	],
 	templateUrl: "./current-weather.component.html",
 	styleUrl: "./current-weather.component.scss",
 })
 export class CurrentWeatherComponent implements OnChanges {
 	@Input() city: ICityWeather | undefined;
-	breakpoints = 2;
 	mainWeather: IWeather | undefined;
 	mainInfo: IMainInfo | undefined;
 
-	isHandset$: Observable<boolean> = this.breakpointObserver
-		.observe(Breakpoints.Handset)
-		.pipe(map((res): boolean => res.matches));
-
-	constructor(private readonly breakpointObserver: BreakpointObserver) {}
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes["city"]) {
 			this.mainWeather =

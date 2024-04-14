@@ -1,8 +1,11 @@
 :host {
 	display: block;
+	mat-card,
+	mat-card-content {
+		height: inherit;
+	}
 }
 
-.header,
 .row {
 	width: calc(100% - 2rem);
 	padding: 0 1rem;
@@ -10,11 +13,27 @@
 	flex-wrap: nowrap;
 	align-items: center;
 	div {
-		width: 25%;
 		&.wind,
 		&.pop {
 			display: flex;
 			align-items: flex-start;
+		}
+	}
+}
+@media (min-width: 576px) {
+	.row div {
+		width: 20%;
+	}
+}
+@media (max-width: 576px) {
+	.row div {
+		width: 100%;
+		min-width: 15%;
+		&.icon {
+			width: 50px;
+		}
+		&.hours {
+			max-width: 50px;
 		}
 	}
 }

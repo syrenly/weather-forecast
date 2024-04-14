@@ -46,12 +46,6 @@ $custom-typography: mat.define-typography-config(
 @include mat.all-component-themes($dark-theme);
 
 // make a specific class for light theme
-.dark-theme {
-	background-color: #303030;
-}
-
-// make a specific class for light theme
 .light-theme {
-	background-color: white;
 	@include mat.all-component-colors($light-theme);
 }

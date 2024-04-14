@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@use "sass:color";
 
 * {
 	font-family: "Roboto", "Helvetica Neue", sans-serif;
@@ -15,3 +16,17 @@ body {
 .c-pointer {
 	cursor: pointer;
 }
+
+// #region SCROLLBAR
+::-webkit-scrollbar {
+	width: 0.25em;
+	height: 0.5rem;
+}
+::-webkit-scrollbar-thumb {
+	background: color.adjust(#708090, $lightness: 10%);
+	border-radius: 15px;
+}
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+// #endregion
