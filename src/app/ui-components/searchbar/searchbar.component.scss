@@ -13,3 +13,7 @@
 .city-name {
 	margin: 0 1rem;
 }
+::ng-deep .light-theme-autocomplete-panel {
+	background-color: white !important;
+	color: inherit;
+}

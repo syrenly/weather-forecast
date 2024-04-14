@@ -10,7 +10,7 @@ import {
 } from "@angular/core";
 import { MatCardModule } from "@angular/material/card";
 import Chart from "chart.js/auto";
-import { IFiveDaysForecast } from "../types/forecast-types";
+import { IFiveDaysForecast } from "../../types/forecast-types";
 
 @Component({
 	selector: "app-temperature-chart",

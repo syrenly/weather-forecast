@@ -15,13 +15,14 @@ import { ActivatedRoute, Data, RouterLink } from "@angular/router";
 import { Observable, map } from "rxjs";
 import { FlagPipe } from "../pipes/flag.pipe";
 import { WeatherPipe } from "../pipes/weather.pipe";
-import { PrecipitationChartComponent } from "../precipitation-chart/precipitation-chart.component";
-import { TemperatureChartComponent } from "../temperature-chart/temperature-chart.component";
 import { ICityWeather, IWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
 import { CurrentWeatherComponent } from "../ui-components/current-weather/current-weather.component";
 import { ForecastFiveComponent } from "../ui-components/forecast-five/forecast-five.component";
+import { PrecipitationChartComponent } from "../ui-components/precipitation-chart/precipitation-chart.component";
 import { SearchbarComponent } from "../ui-components/searchbar/searchbar.component";
+import { SwitchThemeComponent } from "../ui-components/switch-theme/switch-theme.component";
+import { TemperatureChartComponent } from "../ui-components/temperature-chart/temperature-chart.component";
 @Component({
 	selector: "app-forecast",
 	standalone: true,
@@ -31,6 +32,7 @@ import { SearchbarComponent } from "../ui-components/searchbar/searchbar.compone
 		ForecastFiveComponent,
 		TemperatureChartComponent,
 		PrecipitationChartComponent,
+		SwitchThemeComponent,
 		RouterLink,
 		MatIconModule,
 		MatCardModule,
