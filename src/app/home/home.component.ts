@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
-import { CitySuggestionsComponent } from "../ui-components/city-suggestions/city-suggestions.component";
+import { Router } from "@angular/router";
 import { SearchbarComponent } from "../ui-components/searchbar/searchbar.component";
 import { SwitchThemeComponent } from "../ui-components/switch-theme/switch-theme.component";
 
@@ -9,11 +10,16 @@ import { SwitchThemeComponent } from "../ui-components/switch-theme/switch-theme
 	standalone: true,
 	imports: [
 		SearchbarComponent,
-		CitySuggestionsComponent,
 		MatCardModule,
 		SwitchThemeComponent,
+		MatButtonModule,
 	],
 	templateUrl: "./home.component.html",
 	styleUrl: "./home.component.scss",
 })
-export class HomeComponent {}
+export class HomeComponent {
+	constructor(private readonly router: Router) {}
+	navigateTo(id: number): void {
+		this.router.navigate(["forecast", id]);
+	}
+}
