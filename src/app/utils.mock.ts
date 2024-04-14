@@ -1422,6 +1422,7 @@ export const forecastResult: IFiveDaysForecast = {
 			pop: 0.2,
 			rain: {
 				"3h": 0.15,
+				"1h": 0.15,
 			},
 			sys: {
 				pod: "d",
@@ -1461,6 +1462,7 @@ export const forecastResult: IFiveDaysForecast = {
 			pop: 0.26,
 			rain: {
 				"3h": 0.12,
+				"1h": 0.5,
 			},
 			sys: {
 				pod: "d",

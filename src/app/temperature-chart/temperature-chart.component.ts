@@ -23,9 +23,9 @@ export class TemperatureChartComponent implements OnChanges, AfterViewInit {
 	@Input() forecastResult: IFiveDaysForecast | undefined;
 	chart: Chart = null;
 	canvasId = "temperatureChart";
-	meanTemperature = [];
-	maxTemperature = [];
-	minTemperature = [];
+	meanTemperature: number[] = [];
+	maxTemperature: number[] = [];
+	minTemperature: number[] = [];
 	xAxis: string[] = [];
 	datePipe: DatePipe;
 	constructor(@Inject(LOCALE_ID) private readonly localeId: string) {}
