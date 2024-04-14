@@ -15,7 +15,9 @@ import { BehaviorSubject } from "rxjs";
 import { CURRENT_THEME, Theme } from "../../tokens";
 import { IFiveDaysForecast } from "../../types/forecast-types";
 import { ChartBase } from "../chart.base";
-
+/**
+ * PrecipitationChartComponent shows with a ChartJS instance the linear graphic of the precipitations (rain and snow) in 5 days
+ */
 @Component({
 	selector: "app-precipitation-chart",
 	standalone: true,
@@ -59,7 +61,9 @@ export class PrecipitationChartComponent
 		this.calculateDataSets();
 		super.ngAfterViewInit();
 	}
-
+	/**
+	 * Calculate the data to be injected inside the chart
+	 */
 	private calculateDataSets(): void {
 		const list = this.forecastResult.list;
 		this.rainPrecipitations = [];
@@ -75,7 +79,6 @@ export class PrecipitationChartComponent
 			this.snowPrecipitations.push(snow);
 		});
 	}
-
 	createChart(): void {
 		const data = {
 			labels: this.xAxis,

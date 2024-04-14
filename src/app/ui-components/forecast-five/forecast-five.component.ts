@@ -8,13 +8,7 @@ import {
 	NgTemplateOutlet,
 	TitleCasePipe,
 } from "@angular/common";
-import {
-	Component,
-	DestroyRef,
-	Input,
-	OnChanges,
-	SimpleChanges,
-} from "@angular/core";
+import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
 import { MatCardModule } from "@angular/material/card";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatIconModule } from "@angular/material/icon";
@@ -28,7 +22,9 @@ import {
 	IFiveDaysForecast,
 	IThreeHoursForecast,
 } from "../../types/forecast-types";
-import { SearchService } from "./../../services/search.service";
+/**
+ * ForecastFiveComponent shows weather forecast for 5 days. Each day is shown inside a tab; every row is the summary of forecast for 3 hours in that specific day
+ */
 @Component({
 	selector: "app-forecast-five",
 	standalone: true,
@@ -63,11 +59,7 @@ export class ForecastFiveComponent implements OnChanges {
 		.observe(Breakpoints.Handset)
 		.pipe(map((res): boolean => res.matches));
 
-	constructor(
-		private readonly breakpointObserver: BreakpointObserver,
-		private readonly searchService: SearchService,
-		private readonly destroyRef: DestroyRef
-	) {}
+	constructor(private readonly breakpointObserver: BreakpointObserver) {}
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes["forecastResult"]?.currentValue) {
 			this.daysDictionary = groupBy(
@@ -89,7 +81,8 @@ export class ForecastFiveComponent implements OnChanges {
 		}
 	}
 }
-const groupBy = <T>(
+/** Replace this with the new Object.groupBy function when Typescript will expose it  */
+export const groupBy = <T>(
 	array: T[],
 	predicate: (value: T, index: number, array: T[]) => string
 ): { [key: string]: T[] } =>
@@ -97,11 +90,3 @@ const groupBy = <T>(
 		(acc[predicate(value, index, array)] ||= []).push(value);
 		return acc;
 	}, {} as { [key: string]: T[] });
-
-// function partition(array, isValid) {
-// 	return array.reduce(([pass, fail], elem) => {
-// 	  return isValid(elem) ? [[...pass, elem], fail] : [pass, [...fail, elem]];
-// 	}, [[], []]);
-//   }
-
-//   const [pass, fail] = partition(myArray, (e) => e > 5);

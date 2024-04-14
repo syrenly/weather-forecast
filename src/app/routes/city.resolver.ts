@@ -22,18 +22,21 @@ export const cityResolver: ResolveFn<Observable<CityResolverType>> = (
 	}
 	const searchService = inject(SearchService);
 	const router = inject(Router);
+	// get city from current navigation data
 	const city: ICityWeather = router.getCurrentNavigation()?.extras
 		?.state as ICityWeather;
+	// if current navigation data contains the city, keep it, otherwise, retrieve it from server
 	const cityObs =
 		city && city.id === id ? of(city) : searchService.getCityWeather(id);
 	return forkJoin({
 		countryInfo: cityObs,
+		// retrieve also the 5 days forecast
 		forecastResult: searchService.getFiveDaysForecast(id),
 	}).pipe(
+		// manage show of errors in ForecastComponent
 		catchError(
-			(error: HttpErrorResponse): Observable<{ errorStatus: number }> => {
-				return of({ errorStatus: error.status });
-			}
+			(error: HttpErrorResponse): Observable<{ errorStatus: number }> =>
+				of({ errorStatus: error.status })
 		)
 	);
 };

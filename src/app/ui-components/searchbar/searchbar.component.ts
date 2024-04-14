@@ -29,7 +29,9 @@ import { WeatherPipe } from "../../pipes/weather.pipe";
 import { SearchService } from "../../services/search.service";
 import { Theme, WEATHER_API_LICENSE } from "../../tokens";
 import { ICitySearchResult, ICityWeather } from "../../types/city-types";
-
+/**
+ * Search for the city to know which weather conditions there are. It will navigate to the ForecastComponent to show details.
+ */
 @Component({
 	selector: "app-searchbar",
 	standalone: true,

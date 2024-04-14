@@ -17,4 +17,5 @@ The following enhancements will be evaluated in order to improve the application
 -   [ ] refactor scss variables
 -   [ ] refresh button or periodic refresh of the data
 -   [ ] add a background image with transparence for the HomeComponent
+-   [ ] Replace this with the new Object.groupBy function when Typescript will expose it
 -   [ ] of course new ideas will come!
