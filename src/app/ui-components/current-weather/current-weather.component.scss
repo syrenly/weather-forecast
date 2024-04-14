@@ -1,0 +1,76 @@
+// @use "sass:math";
+
+:host {
+	display: block;
+}
+
+// TODO ADD breakpoints with media queries
+mat-card {
+	width: 60%;
+	max-height: 70%;
+	height: fit-content;
+	min-height: 400px;
+	.card-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		mat-card-title.main-temperature {
+			text-align: end;
+		}
+	}
+	.additional-data {
+		padding: 0 2rem;
+		display: flex;
+		flex-wrap: wrap;
+		// &.small-device .data {
+		// 	width: 100%;
+		// }
+		.data {
+			margin: 0.5rem 0;
+
+			.info-data {
+				display: flex;
+				align-items: center;
+			}
+			.label-data {
+				white-space: nowrap;
+			}
+		}
+	}
+}
+
+// .wind-icon {
+// 	//rotate counter clockwise
+// 	&.rotate-ccw- {
+// 		&90 {
+// 			rotate: -90deg;
+// 		}
+// 		&180 {
+// 			rotate: -180deg;
+// 		}
+// 		&270 {
+// 			rotate: -270deg;
+// 		}
+// 	}
+// 	@for $i from 1 to 360 {
+// 		&.rotate-#{$i} {
+// 			rotate: #{$i}deg;
+// 		}
+// 	}
+// }
+
+@media (min-width: 576px) {
+	.data {
+		-ms-flex-preferred-size: 0;
+		flex-basis: 0;
+		-webkit-box-flex: 1;
+		-ms-flex-positive: 1;
+		flex-grow: 1;
+		max-width: 100%;
+	}
+}
+@media (max-width: 576px) {
+	.data {
+		width: 100%;
+	}
+}
