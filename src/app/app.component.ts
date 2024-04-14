@@ -5,7 +5,6 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { RouterOutlet } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
 import { routeTransitionAnimations } from "./routes/route-transition-animations";
-import { ThemeService } from "./services/theme.service";
 import { CURRENT_THEME, Theme } from "./tokens";
 
 @Component({
@@ -20,7 +19,6 @@ import { CURRENT_THEME, Theme } from "./tokens";
 			provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
 			useValue: { appearance: "outline" },
 		},
-		ThemeService,
 	],
 })
 export class AppComponent {

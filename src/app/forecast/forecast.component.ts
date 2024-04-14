@@ -24,6 +24,7 @@ import { PrecipitationChartComponent } from "../ui-components/precipitation-char
 import { SearchbarComponent } from "../ui-components/searchbar/searchbar.component";
 import { SwitchThemeComponent } from "../ui-components/switch-theme/switch-theme.component";
 import { TemperatureChartComponent } from "../ui-components/temperature-chart/temperature-chart.component";
+import { SearchService } from "./../services/search.service";
 /**
  * ForecastComponent is the main component for the application. It shows specific information about the weather for a city.
  * - header with title (link to return to home), searchbar (to change the current selected city), toggle button to switch between light and dark theme
@@ -66,18 +67,19 @@ export class ForecastComponent implements OnInit {
 	}
 	isHandset$: Observable<boolean> = this.breakpointObserver
 		.observe(Breakpoints.Handset)
-		.pipe(map((res) => res.matches));
+		.pipe(map((res): boolean => res.matches));
 
 	forecastResult: IFiveDaysForecast | undefined;
 	constructor(
 		private readonly breakpointObserver: BreakpointObserver,
 		private readonly route: ActivatedRoute,
-		private readonly destroyRef: DestroyRef
+		private readonly destroyRef: DestroyRef,
+		private readonly searchService: SearchService
 	) {}
 	ngOnInit(): void {
 		this.route.data
 			.pipe(takeUntilDestroyed(this.destroyRef))
-			.subscribe((value: Data) => {
+			.subscribe((value: Data): void => {
 				console.log(value);
 				const routeData: {
 					countryInfo: ICityWeather;
@@ -86,6 +88,7 @@ export class ForecastComponent implements OnInit {
 				delete routeData["animationState"];
 				this.city = routeData.countryInfo;
 				this.forecastResult = routeData.forecastResult;
+				this.searchService.navigationStarted = false;
 			});
 	}
 }

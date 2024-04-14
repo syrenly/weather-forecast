@@ -28,6 +28,7 @@ export const cityResolver: ResolveFn<Observable<CityResolverType>> = (
 	// if current navigation data contains the city, keep it, otherwise, retrieve it from server
 	const cityObs =
 		city && city.id === id ? of(city) : searchService.getCityWeather(id);
+	searchService.navigationStarted = true;
 	return forkJoin({
 		countryInfo: cityObs,
 		// retrieve also the 5 days forecast

@@ -70,8 +70,9 @@ export class PrecipitationChartComponent
 		this.snowPrecipitations = [];
 		this.xAxis = [];
 		list.forEach((l): void => {
-			const snow = l["snow.?3h"] ?? 0;
-			const rain = l["rain.?3h"] ?? 0;
+			console.log(l);
+			const snow = l.snow && l.snow["3h"] > 0 ? l.snow["3h"] : 0;
+			const rain = l.rain && l.rain["3h"] > 0 ? l.rain["3h"] : 0;
 			const { dt } = l;
 			const date = this.datePipe.transform(dt * 1000, "MMM, d HH:mm");
 			this.xAxis.push(date);
