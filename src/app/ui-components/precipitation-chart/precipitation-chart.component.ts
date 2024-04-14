@@ -2,6 +2,7 @@ import { DatePipe } from "@angular/common";
 import {
 	AfterViewInit,
 	Component,
+	DestroyRef,
 	Inject,
 	Input,
 	LOCALE_ID,
@@ -10,7 +11,10 @@ import {
 } from "@angular/core";
 import { MatCardModule } from "@angular/material/card";
 import Chart from "chart.js/auto";
+import { BehaviorSubject } from "rxjs";
+import { CURRENT_THEME, Theme } from "../../tokens";
 import { IFiveDaysForecast } from "../../types/forecast-types";
+import { ChartBase } from "../chart.base";
 
 @Component({
 	selector: "app-precipitation-chart",
@@ -19,15 +23,25 @@ import { IFiveDaysForecast } from "../../types/forecast-types";
 	templateUrl: "./precipitation-chart.component.html",
 	styleUrl: "./precipitation-chart.component.scss",
 })
-export class PrecipitationChartComponent implements OnChanges, AfterViewInit {
+export class PrecipitationChartComponent
+	extends ChartBase
+	implements OnChanges, AfterViewInit
+{
 	@Input() forecastResult: IFiveDaysForecast | undefined;
-	chart: Chart = null;
 	canvasId = "precipitationChart";
 	rainPrecipitations: number[] = [];
 	snowPrecipitations: number[] = [];
 	xAxis: string[] = [];
 	datePipe: DatePipe;
-	constructor(@Inject(LOCALE_ID) private readonly localeId: string) {}
+
+	constructor(
+		@Inject(LOCALE_ID) private readonly localeId: string,
+		@Inject(CURRENT_THEME)
+		themeSubject: BehaviorSubject<Theme>,
+		destroyRef: DestroyRef
+	) {
+		super(themeSubject, destroyRef);
+	}
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if (
@@ -39,10 +53,11 @@ export class PrecipitationChartComponent implements OnChanges, AfterViewInit {
 			this.createChart();
 		}
 	}
-	ngAfterViewInit(): void {
+
+	override ngAfterViewInit(): void {
 		this.datePipe = new DatePipe(this.localeId);
 		this.calculateDataSets();
-		this.createChart();
+		super.ngAfterViewInit();
 	}
 
 	private calculateDataSets(): void {
@@ -50,10 +65,10 @@ export class PrecipitationChartComponent implements OnChanges, AfterViewInit {
 		this.rainPrecipitations = [];
 		this.snowPrecipitations = [];
 		this.xAxis = [];
-		list.forEach((l) => {
+		list.forEach((l): void => {
 			const snow = l["snow.?3h"] ?? 0;
 			const rain = l["rain.?3h"] ?? 0;
-			const { pop = 0, dt } = l;
+			const { dt } = l;
 			const date = this.datePipe.transform(dt * 1000, "MMM, d HH:mm");
 			this.xAxis.push(date);
 			this.rainPrecipitations.push(rain);
@@ -61,21 +76,24 @@ export class PrecipitationChartComponent implements OnChanges, AfterViewInit {
 		});
 	}
 
-	private createChart(): void {
+	createChart(): void {
+		const data = {
+			labels: this.xAxis,
+			datasets: [
+				{ data: this.rainPrecipitations, label: "Rain" },
+				{ data: this.snowPrecipitations, label: "Snow" },
+			],
+		};
+		if (this.chart) {
+			this.chart.data = data;
+			this.chart.update();
+			return;
+		}
 		this.chart = new Chart(this.canvasId, {
 			type: "line",
-			data: {
-				labels: this.xAxis,
-				datasets: [
-					{ data: this.rainPrecipitations, label: "Rain" },
-					{ data: this.snowPrecipitations, label: "Snow" },
-				],
-			},
-			options: {
-				elements: { line: { tension: 0 } },
-				maintainAspectRatio: false,
-				responsive: true,
-			},
+			data,
+			options: {},
 		});
+		this.updateColors();
 	}
 }
