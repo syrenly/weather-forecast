@@ -1,3 +1,5 @@
+@use "sass:math";
+
 :host {
 	display: block;
 	overflow-y: auto;
@@ -35,16 +37,39 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	flex-direction: column;
 	width: 100%;
+	.widgets {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		.widget {
+			margin: 1rem;
+		}
+	}
 
 	// TODO ADD breakpoints with media queries
-	mat-card {
-		width: 60%;
-		max-height: 70%;
-		height: fit-content;
-		min-height: 400px;
-		h1 {
-			margin-top: 0;
-		}
+	app-current-weather {
+		// width: 60%;
+		// max-height: 70%;
+		// height: fit-content;
+		// min-height: 400px;
+	}
+}
+
+@media (min-width: 576px) {
+	.widget {
+		-ms-flex-preferred-size: 0;
+		flex-basis: 0;
+		-webkit-box-flex: 1;
+		-ms-flex-positive: 1;
+		flex-grow: 1;
+		max-width: 100%;
+	}
+}
+@media (max-width: 576px) {
+	.widget {
+		width: 100%;
 	}
 }

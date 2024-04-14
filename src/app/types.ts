@@ -34,7 +34,7 @@ interface ICoordinate {
 	lat: number;
 	lon: number;
 }
-interface IMainInfo {
+export interface IMainInfo {
 	temp: number;
 	feels_like: number;
 	temp_min: number;
@@ -45,6 +45,7 @@ interface IMainInfo {
 interface IWind {
 	speed: number;
 	deg: number;
+	gust: number;
 }
 interface ICloud {
 	all: number;

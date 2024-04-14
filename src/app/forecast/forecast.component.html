@@ -7,30 +7,31 @@
 	<app-searchbar></app-searchbar>
 	<div>bottone per cambiare tema</div>
 </div>
+@if(city){
 <div class="content">
-	@if(city){
-	<mat-card>
-		<div class="card-header"></div>
-		<mat-card-header>
-			@if(mainWeather){
-			<img
-				mat-card-avatar
-				alt="{{ mainWeather.description }}"
-				width="40"
-				height="40"
-				[ngSrc]="mainWeather.icon | weather"
-			/>
-			}
-			<mat-card-title
-				>{{ city.name }}
-				<img width="16" height="11" [ngSrc]="city.sys?.country | flag"
-			/></mat-card-title>
-			@if(mainWeather){
-			<mat-card-subtitle>
-				{{ mainWeather.description }}
-			</mat-card-subtitle>
-			}
-		</mat-card-header>
-	</mat-card>
-	}
+	<h1>
+		<span>{{ city.name }}</span>
+		@if(city.sys?.country){
+		<span>,&nbsp;{{ city.sys?.country }}&nbsp;</span>
+		<!-- NB aspect-ratio: 1.45 -->
+		<img width="30" height="20" [ngSrc]="city.sys?.country | flag" />
+		}
+	</h1>
+	<div class="widgets">
+		<app-current-weather class="widget" [city]="city"></app-current-weather>
+		<app-forecast-five class="widget" [city]="city"></app-forecast-five>
+	</div>
 </div>
+}
+
+<!-- speed: number;
+deg: number;
+gust: number; -->
+<!-- interface IMainInfo {
+	temp: number;
+	feels_like: number;
+	temp_min: number;
+	temp_max: number;
+	pressure: number;
+	humidity: number;
+} -->
