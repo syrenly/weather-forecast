@@ -11,7 +11,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { ActivatedRoute, Data, Router, RouterLink } from "@angular/router";
+import { ActivatedRoute, Data, RouterLink } from "@angular/router";
 import { Observable, map } from "rxjs";
 import { ICityWeather, IWeather } from "../city-types";
 import { IFiveDaysForecast } from "../forecast-types";
@@ -22,7 +22,6 @@ import { TemperatureChartComponent } from "../temperature-chart/temperature-char
 import { CurrentWeatherComponent } from "../ui-components/current-weather/current-weather.component";
 import { ForecastFiveComponent } from "../ui-components/forecast-five/forecast-five.component";
 import { SearchbarComponent } from "../ui-components/searchbar/searchbar.component";
-import { SearchService } from "./../services/search.service";
 @Component({
 	selector: "app-forecast",
 	standalone: true,
@@ -61,8 +60,6 @@ export class ForecastComponent implements OnInit {
 	constructor(
 		private readonly breakpointObserver: BreakpointObserver,
 		private readonly route: ActivatedRoute,
-		private readonly router: Router,
-		private readonly searchService: SearchService,
 		private readonly destroyRef: DestroyRef
 	) {}
 	ngOnInit(): void {
@@ -77,8 +74,6 @@ export class ForecastComponent implements OnInit {
 				delete routeData["animationState"];
 				this.city = routeData.countryInfo;
 				this.forecastResult = routeData.forecastResult;
-
-				// this.searchService.
 			});
 	}
 }
