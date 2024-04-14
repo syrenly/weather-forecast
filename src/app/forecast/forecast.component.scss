@@ -1,4 +1,5 @@
 $header: 40px;
+$widthMinusYpadding: calc(100% - 2rem);
 
 :host {
 	display: flex;
@@ -14,7 +15,7 @@ $header: 40px;
 	align-items: baseline;
 	justify-content: space-between;
 	height: $header;
-	width: calc(100% - 2rem);
+	width: $widthMinusYpadding;
 	padding: 1rem;
 	background-color: inherit;
 	.title {
@@ -45,6 +46,23 @@ h1 {
 		margin: 0.5rem;
 	}
 }
+
+.error-template {
+	height: 100%;
+	align-self: center;
+	align-content: center;
+	display: flex;
+	align-items: center;
+	mat-icon {
+		width: 40px;
+		height: 40px;
+		font-size: 40px;
+	}
+	.error-label {
+		font-size: 20px;
+	}
+}
+
 @media (min-width: 1580px) {
 	app-searchbar,
 	.content {
@@ -54,9 +72,12 @@ h1 {
 }
 
 @media (min-width: 1000px) {
-	app-searchbar,
+	app-searchbar {
+		width: 70%;
+		padding: 0 15%;
+	}
 	.content {
-		width: calc(100% - 2rem);
+		width: $widthMinusYpadding;
 	}
 	.widget {
 		width: calc(50% - 1rem);
@@ -73,7 +94,8 @@ h1 {
 @media (max-width: 1000px) {
 	app-searchbar,
 	.content {
-		width: calc(100% - 2rem);
+		width: $widthMinusYpadding;
+		padding: 0 1rem;
 	}
 	.widget {
 		width: 100%;
