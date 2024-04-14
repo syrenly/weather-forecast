@@ -6,6 +6,8 @@
 	<app-searchbar></app-searchbar>
 	<app-switch-theme></app-switch-theme>
 </div>
+
+<!-- Main content -->
 @if(city){
 <div class="content">
 	<h1>
@@ -17,14 +19,18 @@
 		}
 	</h1>
 	<div class="widgets">
+		<!-- current weather -->
 		<app-current-weather class="widget" [city]="city"></app-current-weather>
 		@if(forecastResult){
+		<!-- weather for 5 days -->
 		<app-forecast-five
 			class="widget"
 			[forecastResult]="forecastResult"
 		></app-forecast-five>
+		<!-- chart temperature for 5 days -->
 		<app-temperature-chart class="widget" [forecastResult]="forecastResult">
 		</app-temperature-chart>
+		<!-- chart precipitation for 5 days -->
 		<app-precipitation-chart
 			class="widget"
 			[forecastResult]="forecastResult"
