@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { forecastResult } from "../../unit-test-utils/utils.mock";
 import { ForecastFiveComponent } from "./forecast-five.component";
 
 describe("ForecastFiveComponent", () => {
@@ -12,10 +13,23 @@ describe("ForecastFiveComponent", () => {
 
 		fixture = TestBed.createComponent(ForecastFiveComponent);
 		component = fixture.componentInstance;
+		component.forecastResult = forecastResult;
 		fixture.detectChanges();
 	});
 
 	it("should create", () => {
 		expect(component).toBeTruthy();
+	});
+
+	it("should test #groupBy", () => {
+		component.ngOnChanges({
+			forecastResult: {
+				currentValue: forecastResult,
+				previousValue: null,
+				isFirstChange: () => false,
+				firstChange: false,
+			},
+		});
+		expect(component.days?.length).toBe(5);
 	});
 });
