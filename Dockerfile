@@ -6,9 +6,9 @@
 
 ARG NODE_VERSION=20.12.2
 
-FROM node:${NODE_VERSION}-alpine
+FROM node:${NODE_VERSION}-alpine as builder
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
 COPY package.json package-lock.json ./
 
@@ -16,6 +16,8 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 4100 49153
+RUN npm run build --prod
 
-CMD npm run start
+FROM nginx:alpine
+
+COPY --from=builder /usr/src/app/dist/weather-forecast/browser /usr/share/nginx/html
