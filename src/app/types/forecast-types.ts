@@ -1,22 +1,24 @@
+import { ICloud, ICoordinate, IPrecipitationH, IWeather, IWind } from "./types";
+
 export interface IFiveDaysForecast {
 	cod: string;
 	message: number;
 	cnt: number;
 	list: IThreeHoursForecast[];
-	city: City;
+	city: ICityInfo;
 }
 
 export interface IThreeHoursForecast {
 	dt: number;
 	main: Main;
-	weather: Weather[];
-	clouds: Clouds;
-	wind: Wind;
+	weather: IWeather[];
+	clouds: ICloud;
+	wind: IWind;
 	visibility: number;
 	pop: number;
-	rain?: Rain;
-	snow?: Rain;
-	sys: Sys;
+	rain?: IPrecipitationH;
+	snow?: IPrecipitationH;
+	sys: ISys;
 	dt_txt: string;
 }
 
@@ -32,44 +34,17 @@ export interface Main {
 	temp_kf: number;
 }
 
-export interface Weather {
-	id: number;
-	main: string;
-	description: string;
-	icon: string;
-}
-
-export interface Clouds {
-	all: number;
-}
-
-export interface Wind {
-	speed: number;
-	deg: number;
-	gust: number;
-}
-
-export interface Rain {
-	"3h"?: number;
-	"1h"?: number;
-}
-
-export interface Sys {
+export interface ISys {
 	pod: string;
 }
 
-export interface City {
+export interface ICityInfo {
 	id: number;
 	name: string;
-	coord: Coord;
+	coord: ICoordinate;
 	country: string;
 	population: number;
 	timezone: number;
 	sunrise: number;
 	sunset: number;
-}
-
-export interface Coord {
-	lat: number;
-	lon: number;
 }

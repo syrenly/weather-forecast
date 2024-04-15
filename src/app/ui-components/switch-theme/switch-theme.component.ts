@@ -33,7 +33,6 @@ export class SwitchThemeComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.themeSubject
-			.asObservable()
 			.pipe(takeUntilDestroyed(this.destroyRef))
 			.subscribe((currentTheme): void => {
 				if (this.currentTheme == undefined) {

@@ -1,3 +1,12 @@
+import {
+	ICloud,
+	ICoordinate,
+	ICountryData,
+	IPrecipitationH,
+	IWeather,
+	IWind,
+} from "./types";
+
 export interface ICitySearchResult {
 	message: string;
 	cod: string;
@@ -22,19 +31,6 @@ export interface ICityWeather {
 	timezone: number;
 }
 
-interface ICountryData {
-	country: string;
-	type?: number;
-	id?: number;
-	message?: number;
-	sunrise?: number;
-	sunset?: number;
-}
-
-interface ICoordinate {
-	lat: number;
-	lon: number;
-}
 export interface IMainInfo {
 	temp: number;
 	feels_like: number;
@@ -42,26 +38,6 @@ export interface IMainInfo {
 	temp_max: number;
 	pressure: number;
 	humidity: number;
-}
-interface IWind {
-	speed: number;
-	deg: number;
-	gust: number;
-}
-interface ICloud {
-	all: number;
-}
-export interface IWeather {
-	id: number;
-	main: string;
-	description: string;
-	icon: string;
-}
-
-interface IPrecipitationH {
-	//Precipitation, mm/h
-	"1h"?: number;
-	"3h"?: number;
 }
 
 export type RouteData = ICityWeather & { animationState?: string };

@@ -38,6 +38,16 @@ import { WeatherPipe } from "../../pipes/weather.pipe";
 import { SearchService } from "../../services/search.service";
 import { Theme } from "../../tokens";
 import { ICitySearchResult, ICityWeather } from "../../types/city-types";
+
+type SearchStatus =
+	| "loading"
+	| 400
+	| 401
+	| 429
+	| 404
+	| "serverError"
+	| "completed"
+	| "pristine";
 /**
  * Search for the city to know which weather conditions there are. It will navigate to the ForecastComponent to show details.
  */
@@ -62,22 +72,17 @@ import { ICitySearchResult, ICityWeather } from "../../types/city-types";
 	styleUrl: "./searchbar.component.scss",
 })
 export class SearchbarComponent implements AfterViewInit {
-	autocompleteControl = new FormControl<string>("");
-	options$!: Observable<ICityWeather[]>;
 	@ViewChild("filterInput", { static: false })
 	filterInput!: ElementRef<HTMLInputElement>;
+
 	@ViewChild("autoTrigger", { static: false })
 	autoTrigger!: MatAutocompleteTrigger;
+	autocompleteControl = new FormControl<string>("");
+	options$!: Observable<ICityWeather[]>;
+
 	currentTheme: Theme;
-	searchStatus:
-		| "loading"
-		| 400
-		| 401
-		| 429
-		| 404
-		| "serverError"
-		| "completed"
-		| "pristine" = "pristine";
+	searchStatus: SearchStatus = "pristine";
+
 	constructor(
 		private readonly searchService: SearchService,
 		private readonly router: Router,
@@ -100,6 +105,7 @@ export class SearchbarComponent implements AfterViewInit {
 						? this.searchService.searchCountry(value)
 						: of(EMPTY_SEARCH_RESULT)
 			),
+			// manage errors
 			catchError(
 				(error: HttpErrorResponse): Observable<ICitySearchResult> => {
 					if (
@@ -114,6 +120,7 @@ export class SearchbarComponent implements AfterViewInit {
 					return of(EMPTY_SEARCH_RESULT);
 				}
 			),
+			// take only the inner list
 			switchMap(
 				(value: ICitySearchResult): Observable<ICityWeather[]> =>
 					of(value.list)

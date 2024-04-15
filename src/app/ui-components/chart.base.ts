@@ -20,7 +20,6 @@ export abstract class ChartBase implements AfterViewInit {
 
 	ngAfterViewInit(): void {
 		this.themeSubject
-			.asObservable()
 			.pipe(takeUntilDestroyed(this.destroyRef))
 			.subscribe((currentTheme): void => {
 				this.currentTheme = currentTheme;

@@ -64,12 +64,11 @@ export class PrecipitationChartComponent
 	 * Calculate the data to be injected inside the chart
 	 */
 	private calculateDataSets(): void {
-		const list = this.forecastResult.list;
+		const list = this.forecastResult?.list || [];
 		this.rainPrecipitations = [];
 		this.snowPrecipitations = [];
 		this.xAxis = [];
 		list.forEach((l): void => {
-			console.log(l);
 			const snow = l.snow && l.snow["3h"] > 0 ? l.snow["3h"] : 0;
 			const rain = l.rain && l.rain["3h"] > 0 ? l.rain["3h"] : 0;
 			const { dt } = l;

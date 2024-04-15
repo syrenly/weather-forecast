@@ -41,12 +41,15 @@
 			<mat-icon color="primary" matTooltip="Probability of precipitation"
 				>umbrella</mat-icon
 			>
-			<span>{{ forecast.pop * 100 | number : "1.0-0" }}%</span>
+			<span>&nbsp;{{ forecast.pop * 100 | number : "1.0-0" }}%</span>
 		</div>
 		<div class="wind">
 			<mat-icon color="primary" matTooltip="Wind">air </mat-icon>
 			<span>
-				{{ forecast.wind?.speed | number : "1.0-0" }} Km/h&nbsp;</span
+				&nbsp;{{
+					forecast.wind?.speed | number : "1.0-0"
+				}}
+				Km/h&nbsp;</span
 			>
 			<mat-icon
 				color="primary"
