@@ -1,4 +1,6 @@
+import { DebugElement } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { By } from "@angular/platform-browser";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { CURRENT_THEME, currentTheme } from "../tokens";
 import { getSearchMockProvider } from "../unit-test-utils/search.service.mock";
@@ -24,5 +26,16 @@ describe("HomeComponent", () => {
 
 	it("should create", () => {
 		expect(component).toBeTruthy();
+	});
+
+	it("should set OpenWeatherApi logo", () => {
+		const nativeElement = fixture.debugElement.nativeElement;
+		const img: HTMLImageElement =
+			nativeElement.querySelector("a.attribution img");
+		expect(img.src).toContain("/assets/OpenWeatherLogo.png");
+		const a: DebugElement = fixture.debugElement.query(
+			By.css("a.attribution")
+		);
+		expect(a.nativeNode.href).toBe("https://openweathermap.org/");
 	});
 });

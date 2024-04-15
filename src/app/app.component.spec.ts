@@ -6,6 +6,7 @@ import { CURRENT_THEME, currentTheme } from "./tokens";
 describe("AppComponent", () => {
 	let fixture: ComponentFixture<AppComponent>;
 	let component: AppComponent;
+
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [AppComponent],
@@ -21,5 +22,23 @@ describe("AppComponent", () => {
 
 	it("should create the app", () => {
 		expect(component).toBeTruthy();
+	});
+
+	it("should set the light-theme class", () => {
+		component["applyTheme"]("light");
+		fixture.detectChanges();
+		const doc = fixture.nativeElement.ownerDocument;
+		const bodyElement = doc.querySelector("body");
+		expect(bodyElement.classList.contains("light-theme")).toBeTrue();
+		expect(bodyElement.classList.contains("dark-theme")).toBeFalse();
+	});
+
+	it("should set the dark-theme class", () => {
+		component["applyTheme"]("dark");
+		fixture.detectChanges();
+		const doc = fixture.nativeElement.ownerDocument;
+		const bodyElement = doc.querySelector("body");
+		expect(bodyElement.classList.contains("dark-theme")).toBeTrue();
+		expect(bodyElement.classList.contains("light-theme")).toBeFalse();
 	});
 });

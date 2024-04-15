@@ -1,5 +1,7 @@
 $header: 40px;
-$widthMinusYpadding: calc(100% - 2rem);
+$padding: 1rem;
+$widthMinusYPadding: calc(100% - 2 * #{$padding});
+$widthMinusYMargin: calc(100% - #{$padding});
 
 :host {
 	display: flex;
@@ -15,8 +17,8 @@ $widthMinusYpadding: calc(100% - 2rem);
 	align-items: baseline;
 	justify-content: space-between;
 	height: $header;
-	width: $widthMinusYpadding;
-	padding: 1rem;
+	width: $widthMinusYPadding;
+	padding: 0.5rem 1rem 1rem 1rem;
 	background-color: inherit;
 	.title {
 		display: flex;
@@ -77,14 +79,14 @@ h1 {
 		padding: 0 15%;
 	}
 	.content {
-		width: $widthMinusYpadding;
+		width: $widthMinusYPadding;
 	}
 	.widget {
-		width: calc(50% - 1rem);
+		width: calc(50% - #{$padding});
 	}
 	app-current-weather,
 	app-forecast-five {
-		height: calc(370px - 1rem);
+		height: calc(370px - #{$padding});
 	}
 	app-temperature-chart,
 	app-precipitation-chart {
@@ -94,11 +96,11 @@ h1 {
 @media (max-width: 1000px) {
 	app-searchbar,
 	.content {
-		width: $widthMinusYpadding;
-		padding: 0 1rem;
+		width: $widthMinusYPadding;
+		padding: 0 #{$padding};
 	}
 	.widget {
-		width: 100%;
+		width: $widthMinusYMargin;
 	}
 	app-current-weather,
 	app-forecast-five {
@@ -106,7 +108,7 @@ h1 {
 	}
 	app-temperature-chart,
 	app-precipitation-chart {
-		height: 100vw;
+		height: calc(100vw - #{$header});
 	}
 }
 @media (max-width: 700px) {

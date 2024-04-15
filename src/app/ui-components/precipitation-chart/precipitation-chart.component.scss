@@ -1,7 +1,9 @@
 :host {
-	display: block;
-	mat-card,
+	mat-card {
+		height: 100%;
+	}
+	$header: 20px;
 	mat-card-content {
-		height: inherit;
+		height: calc(100% - 2rem - #{$header});
 	}
 }

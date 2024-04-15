@@ -3,6 +3,7 @@ import {
 	AfterViewInit,
 	Component,
 	DestroyRef,
+	ElementRef,
 	Inject,
 	Input,
 	LOCALE_ID,
@@ -40,9 +41,10 @@ export class PrecipitationChartComponent
 		@Inject(LOCALE_ID) private readonly localeId: string,
 		@Inject(CURRENT_THEME)
 		themeSubject: BehaviorSubject<Theme>,
-		destroyRef: DestroyRef
+		destroyRef: DestroyRef,
+		elementRef: ElementRef
 	) {
-		super(themeSubject, destroyRef);
+		super(themeSubject, destroyRef, elementRef);
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
@@ -72,7 +74,7 @@ export class PrecipitationChartComponent
 			const snow = l.snow && l.snow["3h"] > 0 ? l.snow["3h"] : 0;
 			const rain = l.rain && l.rain["3h"] > 0 ? l.rain["3h"] : 0;
 			const { dt } = l;
-			const date = this.datePipe.transform(dt * 1000, "MMM, d HH:mm");
+			const date = this.datePipe.transform(dt * 1000, "MMM, d HH");
 			this.xAxis.push(date);
 			this.rainPrecipitations.push(rain);
 			this.snowPrecipitations.push(snow);

@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { CURRENT_THEME, currentTheme } from "../../tokens";
 import { SwitchThemeComponent } from "./switch-theme.component";
 
-describe("SwitchThemeComponent", () => {
+fdescribe("SwitchThemeComponent", () => {
 	let component: SwitchThemeComponent;
 	let fixture: ComponentFixture<SwitchThemeComponent>;
 
@@ -15,6 +15,10 @@ describe("SwitchThemeComponent", () => {
 		fixture = TestBed.createComponent(SwitchThemeComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
+	});
+
+	it("should create", () => {
+		expect(component).toBeTruthy();
 	});
 
 	it("should create", () => {

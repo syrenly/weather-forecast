@@ -8,6 +8,13 @@ $licenseHeight: 57px;
 	overflow-y: auto;
 	overflow-x: hidden;
 	height: 100%;
+	position: relative;
+}
+
+.attribution {
+	position: absolute;
+	bottom: 0;
+	left: 0;
 }
 
 .header {
@@ -15,7 +22,7 @@ $licenseHeight: 57px;
 	align-items: center;
 	justify-content: end;
 	height: $headerHeight;
-	padding: $padding;
+	padding: 0.5rem 1rem;
 	width: $widthMinusPadding;
 }
 
@@ -51,7 +58,6 @@ $licenseHeight: 57px;
 @media (min-width: 590px) {
 	mat-card {
 		width: 60%;
-		max-height: 70%;
 	}
 }
 @media (max-width: 590px) {

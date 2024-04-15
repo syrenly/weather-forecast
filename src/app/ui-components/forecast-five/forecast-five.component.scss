@@ -1,8 +1,7 @@
 :host {
-	display: block;
 	mat-card,
 	mat-card-content {
-		height: inherit;
+		height: 100%;
 	}
 }
 
@@ -32,7 +31,8 @@
 		&.icon {
 			width: 50px;
 		}
-		&.hours {
+		&.hours,
+		&.temperature {
 			max-width: 50px;
 		}
 	}
