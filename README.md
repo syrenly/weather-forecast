@@ -18,6 +18,8 @@ You can run the project with this commands:
 -   [theme.scss](./src/theme.scss) hosts the 2 themes (light and dark), that can be switched using the SwitchThemeComponent from _ui-components_; the component is always available on the upper right corner of the view;
 -   HomeComponent is an entry point where search cities;
 -   ForecastComponent is the core of the application, where data are displayed using charts, tabs and list;
+-   Switch for themes and the license key are managed with injection tokens;
+-   unit tests started with Karma and Jasmine, but not ended;
 
 ## Libraries
 
@@ -32,4 +34,4 @@ The project depends on [Open Weather Map](https://openweathermap.org), which pro
 
 ## TODO List
 
-Explore the [TODO List](./TODO_LIST.md) to know what's next
+Explore the [TODO List](./TODO_LIST.md) to know what's next.
