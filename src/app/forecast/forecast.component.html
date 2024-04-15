@@ -11,8 +11,6 @@
 		<span>{{ city.name }}</span>
 		@if(city.sys?.country){
 		<span>,&nbsp;{{ city.sys?.country }}&nbsp;</span>
-		<!-- NB aspect-ratio: 1.45 -->
-		<img width="30" height="20" [ngSrc]="city.sys?.country | flag" />
 		}
 	</h1>
 	}

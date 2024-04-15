@@ -3,6 +3,7 @@ import {
 	AfterViewInit,
 	Component,
 	DestroyRef,
+	ElementRef,
 	Inject,
 	Input,
 	LOCALE_ID,
@@ -35,16 +36,16 @@ export class TemperatureChartComponent
 	maxTemperature: number[] = [];
 	minTemperature: number[] = [];
 	xAxis: string[] = [];
-
 	datePipe: DatePipe;
 
 	constructor(
 		@Inject(LOCALE_ID) private readonly localeId: string,
 		@Inject(CURRENT_THEME)
 		themeSubject: BehaviorSubject<Theme>,
-		destroyRef: DestroyRef
+		destroyRef: DestroyRef,
+		elementRef: ElementRef
 	) {
-		super(themeSubject, destroyRef);
+		super(themeSubject, destroyRef, elementRef);
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
@@ -73,7 +74,7 @@ export class TemperatureChartComponent
 				main: { temp, temp_max, temp_min },
 				dt,
 			} = l;
-			const date = this.datePipe.transform(dt * 1000, "MMM, d HH:mm");
+			const date = this.datePipe.transform(dt * 1000, "MMM, d HH");
 			this.xAxis.push(date);
 			this.meanTemperature.push(temp);
 			this.maxTemperature.push(temp_max);

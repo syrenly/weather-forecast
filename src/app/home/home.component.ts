@@ -1,6 +1,8 @@
+import { NgOptimizedImage } from "@angular/common";
 import { Component } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
+import { MatTooltipModule } from "@angular/material/tooltip";
 import { Router } from "@angular/router";
 import { SearchbarComponent } from "../ui-components/searchbar/searchbar.component";
 import { SwitchThemeComponent } from "../ui-components/switch-theme/switch-theme.component";
@@ -18,8 +20,10 @@ import { SwitchThemeComponent } from "../ui-components/switch-theme/switch-theme
 	imports: [
 		MatCardModule,
 		MatButtonModule,
+		NgOptimizedImage,
 		SearchbarComponent,
 		SwitchThemeComponent,
+		MatTooltipModule,
 	],
 	templateUrl: "./home.component.html",
 	styleUrl: "./home.component.scss",

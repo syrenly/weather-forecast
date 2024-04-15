@@ -1,8 +1,15 @@
-import { AfterViewInit, DestroyRef, Directive, Inject } from "@angular/core";
+import {
+	AfterViewInit,
+	DestroyRef,
+	Directive,
+	ElementRef,
+	Inject,
+} from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { Chart } from "chart.js";
 import { BehaviorSubject } from "rxjs";
 import { CURRENT_THEME, Theme } from "../tokens";
+import { darkOptions, lightOptions, mainOptions } from "./chart-utils";
 /**
  * Base class for the components that implement a ChartJS object
  */
@@ -15,7 +22,8 @@ export abstract class ChartBase implements AfterViewInit {
 	constructor(
 		@Inject(CURRENT_THEME)
 		protected readonly themeSubject: BehaviorSubject<Theme>,
-		protected readonly destroyRef: DestroyRef
+		protected readonly destroyRef: DestroyRef,
+		protected readonly elementRef: ElementRef
 	) {}
 
 	ngAfterViewInit(): void {
@@ -30,53 +38,12 @@ export abstract class ChartBase implements AfterViewInit {
 				}
 			});
 	}
-
+	/** Update colors, setting again the options */
 	protected updateColors(): void {
 		if (this.currentTheme === "light") {
-			this.chart.options = {
-				elements: { line: { tension: 0 } },
-				maintainAspectRatio: false,
-				responsive: true,
-			};
+			this.chart.options = { ...mainOptions, ...lightOptions };
 		} else {
-			const color = "#FFFFFF";
-			this.chart.options = {
-				elements: { line: { tension: 0 } },
-				maintainAspectRatio: false,
-				responsive: true,
-				plugins: {
-					legend: {
-						labels: {
-							color,
-						},
-					},
-				},
-				scales: {
-					x: {
-						display: true,
-						ticks: {
-							display: true,
-							color,
-						},
-						grid: {
-							display: true,
-							color,
-						},
-					},
-					y: {
-						display: true,
-						ticks: {
-							display: true,
-							color,
-							stepSize: 1,
-						},
-						grid: {
-							display: true,
-							color,
-						},
-					},
-				},
-			};
+			this.chart.options = { ...mainOptions, ...darkOptions };
 		}
 		this.chart.update();
 	}

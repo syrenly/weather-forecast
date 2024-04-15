@@ -36,7 +36,9 @@
 		} @else {
 		<div>-</div>
 		}
-		<div>{{ forecast.main?.temp | number : "1.0-0" }} C°</div>
+		<div class="temperature">
+			{{ forecast.main?.temp | number : "1.0-0" }} C°
+		</div>
 		<div class="pop">
 			<mat-icon color="primary" matTooltip="Probability of precipitation"
 				>umbrella</mat-icon
@@ -46,11 +48,8 @@
 		<div class="wind">
 			<mat-icon color="primary" matTooltip="Wind">air </mat-icon>
 			<span>
-				&nbsp;{{
-					forecast.wind?.speed | number : "1.0-0"
-				}}
-				Km/h&nbsp;</span
-			>
+				&nbsp;{{ forecast.wind?.speed | number : "1.0-0" }} Km/h&nbsp;
+			</span>
 			<mat-icon
 				color="primary"
 				matTooltip="Wind direction"
