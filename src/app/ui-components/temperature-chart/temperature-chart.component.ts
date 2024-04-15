@@ -63,7 +63,7 @@ export class TemperatureChartComponent
 	}
 
 	private calculateDataSets(): void {
-		const list = this.forecastResult.list;
+		const list = this.forecastResult?.list || [];
 		this.meanTemperature = [];
 		this.maxTemperature = [];
 		this.minTemperature = [];

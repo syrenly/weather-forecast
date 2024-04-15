@@ -11,7 +11,8 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { FlagPipe } from "../../pipes/flag.pipe";
 import { WeatherPipe } from "../../pipes/weather.pipe";
-import { ICityWeather, IMainInfo, IWeather } from "../../types/city-types";
+import { ICityWeather, IMainInfo } from "../../types/city-types";
+import { IWeather } from "../../types/types";
 /**
  * CurrentWeatherComponent shows the current weather conditions (pressure, temperature, max/min temperature, clouds, etc)
  */
