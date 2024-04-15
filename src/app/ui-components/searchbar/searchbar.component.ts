@@ -128,7 +128,6 @@ export class SearchbarComponent implements AfterViewInit {
 
 	displayFn = (value: ICityWeather): string => {
 		const { name, sys } = value;
-		// todo more strict
 		return value ? `${name}, ${sys?.country || "N.A"}` : "";
 	};
 

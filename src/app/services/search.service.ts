@@ -15,7 +15,6 @@ export class SearchService {
 		@Inject(WEATHER_API_LICENSE) private readonly licenseApi: string
 	) {}
 
-	//&lang=it
 	searchCountry(queryArg: string): Observable<ICitySearchResult> {
 		return this.httpClient.get<ICitySearchResult>(
 			`https://api.openweathermap.org/data/2.5/find?q=${queryArg}&type=like&appid=${this.licenseApi}&units=metric`

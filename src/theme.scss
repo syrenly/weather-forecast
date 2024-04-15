@@ -1,5 +1,6 @@
 @use "@angular/material" as mat;
 @use "_palettes.scss" as palettes;
+
 // Include non-theme styles for core.
 @include mat.core();
 

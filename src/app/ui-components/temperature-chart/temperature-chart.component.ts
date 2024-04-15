@@ -52,7 +52,6 @@ export class TemperatureChartComponent
 			changes["forecastResult"] &&
 			!changes["forecastResult"].isFirstChange()
 		) {
-			// TODO errors/void etc
 			this.calculateDataSets();
 			this.createChart();
 		}

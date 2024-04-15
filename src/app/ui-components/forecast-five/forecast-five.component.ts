@@ -70,14 +70,6 @@ export class ForecastFiveComponent implements OnChanges {
 				}
 			);
 			this.days = Object.keys(this.daysDictionary);
-			console.log(this.daysDictionary);
-			// TODO manage error
-
-			// this.mainWeather =
-			// 	this.city?.weather && this.city.weather[0]
-			// 		? this.city.weather[0]
-			// 		: undefined;
-			// this.mainInfo = this.city?.main ? this.city.main : undefined;
 		}
 	}
 }
