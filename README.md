@@ -35,3 +35,8 @@ The project depends on [Open Weather Map](https://openweathermap.org), which pro
 ## TODO List
 
 Explore the [TODO List](./TODO_LIST.md) to know what's next.
+
+## Branches
+
+- [assignment-04-2024](https://github.com/syrenly/weather-forecast/tree/assignment-04-2024): the first implementation of the application. Updates are not planned.
+
