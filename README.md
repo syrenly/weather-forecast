@@ -2,6 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.4. It's a Demo application for weather forecasts.
 
+The current branch was created to host the first version of the application, which was an assignment for a job position: it took me a weekend to complete it. In the main branch, you can find an evolution of this work.
+
 ## How
 
 You can run the project with this commands:
