@@ -1,18 +1,10 @@
 import { AsyncPipe, NgClass, NgOptimizedImage } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
-import {
-	AfterViewInit,
-	Component,
-	DestroyRef,
-	ElementRef,
-	ViewChild,
-} from "@angular/core";
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { AfterViewInit, Component, DestroyRef } from "@angular/core";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import {
 	MatAutocompleteModule,
 	MatAutocompleteSelectedEvent,
-	MatAutocompleteTrigger,
 } from "@angular/material/autocomplete";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
@@ -72,11 +64,6 @@ type SearchStatus =
 	styleUrl: "./searchbar.component.scss",
 })
 export class SearchbarComponent implements AfterViewInit {
-	@ViewChild("filterInput", { static: false })
-	filterInput!: ElementRef<HTMLInputElement>;
-
-	@ViewChild("autoTrigger", { static: false })
-	autoTrigger!: MatAutocompleteTrigger;
 	autocompleteControl = new FormControl<string>("");
 	options$!: Observable<ICityWeather[]>;
 
@@ -91,7 +78,6 @@ export class SearchbarComponent implements AfterViewInit {
 
 	ngAfterViewInit(): void {
 		this.options$ = this.autocompleteControl.valueChanges.pipe(
-			takeUntilDestroyed(this.destroyRef),
 			debounceTime(DEFAULT_DEBOUNCE_DELAY_MILLISECONDS),
 			map((value: string | null): string =>
 				typeof value !== "string" ? "" : value
