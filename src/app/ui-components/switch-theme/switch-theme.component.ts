@@ -1,10 +1,7 @@
 import { Component, DestroyRef, Inject, OnInit } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { FormsModule } from "@angular/forms";
-import {
-	MatButtonToggleChange,
-	MatButtonToggleModule,
-} from "@angular/material/button-toggle";
+import { MatButtonToggleChange, MatButtonToggleModule } from "@angular/material/button-toggle";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { BehaviorSubject } from "rxjs";
@@ -15,12 +12,7 @@ import { CURRENT_THEME, Theme } from "../../tokens";
 @Component({
 	selector: "app-switch-theme",
 	standalone: true,
-	imports: [
-		MatButtonToggleModule,
-		FormsModule,
-		MatIconModule,
-		MatTooltipModule,
-	],
+	imports: [MatButtonToggleModule, FormsModule, MatIconModule, MatTooltipModule],
 	templateUrl: "./switch-theme.component.html",
 })
 export class SwitchThemeComponent implements OnInit {
@@ -32,13 +24,11 @@ export class SwitchThemeComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		this.themeSubject
-			.pipe(takeUntilDestroyed(this.destroyRef))
-			.subscribe((currentTheme): void => {
-				if (this.currentTheme == undefined) {
-					this.currentTheme = currentTheme;
-				}
-			});
+		this.themeSubject.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((currentTheme): void => {
+			if (this.currentTheme == undefined) {
+				this.currentTheme = currentTheme;
+			}
+		});
 	}
 	onSwitchChanged(event: MatButtonToggleChange): void {
 		this.currentTheme = event.value;

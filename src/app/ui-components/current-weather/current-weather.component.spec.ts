@@ -1,10 +1,4 @@
-import {
-	AsyncPipe,
-	DatePipe,
-	DecimalPipe,
-	NgOptimizedImage,
-	TitleCasePipe,
-} from "@angular/common";
+import { AsyncPipe, DatePipe, DecimalPipe, NgOptimizedImage, TitleCasePipe } from "@angular/common";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
@@ -14,11 +8,11 @@ import { WeatherPipe } from "../../pipes/weather.pipe";
 import { city } from "../../unit-test-utils/utils.mock";
 import { CurrentWeatherComponent } from "./current-weather.component";
 
-describe("CurrentWeatherComponent", () => {
+describe("CurrentWeatherComponent", (): void => {
 	let component: CurrentWeatherComponent;
 	let fixture: ComponentFixture<CurrentWeatherComponent>;
 
-	beforeEach(async () => {
+	beforeEach(async (): Promise<void> => {
 		await TestBed.configureTestingModule({
 			imports: [
 				CurrentWeatherComponent,
@@ -41,15 +35,15 @@ describe("CurrentWeatherComponent", () => {
 		fixture.detectChanges();
 	});
 
-	it("should create", () => {
+	it("should create", (): void => {
 		expect(component).toBeTruthy();
 	});
-	it("should test #groupBy", () => {
+	it("should test #groupBy", (): void => {
 		component.ngOnChanges({
 			city: {
 				currentValue: city,
 				previousValue: null,
-				isFirstChange: () => false,
+				isFirstChange: (): boolean => false,
 				firstChange: false,
 			},
 		});

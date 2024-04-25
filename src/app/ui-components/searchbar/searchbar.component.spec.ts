@@ -3,11 +3,11 @@ import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { getSearchMockProvider } from "../../unit-test-utils/search.service.mock";
 import { SearchbarComponent } from "./searchbar.component";
 
-describe("SearchbarComponent", () => {
+describe("SearchbarComponent", (): void => {
 	let component: SearchbarComponent;
 	let fixture: ComponentFixture<SearchbarComponent>;
 
-	beforeEach(async () => {
+	beforeEach(async (): Promise<void> => {
 		await TestBed.configureTestingModule({
 			imports: [NoopAnimationsModule, SearchbarComponent],
 			providers: [getSearchMockProvider()],
@@ -18,7 +18,7 @@ describe("SearchbarComponent", () => {
 		fixture.detectChanges();
 	});
 
-	it("should create", () => {
+	it("should create", (): void => {
 		expect(component).toBeTruthy();
 	});
 });

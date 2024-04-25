@@ -1,18 +1,16 @@
 import { TestBed } from "@angular/core/testing";
-import { CanActivateFn } from "@angular/router";
+import { CanActivateFn, GuardResult, MaybeAsync } from "@angular/router";
 import { forecastDetailsGuard } from "./forecast-details.guard";
 
-describe("forecastDetailsGuard", () => {
-	const executeGuard: CanActivateFn = (...guardParameters) =>
-		TestBed.runInInjectionContext(() =>
-			forecastDetailsGuard(...guardParameters)
-		);
+describe("forecastDetailsGuard", (): void => {
+	const executeGuard: CanActivateFn = (...guardParameters): MaybeAsync<GuardResult> =>
+		TestBed.runInInjectionContext((): MaybeAsync<GuardResult> => forecastDetailsGuard(...guardParameters));
 
-	beforeEach(() => {
+	beforeEach((): void => {
 		TestBed.configureTestingModule({});
 	});
 
-	it("should be created", () => {
+	it("should be created", (): void => {
 		expect(executeGuard).toBeTruthy();
 	});
 });

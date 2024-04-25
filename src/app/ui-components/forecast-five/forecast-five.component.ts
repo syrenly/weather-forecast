@@ -16,10 +16,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { FlagPipe } from "../../pipes/flag.pipe";
 import { WeatherPipe } from "../../pipes/weather.pipe";
 import { IMainInfo } from "../../types/city-types";
-import {
-	IFiveDaysForecast,
-	IThreeHoursForecast,
-} from "../../types/forecast-types";
+import { IFiveDaysForecast, IThreeHoursForecast } from "../../types/forecast-types";
 import { IWeather } from "../../types/types";
 /**
  * ForecastFiveComponent shows weather forecast for 5 days. Each day is shown inside a tab; every row is the summary of forecast for 3 hours in that specific day
@@ -56,13 +53,10 @@ export class ForecastFiveComponent implements OnChanges {
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes["forecastResult"]?.currentValue) {
-			this.daysDictionary = groupBy(
-				this.forecastResult?.list || [],
-				(v): string => {
-					const [date, time] = v.dt_txt.split(" ");
-					return date;
-				}
-			);
+			this.daysDictionary = groupBy(this.forecastResult?.list || [], (v): string => {
+				const [date] = v.dt_txt.split(" ");
+				return date;
+			});
 			this.days = Object.keys(this.daysDictionary);
 		}
 	}
@@ -72,7 +66,10 @@ export const groupBy = <T>(
 	array: T[],
 	predicate: (value: T, index: number, array: T[]) => string
 ): { [key: string]: T[] } =>
-	array.reduce((acc, value, index, array): { [key: string]: T[] } => {
-		(acc[predicate(value, index, array)] ||= []).push(value);
-		return acc;
-	}, {} as { [key: string]: T[] });
+	array.reduce(
+		(acc, value, index, array): { [key: string]: T[] } => {
+			(acc[predicate(value, index, array)] ||= []).push(value);
+			return acc;
+		},
+		{} as { [key: string]: T[] }
+	);

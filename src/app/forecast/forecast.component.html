@@ -1,18 +1,24 @@
-@if(searchService.navigationStarted) {
-<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+@if (searchService.navigationStarted) {
+	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
 }
 <div class="header">
-	<div class="title c-pointer" routerLink="home">
-		<mat-icon color="primary" matTooltip="Return home">home</mat-icon>
+	<div
+		class="title c-pointer"
+		routerLink="home">
+		<mat-icon
+			color="primary"
+			matTooltip="Return home">
+			home
+		</mat-icon>
 		<h3 class="app-name">What's the weather like?</h3>
 	</div>
-	@if(city){
-	<h1>
-		<span>{{ city.name }}</span>
-		@if(city.sys.country){
-		<span>,&nbsp;{{ city.sys.country }}&nbsp;</span>
-		}
-	</h1>
+	@if (city) {
+		<h1>
+			<span>{{ city.name }}</span>
+			@if (city.sys.country) {
+				<span>,&nbsp;{{ city.sys.country }}&nbsp;</span>
+			}
+		</h1>
 	}
 	<app-switch-theme></app-switch-theme>
 </div>
@@ -20,56 +26,45 @@
 <app-searchbar></app-searchbar>
 
 <!-- error template -->
-@if(!!errorStatus) {
-<div class="error-template">
-	@if (errorStatus === 401) {
-	<mat-icon color="accent">policy</mat-icon>
-	<div class="error-label">
-		The forecasts were not retrieved, since the license is not valid,
-		expired or missing
+@if (!!errorStatus) {
+	<div class="error-template">
+		@if (errorStatus === 401) {
+			<mat-icon color="accent">policy</mat-icon>
+			<div class="error-label">The forecasts were not retrieved, since the license is not valid, expired or missing</div>
+		} @else if (errorStatus === 400) {
+			<mat-icon color="accent">error_outline</mat-icon>
+			<div class="error-label">The forecasts were not retrieved due to an error in the structure of the request. Retry</div>
+		} @else if (errorStatus === 429) {
+			<mat-icon color="accent">event_repeat</mat-icon>
+			<div class="error-label">The forecasts were not retrieved, because too many requests were sent to the server. Please, consider to extend the license or wait some times.</div>
+		} @else if (errorStatus === 404) {
+			<mat-icon color="accent">search_off</mat-icon>
+			<div class="error-label">The city related to the wanted forecasts was not found. Please make another search in order to retrieve the right data.</div>
+		} @else {
+			<mat-icon color="accent">error_outline</mat-icon>
+			<div class="error-label">The forecasts were not retrieved due to an internal error.</div>
+		}
 	</div>
-	} @else if (errorStatus === 400) {
-	<mat-icon color="accent">error_outline</mat-icon>
-	<div class="error-label">
-		The forecasts were not retrieved due to an error in the structure of the
-		request. Retry
+} @else if (city) {
+	<!-- Main Content -->
+	<div class="content">
+		<!-- current weather -->
+		<app-current-weather
+			class="widget"
+			[city]="city"></app-current-weather>
+		@if (forecastResult) {
+			<!-- weather for 5 days -->
+			<app-forecast-five
+				class="widget"
+				[forecastResult]="forecastResult"></app-forecast-five>
+			<!-- chart temperature for 5 days -->
+			<app-temperature-chart
+				class="widget"
+				[forecastResult]="forecastResult"></app-temperature-chart>
+			<!-- chart precipitation for 5 days -->
+			<app-precipitation-chart
+				class="widget"
+				[forecastResult]="forecastResult"></app-precipitation-chart>
+		}
 	</div>
-	} @else if (errorStatus === 429) {
-	<mat-icon color="accent">event_repeat</mat-icon>
-	<div class="error-label">
-		The forecasts were not retrieved, because too many requests were sent to
-		the server. Please, consider to extend the license or wait some times.
-	</div>
-	}@else if (errorStatus === 404) {
-	<mat-icon color="accent">search_off</mat-icon>
-	<div class="error-label">
-		The city related to the wanted forecasts was not found. Please make
-		another search in order to retrieve the right data.
-	</div>
-	} @else {
-	<mat-icon color="accent">error_outline</mat-icon>
-	<div class="error-label">
-		The forecasts were not retrieved due to an internal error.
-	</div>
-	}
-</div>
-} @else if(city){
-<!-- Main Content -->
-<div class="content">
-	<!-- current weather -->
-	<app-current-weather class="widget" [city]="city"></app-current-weather>
-	@if(forecastResult){
-	<!-- weather for 5 days -->
-	<app-forecast-five
-		class="widget"
-		[forecastResult]="forecastResult"
-	></app-forecast-five>
-	<!-- chart temperature for 5 days -->
-	<app-temperature-chart class="widget" [forecastResult]="forecastResult">
-	</app-temperature-chart>
-	<!-- chart precipitation for 5 days -->
-	<app-precipitation-chart class="widget" [forecastResult]="forecastResult">
-	</app-precipitation-chart>
-	}
-</div>
 }

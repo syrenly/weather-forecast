@@ -3,28 +3,25 @@ import { provideAnimations } from "@angular/platform-browser/animations";
 import { AppComponent } from "./app.component";
 import { CURRENT_THEME, currentTheme } from "./tokens";
 
-describe("AppComponent", () => {
+describe("AppComponent", (): void => {
 	let fixture: ComponentFixture<AppComponent>;
 	let component: AppComponent;
 
-	beforeEach(async () => {
+	beforeEach(async (): Promise<void> => {
 		await TestBed.configureTestingModule({
 			imports: [AppComponent],
-			providers: [
-				provideAnimations(),
-				{ provide: CURRENT_THEME, useFactory: currentTheme, deps: [] },
-			],
+			providers: [provideAnimations(), { provide: CURRENT_THEME, useFactory: currentTheme, deps: [] }],
 		}).compileComponents();
 		fixture = TestBed.createComponent(AppComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
 
-	it("should create the app", () => {
+	it("should create the app", (): void => {
 		expect(component).toBeTruthy();
 	});
 
-	it("should set the light-theme class", () => {
+	it("should set the light-theme class", (): void => {
 		component["applyTheme"]("light");
 		fixture.detectChanges();
 		const doc = fixture.nativeElement.ownerDocument;
@@ -33,7 +30,7 @@ describe("AppComponent", () => {
 		expect(bodyElement.classList.contains("dark-theme")).toBeFalse();
 	});
 
-	it("should set the dark-theme class", () => {
+	it("should set the dark-theme class", (): void => {
 		component["applyTheme"]("dark");
 		fixture.detectChanges();
 		const doc = fixture.nativeElement.ownerDocument;

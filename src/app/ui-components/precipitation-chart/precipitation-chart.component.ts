@@ -26,10 +26,7 @@ import { ChartBase } from "../chart.base";
 	templateUrl: "./precipitation-chart.component.html",
 	styleUrl: "./precipitation-chart.component.scss",
 })
-export class PrecipitationChartComponent
-	extends ChartBase
-	implements OnChanges, AfterViewInit
-{
+export class PrecipitationChartComponent extends ChartBase implements OnChanges, AfterViewInit {
 	@Input() forecastResult: IFiveDaysForecast | undefined;
 	canvasId = "precipitationChart";
 	rainPrecipitations: number[] = [];
@@ -48,10 +45,7 @@ export class PrecipitationChartComponent
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
-		if (
-			changes["forecastResult"] &&
-			!changes["forecastResult"].isFirstChange()
-		) {
+		if (changes["forecastResult"] && !changes["forecastResult"].isFirstChange()) {
 			this.calculateDataSets();
 			this.createChart();
 		}

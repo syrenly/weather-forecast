@@ -1,12 +1,4 @@
-import {
-	animate,
-	animateChild,
-	group,
-	query,
-	style,
-	transition,
-	trigger,
-} from "@angular/animations";
+import { animate, animateChild, group, query, style, transition, trigger } from "@angular/animations";
 
 export const routeTransitionAnimations = trigger("animateRoute", [
 	transition("homeState => forecastState, forecastState => homeState", [
@@ -22,12 +14,8 @@ export const routeTransitionAnimations = trigger("animateRoute", [
 		query(":enter", [style({ left: "100%", opacity: 0 })]),
 		query(":leave", animateChild()),
 		group([
-			query(":leave", [
-				animate("1s ease-out", style({ left: "-100%", opacity: 0 })),
-			]),
-			query(":enter", [
-				animate("1s ease-out", style({ left: "0%", opacity: 1 })),
-			]),
+			query(":leave", [animate("1s ease-out", style({ left: "-100%", opacity: 0 }))]),
+			query(":enter", [animate("1s ease-out", style({ left: "0%", opacity: 1 }))]),
 		]),
 		query(":enter", animateChild()),
 	]),

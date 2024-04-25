@@ -27,9 +27,7 @@ export class AppComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		this.themeSubject.subscribe((currentTheme: Theme): void =>
-			this.applyTheme(currentTheme)
-		);
+		this.themeSubject.subscribe((currentTheme: Theme): void => this.applyTheme(currentTheme));
 	}
 	/**
 	 * Add "light-theme" class to body to apply light theme; "dark-theme" for the dark one

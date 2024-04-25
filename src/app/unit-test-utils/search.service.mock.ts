@@ -10,6 +10,7 @@ export class SearchMockService {
 	searchCountry(queryArg: string): Observable<ICitySearchResult> {
 		return of(citySearchResult);
 	}
+
 	getCityWeather(cityId: number): Observable<ICityWeather> {
 		return of(city);
 	}

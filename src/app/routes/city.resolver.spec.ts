@@ -1,21 +1,21 @@
 import { TestBed } from "@angular/core/testing";
-import { ResolveFn } from "@angular/router";
+import { MaybeAsync, ResolveFn } from "@angular/router";
 import { Observable } from "rxjs";
 import { CityResolverType, cityResolver } from "./city.resolver";
 
-describe("cityResolver", () => {
+describe("cityResolver", (): void => {
 	const executeResolver: ResolveFn<Observable<CityResolverType>> = (
 		...resolverParameters
-	) =>
-		TestBed.runInInjectionContext(() =>
-			cityResolver(...resolverParameters)
+	): MaybeAsync<Observable<CityResolverType>> =>
+		TestBed.runInInjectionContext(
+			(): MaybeAsync<Observable<CityResolverType>> => cityResolver(...resolverParameters)
 		);
 
-	beforeEach(() => {
+	beforeEach((): void => {
 		TestBed.configureTestingModule({});
 	});
 
-	it("should be created", () => {
+	it("should be created", (): void => {
 		expect(executeResolver).toBeTruthy();
 	});
 });
