@@ -16,7 +16,7 @@ import { darkOptions, lightOptions, mainOptions } from "./chart-utils";
 @Directive()
 export abstract class ChartBase implements AfterViewInit {
 	abstract canvasId: string;
-	chart: Chart = null;
+	chart: Chart | undefined;
 	currentTheme!: Theme;
 
 	constructor(
@@ -40,6 +40,9 @@ export abstract class ChartBase implements AfterViewInit {
 	}
 	/** Update colors, setting again the options */
 	protected updateColors(): void {
+		if (!this.chart) {
+			return;
+		}
 		if (this.currentTheme === "light") {
 			this.chart.options = { ...mainOptions, ...lightOptions };
 		} else {

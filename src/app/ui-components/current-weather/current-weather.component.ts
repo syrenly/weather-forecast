@@ -47,7 +47,7 @@ export class CurrentWeatherComponent implements OnChanges {
 					: {
 							description: "",
 							icon: "",
-							id: null,
+							id: 0,
 							main: "",
 					  };
 			this.mainInfo = this.city?.main;

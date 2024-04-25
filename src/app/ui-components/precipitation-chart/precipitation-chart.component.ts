@@ -35,7 +35,7 @@ export class PrecipitationChartComponent
 	rainPrecipitations: number[] = [];
 	snowPrecipitations: number[] = [];
 	xAxis: string[] = [];
-	datePipe: DatePipe;
+	datePipe: DatePipe | undefined;
 
 	constructor(
 		@Inject(LOCALE_ID) private readonly localeId: string,
@@ -58,7 +58,6 @@ export class PrecipitationChartComponent
 	}
 
 	override ngAfterViewInit(): void {
-		this.datePipe = new DatePipe(this.localeId);
 		this.calculateDataSets();
 		super.ngAfterViewInit();
 	}
@@ -66,18 +65,29 @@ export class PrecipitationChartComponent
 	 * Calculate the data to be injected inside the chart
 	 */
 	private calculateDataSets(): void {
+		if (!this.datePipe) {
+			this.initializeDatePipe();
+		}
 		const list = this.forecastResult?.list || [];
 		this.rainPrecipitations = [];
 		this.snowPrecipitations = [];
 		this.xAxis = [];
 		list.forEach((l): void => {
-			const snow = l.snow && l.snow["3h"] > 0 ? l.snow["3h"] : 0;
-			const rain = l.rain && l.rain["3h"] > 0 ? l.rain["3h"] : 0;
 			const { dt } = l;
-			const date = this.datePipe.transform(dt * 1000, "MMM, d HH");
-			this.xAxis.push(date);
-			this.rainPrecipitations.push(rain);
-			this.snowPrecipitations.push(snow);
+			const date = this.datePipe?.transform(dt * 1000, "MMM, d HH");
+
+			// if date is absent, do not add the data
+			if (date) {
+				this.xAxis.push(date);
+
+				const rain = l.rain?.["3h"] || 0;
+				this.rainPrecipitations.push(rain);
+
+				const snow = l.snow?.["3h"] || 0;
+				this.snowPrecipitations.push(snow);
+			} else {
+				console.warn(`Date not found for forecast ${l}`);
+			}
 		});
 	}
 	createChart(): void {
@@ -99,5 +109,9 @@ export class PrecipitationChartComponent
 			options: {},
 		});
 		this.updateColors();
+	}
+
+	private initializeDatePipe(): void {
+		this.datePipe = new DatePipe(this.localeId);
 	}
 }

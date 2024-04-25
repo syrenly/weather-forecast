@@ -36,7 +36,7 @@ export class TemperatureChartComponent
 	maxTemperature: number[] = [];
 	minTemperature: number[] = [];
 	xAxis: string[] = [];
-	datePipe: DatePipe;
+	datePipe!: DatePipe;
 
 	constructor(
 		@Inject(LOCALE_ID) private readonly localeId: string,
@@ -75,10 +75,15 @@ export class TemperatureChartComponent
 				dt,
 			} = l;
 			const date = this.datePipe.transform(dt * 1000, "MMM, d HH");
-			this.xAxis.push(date);
-			this.meanTemperature.push(temp);
-			this.maxTemperature.push(temp_max);
-			this.minTemperature.push(temp_min);
+			// if date is absent, do not add the data
+			if (date) {
+				this.xAxis.push(date);
+				this.meanTemperature.push(temp);
+				this.maxTemperature.push(temp_max);
+				this.minTemperature.push(temp_min);
+			} else {
+				console.warn(`Date not found for forecast ${l}`);
+			}
 		});
 	}
 
