@@ -1,15 +1,8 @@
 # WeatherForecast
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.4. It's a Demo application for weather forecasts.
+👋 Hi, I’m @syrenly and welcome to **weather-forecast** repo! It's a Demo application for weather forecasts and it was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.1.
 
-## How
-
-You can run the project with this commands:
-
--   Run `npm i` and `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
--   Run `docker build . -t weather-forecast` and `docker run -p 4200:80 weather-forecast` to run a "dockerized" version of the application. Navigate to `http://localhost:4200/`.
-
-## What
+### Implementations
 
 -   Angular 17 and standalone components only;
 -   folders organized mainly in a "folder-by-type" way;
@@ -19,12 +12,44 @@ You can run the project with this commands:
 -   HomeComponent is an entry point where search cities;
 -   ForecastComponent is the core of the application, where data are displayed using charts, tabs and list;
 -   Switch for themes and the license key are managed with injection tokens;
--   unit tests started with Karma and Jasmine, but not ended;
 
-## Libraries
+### Main external dependencies
 
 -   Angular Material for theme and UI Kit;
 -   ChartJS for charts;
+
+## Development server
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+### Last code coverage
+
+Run `npm run test:coverage` to get stats about the code coverage. Current:
+
+```
+=============================== Coverage summary ===============================
+Statements   : 69.3% ( 149/215 )
+Branches     : 34.32% ( 23/67 )
+Functions    : 67.74% ( 42/62 )
+Lines        : 68.57% ( 144/210 )
+================================================================================
+```
+
+## Docker
+
+Install docker in your machine. From the root folder of this application, run
+
+`docker build . -t weather-forecast` and `docker run -p 4200:80 weather-forecast`.
+
+Navigate to `http://localhost:4200/`.
 
 ## Attributions
 
@@ -38,5 +63,4 @@ Explore the [TODO List](./TODO_LIST.md) to know what's next.
 
 ## Branches
 
-- [assignment-04-2024](https://github.com/syrenly/weather-forecast/tree/assignment-04-2024): the first implementation of the application. Updates are not planned.
-
+-   [assignment-04-2024](https://github.com/syrenly/weather-forecast/tree/assignment-04-2024): the first implementation of the application. Updates are not planned.
