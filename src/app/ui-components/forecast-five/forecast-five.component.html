@@ -2,7 +2,7 @@
 <mat-card>
 	<mat-tab-group>
 		@for (day of days; track day) {
-		<mat-tab [label]="day | date : 'MMM d'">
+		<mat-tab [label]="(day | date : 'MMM d') || 'N.A.'">
 			<ng-template matTabContent>
 				@for (forecast of daysDictionary[day]; track forecast.dt) {
 				<ng-container

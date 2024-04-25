@@ -62,11 +62,13 @@ import { SearchService } from "./../services/search.service";
 })
 export class ForecastComponent implements OnInit {
 	city: ICityWeather | undefined;
+	forecastResult: IFiveDaysForecast | undefined;
+	errorStatus: number | undefined;
+
 	get mainWeather(): IWeather | undefined {
 		return this.city?.weather ? this.city.weather[0] : undefined;
 	}
-	forecastResult: IFiveDaysForecast | undefined;
-	errorStatus!: number;
+
 	constructor(
 		private readonly route: ActivatedRoute,
 		private readonly destroyRef: DestroyRef,
@@ -85,10 +87,9 @@ export class ForecastComponent implements OnInit {
 					countryInfo: ICityWeather;
 					forecastResult: IFiveDaysForecast;
 				} & { animationState: string } = value[0];
-				delete routeData["animationState"];
 				this.city = routeData.countryInfo;
 				this.forecastResult = routeData.forecastResult;
-				this.errorStatus = null;
+				this.errorStatus = undefined;
 			});
 	}
 }

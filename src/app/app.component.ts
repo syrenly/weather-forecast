@@ -37,8 +37,10 @@ export class AppComponent implements OnInit {
 	private applyTheme(currentTheme: Theme): void {
 		// to extend the theme to cdk panels, apply the theme class to the body
 		const bodyElement = document.querySelector("body");
-		bodyElement.classList.remove(...["light-theme", "dark-theme"]);
-		bodyElement.classList.add(`${currentTheme}-theme`);
+		if (bodyElement?.classList) {
+			bodyElement.classList.remove(...["light-theme", "dark-theme"]);
+			bodyElement.classList.add(`${currentTheme}-theme`);
+		}
 	}
 	/**
 	 * Retrieve the animation between routes if any

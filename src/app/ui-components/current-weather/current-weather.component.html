@@ -67,11 +67,11 @@
 			<mat-icon
 				color="primary"
 				matTooltip="Wind direction"
-				[style.rotate.deg]="city.wind.deg"
+				[style.rotate.deg]="city.wind?.deg"
 			>
 				north
 			</mat-icon>
-			<span>&nbsp;{{ city.wind.deg | number : "1.0-0" }}°</span>
+			<span>&nbsp;{{ city.wind?.deg | number : "1.0-0" }}°</span>
 		</div>
 	</div>
 </mat-card>

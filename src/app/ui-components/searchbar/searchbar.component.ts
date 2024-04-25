@@ -1,6 +1,6 @@
 import { AsyncPipe, NgClass, NgOptimizedImage } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
-import { AfterViewInit, Component, DestroyRef } from "@angular/core";
+import { AfterViewInit, Component } from "@angular/core";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import {
 	MatAutocompleteModule,
@@ -67,13 +67,12 @@ export class SearchbarComponent implements AfterViewInit {
 	autocompleteControl = new FormControl<string>("");
 	options$!: Observable<ICityWeather[]>;
 
-	currentTheme: Theme;
+	currentTheme!: Theme;
 	searchStatus: SearchStatus = "pristine";
 
 	constructor(
 		private readonly searchService: SearchService,
-		private readonly router: Router,
-		private readonly destroyRef: DestroyRef
+		private readonly router: Router
 	) {}
 
 	ngAfterViewInit(): void {
