@@ -83,6 +83,12 @@
 						"styles": ["src/styles.scss"],
 						"scripts": []
 					}
+				},
+				"lint": {
+					"builder": "@angular-eslint/builder:lint",
+					"options": {
+						"lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+					}
 				}
 			}
 		}
@@ -90,6 +96,7 @@
 	"cli": {
 		"cache": {
 			"enabled": false
-		}
+		},
+		"schematicCollections": ["@angular-eslint/schematics"]
 	}
 }
