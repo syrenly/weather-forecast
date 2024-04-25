@@ -1,6 +1,6 @@
 {
 	"name": "weather-forecast",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"author": {
 		"name": "syrenly"
 	},
@@ -11,6 +11,7 @@
 		"build:prod": "ng build --configuration production",
 		"watch": "ng build --watch --configuration development",
 		"test": "ng test",
+		"test:coverage": "ng test --no-watch --code-coverage",
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix"
 	},
