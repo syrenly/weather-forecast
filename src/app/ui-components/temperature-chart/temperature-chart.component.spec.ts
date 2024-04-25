@@ -4,11 +4,11 @@ import { CURRENT_THEME, currentTheme } from "../../tokens";
 import { forecastResult } from "../../unit-test-utils/utils.mock";
 import { TemperatureChartComponent } from "./temperature-chart.component";
 
-describe("TemperatureChartComponent", () => {
+describe("TemperatureChartComponent", (): void => {
 	let component: TemperatureChartComponent;
 	let fixture: ComponentFixture<TemperatureChartComponent>;
 
-	beforeEach(async () => {
+	beforeEach(async (): Promise<void> => {
 		await TestBed.configureTestingModule({
 			imports: [TemperatureChartComponent],
 			providers: [
@@ -23,52 +23,55 @@ describe("TemperatureChartComponent", () => {
 		fixture.detectChanges();
 	});
 
-	it("should create", () => {
+	it("should create", (): void => {
 		expect(component).toBeTruthy();
 	});
 
-	it("should test #ngOnChanges", () => {
-		const spyCalculate = spyOn<any>(component, "calculateDataSets");
+	it("should test #ngOnChanges", (): void => {
+		const spyCalculate = spyOn(component, "calculateDataSets");
 		const spyCreateChart = spyOn(component, "createChart");
 		component.ngOnChanges({
 			forecastResult: {
 				currentValue: forecastResult,
 				previousValue: null,
-				isFirstChange: () => false,
+				isFirstChange: (): boolean => false,
 				firstChange: false,
 			},
 		});
 		expect(spyCalculate).toHaveBeenCalled();
 		expect(spyCreateChart).toHaveBeenCalled();
 	});
-	it("should test #calculateDataSets", () => {
+	it("should test #calculateDataSets", (): void => {
 		component["calculateDataSets"]();
-		const numberOfPoints = component.forecastResult.list.length;
+		const numberOfPoints = component.forecastResult?.list?.length || 0;
 		expect(component.maxTemperature.length).toBe(numberOfPoints);
 		expect(component.minTemperature.length).toBe(numberOfPoints);
 		expect(component.meanTemperature.length).toBe(numberOfPoints);
 		expect(component.xAxis.length).toBe(numberOfPoints);
 	});
-	it("should check properties in chart - light theme", () => {
+	it("should check properties in chart - light theme", (): void => {
 		component.currentTheme = "light";
 		component.createChart();
 		fixture.detectChanges();
-		expect(component.chart.options.elements.line.tension).toBe(0);
-		expect(component.chart.options.maintainAspectRatio).toBeFalse();
-		expect(component.chart.options.responsive).toBeTrue();
+		const options = component.chart?.options;
+		expect(options?.elements?.line?.tension).toBe(0);
+		expect(options?.maintainAspectRatio).toBeFalse();
+		expect(options?.responsive).toBeTrue();
 	});
-	it("should check properties in chart dark theme", () => {
+	it("should check properties in chart dark theme", (): void => {
 		component.currentTheme = "dark";
 		component.createChart();
 		fixture.detectChanges();
-		expect(component.chart.options.elements.line.tension).toBe(0);
-		expect(component.chart.options.maintainAspectRatio).toBeFalse();
-		expect(component.chart.options.responsive).toBeTrue();
+		const options = component.chart?.options;
+		expect(options?.elements?.line?.tension).toBe(0);
+		expect(options?.maintainAspectRatio).toBeFalse();
+		expect(options?.responsive).toBeTrue();
 		const color = "#FFFFFF";
-		expect(component.chart.options.plugins.legend.labels.color).toBe(color);
-		expect(component.chart.options.scales["x"].ticks.color).toBe(color);
-		expect(component.chart.options.scales["x"].grid.color).toBe(color);
-		expect(component.chart.options.scales["y"].ticks.color).toBe(color);
-		expect(component.chart.options.scales["y"].grid.color).toBe(color);
+		const scales = options?.scales;
+		expect(options?.plugins?.legend?.labels?.color).toBe(color);
+		expect(scales?.["x"]?.ticks?.color).toBe(color);
+		expect(scales?.["x"]?.grid?.color).toBe(color);
+		expect(scales?.["y"]?.ticks?.color).toBe(color);
+		expect(scales?.["y"]?.grid?.color).toBe(color);
 	});
 });

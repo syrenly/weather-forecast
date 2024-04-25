@@ -1,11 +1,4 @@
-import {
-	ICloud,
-	ICoordinate,
-	ICountryData,
-	IPrecipitationH,
-	IWeather,
-	IWind,
-} from "./types";
+import { ICloud, ICoordinate, ICountryData, IPrecipitationH, IWeather, IWind } from "./types";
 
 export interface ICitySearchResult {
 	message: string;

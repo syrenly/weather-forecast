@@ -26,10 +26,7 @@ import { ChartBase } from "../chart.base";
 	templateUrl: "./temperature-chart.component.html",
 	styleUrl: "./temperature-chart.component.scss",
 })
-export class TemperatureChartComponent
-	extends ChartBase
-	implements OnChanges, AfterViewInit
-{
+export class TemperatureChartComponent extends ChartBase implements OnChanges, AfterViewInit {
 	@Input() forecastResult: IFiveDaysForecast | undefined;
 	canvasId = "temperatureChart";
 	meanTemperature: number[] = [];
@@ -49,10 +46,7 @@ export class TemperatureChartComponent
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
-		if (
-			changes["forecastResult"] &&
-			!changes["forecastResult"].isFirstChange()
-		) {
+		if (changes["forecastResult"] && !changes["forecastResult"].isFirstChange()) {
 			this.calculateDataSets();
 			this.createChart();
 		}
@@ -63,7 +57,7 @@ export class TemperatureChartComponent
 		super.ngAfterViewInit();
 	}
 
-	private calculateDataSets(): void {
+	calculateDataSets(): void {
 		const list = this.forecastResult?.list || [];
 		this.meanTemperature = [];
 		this.maxTemperature = [];

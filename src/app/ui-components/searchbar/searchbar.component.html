@@ -1,6 +1,12 @@
-<mat-form-field #matFormField class="autocomplete">
+<mat-form-field
+	#matFormField
+	class="autocomplete">
 	<mat-label>Search city</mat-label>
-	<mat-icon matPrefix color="primary">search</mat-icon>
+	<mat-icon
+		matPrefix
+		color="primary">
+		search
+	</mat-icon>
 	<input
 		#filterInput
 		matInput
@@ -8,31 +14,41 @@
 		aria-label="city name"
 		[matAutocomplete]="auto"
 		#autoTrigger="matAutocompleteTrigger"
-		[formControl]="autocompleteControl"
-	/>
+		[formControl]="autocompleteControl" />
 
 	<!-- icons to show errors -->
 	@if (searchStatus === 401) {
-	<mat-icon matSuffix color="warn" matTooltip="Not authorized"
-		>policy</mat-icon
-	>
+		<mat-icon
+			matSuffix
+			color="warn"
+			matTooltip="Not authorized">
+			policy
+		</mat-icon>
 	} @else if (searchStatus === 400) {
-	<mat-icon matSuffix color="warn" matTooltip="Request invalid"
-		>error_outline</mat-icon
-	>
+		<mat-icon
+			matSuffix
+			color="warn"
+			matTooltip="Request invalid">
+			error_outline
+		</mat-icon>
 	} @else if (searchStatus === 429) {
-	<mat-icon
-		matSuffix
-		color="accent"
-		matTooltip="Too many requests. Retry later"
-		>event_repeat</mat-icon
-	>
-	}@else if (searchStatus === "serverError") {
-	<mat-icon matSuffix color="warn" matTooltip="An internal error occurred"
-		>error_outline</mat-icon
-	>
-	} @else if(searchStatus === "loading") {
-	<mat-spinner matSuffix [diameter]="24"></mat-spinner>
+		<mat-icon
+			matSuffix
+			color="accent"
+			matTooltip="Too many requests. Retry later">
+			event_repeat
+		</mat-icon>
+	} @else if (searchStatus === "serverError") {
+		<mat-icon
+			matSuffix
+			color="warn"
+			matTooltip="An internal error occurred">
+			error_outline
+		</mat-icon>
+	} @else if (searchStatus === "loading") {
+		<mat-spinner
+			matSuffix
+			[diameter]="24"></mat-spinner>
 	}
 
 	<mat-autocomplete
@@ -40,51 +56,46 @@
 		autoActiveFirstOption
 		[displayWith]="displayFn"
 		(optionSelected)="itemSelected($event)"
-		class="autocomplete-panel"
-	>
+		class="autocomplete-panel">
 		@for (option of options$ | async; track option) {
-		<mat-option [value]="option">
-			<div class="weather-option">
-				@if(option.weather.length > 0){
-				<img
-					[matTooltip]="option.weather[0].description"
-					width="36"
-					height="36"
-					[ngSrc]="option.weather[0].icon | weather"
-				/>
-				}
-				<span class="city-name">
-					{{ option.name }},&nbsp;{{ option.sys.country }}
-				</span>
-				<!-- NB aspect-ratio: 1.45 -->
-				<img
-					width="16"
-					height="11"
-					[ngSrc]="option.sys.country | flag"
-				/>
-			</div>
-		</mat-option>
+			<mat-option [value]="option">
+				<div class="weather-option">
+					@if (option.weather.length > 0) {
+						<img
+							alt="{{ option.weather[0].description }}"
+							[matTooltip]="option.weather[0].description"
+							width="36"
+							height="36"
+							[ngSrc]="option.weather[0].icon | weather" />
+					}
+					<span class="city-name">{{ option.name }},&nbsp;{{ option.sys.country }}</span>
+					<!-- NB aspect-ratio: 1.45 -->
+					<img
+						alt="image for the flag {{ option.sys.country }}"
+						width="16"
+						height="11"
+						[ngSrc]="option.sys.country | flag" />
+				</div>
+			</mat-option>
 		} @empty {
-		<!-- Option that works as a placeholder -->
-		<mat-option disabled> No results </mat-option>
+			<!-- Option that works as a placeholder -->
+			<mat-option disabled>No results</mat-option>
 		}
 	</mat-autocomplete>
 	<!-- messages for hints, error and loading -->
 	<mat-hint>
 		@if (searchStatus === 401) {
-		<span>The license is not valid, expired or missing</span>
+			<span>The license is not valid, expired or missing</span>
 		} @else if (searchStatus === 400) {
-		<span>The request has a wrong signature, retry</span>
+			<span>The request has a wrong signature, retry</span>
 		} @else if (searchStatus === 429) {
-		<span>Too many requests. Wait some time or extend your license</span>
-		} @else if (searchStatus === "serverError"){
-		<span>An internal error occurred</span>
-		} @else if (searchStatus === "loading"){
-		<span>Searching... </span>
+			<span>Too many requests. Wait some time or extend your license</span>
+		} @else if (searchStatus === "serverError") {
+			<span>An internal error occurred</span>
+		} @else if (searchStatus === "loading") {
+			<span>Searching...</span>
 		} @else {
-		<span>
-			The city name, better if followed by comma and 2-letter country code
-		</span>
+			<span>The city name, better if followed by comma and 2-letter country code</span>
 		}
 	</mat-hint>
 </mat-form-field>

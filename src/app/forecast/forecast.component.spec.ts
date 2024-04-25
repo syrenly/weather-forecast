@@ -15,11 +15,11 @@ const route = {
 	}),
 };
 
-describe("ForecastComponent", () => {
+describe("ForecastComponent", (): void => {
 	let component: ForecastComponent;
 	let fixture: ComponentFixture<ForecastComponent>;
 
-	beforeEach(async () => {
+	beforeEach(async (): Promise<void> => {
 		await TestBed.configureTestingModule({
 			imports: [ForecastComponent, NoopAnimationsModule],
 			providers: [
@@ -34,7 +34,7 @@ describe("ForecastComponent", () => {
 		fixture.detectChanges();
 	});
 
-	it("should create", () => {
+	it("should create", (): void => {
 		expect(component).toBeTruthy();
 	});
 });

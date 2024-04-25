@@ -1,6 +1,6 @@
 {
 	"root": true,
-	"ignorePatterns": ["projects/**/*"],
+	"ignorePatterns": ["**/*.mock.ts", "dist/*", ".vscode/*", "node_modules/*", ".nx/", "Docker", "*.yml", "*.yaml"],
 	"overrides": [
 		{
 			"files": ["*.ts"],
@@ -33,10 +33,7 @@
 		},
 		{
 			"files": ["*.html"],
-			"extends": [
-				"plugin:@angular-eslint/template/recommended",
-				"plugin:@angular-eslint/template/accessibility"
-			],
+			"extends": ["plugin:@angular-eslint/template/recommended", "plugin:@angular-eslint/template/accessibility"],
 			"rules": {}
 		}
 	]

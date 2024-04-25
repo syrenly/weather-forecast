@@ -10,10 +10,8 @@ export type CityResolverType =
 	| { errorStatus: number }
 	| { countryInfo: ICityWeather; forecastResult: IFiveDaysForecast };
 
-export const cityResolver: ResolveFn<Observable<CityResolverType>> = (
-	route,
-	state
-): Observable<CityResolverType> => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const cityResolver: ResolveFn<Observable<CityResolverType>> = (route, state): Observable<CityResolverType> => {
 	let id: number;
 	try {
 		id = +(route.paramMap.get("id") || "");
@@ -23,11 +21,9 @@ export const cityResolver: ResolveFn<Observable<CityResolverType>> = (
 	const searchService = inject(SearchService);
 	const router = inject(Router);
 	// get city from current navigation data
-	const city: ICityWeather = router.getCurrentNavigation()?.extras
-		?.state as ICityWeather;
+	const city: ICityWeather = router.getCurrentNavigation()?.extras?.state as ICityWeather;
 	// if current navigation data contains the city, keep it, otherwise, retrieve it from server
-	const cityObs =
-		city && city.id === id ? of(city) : searchService.getCityWeather(id);
+	const cityObs = city && city.id === id ? of(city) : searchService.getCityWeather(id);
 	searchService.navigationStarted = true;
 	return forkJoin({
 		countryInfo: cityObs,
@@ -35,9 +31,6 @@ export const cityResolver: ResolveFn<Observable<CityResolverType>> = (
 		forecastResult: searchService.getFiveDaysForecast(id),
 	}).pipe(
 		// manage show of errors in ForecastComponent
-		catchError(
-			(error: HttpErrorResponse): Observable<{ errorStatus: number }> =>
-				of({ errorStatus: error.status })
-		)
+		catchError((error: HttpErrorResponse): Observable<{ errorStatus: number }> => of({ errorStatus: error.status }))
 	);
 };

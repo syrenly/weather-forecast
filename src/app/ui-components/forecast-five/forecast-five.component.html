@@ -1,60 +1,57 @@
-@if(forecastResult && days.length > 0) {
-<mat-card>
-	<mat-tab-group>
-		@for (day of days; track day) {
-		<mat-tab [label]="(day | date : 'MMM d') || 'N.A.'">
-			<ng-template matTabContent>
-				@for (forecast of daysDictionary[day]; track forecast.dt) {
-				<ng-container
-					*ngTemplateOutlet="
-						threeHours;
-						context: { $implicit: forecast }
-					"
-				></ng-container>
-				}
-			</ng-template>
-		</mat-tab>
-		}
-	</mat-tab-group>
-</mat-card>
+@if (forecastResult && days.length > 0) {
+	<mat-card>
+		<mat-tab-group>
+			@for (day of days; track day) {
+				<mat-tab [label]="(day | date: 'MMM d') || 'N.A.'">
+					<ng-template matTabContent>
+						@for (forecast of daysDictionary[day]; track forecast.dt) {
+							<ng-container *ngTemplateOutlet="threeHours; context: { $implicit: forecast }"></ng-container>
+						}
+					</ng-template>
+				</mat-tab>
+			}
+		</mat-tab-group>
+	</mat-card>
 }
 
-<ng-template #threeHours let-forecast>
+<ng-template
+	#threeHours
+	let-forecast>
 	<mat-divider></mat-divider>
 	<div class="row">
-		<div class="hours">{{ forecast.dt * 1000 | date : "HH:mm" }}</div>
-		@if(forecast.weather && forecast.weather[0]){
-		<div class="icon">
-			<img
-				matTooltip="{{ forecast.weather[0].description | titlecase }}"
-				alt="{{ forecast.weather[0].description }}"
-				width="32"
-				height="32"
-				[ngSrc]="forecast.weather[0].icon | weather"
-			/>
-		</div>
+		<div class="hours">{{ forecast.dt * 1000 | date: "HH:mm" }}</div>
+		@if (forecast.weather && forecast.weather[0]) {
+			<div class="icon">
+				<img
+					matTooltip="{{ forecast.weather[0].description | titlecase }}"
+					alt="{{ forecast.weather[0].description }}"
+					width="32"
+					height="32"
+					[ngSrc]="forecast.weather[0].icon | weather" />
+			</div>
 		} @else {
-		<div>-</div>
+			<div>-</div>
 		}
-		<div class="temperature">
-			{{ forecast.main?.temp | number : "1.0-0" }} C°
-		</div>
+		<div class="temperature">{{ forecast.main?.temp | number: "1.0-0" }} C°</div>
 		<div class="pop">
-			<mat-icon color="primary" matTooltip="Probability of precipitation"
-				>umbrella</mat-icon
-			>
-			<span>&nbsp;{{ forecast.pop * 100 | number : "1.0-0" }}%</span>
+			<mat-icon
+				color="primary"
+				matTooltip="Probability of precipitation">
+				umbrella
+			</mat-icon>
+			<span>&nbsp;{{ forecast.pop * 100 | number: "1.0-0" }}%</span>
 		</div>
 		<div class="wind">
-			<mat-icon color="primary" matTooltip="Wind">air </mat-icon>
-			<span>
-				&nbsp;{{ forecast.wind?.speed | number : "1.0-0" }} Km/h&nbsp;
-			</span>
+			<mat-icon
+				color="primary"
+				matTooltip="Wind">
+				air
+			</mat-icon>
+			<span>&nbsp;{{ forecast.wind?.speed | number: "1.0-0" }} Km/h&nbsp;</span>
 			<mat-icon
 				color="primary"
 				matTooltip="Wind direction"
-				[style.rotate.deg]="forecast.wind?.deg"
-			>
+				[style.rotate.deg]="forecast.wind?.deg">
 				north
 			</mat-icon>
 		</div>

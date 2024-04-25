@@ -2,11 +2,11 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { forecastResult } from "../../unit-test-utils/utils.mock";
 import { ForecastFiveComponent } from "./forecast-five.component";
 
-describe("ForecastFiveComponent", () => {
+describe("ForecastFiveComponent", (): void => {
 	let component: ForecastFiveComponent;
 	let fixture: ComponentFixture<ForecastFiveComponent>;
 
-	beforeEach(async () => {
+	beforeEach(async (): Promise<void> => {
 		await TestBed.configureTestingModule({
 			imports: [ForecastFiveComponent],
 		}).compileComponents();
@@ -17,16 +17,16 @@ describe("ForecastFiveComponent", () => {
 		fixture.detectChanges();
 	});
 
-	it("should create", () => {
+	it("should create", (): void => {
 		expect(component).toBeTruthy();
 	});
 
-	it("should test #groupBy", () => {
+	it("should test #groupBy", (): void => {
 		component.ngOnChanges({
 			forecastResult: {
 				currentValue: forecastResult,
 				previousValue: null,
-				isFirstChange: () => false,
+				isFirstChange: (): boolean => false,
 				firstChange: false,
 			},
 		});

@@ -1,9 +1,4 @@
-import {
-	AsyncPipe,
-	DatePipe,
-	DecimalPipe,
-	NgOptimizedImage,
-} from "@angular/common";
+import { AsyncPipe, DatePipe, DecimalPipe, NgOptimizedImage } from "@angular/common";
 import { Component, DestroyRef, OnInit } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { MatCardModule } from "@angular/material/card";
@@ -75,21 +70,19 @@ export class ForecastComponent implements OnInit {
 		public readonly searchService: SearchService
 	) {}
 	ngOnInit(): void {
-		this.route.data
-			.pipe(takeUntilDestroyed(this.destroyRef))
-			.subscribe((value: Data): void => {
-				this.searchService.navigationStarted = false;
-				if (value && value[0] && value[0]["errorStatus"]) {
-					this.errorStatus = value[0]["errorStatus"];
-					return;
-				}
-				const routeData: {
-					countryInfo: ICityWeather;
-					forecastResult: IFiveDaysForecast;
-				} & { animationState: string } = value[0];
-				this.city = routeData.countryInfo;
-				this.forecastResult = routeData.forecastResult;
-				this.errorStatus = undefined;
-			});
+		this.route.data.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value: Data): void => {
+			this.searchService.navigationStarted = false;
+			if (value && value[0] && value[0]["errorStatus"]) {
+				this.errorStatus = value[0]["errorStatus"];
+				return;
+			}
+			const routeData: {
+				countryInfo: ICityWeather;
+				forecastResult: IFiveDaysForecast;
+			} & { animationState: string } = value[0];
+			this.city = routeData.countryInfo;
+			this.forecastResult = routeData.forecastResult;
+			this.errorStatus = undefined;
+		});
 	}
 }

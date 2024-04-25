@@ -10,7 +10,9 @@ import {
 import { WEATHER_API_LICENSE } from "../tokens";
 
 export const forecastDetailsGuard: CanActivateFn = (
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	route: ActivatedRouteSnapshot,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	state: RouterStateSnapshot
 ): MaybeAsync<GuardResult> => {
 	const licenseToken = inject(WEATHER_API_LICENSE);

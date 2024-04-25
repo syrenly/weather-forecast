@@ -6,17 +6,14 @@ import { CURRENT_THEME, currentTheme } from "../tokens";
 import { getSearchMockProvider } from "../unit-test-utils/search.service.mock";
 import { HomeComponent } from "./home.component";
 
-describe("HomeComponent", () => {
+describe("HomeComponent", (): void => {
 	let component: HomeComponent;
 	let fixture: ComponentFixture<HomeComponent>;
 
-	beforeEach(async () => {
+	beforeEach(async (): Promise<void> => {
 		await TestBed.configureTestingModule({
 			imports: [HomeComponent, NoopAnimationsModule],
-			providers: [
-				{ provide: CURRENT_THEME, useFactory: currentTheme },
-				getSearchMockProvider(),
-			],
+			providers: [{ provide: CURRENT_THEME, useFactory: currentTheme }, getSearchMockProvider()],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(HomeComponent);
@@ -24,18 +21,15 @@ describe("HomeComponent", () => {
 		fixture.detectChanges();
 	});
 
-	it("should create", () => {
+	it("should create", (): void => {
 		expect(component).toBeTruthy();
 	});
 
-	it("should set OpenWeatherApi logo", () => {
+	it("should set OpenWeatherApi logo", (): void => {
 		const nativeElement = fixture.debugElement.nativeElement;
-		const img: HTMLImageElement =
-			nativeElement.querySelector("a.attribution img");
+		const img: HTMLImageElement = nativeElement.querySelector("a.attribution img");
 		expect(img.src).toContain("/assets/OpenWeatherLogo.png");
-		const a: DebugElement = fixture.debugElement.query(
-			By.css("a.attribution")
-		);
+		const a: DebugElement = fixture.debugElement.query(By.css("a.attribution"));
 		expect(a.nativeNode.href).toBe("https://openweathermap.org/");
 	});
 });

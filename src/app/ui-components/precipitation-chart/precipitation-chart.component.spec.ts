@@ -3,11 +3,11 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { CURRENT_THEME, currentTheme } from "../../tokens";
 import { PrecipitationChartComponent } from "./precipitation-chart.component";
 
-describe("PrecipitationChartComponent", () => {
+describe("PrecipitationChartComponent", (): void => {
 	let component: PrecipitationChartComponent;
 	let fixture: ComponentFixture<PrecipitationChartComponent>;
 
-	beforeEach(async () => {
+	beforeEach(async (): Promise<void> => {
 		await TestBed.configureTestingModule({
 			imports: [PrecipitationChartComponent],
 			providers: [
@@ -21,7 +21,7 @@ describe("PrecipitationChartComponent", () => {
 		fixture.detectChanges();
 	});
 
-	it("should create", () => {
+	it("should create", (): void => {
 		expect(component).toBeTruthy();
 	});
 });

@@ -1,10 +1,4 @@
-import {
-	AfterViewInit,
-	DestroyRef,
-	Directive,
-	ElementRef,
-	Inject,
-} from "@angular/core";
+import { AfterViewInit, DestroyRef, Directive, ElementRef, Inject } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { Chart } from "chart.js";
 import { BehaviorSubject } from "rxjs";
@@ -27,16 +21,14 @@ export abstract class ChartBase implements AfterViewInit {
 	) {}
 
 	ngAfterViewInit(): void {
-		this.themeSubject
-			.pipe(takeUntilDestroyed(this.destroyRef))
-			.subscribe((currentTheme): void => {
-				this.currentTheme = currentTheme;
-				if (this.chart) {
-					this.updateColors();
-				} else {
-					this.createChart();
-				}
-			});
+		this.themeSubject.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((currentTheme): void => {
+			this.currentTheme = currentTheme;
+			if (this.chart) {
+				this.updateColors();
+			} else {
+				this.createChart();
+			}
+		});
 	}
 	/** Update colors, setting again the options */
 	protected updateColors(): void {

@@ -1,10 +1,4 @@
-import {
-	AsyncPipe,
-	DatePipe,
-	DecimalPipe,
-	NgOptimizedImage,
-	TitleCasePipe,
-} from "@angular/common";
+import { AsyncPipe, DatePipe, DecimalPipe, NgOptimizedImage, TitleCasePipe } from "@angular/common";
 import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
 import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
@@ -49,7 +43,7 @@ export class CurrentWeatherComponent implements OnChanges {
 							icon: "",
 							id: 0,
 							main: "",
-					  };
+						};
 			this.mainInfo = this.city?.main;
 		}
 	}
