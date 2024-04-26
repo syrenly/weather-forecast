@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { ActivatedRoute } from "@angular/router";
 import { of } from "rxjs";
-import { CURRENT_THEME, currentThemeFn } from "../tokens";
 import { getSearchMockProvider } from "../unit-test-utils/search.service.mock";
+import { provideMockTheme } from "../unit-test-utils/token.mock";
 import { city, forecastResult } from "../unit-test-utils/utils.mock";
 import { ForecastComponent } from "./forecast.component";
 
@@ -22,11 +22,7 @@ describe("ForecastComponent", (): void => {
 	beforeEach(async (): Promise<void> => {
 		await TestBed.configureTestingModule({
 			imports: [ForecastComponent, NoopAnimationsModule],
-			providers: [
-				getSearchMockProvider(),
-				{ provide: ActivatedRoute, useValue: route },
-				{ provide: CURRENT_THEME, useFactory: currentThemeFn },
-			],
+			providers: [getSearchMockProvider(), provideMockTheme(), { provide: ActivatedRoute, useValue: route }],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(ForecastComponent);
