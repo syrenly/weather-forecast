@@ -7,4 +7,4 @@ export const WEATHER_API_LICENSE = new InjectionToken<string>("License to access
 
 export const CURRENT_THEME = new InjectionToken<BehaviorSubject<"dark" | "light">>("Color of current theme");
 
-export const currentTheme = (): BehaviorSubject<"dark" | "light"> => new BehaviorSubject<"dark" | "light">("dark");
+export const currentThemeFn = (): BehaviorSubject<"dark" | "light"> => new BehaviorSubject<"dark" | "light">("dark");
