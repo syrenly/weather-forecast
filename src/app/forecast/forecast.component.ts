@@ -69,6 +69,7 @@ export class ForecastComponent implements OnInit {
 		private readonly destroyRef: DestroyRef,
 		public readonly searchService: SearchService
 	) {}
+
 	ngOnInit(): void {
 		this.route.data.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value: Data): void => {
 			this.searchService.navigationStarted = false;
