@@ -1,6 +1,5 @@
-import { LOCALE_ID } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { CURRENT_THEME, currentThemeFn } from "../../tokens";
+import { provideMockLocaleId, provideMockTheme } from "../../unit-test-utils/token.mock";
 import { forecastResult } from "../../unit-test-utils/utils.mock";
 import { TemperatureChartComponent } from "./temperature-chart.component";
 
@@ -11,10 +10,7 @@ describe("TemperatureChartComponent", (): void => {
 	beforeEach(async (): Promise<void> => {
 		await TestBed.configureTestingModule({
 			imports: [TemperatureChartComponent],
-			providers: [
-				{ provide: LOCALE_ID, useValue: "en" },
-				{ provide: CURRENT_THEME, useFactory: currentThemeFn },
-			],
+			providers: [provideMockLocaleId(), provideMockTheme()],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(TemperatureChartComponent);

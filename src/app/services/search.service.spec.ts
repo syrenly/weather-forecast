@@ -1,8 +1,8 @@
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
 import { TestBed, getTestBed } from "@angular/core/testing";
-import { WEATHER_API_LICENSE } from "../tokens";
 import { ICitySearchResult, ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
+import { provideMockWeatherApiKey } from "../unit-test-utils/token.mock";
 import { SearchService } from "./search.service";
 
 describe("SearchService", (): void => {
@@ -13,7 +13,7 @@ describe("SearchService", (): void => {
 	beforeEach((): void => {
 		TestBed.configureTestingModule({
 			imports: [HttpClientTestingModule],
-			providers: [SearchService, { provide: WEATHER_API_LICENSE, useValue: "KEY" }],
+			providers: [SearchService, provideMockWeatherApiKey()],
 			teardown: { destroyAfterEach: false },
 		});
 

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { CURRENT_THEME, currentThemeFn } from "../../tokens";
+import { provideMockTheme } from "../../unit-test-utils/token.mock";
 import { SwitchThemeComponent } from "./switch-theme.component";
 
 describe("SwitchThemeComponent", (): void => {
@@ -9,7 +9,7 @@ describe("SwitchThemeComponent", (): void => {
 	beforeEach(async (): Promise<void> => {
 		await TestBed.configureTestingModule({
 			imports: [SwitchThemeComponent],
-			providers: [{ provide: CURRENT_THEME, useFactory: currentThemeFn }],
+			providers: [provideMockTheme()],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(SwitchThemeComponent);
