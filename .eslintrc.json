@@ -1,6 +1,16 @@
 {
 	"root": true,
-	"ignorePatterns": ["**/*.mock.ts", "dist/*", ".vscode/*", "node_modules/*", ".nx/", "Docker", "*.yml", "*.yaml"],
+	"ignorePatterns": [
+		".nx/",
+		".vscode/*",
+		"*.yaml",
+		"*.yml",
+		"**/*.mock.ts",
+		"coverage/",
+		"dist/*",
+		"Docker",
+		"node_modules/*"
+	],
 	"overrides": [
 		{
 			"files": ["*.ts"],
@@ -38,3 +48,4 @@
 		}
 	]
 }
+
