@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { WEATHER_API_LICENSE } from "../tokens";
+import { WEATHER_API_KEY } from "../tokens";
 import { ICitySearchResult, ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
 
@@ -12,7 +12,7 @@ export class SearchService {
 	navigationStarted = false;
 	constructor(
 		private httpClient: HttpClient,
-		@Inject(WEATHER_API_LICENSE) private readonly licenseApi: string
+		@Inject(WEATHER_API_KEY) private readonly licenseApi: string
 	) {}
 
 	searchCountry(queryArg: string): Observable<ICitySearchResult> {

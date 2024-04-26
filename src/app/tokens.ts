@@ -2,7 +2,7 @@ import { InjectionToken } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 
 //#region WEATHER API LICENSE KEY
-export const WEATHER_API_LICENSE = new InjectionToken<string>("License to access to weather API");
+export const WEATHER_API_KEY = new InjectionToken<string>("License to access to weather API");
 export const weatherApiKeyFn = (): BehaviorSubject<string> => new BehaviorSubject<string>("");
 //#endregion
 
