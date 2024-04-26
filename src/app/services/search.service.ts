@@ -15,7 +15,7 @@ export class SearchService {
 		private httpClient: HttpClient,
 		@Inject(WEATHER_API_KEY) private readonly licenseKeySubj: BehaviorSubject<string>
 	) {
-		licenseKeySubj.subscribe(key => {
+		this.licenseKeySubj.subscribe(key => {
 			this.licenseKey = key;
 		});
 	}

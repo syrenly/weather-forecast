@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { InjectionToken, Provider } from "@angular/core";
+import { InjectionToken, Provider, isDevMode } from "@angular/core";
 import { BehaviorSubject, firstValueFrom, tap } from "rxjs";
 
 //#region WEATHER API LICENSE KEY
@@ -32,11 +32,14 @@ export function initializeApp(
 ): () => Promise<IConfiguration> {
 	return (): Promise<IConfiguration> =>
 		firstValueFrom(
-			http.get<IConfiguration>("./assets/configuration.json").pipe(
-				tap(jsonConfig => {
-					weatherApiKeySubject.next(jsonConfig.OpenWeatherApiKey);
-				})
-			)
+			http
+				// use different json file, based on the type of build
+				.get<IConfiguration>(isDevMode() ? "./assets/configuration.json" : "./assets/configuration.prod.json")
+				.pipe(
+					tap(jsonConfig => {
+						weatherApiKeySubject.next(jsonConfig.OpenWeatherApiKey);
+					})
+				)
 		);
 }
 //#endregion
