@@ -9,7 +9,13 @@ import { IFiveDaysForecast } from "../types/forecast-types";
 	providedIn: "root",
 })
 export class SearchService {
-	navigationStarted = false;
+	private _navigationStarted = false;
+	get navigationStarted(): boolean {
+		return this._navigationStarted;
+	}
+	set navigationStarted(value: boolean) {
+		this._navigationStarted = value;
+	}
 	private licenseKey = "";
 	constructor(
 		private httpClient: HttpClient,
@@ -30,7 +36,6 @@ export class SearchService {
 			`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${this.licenseKey}&units=metric`
 		);
 	}
-
 	getFiveDaysForecast(cityId: number): Observable<IFiveDaysForecast> {
 		return this.httpClient.get<IFiveDaysForecast>(
 			`https://api.openweathermap.org/data/2.5/forecast?id=${cityId}&appid=${this.licenseKey}&units=metric`
