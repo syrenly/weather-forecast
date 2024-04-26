@@ -46,7 +46,15 @@ $custom-typography: mat.define-typography-config(
 // Apply the dark theme by default
 @include mat.all-component-themes($dark-theme);
 
+.attribution-bg {
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+}
+
 // make a specific class for light theme
 .light-theme {
 	@include mat.all-component-colors($light-theme);
+	.attribution-bg {
+		background-color: transparent;
+	}
 }

@@ -25,7 +25,7 @@ describe("HomeComponent", (): void => {
 		expect(component).toBeTruthy();
 	});
 
-	it("should set OpenWeatherApi logo", (): void => {
+	it("should set OpenWeather logo", (): void => {
 		const nativeElement = fixture.debugElement.nativeElement;
 		const img: HTMLImageElement = nativeElement.querySelector("a.attribution img");
 		expect(img.src).toContain("/assets/OpenWeatherLogo.png");

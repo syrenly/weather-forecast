@@ -19,5 +19,5 @@ The following enhancements will be evaluated in order to improve the application
 -   [ ] add a background image with transparence for the HomeComponent
 -   [ ] replace this with the new Object.groupBy function when Typescript will expose it
 -   [ ] manage errors and not-found with specific components in routing
--   [ ] find a better place for the OpenWeatherApi attribution
+-   [ ] find a better place for the OpenWeather attribution
 -   [ ] of course new ideas will come!
