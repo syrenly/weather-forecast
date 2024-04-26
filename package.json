@@ -13,8 +13,9 @@
 		"watch": "ng build --watch --configuration development",
 		"test": "ng test",
 		"test:coverage": "ng test --no-watch --code-coverage",
-		"lint": "eslint .",
-		"lint:fix": "eslint . --fix"
+		"lint": "ng lint",
+		"eslint": "eslint .",
+		"eslint:fix": "eslint . --fix"
 	},
 	"private": true,
 	"dependencies": {

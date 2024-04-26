@@ -43,6 +43,14 @@ Lines        : 68.57% ( 144/210 )
 ================================================================================
 ```
 
+## Lint
+
+Run `ng lint` to run the Angular lint.
+
+Run `npm run eslint` to run the ES lint.
+
+Run `npm run eslint:fix` to run the ES lint and apply fixes.
+
 ## Docker
 
 Install docker in your machine. From the root folder of this application, run
