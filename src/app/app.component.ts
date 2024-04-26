@@ -1,5 +1,4 @@
 import { Component, Inject, OnInit } from "@angular/core";
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
 import { RouterOutlet } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
 import { routeTransitionAnimations } from "./routes/route-transition-animations";
@@ -12,13 +11,6 @@ import { CURRENT_THEME, Theme } from "./tokens";
 	templateUrl: "./app.component.html",
 	styleUrl: "./app.component.scss",
 	animations: [routeTransitionAnimations],
-	// set outline style for material
-	providers: [
-		{
-			provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-			useValue: { appearance: "outline" },
-		},
-	],
 })
 export class AppComponent implements OnInit {
 	constructor(
