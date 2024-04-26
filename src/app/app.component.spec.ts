@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { provideAnimations } from "@angular/platform-browser/animations";
 import { AppComponent } from "./app.component";
-import { CURRENT_THEME, currentTheme } from "./tokens";
+import { CURRENT_THEME, currentThemeFn } from "./tokens";
 
 describe("AppComponent", (): void => {
 	let fixture: ComponentFixture<AppComponent>;
@@ -10,7 +10,7 @@ describe("AppComponent", (): void => {
 	beforeEach(async (): Promise<void> => {
 		await TestBed.configureTestingModule({
 			imports: [AppComponent],
-			providers: [provideAnimations(), { provide: CURRENT_THEME, useFactory: currentTheme, deps: [] }],
+			providers: [provideAnimations(), { provide: CURRENT_THEME, useFactory: currentThemeFn, deps: [] }],
 		}).compileComponents();
 		fixture = TestBed.createComponent(AppComponent);
 		component = fixture.componentInstance;

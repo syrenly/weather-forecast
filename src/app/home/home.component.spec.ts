@@ -2,7 +2,7 @@ import { DebugElement } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { By } from "@angular/platform-browser";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { CURRENT_THEME, currentTheme } from "../tokens";
+import { CURRENT_THEME, currentThemeFn } from "../tokens";
 import { getSearchMockProvider } from "../unit-test-utils/search.service.mock";
 import { HomeComponent } from "./home.component";
 
@@ -13,7 +13,7 @@ describe("HomeComponent", (): void => {
 	beforeEach(async (): Promise<void> => {
 		await TestBed.configureTestingModule({
 			imports: [HomeComponent, NoopAnimationsModule],
-			providers: [{ provide: CURRENT_THEME, useFactory: currentTheme }, getSearchMockProvider()],
+			providers: [{ provide: CURRENT_THEME, useFactory: currentThemeFn }, getSearchMockProvider()],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(HomeComponent);
