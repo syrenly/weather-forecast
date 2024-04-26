@@ -12,7 +12,7 @@ export const appConfig: ApplicationConfig = {
 		provideHttpClient(),
 		{
 			provide: WEATHER_API_LICENSE,
-			useValue: "0772d97e05b9ab036c823577ba14f7be",
+			useValue: "748b5bd78f76204828fe90b418acbe5c",
 		},
 		{ provide: CURRENT_THEME, useFactory: currentTheme, deps: [] },
 	],
