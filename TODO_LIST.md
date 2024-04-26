@@ -20,4 +20,5 @@ The following enhancements will be evaluated in order to improve the application
 -   [ ] replace [groupBy](./src//app/ui-components/forecast-five/forecast-five.component.ts) with the new Object.groupBy function when Typescript will expose it
 -   [ ] manage errors and not-found with specific components in routing
 -   [x] find a better place for the OpenWeather attribution
+-   [x] apply inverse animation to the navigation transition from forecasts to home
 -   [ ] of course new ideas will come!
