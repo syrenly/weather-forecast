@@ -14,7 +14,7 @@ The following enhancements will be evaluated in order to improve the application
 -   [ ] refactor scss variables
 -   [ ] refresh button or periodic refresh of the data
 -   [ ] add a background image with transparence for the HomeComponent
--   [ ] replace [groupBy](./src//app/ui-components/forecast-five/forecast-five.component.ts) with the new Object.groupBy function when Typescript will expose it
+-   [ ] replace [groupBy](./src/app/ui-components/forecast-five/forecast-five.component.ts) with the new Object.groupBy function when Typescript will expose it
 -   [ ] manage errors and not-found with specific components in routing
 -   [ ] of course new ideas will come!
 
