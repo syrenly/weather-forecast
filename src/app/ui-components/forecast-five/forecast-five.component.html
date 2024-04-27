@@ -50,7 +50,7 @@
 			<span>&nbsp;{{ forecast.wind?.speed | number: "1.0-0" }} Km/h&nbsp;</span>
 			<mat-icon
 				color="primary"
-				matTooltip="Wind direction"
+				matTooltip="{{ forecast.wind?.deg | toCardinalPoint }}"
 				[style.rotate.deg]="forecast.wind?.deg">
 				north
 			</mat-icon>

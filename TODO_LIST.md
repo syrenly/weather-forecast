@@ -8,10 +8,7 @@ The following enhancements will be evaluated in order to improve the application
 -   [ ] ask users to retrieve their location and open directly their city
 -   [ ] _started_ integrate the signal feature
 -   [ ] evaluate where to use the DetectionStrategy OnPush
--   [ ] create a pipe that turns the direction (in degree) of the wind in a more human readable way using cardinal point
-        s (like N, NWN, S, etc)
 -   [ ] not sure if leave Angular Material or create custom components
--   [ ] refactor scss variables
 -   [ ] refresh button or periodic refresh of the data
 -   [ ] add a background image with transparence for the HomeComponent
 -   [ ] replace [groupBy](./src/app/ui-components/forecast-five/forecast-five.component.ts) with the new Object.groupBy function when Typescript will expose it
@@ -26,3 +23,6 @@ The following enhancements will be evaluated in order to improve the application
 -   [x] find a better place for the OpenWeather attribution
 -   [x] apply inverse animation to the navigation transition from forecasts to home
 -   [x] remove navigation logic from searchbar
+-   [x] refactor scss variables
+-   [x] create a pipe that turns the direction (in degree) of the wind in a more human readable way using cardinal point
+        s (like N, NWN, S, etc)
