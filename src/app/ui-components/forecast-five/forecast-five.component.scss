@@ -1,3 +1,5 @@
+$padding: 1rem;
+
 :host {
 	mat-card,
 	mat-card-content {
@@ -6,8 +8,8 @@
 }
 
 .row {
-	width: calc(100% - 2rem);
-	padding: 0 1rem;
+	width: calc(100% - 2 * #{$padding});
+	padding: 0 $padding;
 	display: flex;
 	flex-wrap: nowrap;
 	align-items: center;
@@ -25,15 +27,16 @@
 	}
 }
 @media (max-width: 576px) {
+	$colFixedWidth: 50px;
 	.row div {
 		width: 100%;
 		min-width: 15%;
 		&.icon {
-			width: 50px;
+			width: $colFixedWidth;
 		}
 		&.hours,
 		&.temperature {
-			max-width: 50px;
+			max-width: $colFixedWidth;
 		}
 	}
 }
