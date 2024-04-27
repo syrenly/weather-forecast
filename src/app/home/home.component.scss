@@ -1,5 +1,6 @@
 $headerHeight: 50px;
 $padding: 1rem;
+$margin: 1rem;
 $widthMinusPadding: calc(100% - 2 * #{$padding});
 $licenseHeight: 57px;
 
@@ -22,7 +23,7 @@ $licenseHeight: 57px;
 	align-items: center;
 	justify-content: end;
 	height: $headerHeight;
-	padding: 0.5rem 1rem;
+	padding: calc(#{$padding} / 2) $padding;
 	width: $widthMinusPadding;
 }
 
@@ -43,13 +44,13 @@ $licenseHeight: 57px;
 			text-align: justify;
 		}
 		.suggestions {
-			margin-top: 2rem;
+			margin-top: calc(#{$margin} * 2);
 			display: flex;
 			align-items: center;
 			flex-wrap: wrap;
 			justify-content: space-around;
 			button {
-				margin: 0 0.5rem 1rem;
+				margin: 0 calc(#{$margin} / 2) $margin;
 				min-width: 120px;
 			}
 		}

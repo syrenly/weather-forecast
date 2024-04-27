@@ -36,8 +36,7 @@ export class PrecipitationChartComponent extends ChartBase implements OnChanges,
 
 	constructor(
 		@Inject(LOCALE_ID) private readonly localeId: string,
-		@Inject(CURRENT_THEME)
-		themeSubject: BehaviorSubject<Theme>,
+		@Inject(CURRENT_THEME) themeSubject: BehaviorSubject<Theme>,
 		destroyRef: DestroyRef,
 		elementRef: ElementRef
 	) {

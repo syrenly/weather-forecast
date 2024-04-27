@@ -23,11 +23,7 @@ export abstract class ChartBase implements AfterViewInit {
 	ngAfterViewInit(): void {
 		this.themeSubject.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((currentTheme): void => {
 			this.currentTheme = currentTheme;
-			if (this.chart) {
-				this.updateColors();
-			} else {
-				this.createChart();
-			}
+			this.chart ? this.updateColors() : this.createChart();
 		});
 	}
 	/** Update colors, setting again the options */
@@ -35,11 +31,7 @@ export abstract class ChartBase implements AfterViewInit {
 		if (!this.chart) {
 			return;
 		}
-		if (this.currentTheme === "light") {
-			this.chart.options = { ...mainOptions, ...lightOptions };
-		} else {
-			this.chart.options = { ...mainOptions, ...darkOptions };
-		}
+		this.chart.options = { ...mainOptions, ...(this.currentTheme === "light" ? lightOptions : darkOptions) };
 		this.chart.update();
 	}
 

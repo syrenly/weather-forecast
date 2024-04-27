@@ -1,6 +1,4 @@
-<mat-form-field
-	#matFormField
-	class="autocomplete">
+<mat-form-field class="autocomplete">
 	<mat-label>Search city</mat-label>
 	<mat-icon
 		matPrefix
@@ -8,14 +6,11 @@
 		search
 	</mat-icon>
 	<input
-		#filterInput
 		matInput
 		placeholder="Rome, IT"
 		aria-label="city name"
 		[matAutocomplete]="auto"
-		#autoTrigger="matAutocompleteTrigger"
 		[formControl]="autocompleteControl" />
-
 	<!-- icons to show errors -->
 	@if (searchStatus === 401) {
 		<mat-icon

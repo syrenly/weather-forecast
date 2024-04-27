@@ -82,7 +82,10 @@ export class SearchbarComponent implements AfterViewInit {
 		);
 	}
 
-	displayFn = (value: ICityWeather): string => {
+	displayFn = (value: ICityWeather | null): string => {
+		if (!value) {
+			return "";
+		}
 		const { name, sys } = value;
 		return value ? `${name}, ${sys?.country || "N.A"}` : "";
 	};
@@ -91,6 +94,8 @@ export class SearchbarComponent implements AfterViewInit {
 		const selectedValue: ICityWeather = event?.option?.value;
 		if (selectedValue) {
 			this.itemSelected.emit(selectedValue);
+			// reset value in input
+			this.autocompleteControl.setValue(null);
 		}
 	}
 }

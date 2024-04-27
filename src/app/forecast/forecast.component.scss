@@ -1,5 +1,6 @@
 $header: 40px;
 $padding: 1rem;
+$margin: 1rem;
 $widthMinusYPadding: calc(100% - 2 * #{$padding});
 $widthMinusYMargin: calc(100% - #{$padding});
 
@@ -9,7 +10,6 @@ $widthMinusYMargin: calc(100% - #{$padding});
 	overflow: hidden;
 	height: 100%;
 	width: 100%;
-	background-color: inherit;
 }
 
 .header {
@@ -18,13 +18,12 @@ $widthMinusYMargin: calc(100% - #{$padding});
 	justify-content: space-between;
 	height: $header;
 	width: $widthMinusYPadding;
-	padding: 0.5rem 1rem 1rem 1rem;
-	background-color: inherit;
+	padding: calc(#{$padding} / 2) $padding $padding $padding;
 	.title {
 		display: flex;
 		align-items: center;
 		h3 {
-			margin: 0 1rem;
+			margin: 0 $margin;
 		}
 	}
 }
@@ -37,7 +36,7 @@ h1 {
 	height: calc(100% - #{$header});
 	align-self: center;
 	overflow: auto;
-	margin-bottom: 1rem;
+	margin-bottom: $margin;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -45,7 +44,7 @@ h1 {
 	width: 100%;
 	height: 100%;
 	.widget {
-		margin: 0.5rem;
+		margin: calc(#{$margin} / 2);
 	}
 }
 
