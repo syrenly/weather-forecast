@@ -7,7 +7,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { ActivatedRoute, Data, RouterLink } from "@angular/router";
+import { ActivatedRoute, Data, Router, RouterLink } from "@angular/router";
 import { FlagPipe } from "../pipes/flag.pipe";
 import { WeatherPipe } from "../pipes/weather.pipe";
 import { ICityWeather } from "../types/city-types";
@@ -66,6 +66,7 @@ export class ForecastComponent implements OnInit {
 
 	constructor(
 		private readonly route: ActivatedRoute,
+		private readonly router: Router,
 		private readonly destroyRef: DestroyRef,
 		public readonly searchService: SearchService
 	) {}
@@ -84,6 +85,12 @@ export class ForecastComponent implements OnInit {
 			this.city = routeData.countryInfo;
 			this.forecastResult = routeData.forecastResult;
 			this.errorStatus = undefined;
+		});
+	}
+
+	navigateToCity(city: ICityWeather): void {
+		this.router.navigateByUrl(`/forecast/${city.id}`, {
+			state: city,
 		});
 	}
 }

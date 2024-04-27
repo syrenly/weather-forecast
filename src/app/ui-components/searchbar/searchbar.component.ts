@@ -1,6 +1,6 @@
 import { AsyncPipe, NgClass, NgOptimizedImage } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
-import { AfterViewInit, Component } from "@angular/core";
+import { AfterViewInit, Component, output } from "@angular/core";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -8,7 +8,6 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatProgressSpinner } from "@angular/material/progress-spinner";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { Router } from "@angular/router";
 import { Observable, catchError, debounceTime, map, of, switchMap, tap } from "rxjs";
 import { DEFAULT_DEBOUNCE_DELAY_MILLISECONDS, EMPTY_SEARCH_RESULT } from "../../consts";
 import { FlagPipe } from "../../pipes/flag.pipe";
@@ -48,10 +47,9 @@ export class SearchbarComponent implements AfterViewInit {
 	currentTheme!: Theme;
 	searchStatus: SearchStatus = "pristine";
 
-	constructor(
-		private readonly searchService: SearchService,
-		private readonly router: Router
-	) {}
+	itemSelected = output<ICityWeather>();
+
+	constructor(private readonly searchService: SearchService) {}
 
 	ngAfterViewInit(): void {
 		this.options$ = this.autocompleteControl.valueChanges.pipe(
@@ -60,6 +58,7 @@ export class SearchbarComponent implements AfterViewInit {
 			tap((): void => {
 				this.searchStatus = "loading";
 			}),
+			// make search server side
 			switchMap(
 				(value: string): Observable<ICitySearchResult> =>
 					value.length >= 3 ? this.searchService.searchCountry(value) : of(EMPTY_SEARCH_RESULT)
@@ -88,12 +87,10 @@ export class SearchbarComponent implements AfterViewInit {
 		return value ? `${name}, ${sys?.country || "N.A"}` : "";
 	};
 
-	itemSelected(event: MatAutocompleteSelectedEvent): void {
+	onItemSelected(event: MatAutocompleteSelectedEvent): void {
 		const selectedValue: ICityWeather = event?.option?.value;
 		if (selectedValue) {
-			this.router.navigateByUrl(`/forecast/${selectedValue.id}`, {
-				state: selectedValue,
-			});
+			this.itemSelected.emit(selectedValue);
 		}
 	}
 }

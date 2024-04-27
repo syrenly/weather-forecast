@@ -55,7 +55,7 @@
 		#auto="matAutocomplete"
 		autoActiveFirstOption
 		[displayWith]="displayFn"
-		(optionSelected)="itemSelected($event)"
+		(optionSelected)="onItemSelected($event)"
 		class="autocomplete-panel">
 		@for (option of options$ | async; track option) {
 			<mat-option [value]="option">

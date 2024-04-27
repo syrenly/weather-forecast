@@ -7,34 +7,34 @@
 	<mat-card>
 		<mat-card-content>
 			<h3>Welcome to my Demo application for weather forecasts. Look for a city using the search input, or pick one from the list below.</h3>
-			<app-searchbar></app-searchbar>
+			<app-searchbar (itemSelected)="navigateToCity($event)"></app-searchbar>
 			<div class="suggestions">
 				<button
 					mat-flat-button
 					type="button"
 					color="primary"
-					(click)="navigateTo(3170647)">
+					(click)="navigateByCityId(3170647)">
 					Pisa, IT
 				</button>
 				<button
 					mat-flat-button
 					type="button"
 					color="primary"
-					(click)="navigateTo(3171366)">
+					(click)="navigateByCityId(3171366)">
 					Pavia, IT
 				</button>
 				<button
 					mat-flat-button
 					type="button"
 					color="primary"
-					(click)="navigateTo(3169070)">
+					(click)="navigateByCityId(3169070)">
 					Rome, IT
 				</button>
 				<button
 					mat-flat-button
 					type="button"
 					color="primary"
-					(click)="navigateTo(2643743)">
+					(click)="navigateByCityId(2643743)">
 					London, GB
 				</button>
 			</div>
