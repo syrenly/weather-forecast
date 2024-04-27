@@ -14,6 +14,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { FlagPipe } from "../../pipes/flag.pipe";
+import { ToCardinalPointPipe } from "../../pipes/to-cardinal-point.pipe";
 import { WeatherPipe } from "../../pipes/weather.pipe";
 import { IMainInfo } from "../../types/city-types";
 import { IFiveDaysForecast, IThreeHoursForecast } from "../../types/forecast-types";
@@ -38,6 +39,7 @@ import { IWeather } from "../../types/types";
 		NgOptimizedImage,
 		NgTemplateOutlet,
 		TitleCasePipe,
+		ToCardinalPointPipe,
 		WeatherPipe,
 	],
 	templateUrl: "./forecast-five.component.html",

@@ -4,6 +4,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { FlagPipe } from "../../pipes/flag.pipe";
+import { ToCardinalPointPipe } from "../../pipes/to-cardinal-point.pipe";
 import { WeatherPipe } from "../../pipes/weather.pipe";
 import { ICityWeather, IMainInfo } from "../../types/city-types";
 import { IWeather } from "../../types/types";
@@ -23,6 +24,7 @@ import { IWeather } from "../../types/types";
 		NgOptimizedImage,
 		MatTooltipModule,
 		TitleCasePipe,
+		ToCardinalPointPipe,
 		WeatherPipe,
 	],
 	templateUrl: "./current-weather.component.html",
