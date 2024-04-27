@@ -7,7 +7,7 @@ import { city, citySearchResult, forecastResult } from "./utils.mock";
 
 @Injectable()
 export class SearchMockService {
-	searchCountry(queryArg: string): Observable<ICitySearchResult> {
+	searchCity(queryArg: string): Observable<ICitySearchResult> {
 		return of(citySearchResult);
 	}
 
