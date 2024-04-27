@@ -25,7 +25,7 @@ describe("SearchService", (): void => {
 		expect(service).toBeTruthy();
 	});
 	it("should search cities", (): void => {
-		service.searchCountry("test").subscribe((result: ICitySearchResult): void => {
+		service.searchCity("test").subscribe((result: ICitySearchResult): void => {
 			expect(result).toBeNull();
 		});
 		const req = httpMock.expectOne(

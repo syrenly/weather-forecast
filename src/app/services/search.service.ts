@@ -26,7 +26,7 @@ export class SearchService {
 		});
 	}
 
-	searchCountry(queryArg: string): Observable<ICitySearchResult> {
+	searchCity(queryArg: string): Observable<ICitySearchResult> {
 		return this.httpClient.get<ICitySearchResult>(
 			`https://api.openweathermap.org/data/2.5/find?q=${queryArg}&type=like&appid=${this.licenseKey}&units=metric`
 		);
