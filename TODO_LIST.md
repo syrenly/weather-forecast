@@ -6,7 +6,7 @@ The following enhancements will be evaluated in order to improve the application
 -   [ ] add missing unit tests
 -   [ ] save in the browser storage the last N selected city and suggest them inside the HomeComponent instead of the list of hard-coded cities
 -   [ ] ask users to retrieve their location and open directly their city
--   [ ] integrate the signal feature
+-   [ ] _started_ integrate the signal feature
 -   [ ] evaluate where to use the DetectionStrategy OnPush
 -   [ ] create a pipe that turns the direction (in degree) of the wind in a more human readable way using cardinal point
         s (like N, NWN, S, etc)
@@ -25,3 +25,4 @@ The following enhancements will be evaluated in order to improve the application
 -   [x] _fixed with prettier+eslint_: rewrite in a more readable way the htmls of the ForecastComponent and children: unlucky choice to use Angular 17 😿. It seems that most of VSCode extensions are not updated for the new statements @if and @for. The indentation of the code is a mess
 -   [x] find a better place for the OpenWeather attribution
 -   [x] apply inverse animation to the navigation transition from forecasts to home
+-   [x] remove navigation logic from searchbar
