@@ -4,6 +4,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { Router } from "@angular/router";
+import { ICityWeather } from "../types/city-types";
 import { SearchbarComponent } from "../ui-components/searchbar/searchbar.component";
 import { SwitchThemeComponent } from "../ui-components/switch-theme/switch-theme.component";
 /**
@@ -31,7 +32,12 @@ import { SwitchThemeComponent } from "../ui-components/switch-theme/switch-theme
 export class HomeComponent {
 	constructor(private readonly router: Router) {}
 
-	navigateTo(cityId: number): void {
+	navigateByCityId(cityId: number): void {
 		this.router.navigate(["forecast", cityId]);
+	}
+	navigateToCity(item: ICityWeather): void {
+		this.router.navigateByUrl(`/forecast/${item.id}`, {
+			state: item,
+		});
 	}
 }

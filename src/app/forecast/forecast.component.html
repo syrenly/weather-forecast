@@ -23,7 +23,7 @@
 	<app-switch-theme></app-switch-theme>
 </div>
 
-<app-searchbar></app-searchbar>
+<app-searchbar (itemSelected)="navigateToCity($event)"></app-searchbar>
 
 <!-- error template -->
 @if (!!errorStatus) {
