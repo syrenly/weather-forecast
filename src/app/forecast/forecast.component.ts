@@ -75,16 +75,17 @@ export class ForecastComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		this.route.data.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value: Data): void => {
+		this.route.data.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data: Data): void => {
+			const valueData = data?.[0];
 			this.searchService.navigationStarted = false;
-			if (value?.[0]?.errorStatus) {
-				this.errorStatus = value[0].errorStatus;
+			if (valueData?.errorStatus) {
+				this.errorStatus = valueData.errorStatus;
 				return;
 			}
 			const routeData: {
 				countryInfo: ICityWeather;
 				forecastResult: IFiveDaysForecast;
-			} & { animationState: string } = value[0];
+			} & { animationState: string } = valueData;
 			this.city = routeData.countryInfo;
 			this.forecastResult = routeData.forecastResult;
 			this.errorStatus = undefined;
