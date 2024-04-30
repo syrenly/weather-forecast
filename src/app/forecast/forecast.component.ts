@@ -63,7 +63,6 @@ export class ForecastComponent implements OnInit {
 	get mainWeather(): IWeather | undefined {
 		return this.city?.weather?.[0];
 	}
-
 	get navigationStarted(): boolean {
 		return this.searchService.navigationStarted;
 	}
@@ -78,8 +77,8 @@ export class ForecastComponent implements OnInit {
 	ngOnInit(): void {
 		this.route.data.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value: Data): void => {
 			this.searchService.navigationStarted = false;
-			if (value && value[0] && value[0]["errorStatus"]) {
-				this.errorStatus = value[0]["errorStatus"];
+			if (value?.[0]?.errorStatus) {
+				this.errorStatus = value[0].errorStatus;
 				return;
 			}
 			const routeData: {
