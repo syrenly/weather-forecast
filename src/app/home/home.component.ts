@@ -35,9 +35,9 @@ export class HomeComponent {
 	navigateByCityId(cityId: number): void {
 		this.router.navigate(["forecast", cityId]);
 	}
-	navigateToCity(item: ICityWeather): void {
-		this.router.navigateByUrl(`/forecast/${item.id}`, {
-			state: item,
+	navigateToCity(city: ICityWeather): void {
+		this.router.navigateByUrl(`/forecast/${city.id}`, {
+			state: city,
 		});
 	}
 }
