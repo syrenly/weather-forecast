@@ -57,7 +57,7 @@ export class PrecipitationChartComponent extends ChartBase implements OnChanges,
 	/**
 	 * Calculate the data to be injected inside the chart
 	 */
-	private calculateDataSets(): void {
+	calculateDataSets(): void {
 		if (!this.datePipe) {
 			this.initializeDatePipe();
 		}
