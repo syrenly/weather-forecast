@@ -61,14 +61,18 @@ export class ForecastComponent implements OnInit {
 	errorStatus: number | undefined;
 
 	get mainWeather(): IWeather | undefined {
-		return this.city?.weather ? this.city.weather[0] : undefined;
+		return this.city?.weather?.[0];
+	}
+
+	get navigationStarted(): boolean {
+		return this.searchService.navigationStarted;
 	}
 
 	constructor(
 		private readonly route: ActivatedRoute,
 		private readonly router: Router,
 		private readonly destroyRef: DestroyRef,
-		public readonly searchService: SearchService
+		private readonly searchService: SearchService
 	) {}
 
 	ngOnInit(): void {
