@@ -48,7 +48,7 @@ describe("ForecastComponent case success route", (): void => {
 		expect(component.forecastResult).toEqual(forecastResult);
 		expect(component.errorStatus).toBeUndefined();
 	}));
-	it("should navigate to selected city", (): void => {
+	it("should navigate to selected city adding data to navigation", (): void => {
 		const routerSpy = spyOn(router, "navigateByUrl");
 		component.navigateToCity(city);
 		expect(routerSpy).toHaveBeenCalledWith(`/forecast/${city.id}`, {
