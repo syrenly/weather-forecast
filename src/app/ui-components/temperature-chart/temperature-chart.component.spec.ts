@@ -38,7 +38,7 @@ describe("TemperatureChartComponent", (): void => {
 		expect(spyCreateChart).toHaveBeenCalled();
 	});
 	it("should test #calculateDataSets", (): void => {
-		component["calculateDataSets"]();
+		component.calculateDataSets();
 		const numberOfPoints = component.forecastResult?.list?.length || 0;
 		expect(component.maxTemperature.length).toBe(numberOfPoints);
 		expect(component.minTemperature.length).toBe(numberOfPoints);
