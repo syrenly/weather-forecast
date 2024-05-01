@@ -1,5 +1,5 @@
 import { LOCALE_ID, Provider } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, EMPTY } from "rxjs";
 import { CURRENT_THEME, WEATHER_API_KEY } from "../tokens";
 
 export const provideMockWeatherApiKey = (): Provider => ({
@@ -13,3 +13,8 @@ export const provideMockTheme = (): Provider => ({
 });
 
 export const provideMockLocaleId = (): Provider => ({ provide: LOCALE_ID, useValue: "en" });
+
+export const provideMockEMPTYWeatherApiKey = (): Provider => ({
+	provide: WEATHER_API_KEY,
+	useValue: EMPTY,
+});
