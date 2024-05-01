@@ -2,7 +2,7 @@ import { AsyncPipe, NgClass, NgOptimizedImage } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
 import { AfterViewInit, Component, output } from "@angular/core";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
-import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
@@ -87,15 +87,12 @@ export class SearchbarComponent implements AfterViewInit {
 			return "";
 		}
 		const { name, sys } = value;
-		return value ? `${name}, ${sys?.country || "N.A"}` : "";
+		return `${name || "Unknown"}, ${sys?.country || "Unknown"}`;
 	};
 
-	onItemSelected(event: MatAutocompleteSelectedEvent): void {
-		const selectedValue: ICityWeather = event?.option?.value;
-		if (selectedValue) {
-			this.itemSelected.emit(selectedValue);
-			// reset value in input
-			this.autocompleteControl.setValue(null);
-		}
+	onItemSelected(selectedValue: ICityWeather): void {
+		this.itemSelected.emit(selectedValue);
+		// reset value in input
+		this.autocompleteControl.setValue(null);
 	}
 }

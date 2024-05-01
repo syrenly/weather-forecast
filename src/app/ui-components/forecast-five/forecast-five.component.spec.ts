@@ -32,4 +32,16 @@ describe("ForecastFiveComponent", (): void => {
 		});
 		expect(component.days?.length).toBe(5);
 	});
+
+	it("should test #groupBy", (): void => {
+		component.ngOnChanges({
+			forecastResult: {
+				currentValue: forecastResult,
+				previousValue: null,
+				isFirstChange: (): boolean => false,
+				firstChange: false,
+			},
+		});
+		expect(component.days?.length).toBe(5);
+	});
 });
