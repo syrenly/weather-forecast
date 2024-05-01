@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { inject } from "@angular/core";
-import { ResolveFn, Router } from "@angular/router";
+import { ActivatedRouteSnapshot, ResolveFn, Router } from "@angular/router";
 import { Observable, catchError, forkJoin, of } from "rxjs";
 import { SearchService } from "../services/search.service";
 import { ICityWeather } from "../types/city-types";
@@ -11,10 +11,15 @@ export type CityResolverType =
 	| { countryInfo: ICityWeather; forecastResult: IFiveDaysForecast };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const cityResolver: ResolveFn<Observable<CityResolverType>> = (route, state): Observable<CityResolverType> => {
+export const cityResolver: ResolveFn<Observable<CityResolverType>> = (
+	route: ActivatedRouteSnapshot
+): Observable<CityResolverType> => {
 	let id: number;
 	try {
 		id = +(route.paramMap.get("id") || "");
+		if (!id) {
+			throw Error("Id not found or not valid");
+		}
 	} catch (error) {
 		return of({ errorStatus: 404 });
 	}
@@ -23,7 +28,7 @@ export const cityResolver: ResolveFn<Observable<CityResolverType>> = (route, sta
 	// get city from current navigation data
 	const city: ICityWeather = router.getCurrentNavigation()?.extras?.state as ICityWeather;
 	// if current navigation data contains the city, keep it, otherwise, retrieve it from server
-	const cityObs = city && city.id === id ? of(city) : searchService.getCityWeather(id);
+	const cityObs = city?.id === id ? of(city) : searchService.getCityWeather(id);
 	searchService.navigationStarted = true;
 	return forkJoin({
 		countryInfo: cityObs,

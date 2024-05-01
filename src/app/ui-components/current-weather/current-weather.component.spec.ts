@@ -48,6 +48,6 @@ describe("CurrentWeatherComponent", (): void => {
 			},
 		});
 		expect(component.mainWeather).toEqual(city.weather[0]);
-		expect(component.mainInfo).toEqual(city?.main);
+		expect(component.mainInfo).toEqual(city.main);
 	});
 });
