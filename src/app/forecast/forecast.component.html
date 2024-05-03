@@ -26,24 +26,10 @@
 <app-searchbar (itemSelected)="navigateToCity($event)"></app-searchbar>
 
 <!-- error template -->
-@if (!!errorStatus) {
+@if (!!errorInfo) {
 	<div class="error-template">
-		@if (errorStatus === 401) {
-			<mat-icon color="accent">policy</mat-icon>
-			<div class="error-label">The forecasts were not retrieved, since the license is not valid, expired or missing</div>
-		} @else if (errorStatus === 400) {
-			<mat-icon color="accent">error_outline</mat-icon>
-			<div class="error-label">The forecasts were not retrieved due to an error in the structure of the request. Retry</div>
-		} @else if (errorStatus === 429) {
-			<mat-icon color="accent">event_repeat</mat-icon>
-			<div class="error-label">The forecasts were not retrieved, because too many requests were sent to the server. Please, consider to extend the license or wait some times.</div>
-		} @else if (errorStatus === 404) {
-			<mat-icon color="accent">search_off</mat-icon>
-			<div class="error-label">The city related to the wanted forecasts was not found. Please make another search in order to retrieve the right data.</div>
-		} @else {
-			<mat-icon color="accent">error_outline</mat-icon>
-			<div class="error-label">The forecasts were not retrieved due to an internal error.</div>
-		}
+		<mat-icon color="accent">{{ errorInfo.icon }}</mat-icon>
+		<div class="error-label">{{ errorInfo.text }}</div>
 	</div>
 } @else if (city) {
 	<!-- Main Content -->

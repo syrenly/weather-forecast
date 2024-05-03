@@ -46,7 +46,7 @@ describe("ForecastComponent case success route", (): void => {
 		tick(10);
 		expect(component.city).toEqual(city);
 		expect(component.forecastResult).toEqual(forecastResult);
-		expect(component.errorStatus).toBeUndefined();
+		expect(component.errorInfo).toBeUndefined();
 	}));
 	it("should navigate to selected city adding data to navigation", (): void => {
 		const routerSpy = spyOn(router, "navigateByUrl");
@@ -91,6 +91,44 @@ describe("ForecastComponent case error status", (): void => {
 		tick(10);
 		expect(component.city).toBeUndefined();
 		expect(component.forecastResult).toBeUndefined();
-		expect(component.errorStatus).toBe(404);
+		expect(component.errorInfo?.icon).toBe("search_off");
+		expect(component.errorInfo?.text).toBe(
+			"The city related to the wanted forecasts was not found. Please make another search in order to retrieve the right data."
+		);
 	}));
+	describe("should set error info", (): void => {
+		it("#case 400", (): void => {
+			const errorInfo = component.setErrorInfo(400);
+			expect(errorInfo.icon).toBe("error_outline");
+			expect(errorInfo.text).toBe(
+				"The forecasts were not retrieved due to an error in the structure of the request. Please retry."
+			);
+		});
+		it("#case 401", (): void => {
+			const errorInfo = component.setErrorInfo(401);
+			expect(errorInfo.icon).toBe("policy");
+			expect(errorInfo.text).toBe(
+				"The forecasts were not retrieved, since the license is not valid, expired or missing."
+			);
+		});
+		it("#case 404", (): void => {
+			const errorInfo = component.setErrorInfo(404);
+			expect(errorInfo.icon).toBe("search_off");
+			expect(errorInfo.text).toBe(
+				"The city related to the wanted forecasts was not found. Please make another search in order to retrieve the right data."
+			);
+		});
+		it("#case 429", (): void => {
+			const errorInfo = component.setErrorInfo(429);
+			expect(errorInfo.icon).toBe("event_repeat");
+			expect(errorInfo.text).toBe(
+				"The forecasts were not retrieved, because too many requests were sent to the server. Please, consider to extend the license or wait some times."
+			);
+		});
+		it("#case default", (): void => {
+			const errorInfo = component.setErrorInfo(500);
+			expect(errorInfo.icon).toBe("error_outline");
+			expect(errorInfo.text).toBe("The forecasts were not retrieved due to an internal error.");
+		});
+	});
 });

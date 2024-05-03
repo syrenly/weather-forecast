@@ -20,6 +20,7 @@ import { SearchbarComponent } from "../ui-components/searchbar/searchbar.compone
 import { SwitchThemeComponent } from "../ui-components/switch-theme/switch-theme.component";
 import { TemperatureChartComponent } from "../ui-components/temperature-chart/temperature-chart.component";
 import { SearchService } from "./../services/search.service";
+
 /**
  * ForecastComponent is the main component for the application. It shows specific information about the weather for a city.
  * - header with title (link to return to home), searchbar (to change the current selected city), toggle button to switch between light and dark theme
@@ -58,7 +59,7 @@ import { SearchService } from "./../services/search.service";
 export class ForecastComponent implements OnInit {
 	city: ICityWeather | undefined;
 	forecastResult: IFiveDaysForecast | undefined;
-	errorStatus: number | undefined;
+	errorInfo: { icon: string; text: string } | undefined;
 
 	get mainWeather(): IWeather | undefined {
 		return this.city?.weather?.[0];
@@ -79,7 +80,7 @@ export class ForecastComponent implements OnInit {
 			const valueData = data?.[0];
 			this.searchService.navigationStarted = false;
 			if (valueData?.errorStatus) {
-				this.errorStatus = valueData.errorStatus;
+				this.errorInfo = this.setErrorInfo(valueData.errorStatus);
 				return;
 			}
 			const routeData: {
@@ -88,7 +89,7 @@ export class ForecastComponent implements OnInit {
 			} & { animationState: string } = valueData;
 			this.city = routeData.countryInfo;
 			this.forecastResult = routeData.forecastResult;
-			this.errorStatus = undefined;
+			this.errorInfo = undefined;
 		});
 	}
 
@@ -96,5 +97,35 @@ export class ForecastComponent implements OnInit {
 		this.router.navigateByUrl(`/forecast/${city.id}`, {
 			state: city,
 		});
+	}
+
+	setErrorInfo(errorStatus: number): { icon: string; text: string } {
+		switch (errorStatus) {
+			case 400:
+				return {
+					icon: "error_outline",
+					text: "The forecasts were not retrieved due to an error in the structure of the request. Please retry.",
+				};
+			case 401:
+				return {
+					icon: "policy",
+					text: "The forecasts were not retrieved, since the license is not valid, expired or missing.",
+				};
+			case 404:
+				return {
+					icon: "search_off",
+					text: "The city related to the wanted forecasts was not found. Please make another search in order to retrieve the right data.",
+				};
+			case 429:
+				return {
+					icon: "event_repeat",
+					text: "The forecasts were not retrieved, because too many requests were sent to the server. Please, consider to extend the license or wait some times.",
+				};
+			default:
+				return {
+					icon: "error_outline",
+					text: "The forecasts were not retrieved due to an internal error.",
+				};
+		}
 	}
 }
