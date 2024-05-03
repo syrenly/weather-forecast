@@ -1,7 +1,7 @@
 <mat-button-toggle-group
 	name="ThemeColor"
 	aria-label="theme color"
-	(change)="onSwitchChanged($event)">
+	(change)="onSwitchChanged($event.value)">
 	<mat-button-toggle
 		value="dark"
 		[checked]="currentTheme === 'dark'"

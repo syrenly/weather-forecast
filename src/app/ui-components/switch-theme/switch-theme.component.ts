@@ -1,7 +1,7 @@
 import { Component, DestroyRef, Inject, OnInit } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { FormsModule } from "@angular/forms";
-import { MatButtonToggleChange, MatButtonToggleModule } from "@angular/material/button-toggle";
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { BehaviorSubject } from "rxjs";
@@ -30,8 +30,8 @@ export class SwitchThemeComponent implements OnInit {
 			}
 		});
 	}
-	onSwitchChanged(event: MatButtonToggleChange): void {
-		this.currentTheme = event.value;
+	onSwitchChanged(event: Theme): void {
+		this.currentTheme = event;
 		this.themeSubject.next(this.currentTheme);
 	}
 }

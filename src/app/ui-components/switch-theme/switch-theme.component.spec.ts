@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { MatButtonToggle } from "@angular/material/button-toggle";
 import { provideMockTheme } from "../../unit-test-utils/token.mock";
 import { SwitchThemeComponent } from "./switch-theme.component";
 
@@ -26,7 +25,7 @@ describe("SwitchThemeComponent", (): void => {
 	});
 	it("should change the current theme", (): void => {
 		const subjectSpy = spyOn(component["themeSubject"], "next");
-		component.onSwitchChanged({ source: {} as MatButtonToggle, value: "light" });
+		component.onSwitchChanged("light");
 		expect(component.currentTheme).toBe("light");
 		expect(subjectSpy).toHaveBeenCalledWith("light");
 	});
