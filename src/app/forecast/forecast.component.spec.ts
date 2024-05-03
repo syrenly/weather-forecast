@@ -131,4 +131,20 @@ describe("ForecastComponent case error status", (): void => {
 			expect(errorInfo.text).toBe("The forecasts were not retrieved due to an internal error.");
 		});
 	});
+	it("should show components when the city is valued", fakeAsync((): void => {
+		component.city = city;
+		component.forecastResult = forecastResult;
+		component.errorInfo = undefined;
+		fixture.detectChanges();
+		tick();
+		const nativeElement = fixture.debugElement.nativeElement;
+		const currentWeatherComponent: HTMLElement = nativeElement.querySelector("app-current-weather");
+		const forecastFiveComponent: HTMLElement = nativeElement.querySelector("app-forecast-five");
+		const temperatureChartComponent: HTMLElement = nativeElement.querySelector("app-temperature-chart");
+		const precipitationChartComponent: HTMLElement = nativeElement.querySelector("app-precipitation-chart");
+		expect(currentWeatherComponent).toBeTruthy();
+		expect(forecastFiveComponent).toBeTruthy();
+		expect(temperatureChartComponent).toBeTruthy();
+		expect(precipitationChartComponent).toBeTruthy();
+	}));
 });
