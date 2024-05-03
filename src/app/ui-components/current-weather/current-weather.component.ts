@@ -37,16 +37,16 @@ export class CurrentWeatherComponent implements OnChanges {
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes["city"]) {
-			this.mainWeather =
-				this.city?.weather && this.city.weather[0]
-					? this.city.weather[0]
-					: {
-							description: "",
-							icon: "",
-							id: 0,
-							main: "",
-						};
-			this.mainInfo = this.city?.main;
+			const city = changes["city"]?.currentValue;
+			this.mainWeather = city?.weather?.[0]
+				? city.weather[0]
+				: {
+						description: "",
+						icon: "",
+						id: 0,
+						main: "",
+					};
+			this.mainInfo = city?.main;
 		}
 	}
 }

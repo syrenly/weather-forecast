@@ -47,4 +47,12 @@ describe("SearchService", (): void => {
 		const req = httpMock.expectOne(`https://api.openweathermap.org/data/2.5/forecast?id=1&appid=KEY&units=metric`);
 		expect(req.request.method).toBe("GET");
 	});
+	it("should test #navigationStarted", (): void => {
+		expect(service.navigationStarted).toBeFalse();
+		service.navigationStarted = true;
+		expect(service.navigationStarted).toBeTrue();
+	});
+	it("should test #licenseKey", (): void => {
+		expect(service["licenseKey"]).toBe("KEY");
+	});
 });

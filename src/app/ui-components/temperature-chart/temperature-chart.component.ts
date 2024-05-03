@@ -68,16 +68,16 @@ export class TemperatureChartComponent extends ChartBase implements OnChanges, A
 				main: { temp, temp_max, temp_min },
 				dt,
 			} = l;
-			const date = this.datePipe.transform(dt * 1000, "MMM, d HH");
 			// if date is absent, do not add the data
-			if (date) {
-				this.xAxis.push(date);
-				this.meanTemperature.push(temp);
-				this.maxTemperature.push(temp_max);
-				this.minTemperature.push(temp_min);
-			} else {
+			if (!dt) {
 				console.warn(`Date not found for forecast ${l}`);
+				return;
 			}
+			const date = this.datePipe.transform(dt * 1000, "MMM, d HH") as string;
+			this.xAxis.push(date);
+			this.meanTemperature.push(temp);
+			this.maxTemperature.push(temp_max);
+			this.minTemperature.push(temp_min);
 		});
 	}
 

@@ -32,7 +32,7 @@ export class PrecipitationChartComponent extends ChartBase implements OnChanges,
 	rainPrecipitations: number[] = [];
 	snowPrecipitations: number[] = [];
 	xAxis: string[] = [];
-	datePipe: DatePipe | undefined;
+	datePipe!: DatePipe;
 
 	constructor(
 		@Inject(LOCALE_ID) private readonly localeId: string,
@@ -65,22 +65,22 @@ export class PrecipitationChartComponent extends ChartBase implements OnChanges,
 		this.rainPrecipitations = [];
 		this.snowPrecipitations = [];
 		this.xAxis = [];
+
 		list.forEach((l): void => {
 			const { dt } = l;
-			const date = this.datePipe?.transform(dt * 1000, "MMM, d HH");
-
 			// if date is absent, do not add the data
-			if (date) {
-				this.xAxis.push(date);
-
-				const rain = l.rain?.["3h"] || 0;
-				this.rainPrecipitations.push(rain);
-
-				const snow = l.snow?.["3h"] || 0;
-				this.snowPrecipitations.push(snow);
-			} else {
+			if (!dt) {
 				console.warn(`Date not found for forecast ${l}`);
+				return;
 			}
+			const date = this.datePipe.transform(dt * 1000, "MMM, d HH") as string;
+			this.xAxis.push(date);
+
+			const rain = l.rain?.["3h"] || 0;
+			this.rainPrecipitations.push(rain);
+
+			const snow = l.snow?.["3h"] || 0;
+			this.snowPrecipitations.push(snow);
 		});
 	}
 	createChart(): void {

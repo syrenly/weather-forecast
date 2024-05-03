@@ -35,6 +35,6 @@ export class ToCardinalPointPipe implements PipeTransform {
 			return "";
 		}
 		const section: number = Math.floor(angle / DEGREES_PER_DIRECTION);
-		return CardinalPoints[section % NUMBER_OF_DIRECTION] || "";
+		return CardinalPoints[section % NUMBER_OF_DIRECTION];
 	}
 }
