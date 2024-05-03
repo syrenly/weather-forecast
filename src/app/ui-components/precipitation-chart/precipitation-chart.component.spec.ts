@@ -43,6 +43,7 @@ describe("PrecipitationChartComponent", (): void => {
 		expect(component.rainPrecipitations.length).toBe(numberOfPoints);
 		expect(component.snowPrecipitations.length).toBe(numberOfPoints);
 		expect(component.xAxis.length).toBe(numberOfPoints);
+		expect(component.datePipe).not.toBeNull();
 	});
 	it("should check properties in chart - light theme", (): void => {
 		component.currentTheme = "light";
