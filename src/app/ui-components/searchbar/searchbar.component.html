@@ -12,38 +12,17 @@
 		[matAutocomplete]="auto"
 		[formControl]="autocompleteControl" />
 	<!-- icons to show errors -->
-	@if (searchStatus === 401) {
-		<mat-icon
-			matSuffix
-			color="warn"
-			matTooltip="Not authorized">
-			policy
-		</mat-icon>
-	} @else if (searchStatus === 400) {
-		<mat-icon
-			matSuffix
-			color="warn"
-			matTooltip="Request invalid">
-			error_outline
-		</mat-icon>
-	} @else if (searchStatus === 429) {
-		<mat-icon
-			matSuffix
-			color="accent"
-			matTooltip="Too many requests. Retry later">
-			event_repeat
-		</mat-icon>
-	} @else if (searchStatus === "serverError") {
-		<mat-icon
-			matSuffix
-			color="warn"
-			matTooltip="An internal error occurred">
-			error_outline
-		</mat-icon>
-	} @else if (searchStatus === "loading") {
+	@if (searchStatus === "loading") {
 		<mat-spinner
 			matSuffix
 			[diameter]="24"></mat-spinner>
+	} @else if (autocompleteSuffix) {
+		<mat-icon
+			matSuffix
+			color="warn"
+			matTooltip="{{ autocompleteSuffix.tooltip }}">
+			{{ autocompleteSuffix.icon }}
+		</mat-icon>
 	}
 
 	<mat-autocomplete
@@ -79,18 +58,6 @@
 	</mat-autocomplete>
 	<!-- messages for hints, error and loading -->
 	<mat-hint>
-		@if (searchStatus === 401) {
-			<span>The license is not valid, expired or missing</span>
-		} @else if (searchStatus === 400) {
-			<span>The request has a wrong signature, retry</span>
-		} @else if (searchStatus === 429) {
-			<span>Too many requests. Wait some time or extend your license</span>
-		} @else if (searchStatus === "serverError") {
-			<span>An internal error occurred</span>
-		} @else if (searchStatus === "loading") {
-			<span>Searching...</span>
-		} @else {
-			<span>The city name, better if followed by comma and 2-letter country code</span>
-		}
+		<span>{{ autocompleteHint }}</span>
 	</mat-hint>
 </mat-form-field>

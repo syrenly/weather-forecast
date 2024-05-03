@@ -1,7 +1,10 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+import { DEFAULT_DEBOUNCE_DELAY_MILLISECONDS } from "../../consts";
+import { ICityWeather } from "../../types/city-types";
 import { getSearchMockProvider } from "../../unit-test-utils/search.service.mock";
-import { city } from "../../unit-test-utils/utils.mock";
+import { city, citySearchResult } from "../../unit-test-utils/utils.mock";
 import { SearchbarComponent } from "./searchbar.component";
 
 describe("SearchbarComponent", (): void => {
@@ -22,7 +25,6 @@ describe("SearchbarComponent", (): void => {
 	it("should create", (): void => {
 		expect(component).toBeTruthy();
 	});
-
 	it("should test #displayFn", (): void => {
 		let display = component.displayFn(null);
 		expect(display).toBe("");
@@ -36,11 +38,85 @@ describe("SearchbarComponent", (): void => {
 		display = component.displayFn(cityWithoutNames);
 		expect(display).toBe("Unknown, Unknown");
 	});
-
 	it("should test #onItemSelected", (): void => {
 		const emitSpy = spyOn(component.itemSelected, "emit");
 		component.onItemSelected(city);
 		expect(emitSpy).toHaveBeenCalledWith(city);
 		expect(component.autocompleteControl.value).toBeNull();
+	});
+	it("should test the search", fakeAsync((): void => {
+		let results: ICityWeather[] = [];
+		component.options$.subscribe(list => {
+			results = list;
+		});
+		const debugElement = fixture.debugElement.nativeElement;
+		const input: HTMLInputElement = debugElement.querySelector("input");
+		input.value = "test";
+		input.dispatchEvent(new Event("input"));
+		fixture.detectChanges();
+		tick(DEFAULT_DEBOUNCE_DELAY_MILLISECONDS + 10);
+		expect(results).toBe(citySearchResult.list);
+	}));
+	describe("should set status of hint and suffix of autocomplete", (): void => {
+		it("#case 400", (): void => {
+			component.setStatus(400);
+			expect(component.searchStatus).toEqual(400);
+			expect(component.autocompleteSuffix).toEqual({ icon: "error_outline", tooltip: "Request invalid" });
+			expect(component.autocompleteHint).toBe("The request has a wrong signature, retry");
+		});
+		it("#case 401", (): void => {
+			component.setStatus(401);
+			expect(component.searchStatus).toEqual(401);
+			expect(component.autocompleteSuffix).toEqual({ icon: "policy", tooltip: "Not authorized" });
+			expect(component.autocompleteHint).toBe("The license is not valid, expired or missing");
+		});
+		it("#case 404", (): void => {
+			component.setStatus(404);
+			expect(component.searchStatus).toEqual(404);
+			expect(component.autocompleteSuffix).toBeUndefined();
+			expect(component.autocompleteHint).toBe(
+				"The city name, better if followed by comma and 2-letter country code"
+			);
+		});
+		it("#case 429", (): void => {
+			component.setStatus(429);
+			expect(component.searchStatus).toEqual(429);
+			expect(component.autocompleteSuffix).toEqual({
+				icon: "event_repeat",
+				tooltip: "Too many requests. Retry later.",
+			});
+			expect(component.autocompleteHint).toBe("Too many requests. Wait some time or extend your license");
+		});
+		it("#case server error", (): void => {
+			component.setStatus("serverError");
+			expect(component.searchStatus).toEqual("serverError");
+			expect(component.autocompleteSuffix).toEqual({
+				icon: "error_outline",
+				tooltip: "An internal error occurred",
+			});
+			expect(component.autocompleteHint).toBe("An internal error occurred");
+		});
+		it("#case loading", (): void => {
+			component.setStatus("loading");
+			expect(component.searchStatus).toEqual("loading");
+			expect(component.autocompleteSuffix).toBeUndefined();
+			expect(component.autocompleteHint).toBe("Searching...");
+		});
+		it("#case completed", (): void => {
+			component.setStatus("completed");
+			expect(component.searchStatus).toEqual("completed");
+			expect(component.autocompleteSuffix).toBeUndefined();
+			expect(component.autocompleteHint).toBe(
+				"The city name, better if followed by comma and 2-letter country code"
+			);
+		});
+		it("#case pristine", (): void => {
+			component.setStatus("pristine");
+			expect(component.searchStatus).toEqual("pristine");
+			expect(component.autocompleteSuffix).toBeUndefined();
+			expect(component.autocompleteHint).toBe(
+				"The city name, better if followed by comma and 2-letter country code"
+			);
+		});
 	});
 });

@@ -17,6 +17,7 @@ import { Theme } from "../../tokens";
 import { ICitySearchResult, ICityWeather } from "../../types/city-types";
 
 type SearchStatus = "loading" | 400 | 401 | 429 | 404 | "serverError" | "completed" | "pristine";
+const DEFAULT_HINT = "The city name, better if followed by comma and 2-letter country code";
 /**
  * Search for the city to know which weather conditions there are. It will navigate to the ForecastComponent to show details.
  */
@@ -49,15 +50,16 @@ export class SearchbarComponent implements AfterViewInit {
 
 	itemSelected = output<ICityWeather>();
 
+	autocompleteSuffix: { icon: string; tooltip: string } | undefined;
+	autocompleteHint: string = DEFAULT_HINT;
+
 	constructor(private readonly searchService: SearchService) {}
 
 	ngAfterViewInit(): void {
 		this.options$ = this.autocompleteControl.valueChanges.pipe(
 			debounceTime(DEFAULT_DEBOUNCE_DELAY_MILLISECONDS),
 			map((value: string | null): string => (typeof value !== "string" ? "" : value)),
-			tap((): void => {
-				this.searchStatus = "loading";
-			}),
+			tap((): void => this.setStatus("loading")),
 			// make search server side
 			switchMap(
 				(value: string): Observable<ICitySearchResult> =>
@@ -65,18 +67,15 @@ export class SearchbarComponent implements AfterViewInit {
 			),
 			// manage errors
 			catchError((error: HttpErrorResponse): Observable<ICitySearchResult> => {
-				if (error.status === 400 || error.status === 401 || error.status === 429) {
-					this.searchStatus = error.status;
-				} else {
-					this.searchStatus = "serverError";
-				}
+				const hasKnownErrorStatus = error.status === 400 || error.status === 401 || error.status === 429;
+				this.setStatus(hasKnownErrorStatus ? error.status : "serverError");
 				return of(EMPTY_SEARCH_RESULT);
 			}),
 			// take only the inner list
 			switchMap((value: ICitySearchResult): Observable<ICityWeather[]> => of(value.list)),
 			tap((): void => {
 				if (this.searchStatus === "loading") {
-					this.searchStatus = "completed";
+					this.setStatus("completed");
 				}
 			})
 		);
@@ -94,5 +93,55 @@ export class SearchbarComponent implements AfterViewInit {
 		this.itemSelected.emit(selectedValue);
 		// reset value in input
 		this.autocompleteControl.setValue(null);
+	}
+
+	setStatus(status: SearchStatus): void {
+		this.searchStatus = status;
+		this.autocompleteSuffix = this.setAutocompleteSuffix();
+		this.autocompleteHint = this.setAutocompleteHint();
+	}
+
+	setAutocompleteSuffix(): { icon: string; tooltip: string } | undefined {
+		switch (this.searchStatus) {
+			case 400:
+				return {
+					icon: "error_outline",
+					tooltip: "Request invalid",
+				};
+			case 401:
+				return {
+					icon: "policy",
+					tooltip: "Not authorized",
+				};
+			case 429:
+				return {
+					icon: "event_repeat",
+					tooltip: "Too many requests. Retry later.",
+				};
+			case "serverError":
+				return {
+					icon: "error_outline",
+					tooltip: "An internal error occurred",
+				};
+			default:
+				return undefined;
+		}
+	}
+
+	setAutocompleteHint(): string {
+		switch (this.searchStatus) {
+			case 400:
+				return "The request has a wrong signature, retry";
+			case 401:
+				return "The license is not valid, expired or missing";
+			case 429:
+				return "Too many requests. Wait some time or extend your license";
+			case "serverError":
+				return "An internal error occurred";
+			case "loading":
+				return "Searching...";
+			default:
+				return DEFAULT_HINT;
+		}
 	}
 }
