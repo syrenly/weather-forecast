@@ -54,11 +54,15 @@ export class ForecastFiveComponent implements OnChanges {
 	days: string[] = [];
 
 	ngOnChanges(changes: SimpleChanges): void {
-		if (changes["forecastResult"]?.currentValue) {
-			this.daysDictionary = groupBy(this.forecastResult?.list || [], (v): string => {
-				const [date] = v.dt_txt.split(" ");
-				return date;
-			});
+		if (changes["forecastResult"]) {
+			const list: IThreeHoursForecast[] = changes["forecastResult"].currentValue?.list || [];
+			this.daysDictionary =
+				list.length === 0
+					? {}
+					: groupBy(list, (v): string => {
+							const [date] = v.dt_txt.split(" ");
+							return date;
+						});
 			this.days = Object.keys(this.daysDictionary);
 		}
 	}
