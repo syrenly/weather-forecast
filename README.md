@@ -65,7 +65,7 @@ Navigate to `http://localhost:4200/`.
 
 The project depends on [Open Weather Map](https://openweathermap.org), which provides an API with free license. The license is limited to small number of requests and few methods.
 
-> To change the license key, replace it [here](./src/app/app.config.ts)
+> To change the license key, replace it [here](./src/assets/configuration.json) for development or [here](./src/assets/configuration.prod.json) for production.
 
 ## TODO List
 
