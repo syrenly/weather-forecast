@@ -147,4 +147,16 @@ describe("ForecastComponent case error status", (): void => {
 		expect(temperatureChartComponent).toBeTruthy();
 		expect(precipitationChartComponent).toBeTruthy();
 	}));
+	it("should test #mainWeather", (): void => {
+		component.city = undefined;
+		expect(component.mainWeather).toBeUndefined();
+		component.city = city;
+		expect(component.mainWeather).toEqual(city.weather[0]);
+	});
+	it("should test #navigationStarted", (): void => {
+		component["searchService"].navigationStarted = true;
+		expect(component.navigationStarted).toBeTrue();
+		component["searchService"].navigationStarted = false;
+		expect(component.navigationStarted).toBeFalse();
+	});
 });

@@ -38,7 +38,7 @@ describe("CurrentWeatherComponent", (): void => {
 	it("should create", (): void => {
 		expect(component).toBeTruthy();
 	});
-	it("should test #groupBy", (): void => {
+	it("should test #ngOnChanges case city valued", (): void => {
 		component.ngOnChanges({
 			city: {
 				currentValue: city,
@@ -49,5 +49,22 @@ describe("CurrentWeatherComponent", (): void => {
 		});
 		expect(component.mainWeather).toEqual(city.weather[0]);
 		expect(component.mainInfo).toEqual(city.main);
+	});
+	it("should test #ngOnChanges case city null", (): void => {
+		component.ngOnChanges({
+			city: {
+				currentValue: null,
+				previousValue: null,
+				isFirstChange: (): boolean => false,
+				firstChange: false,
+			},
+		});
+		expect(component.mainWeather).toEqual({
+			description: "",
+			icon: "",
+			id: 0,
+			main: "",
+		});
+		expect(component.mainInfo).toBeUndefined();
 	});
 });

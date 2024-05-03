@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { DEFAULT_DEBOUNCE_DELAY_MILLISECONDS } from "../../consts";
@@ -44,19 +43,35 @@ describe("SearchbarComponent", (): void => {
 		expect(emitSpy).toHaveBeenCalledWith(city);
 		expect(component.autocompleteControl.value).toBeNull();
 	});
-	it("should test the search", fakeAsync((): void => {
-		let results: ICityWeather[] = [];
-		component.options$.subscribe(list => {
-			results = list;
-		});
-		const debugElement = fixture.debugElement.nativeElement;
-		const input: HTMLInputElement = debugElement.querySelector("input");
-		input.value = "test";
-		input.dispatchEvent(new Event("input"));
-		fixture.detectChanges();
-		tick(DEFAULT_DEBOUNCE_DELAY_MILLISECONDS + 10);
-		expect(results).toBe(citySearchResult.list);
-	}));
+	describe("should test the search", (): void => {
+		it("case input text", fakeAsync((): void => {
+			let results: ICityWeather[] = [];
+			component.options$.subscribe(list => {
+				results = list;
+			});
+			const debugElement = fixture.debugElement.nativeElement;
+			const input: HTMLInputElement = debugElement.querySelector("input");
+			input.value = "test";
+			input.dispatchEvent(new Event("input"));
+			fixture.detectChanges();
+			tick(DEFAULT_DEBOUNCE_DELAY_MILLISECONDS + 10);
+			expect(results).toBe(citySearchResult.list);
+		}));
+		it("should null  value", fakeAsync((): void => {
+			let results: ICityWeather[] = [];
+			component.options$.subscribe(list => {
+				results = list;
+			});
+			const debugElement = fixture.debugElement.nativeElement;
+			const input: HTMLInputElement = debugElement.querySelector("input");
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			input.value = null as any;
+			input.dispatchEvent(new Event("input"));
+			fixture.detectChanges();
+			tick(DEFAULT_DEBOUNCE_DELAY_MILLISECONDS + 10);
+			expect(results?.length).toBe(0);
+		}));
+	});
 	describe("should set status of hint and suffix of autocomplete", (): void => {
 		it("#case 400", (): void => {
 			component.setStatus(400);

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { IFiveDaysForecast } from "../../types/forecast-types";
 import { provideMockLocaleId, provideMockTheme } from "../../unit-test-utils/token.mock";
 import { forecastResult } from "../../unit-test-utils/utils.mock";
 import { TemperatureChartComponent } from "./temperature-chart.component";
@@ -45,6 +46,23 @@ describe("TemperatureChartComponent", (): void => {
 		expect(component.meanTemperature.length).toBe(numberOfPoints);
 		expect(component.xAxis.length).toBe(numberOfPoints);
 		expect(component.datePipe).not.toBeNull();
+	});
+	it("should not calculate data sets in #calculateDataSets", (): void => {
+		component.forecastResult = undefined;
+		component.calculateDataSets();
+		expect(component.maxTemperature.length).toBe(0);
+		expect(component.minTemperature.length).toBe(0);
+		expect(component.meanTemperature.length).toBe(0);
+		expect(component.xAxis.length).toBe(0);
+	});
+	it("should show warn in #calculateDataSets when the data are broken", (): void => {
+		const consoleSpy = spyOn(window.console, "warn");
+		const newForecasts: IFiveDaysForecast = JSON.parse(JSON.stringify(forecastResult));
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		newForecasts.list[0].dt = null as any;
+		component.forecastResult = newForecasts;
+		component.calculateDataSets();
+		expect(consoleSpy).toHaveBeenCalled();
 	});
 	it("should check properties in chart - light theme", (): void => {
 		component.currentTheme = "light";

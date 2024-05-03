@@ -58,7 +58,7 @@ export class SearchbarComponent implements AfterViewInit {
 	ngAfterViewInit(): void {
 		this.options$ = this.autocompleteControl.valueChanges.pipe(
 			debounceTime(DEFAULT_DEBOUNCE_DELAY_MILLISECONDS),
-			map((value: string | null): string => (typeof value !== "string" ? "" : value)),
+			map((value: string | null): string => (value === null ? "" : value)),
 			tap((): void => this.setStatus("loading")),
 			// make search server side
 			switchMap(
