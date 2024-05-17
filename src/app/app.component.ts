@@ -1,6 +1,7 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Inject, OnInit, Renderer2 } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
+import { themeCssClass } from "./consts";
 import { routeTransitionAnimations } from "./routes/route-transition-animations";
 import { CURRENT_THEME, Theme } from "./tokens";
 
@@ -15,7 +16,8 @@ import { CURRENT_THEME, Theme } from "./tokens";
 export class AppComponent implements OnInit {
 	constructor(
 		@Inject(CURRENT_THEME)
-		private readonly themeSubject: BehaviorSubject<Theme>
+		private readonly themeSubject: BehaviorSubject<Theme>,
+		private readonly renderer: Renderer2
 	) {}
 
 	ngOnInit(): void {
@@ -28,8 +30,11 @@ export class AppComponent implements OnInit {
 		// to extend the theme to cdk panels, apply the theme class to the body
 		const bodyElement = document.querySelector("body");
 		if (bodyElement?.classList) {
-			bodyElement.classList.remove(...["light-theme", "dark-theme"]);
-			bodyElement.classList.add(`${currentTheme}-theme`);
+			// remove previous theme classes
+			this.renderer.removeClass(bodyElement, themeCssClass("light"));
+			this.renderer.removeClass(bodyElement, themeCssClass("dark"));
+			// add the class to apply the current theme
+			this.renderer.addClass(bodyElement, themeCssClass(currentTheme));
 		}
 	}
 	/**
