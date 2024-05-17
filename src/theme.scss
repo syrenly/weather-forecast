@@ -52,6 +52,7 @@ $custom-typography: mat.define-typography-config(
 }
 
 // make a specific class for light theme
+// NB: if changed, the arrow function in there (src/app/consts.ts) should be updated too
 .light-theme {
 	@include mat.all-component-colors($light-theme);
 	.attribution-bg {

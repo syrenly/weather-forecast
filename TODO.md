@@ -27,3 +27,4 @@ The following enhancements will be evaluated in order to improve the application
 -   [x] create a pipe that turns the direction (in degree) of the wind in a more human readable way using cardinal point
         s (like N, NWN, S, etc)
 -   [x] set unit tests coverage to minimum 80%
+-   [x] use Renderer2 to manipulate DOM while applying a theme
