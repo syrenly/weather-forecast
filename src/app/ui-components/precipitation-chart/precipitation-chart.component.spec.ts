@@ -43,7 +43,7 @@ describe("PrecipitationChartComponent", (): void => {
 		const numberOfPoints = component.forecastResult?.list?.length || 0;
 		expect(component.rainPrecipitations.length).toBe(numberOfPoints);
 		expect(component.snowPrecipitations.length).toBe(numberOfPoints);
-		expect(component.xAxis.length).toBe(numberOfPoints);
+		expect(component.time.length).toBe(numberOfPoints);
 		expect(component.datePipe).not.toBeNull();
 	});
 	it("should not calculate data sets in #calculateDataSets", (): void => {
@@ -51,7 +51,7 @@ describe("PrecipitationChartComponent", (): void => {
 		component.calculateDataSets();
 		expect(component.rainPrecipitations.length).toBe(0);
 		expect(component.snowPrecipitations.length).toBe(0);
-		expect(component.xAxis.length).toBe(0);
+		expect(component.time.length).toBe(0);
 	});
 	it("should show warn in #calculateDataSets when the data are broken", (): void => {
 		const consoleSpy = spyOn(window.console, "warn");

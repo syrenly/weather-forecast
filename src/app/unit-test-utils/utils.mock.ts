@@ -1,3 +1,7 @@
+/**
+ * File containing mocked data to be used in unit tests
+ */
+
 import { ICitySearchResult, ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
 

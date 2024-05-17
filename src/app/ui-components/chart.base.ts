@@ -26,7 +26,7 @@ export abstract class ChartBase implements AfterViewInit {
 			this.chart ? this.updateColors() : this.createChart();
 		});
 	}
-	/** Update colors, setting again the options */
+	/** Update colors of chart to fit the current theme. It sets again the options to override the old ones */
 	protected updateColors(): void {
 		if (!this.chart) {
 			return;

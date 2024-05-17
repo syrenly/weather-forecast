@@ -18,6 +18,8 @@ import { IFiveDaysForecast } from "../../types/forecast-types";
 import { ChartBase } from "../chart.base";
 /**
  * TemperatureChartComponent shows with a ChartJS instance the linear graphic of the temperature (mean, max and min) in 5 days
+ * Y axis is the temperature
+ * X axis is time
  */
 @Component({
 	selector: "app-temperature-chart",
@@ -29,10 +31,14 @@ import { ChartBase } from "../chart.base";
 export class TemperatureChartComponent extends ChartBase implements OnChanges, AfterViewInit {
 	@Input() forecastResult: IFiveDaysForecast | undefined;
 	canvasId = "temperatureChart";
+	// Y data for mean temperature line
 	meanTemperature: number[] = [];
+	// Y data for max temperature line
 	maxTemperature: number[] = [];
+	// Y data for min temperature line
 	minTemperature: number[] = [];
-	xAxis: string[] = [];
+	// X data for time
+	time: string[] = [];
 	datePipe!: DatePipe;
 
 	constructor(
@@ -56,13 +62,14 @@ export class TemperatureChartComponent extends ChartBase implements OnChanges, A
 		this.calculateDataSets();
 		super.ngAfterViewInit();
 	}
-
+	/** Calculate data for Y axis, to generate 3 lines: min temperatures, max temperatures and mean temperatures every 3 hours for 5 days */
 	calculateDataSets(): void {
+		// forecast data
 		const list = this.forecastResult?.list || [];
 		this.meanTemperature = [];
 		this.maxTemperature = [];
 		this.minTemperature = [];
-		this.xAxis = [];
+		this.time = [];
 		list.forEach((l): void => {
 			const {
 				main: { temp, temp_max, temp_min },
@@ -74,16 +81,16 @@ export class TemperatureChartComponent extends ChartBase implements OnChanges, A
 				return;
 			}
 			const date = this.datePipe.transform(dt * 1000, "MMM, d HH") as string;
-			this.xAxis.push(date);
+			this.time.push(date);
 			this.meanTemperature.push(temp);
 			this.maxTemperature.push(temp_max);
 			this.minTemperature.push(temp_min);
 		});
 	}
-
+	/** Create an instance of ChartJs object and add to it dataset for min, max and mean temperature */
 	createChart(): void {
 		const data = {
-			labels: this.xAxis,
+			labels: this.time,
 			datasets: [
 				{ data: this.meanTemperature, label: "Mean" },
 				{ data: this.maxTemperature, label: "Max" },
@@ -100,6 +107,7 @@ export class TemperatureChartComponent extends ChartBase implements OnChanges, A
 			data,
 			options: {},
 		});
+		// add configuration to style the chart based on the current theme
 		this.updateColors();
 	}
 }

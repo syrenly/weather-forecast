@@ -13,7 +13,6 @@ import { DEFAULT_DEBOUNCE_DELAY_MILLISECONDS, EMPTY_SEARCH_RESULT } from "../../
 import { FlagPipe } from "../../pipes/flag.pipe";
 import { WeatherPipe } from "../../pipes/weather.pipe";
 import { SearchService } from "../../services/search.service";
-import { Theme } from "../../tokens";
 import { ICitySearchResult, ICityWeather } from "../../types/city-types";
 
 type SearchStatus = "loading" | 400 | 401 | 429 | 404 | "serverError" | "completed" | "pristine";
@@ -42,16 +41,18 @@ const DEFAULT_HINT = "The city name, better if followed by comma and 2-letter co
 	styleUrl: "./searchbar.component.scss",
 })
 export class SearchbarComponent implements AfterViewInit {
+	// reference to the autocomplete form control
 	autocompleteControl = new FormControl<string>("");
+	// async list of cities with their current weather
 	options$!: Observable<ICityWeather[]>;
-
-	currentTheme!: Theme;
+	// status of the search; it is used to show info about what's happening during/after the search.
 	searchStatus: SearchStatus = "pristine";
-
-	itemSelected = output<ICityWeather>();
-
+	// the icon at the end of the autocomplete; it is used to show info about what's happening during/after the search.
 	autocompleteSuffix: { icon: string; tooltip: string } | undefined;
+	// the message under the autocomplete; it is used to show info about what's happening during/after the search.
 	autocompleteHint: string = DEFAULT_HINT;
+	// emits the selected city
+	itemSelected = output<ICityWeather>();
 
 	constructor(private readonly searchService: SearchService) {}
 
@@ -80,7 +81,11 @@ export class SearchbarComponent implements AfterViewInit {
 			})
 		);
 	}
-
+	/**
+	 * Helper function used by the autocomplete to define how to show the selected item inside the input
+	 * @param value the selected value
+	 * @returns a string with a significative description
+	 */
 	displayFn = (value: ICityWeather | null): string => {
 		if (!value) {
 			return "";
@@ -88,19 +93,24 @@ export class SearchbarComponent implements AfterViewInit {
 		const { name, sys } = value;
 		return `${name || "Unknown"}, ${sys?.country || "Unknown"}`;
 	};
-
+	/**
+	 * Select an item from the autocomplete
+	 * @param selectedValue an object containing oth info about the selected city and its weather
+	 */
 	onItemSelected(selectedValue: ICityWeather): void {
 		this.itemSelected.emit(selectedValue);
 		// reset value in input
 		this.autocompleteControl.setValue(null);
 	}
-
+	/** Set the current status of the autocomplete to show messages if needed: errors, loading, etc */
 	setStatus(status: SearchStatus): void {
 		this.searchStatus = status;
 		this.autocompleteSuffix = this.setAutocompleteSuffix();
 		this.autocompleteHint = this.setAutocompleteHint();
 	}
-
+	/** Set the autocomplete suffix (an icon with tooltip) to give information about what's happening with the search:
+	 * If there's an error it will show a specific icon with a message; if the request was successful no action is done.
+	 */
 	setAutocompleteSuffix(): { icon: string; tooltip: string } | undefined {
 		switch (this.searchStatus) {
 			case 400:
@@ -127,7 +137,9 @@ export class SearchbarComponent implements AfterViewInit {
 				return undefined;
 		}
 	}
-
+	/**
+	 * Set the autocomplete hint to show a message based on what is happening with the search: error, loading or the default message that suggests how to make a search.
+	 */
 	setAutocompleteHint(): string {
 		switch (this.searchStatus) {
 			case 400:

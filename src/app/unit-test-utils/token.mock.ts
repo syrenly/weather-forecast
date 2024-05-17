@@ -1,3 +1,7 @@
+/**
+ * File containing mocked providers to be used in unit tests
+ */
+
 import { LOCALE_ID, Provider } from "@angular/core";
 import { BehaviorSubject, EMPTY } from "rxjs";
 import { CURRENT_THEME, WEATHER_API_KEY } from "../tokens";
