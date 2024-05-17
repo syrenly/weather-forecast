@@ -98,7 +98,10 @@ export class ForecastComponent implements OnInit {
 			state: city,
 		});
 	}
-
+	/**
+	 * Set message and icon to show when an error occurs
+	 * @param errorStatus the http status
+	 */
 	setErrorInfo(errorStatus: number): { icon: string; text: string } {
 		switch (errorStatus) {
 			case 400:

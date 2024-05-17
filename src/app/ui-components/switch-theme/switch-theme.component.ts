@@ -7,7 +7,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { BehaviorSubject } from "rxjs";
 import { CURRENT_THEME, Theme } from "../../tokens";
 /**
- * Switch between dark and light theme. The magic is done with an Injection Token
+ * Switch between dark and light theme. The magic is done with an Injection Token CURRENT_THEME
  */
 @Component({
 	selector: "app-switch-theme",

@@ -1,3 +1,7 @@
+/**
+ * File containing consts used to style the charts
+ */
+
 // light color for dark mode
 const color = "#FFFFFF";
 // #region options for chartJS

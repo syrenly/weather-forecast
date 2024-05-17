@@ -44,7 +44,7 @@ describe("TemperatureChartComponent", (): void => {
 		expect(component.maxTemperature.length).toBe(numberOfPoints);
 		expect(component.minTemperature.length).toBe(numberOfPoints);
 		expect(component.meanTemperature.length).toBe(numberOfPoints);
-		expect(component.xAxis.length).toBe(numberOfPoints);
+		expect(component.time.length).toBe(numberOfPoints);
 		expect(component.datePipe).not.toBeNull();
 	});
 	it("should not calculate data sets in #calculateDataSets", (): void => {
@@ -53,7 +53,7 @@ describe("TemperatureChartComponent", (): void => {
 		expect(component.maxTemperature.length).toBe(0);
 		expect(component.minTemperature.length).toBe(0);
 		expect(component.meanTemperature.length).toBe(0);
-		expect(component.xAxis.length).toBe(0);
+		expect(component.time.length).toBe(0);
 	});
 	it("should show warn in #calculateDataSets when the data are broken", (): void => {
 		const consoleSpy = spyOn(window.console, "warn");

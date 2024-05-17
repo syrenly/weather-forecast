@@ -32,21 +32,26 @@ import { IWeather } from "../../types/types";
 })
 export class CurrentWeatherComponent implements OnChanges {
 	@Input() city: ICityWeather | undefined;
+	// main weather description
 	mainWeather: IWeather | undefined;
+	// main info about temperature and humidity
 	mainInfo: IMainInfo | undefined;
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes["city"]) {
-			const city = changes["city"]?.currentValue;
-			this.mainWeather = city?.weather?.[0]
-				? city.weather[0]
-				: {
-						description: "",
-						icon: "",
-						id: 0,
-						main: "",
-					};
-			this.mainInfo = city?.main;
+			this.setInfo(changes["city"]?.currentValue);
 		}
+	}
+	/** Set the properties mainWeather and mainInfo */
+	private setInfo(city: ICityWeather | undefined): void {
+		this.mainWeather = city?.weather?.[0]
+			? city.weather[0]
+			: {
+					description: "",
+					icon: "",
+					id: 0,
+					main: "",
+				};
+		this.mainInfo = city?.main;
 	}
 }

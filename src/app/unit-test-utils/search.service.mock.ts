@@ -1,3 +1,7 @@
+/**
+ * File containing mocked provider for SearchService
+ */
+
 import { Injectable, Provider } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { SearchService } from "../services/search.service";
