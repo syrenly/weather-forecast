@@ -17,7 +17,7 @@
 <ng-template
 	#threeHours
 	let-forecast>
-	<mat-divider></mat-divider>
+	<mat-divider />
 	<div class="row">
 		<div class="hours">{{ forecast.dt * 1000 | date: "HH:mm" }}</div>
 		@if (forecast.weather && forecast.weather[0]) {
