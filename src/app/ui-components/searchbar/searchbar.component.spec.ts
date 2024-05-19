@@ -89,9 +89,7 @@ describe("SearchbarComponent", (): void => {
 			component.setStatus(404);
 			expect(component.searchStatus).toEqual(404);
 			expect(component.autocompleteSuffix).toBeUndefined();
-			expect(component.autocompleteHint).toBe(
-				"The city name, better if followed by comma and 2-letter country code"
-			);
+			expect(component.autocompleteHint).toBe("City name, better if with comma and 2-letter country code");
 		});
 		it("#case 429", (): void => {
 			component.setStatus(429);
@@ -121,17 +119,13 @@ describe("SearchbarComponent", (): void => {
 			component.setStatus("completed");
 			expect(component.searchStatus).toEqual("completed");
 			expect(component.autocompleteSuffix).toBeUndefined();
-			expect(component.autocompleteHint).toBe(
-				"The city name, better if followed by comma and 2-letter country code"
-			);
+			expect(component.autocompleteHint).toBe("City name, better if with comma and 2-letter country code");
 		});
 		it("#case pristine", (): void => {
 			component.setStatus("pristine");
 			expect(component.searchStatus).toEqual("pristine");
 			expect(component.autocompleteSuffix).toBeUndefined();
-			expect(component.autocompleteHint).toBe(
-				"The city name, better if followed by comma and 2-letter country code"
-			);
+			expect(component.autocompleteHint).toBe("City name, better if with comma and 2-letter country code");
 		});
 	});
 });
