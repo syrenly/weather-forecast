@@ -1,6 +1,5 @@
-import { Routes } from "@angular/router";
-import { ForecastComponent } from "../forecast/forecast.component";
-import { HomeComponent } from "../home/home.component";
+import { Type } from "@angular/core";
+import { DefaultExport, Routes } from "@angular/router";
 import { cityResolver } from "./city.resolver";
 import { forecastDetailsGuard } from "./forecast-details.guard";
 
@@ -12,12 +11,12 @@ export const routes: Routes = [
 	},
 	{
 		path: "home",
-		component: HomeComponent,
+		loadComponent: (): Promise<DefaultExport<Type<unknown>>> => import("../home/home.component"),
 		data: { animationState: "homeState" },
 	},
 	{
 		path: "forecast/:id",
-		component: ForecastComponent,
+		loadComponent: (): Promise<DefaultExport<Type<unknown>>> => import("../forecast/forecast.component"),
 		data: { animationState: "forecastState" },
 		canActivate: [forecastDetailsGuard],
 		resolve: [cityResolver],

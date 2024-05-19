@@ -2,7 +2,6 @@
 
 The following enhancements will be evaluated in order to improve the application:
 
--   [ ] find out why Edge is so reluctant to accept the integrity control made for the Google Font and icons in index.ts with https://subresourceintegrity.com/. At the moment, it is removed from the link element to let the application work
 -   [ ] save in the browser storage the last N selected city and suggest them inside the HomeComponent instead of the list of hard-coded cities
 -   [ ] ask users to retrieve their location and open directly their city
 -   [ ] _started_ integrate the signal feature
@@ -12,6 +11,7 @@ The following enhancements will be evaluated in order to improve the application
 -   [ ] add a background image with transparence for the HomeComponent
 -   [ ] replace [groupBy](./src/app/ui-components/forecast-five/forecast-five.component.ts) with the new Object.groupBy function when Typescript will expose it
 -   [ ] manage errors and not-found with specific components in routing
+-   [ ] find out why Edge is so reluctant to accept the integrity control made for the Google Font and icons in index.ts with https://subresourceintegrity.com/. At the moment, it is removed from the link element to let the application work
 
 ... of course new ideas will come!
 
@@ -28,3 +28,4 @@ The following enhancements will be evaluated in order to improve the application
         s (like N, NWN, S, etc)
 -   [x] set unit tests coverage to minimum 80%
 -   [x] use Renderer2 to manipulate DOM while applying a theme
+-   [x] implementation of lazy loading for components in routes

@@ -56,7 +56,7 @@ import { SearchService } from "./../services/search.service";
 	templateUrl: "./forecast.component.html",
 	styleUrl: "./forecast.component.scss",
 })
-export class ForecastComponent implements OnInit {
+export default class ForecastComponent implements OnInit {
 	city: ICityWeather | undefined;
 	forecastResult: IFiveDaysForecast | undefined;
 	errorInfo: { icon: string; text: string } | undefined;
