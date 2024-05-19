@@ -29,3 +29,4 @@ The following enhancements will be evaluated in order to improve the application
 -   [x] set unit tests coverage to minimum 80%
 -   [x] use Renderer2 to manipulate DOM while applying a theme
 -   [x] implementation of lazy loading for components in routes
+-   [x] defer charts rendering

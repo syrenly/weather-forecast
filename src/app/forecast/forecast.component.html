@@ -39,18 +39,30 @@
 			class="widget"
 			[city]="city" />
 		@if (forecastResult) {
-			<!-- weather for 5 days -->
-			<app-forecast-five
-				class="widget"
-				[forecastResult]="forecastResult" />
-			<!-- chart temperature for 5 days -->
-			<app-temperature-chart
-				class="widget"
-				[forecastResult]="forecastResult" />
-			<!-- chart precipitation for 5 days -->
-			<app-precipitation-chart
-				class="widget"
-				[forecastResult]="forecastResult" />
+			@defer (on viewport) {
+				<!-- weather for 5 days -->
+				<app-forecast-five
+					class="widget"
+					[forecastResult]="forecastResult" />
+			} @placeholder {
+				<div class="widget">Loading next 5 days forecasts...</div>
+			}
+			@defer (on viewport) {
+				<!-- chart temperature for 5 days -->
+				<app-temperature-chart
+					class="widget"
+					[forecastResult]="forecastResult" />
+			} @placeholder {
+				<div class="widget">Loading next 5 days temperatures...</div>
+			}
+			@defer (on viewport) {
+				<!-- chart precipitation for 5 days -->
+				<app-precipitation-chart
+					class="widget"
+					[forecastResult]="forecastResult" />
+			} @placeholder {
+				<div class="widget">Loading next 5 days precipitations...</div>
+			}
 		}
 	</div>
 }
