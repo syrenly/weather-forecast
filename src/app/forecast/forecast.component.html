@@ -37,20 +37,20 @@
 		<!-- current weather -->
 		<app-current-weather
 			class="widget"
-			[city]="city"></app-current-weather>
+			[city]="city" />
 		@if (forecastResult) {
 			<!-- weather for 5 days -->
 			<app-forecast-five
 				class="widget"
-				[forecastResult]="forecastResult"></app-forecast-five>
+				[forecastResult]="forecastResult" />
 			<!-- chart temperature for 5 days -->
 			<app-temperature-chart
 				class="widget"
-				[forecastResult]="forecastResult"></app-temperature-chart>
+				[forecastResult]="forecastResult" />
 			<!-- chart precipitation for 5 days -->
 			<app-precipitation-chart
 				class="widget"
-				[forecastResult]="forecastResult"></app-precipitation-chart>
+				[forecastResult]="forecastResult" />
 		}
 	</div>
 }
