@@ -29,7 +29,7 @@ import { SwitchThemeComponent } from "../ui-components/switch-theme/switch-theme
 	templateUrl: "./home.component.html",
 	styleUrl: "./home.component.scss",
 })
-export class HomeComponent {
+export default class HomeComponent {
 	constructor(private readonly router: Router) {}
 
 	navigateByCityId(cityId: number): void {
