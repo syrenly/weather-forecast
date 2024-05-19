@@ -1,5 +1,5 @@
 @if (navigationStarted) {
-	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+	<mat-progress-bar mode="indeterminate" />
 }
 <div class="header">
 	<div
@@ -20,10 +20,10 @@
 			}
 		</h1>
 	}
-	<app-switch-theme></app-switch-theme>
+	<app-switch-theme />
 </div>
 
-<app-searchbar (itemSelected)="navigateToCity($event)"></app-searchbar>
+<app-searchbar (itemSelected)="navigateToCity($event)" />
 
 <!-- error template -->
 @if (!!errorInfo) {
