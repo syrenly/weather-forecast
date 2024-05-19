@@ -143,9 +143,10 @@ describe("ForecastComponent case error status", (): void => {
 		const temperatureChartComponent: HTMLElement = nativeElement.querySelector("app-temperature-chart");
 		const precipitationChartComponent: HTMLElement = nativeElement.querySelector("app-precipitation-chart");
 		expect(currentWeatherComponent).toBeTruthy();
-		expect(forecastFiveComponent).toBeTruthy();
-		expect(temperatureChartComponent).toBeTruthy();
-		expect(precipitationChartComponent).toBeTruthy();
+		// show this elements only if in view
+		expect(forecastFiveComponent).toBeFalsy();
+		expect(temperatureChartComponent).toBeFalsy();
+		expect(precipitationChartComponent).toBeFalsy();
 	}));
 	it("should test #mainWeather", (): void => {
 		component.city = undefined;
