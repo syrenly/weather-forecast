@@ -1,30 +1,27 @@
-@if (city && mainWeather && mainInfo) {
+@if (canShowCurrentWeather) {
 	<mat-card>
 		<div class="card-header">
 			<mat-card-header>
 				<mat-card-title>
-					<div>{{ city.dt * 1000 | date }}</div>
+					<div>{{ (city().dt || 0) * 1000 | date }}</div>
 				</mat-card-title>
-				@if (mainWeather) {
-					<img
-						mat-card-avatar
-						alt="{{ mainWeather.description }}"
-						width="40"
-						height="40"
-						[ngSrc]="mainWeather.icon | weather" />
-				}
-				@if (mainWeather) {
-					<mat-card-subtitle>
-						{{ mainWeather.description | titlecase }}
-					</mat-card-subtitle>
-				}
+
+				<img
+					mat-card-avatar
+					alt="{{ mainWeather().description }}"
+					width="40"
+					height="40"
+					[ngSrc]="mainWeather().icon | weather" />
+				<mat-card-subtitle>
+					{{ mainWeather().description | titlecase }}
+				</mat-card-subtitle>
 			</mat-card-header>
 			<mat-card-header>
 				<div mat-card-avatar></div>
-				<mat-card-title class="main-temperature">{{ mainInfo.temp | number: "1.0-0" || "N.A." }}&nbsp;C°</mat-card-title>
+				<mat-card-title class="main-temperature">{{ mainInfo().temp | number: "1.0-0" || "N.A." }}&nbsp;C°</mat-card-title>
 				<mat-card-subtitle class="feels-like">
 					Feels like
-					{{ mainInfo.feels_like | number: "1.0-0" || "N.A." }}&nbsp;C°
+					{{ mainInfo().feels_like | number: "1.0-0" || "N.A." }}&nbsp;C°
 				</mat-card-subtitle>
 			</mat-card-header>
 		</div>
@@ -35,9 +32,9 @@
 					matTooltip="Min/Max Temperature">
 					device_thermostat
 				</mat-icon>
-				<span>&nbsp;{{ mainInfo.temp_min | number: "1.0-0" }} C°</span>
+				<span>&nbsp;{{ mainInfo().temp_min | number: "1.0-0" }} C°</span>
 				<span>/</span>
-				<span>{{ mainInfo.temp_max | number: "1.0-0" }} C°</span>
+				<span>{{ mainInfo().temp_max | number: "1.0-0" }} C°</span>
 			</div>
 
 			<div class="data">
@@ -46,7 +43,7 @@
 					matTooltip="Clouds">
 					filter_drama
 				</mat-icon>
-				<span>&nbsp;{{ city.clouds?.all | number: "1.0-0" }}%</span>
+				<span>&nbsp;{{ city().clouds?.all | number: "1.0-0" }}%</span>
 			</div>
 		</div>
 		<div class="additional-data">
@@ -56,7 +53,7 @@
 					matTooltip="Humidity">
 					opacity
 				</mat-icon>
-				<span>&nbsp;{{ mainInfo.humidity | number: "1.0-0" }}%</span>
+				<span>&nbsp;{{ mainInfo().humidity | number: "1.0-0" }}%</span>
 			</div>
 			<div class="data">
 				<mat-icon
@@ -64,7 +61,7 @@
 					matTooltip="Pressure">
 					speed
 				</mat-icon>
-				<span>&nbsp;{{ mainInfo.pressure }} hPa</span>
+				<span>&nbsp;{{ mainInfo().pressure }} hPa</span>
 			</div>
 		</div>
 		<div class="additional-data">
@@ -74,17 +71,17 @@
 					matTooltip="Wind">
 					air
 				</mat-icon>
-				<span>&nbsp;{{ city.wind?.speed | number: "1.0-0" }} Km/h</span>
+				<span>&nbsp;{{ city().wind?.speed | number: "1.0-0" }} Km/h</span>
 			</div>
 
 			<div class="data">
 				<mat-icon
 					color="primary"
 					matTooltip="Wind direction"
-					[style.rotate.deg]="city.wind?.deg">
+					[style.rotate.deg]="city().wind?.deg">
 					north
 				</mat-icon>
-				<span>&nbsp;{{ city.wind?.deg | toCardinalPoint }}</span>
+				<span>&nbsp;{{ city().wind?.deg | toCardinalPoint }}</span>
 			</div>
 		</div>
 	</mat-card>

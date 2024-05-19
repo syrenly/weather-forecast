@@ -69,14 +69,14 @@ export default class ForecastComponent implements OnInit {
 	}
 
 	constructor(
-		private readonly route: ActivatedRoute,
+		private readonly activatedRoute: ActivatedRoute,
 		private readonly router: Router,
 		private readonly destroyRef: DestroyRef,
 		private readonly searchService: SearchService
 	) {}
 
 	ngOnInit(): void {
-		this.route.data.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data: Data): void => {
+		this.activatedRoute.data.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data: Data): void => {
 			const valueData = data?.[0];
 			this.searchService.navigationStarted = false;
 			if (valueData?.errorStatus) {
