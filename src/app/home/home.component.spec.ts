@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
 import { getSearchMockProvider } from "../unit-test-utils/search.service.mock";
 import { provideMockTheme } from "../unit-test-utils/token.mock";
 import { city } from "../unit-test-utils/utils.mock";
-import { HomeComponent } from "./home.component";
+import HomeComponent from "./home.component";
 
 describe("HomeComponent", (): void => {
 	let component: HomeComponent;

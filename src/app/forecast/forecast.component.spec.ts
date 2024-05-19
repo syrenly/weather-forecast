@@ -5,7 +5,7 @@ import { BehaviorSubject } from "rxjs";
 import { getSearchMockProvider } from "../unit-test-utils/search.service.mock";
 import { provideMockTheme } from "../unit-test-utils/token.mock";
 import { city, forecastResult } from "../unit-test-utils/utils.mock";
-import { ForecastComponent } from "./forecast.component";
+import ForecastComponent from "./forecast.component";
 
 const route = {
 	data: new BehaviorSubject({
