@@ -31,40 +31,23 @@ describe("CurrentWeatherComponent", (): void => {
 
 		fixture = TestBed.createComponent(CurrentWeatherComponent);
 		component = fixture.componentInstance;
-		component.city = city;
+		fixture.componentRef.setInput("city", city);
 		fixture.detectChanges();
 	});
 
 	it("should create", (): void => {
 		expect(component).toBeTruthy();
 	});
-	it("should test #ngOnChanges case city valued", (): void => {
-		component.ngOnChanges({
-			city: {
-				currentValue: city,
-				previousValue: null,
-				isFirstChange: (): boolean => false,
-				firstChange: false,
-			},
-		});
-		expect(component.mainWeather).toEqual(city.weather[0]);
-		expect(component.mainInfo).toEqual(city.main);
+	it("should set values of mainWeather and mainInfo when city changes", (): void => {
+		expect(component.mainWeather()).toEqual(city.weather[0]);
+		expect(component.mainInfo()).toEqual(city.main);
+		expect(component.canShowCurrentWeather).toBeTrue();
 	});
-	it("should test #ngOnChanges case city null", (): void => {
-		component.ngOnChanges({
-			city: {
-				currentValue: null,
-				previousValue: null,
-				isFirstChange: (): boolean => false,
-				firstChange: false,
-			},
-		});
-		expect(component.mainWeather).toEqual({
-			description: "",
-			icon: "",
-			id: 0,
-			main: "",
-		});
-		expect(component.mainInfo).toBeUndefined();
+	it("should not set values of mainWeather and mainInfo when city is null", (): void => {
+		fixture.componentRef.setInput("city", null);
+		fixture.detectChanges();
+		expect(component.mainWeather()).toBeUndefined();
+		expect(component.mainInfo()).toBeUndefined();
+		expect(component.canShowCurrentWeather).toBeFalse();
 	});
 });
