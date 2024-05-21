@@ -1,6 +1,6 @@
 # WeatherForecast
 
-👋 Hi, I’m @syrenly and welcome to **weather-forecast** repo! It's a Demo application for weather forecasts and it was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.1.
+👋 Hi, I’m @syrenly and welcome to **weather-forecast** repo! It's a Demo application for weather forecasts and it was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.
 
 ### Implementations
 
