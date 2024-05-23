@@ -1,4 +1,5 @@
-import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
+import { HttpTestingController, provideHttpClientTesting } from "@angular/common/http/testing";
 import { TestBed, getTestBed } from "@angular/core/testing";
 import { ICitySearchResult, ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
@@ -12,9 +13,14 @@ describe("SearchService", (): void => {
 
 	beforeEach((): void => {
 		TestBed.configureTestingModule({
-			imports: [HttpClientTestingModule],
-			providers: [SearchService, provideMockWeatherApiKey()],
 			teardown: { destroyAfterEach: false },
+			imports: [],
+			providers: [
+				SearchService,
+				provideMockWeatherApiKey(),
+				provideHttpClient(withInterceptorsFromDi()),
+				provideHttpClientTesting(),
+			],
 		});
 
 		injector = getTestBed();
