@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { inject } from "@angular/core";
-import { ActivatedRouteSnapshot, ResolveFn, Router } from "@angular/router";
+import { ActivatedRouteSnapshot, RedirectCommand, ResolveFn, Router } from "@angular/router";
 import { Observable, catchError, forkJoin, of } from "rxjs";
 import { SearchService } from "../services/search.service";
 import { ICityWeather } from "../types/city-types";
@@ -11,9 +11,9 @@ export type CityResolverType =
 	| { countryInfo: ICityWeather; forecastResult: IFiveDaysForecast };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const cityResolver: ResolveFn<Observable<CityResolverType>> = (
+export const cityResolver: ResolveFn<Observable<CityResolverType> | RedirectCommand> = (
 	route: ActivatedRouteSnapshot
-): Observable<CityResolverType> => {
+): Observable<CityResolverType> | RedirectCommand => {
 	let id: number;
 	try {
 		id = +(route.paramMap.get("id") || "");

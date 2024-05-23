@@ -1,5 +1,12 @@
 import { TestBed, fakeAsync, tick } from "@angular/core/testing";
-import { ActivatedRouteSnapshot, MaybeAsync, ResolveFn, Router, RouterStateSnapshot } from "@angular/router";
+import {
+	ActivatedRouteSnapshot,
+	MaybeAsync,
+	RedirectCommand,
+	ResolveFn,
+	Router,
+	RouterStateSnapshot,
+} from "@angular/router";
 import { Observable } from "rxjs";
 import { SearchService } from "../services/search.service";
 import { ICityWeather } from "../types/city-types";
@@ -10,11 +17,11 @@ import { CityResolverType, cityResolver } from "./city.resolver";
 
 describe("cityResolver", (): void => {
 	let searchService: SearchService;
-	const executeResolver: ResolveFn<Observable<CityResolverType>> = (
+	const executeResolver: ResolveFn<Observable<CityResolverType> | RedirectCommand> = (
 		...resolverParameters
-	): MaybeAsync<Observable<CityResolverType>> =>
+	): MaybeAsync<Observable<CityResolverType> | RedirectCommand> =>
 		TestBed.runInInjectionContext(
-			(): MaybeAsync<Observable<CityResolverType>> => cityResolver(...resolverParameters)
+			(): MaybeAsync<Observable<CityResolverType> | RedirectCommand> => cityResolver(...resolverParameters)
 		);
 
 	beforeEach((): void => {
