@@ -1,10 +1,10 @@
 # WeatherForecast
 
-👋 Hi, I’m @syrenly and welcome to **weather-forecast** repo! It's a Demo application for weather forecasts and it was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.
+👋 Hi, I’m @syrenly and welcome to **weather-forecast** repo! It's a Demo application for weather forecasts and it was generated with [Angular CLI](https://github.com/angular/angular-cli), maintained to version 18.
 
 ### Implementations
 
--   Angular 17 and standalone components only;
+-   Angular 18 and standalone components only;
 -   folders organized mainly in a "folder-by-type" way;
 -   a router exposes 2 main components: HomeComponent and ForecastComponent; guard, resolver and animations implemented;
 -   the folder _ui-components_ contains the less architectural components, designed to show or search data;
