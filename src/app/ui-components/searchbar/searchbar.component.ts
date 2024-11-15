@@ -16,7 +16,7 @@ import { SearchService } from "../../services/search.service";
 import { ICitySearchResult, ICityWeather } from "../../types/city-types";
 
 type SearchStatus = "loading" | 400 | 401 | 429 | 404 | "serverError" | "completed" | "pristine";
-const DEFAULT_HINT = "City name, better if with comma and 2-letter country code";
+const DEFAULT_HINT = "City name, better with comma and 2-letter country code";
 /**
  * Search for the city to know which weather conditions there are. It will navigate to the ForecastComponent to show details.
  */
