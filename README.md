@@ -2,9 +2,9 @@
 
 👋 Hi, I’m @syrenly and welcome to [**weather-forecast**](https://syrenly.github.io/weather-forecast/) repo! It's a Demo application for weather forecasts and it was generated with [Angular CLI](https://github.com/angular/angular-cli), maintained to version 18.
 
-## Live demo!
+## Live site!
 
-Live [Here!](https://syrenly.github.io/weather-forecast/) 🔥
+Live site [here!](https://syrenly.github.io/weather-forecast/) 🔥
 
 ### Implementations
 
