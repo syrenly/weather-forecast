@@ -23,6 +23,10 @@ export interface ICityWeather {
 	weather: IWeather[];
 	timezone: number;
 }
+export interface ICityIdName {
+	id: number;
+	name: string;
+}
 
 export interface IMainInfo {
 	temp: number;

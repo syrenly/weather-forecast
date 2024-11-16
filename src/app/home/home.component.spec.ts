@@ -47,4 +47,7 @@ describe("HomeComponent", (): void => {
 		component.navigateByCityId(city.id);
 		expect(routerSpy).toHaveBeenCalledWith(["forecast", city.id]);
 	});
+	it("should populate cities array", (): void => {
+		expect(component.cities.length).not.toBe(0);
+	});
 });
