@@ -17,11 +17,10 @@
 				</mat-card-subtitle>
 			</mat-card-header>
 			<mat-card-header>
-				<div mat-card-avatar></div>
-				<mat-card-title class="main-temperature">{{ mainInfo().temp | number: "1.0-0" || "N.A." }}&nbsp;C°</mat-card-title>
+				<mat-card-title class="main-temperature">{{ (mainInfo().temp | number: "1.0-0") || "N.A." }}&nbsp;C°</mat-card-title>
 				<mat-card-subtitle class="feels-like">
 					Feels like
-					{{ mainInfo().feels_like | number: "1.0-0" || "N.A." }}&nbsp;C°
+					{{ (mainInfo().feels_like | number: "1.0-0") || "N.A." }}&nbsp;C°
 				</mat-card-subtitle>
 			</mat-card-header>
 		</div>

@@ -8,8 +8,11 @@ mat-card {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		mat-card-title.main-temperature {
-			text-align: end;
+		.mat-mdc-card-header:first-child {
+			padding-right: 8px;
+		}
+		.mat-mdc-card-header:last-child {
+			padding-left: 8px;
 		}
 	}
 	.additional-data {
