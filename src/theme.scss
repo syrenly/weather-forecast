@@ -47,7 +47,7 @@ $custom-typography: mat.m2-define-typography-config(
 @include mat.all-component-themes($dark-theme);
 
 .attribution-bg {
-	background-color: rgba(0, 0, 0, 0.1);
+	background-color: rgba(0, 0, 0, 0.3);
 	border-radius: 10px;
 }
 
@@ -55,7 +55,7 @@ $custom-typography: mat.m2-define-typography-config(
 // NB: if changed, the arrow function in there (src/app/consts.ts) should be updated too
 .light-theme {
 	@include mat.all-component-colors($light-theme);
-	background-image: url("./assets/fog-LT.webp");
+	background-image: url("./assets/images/fog-LT.webp");
 
 	.attribution-bg {
 		background-color: transparent;
@@ -63,5 +63,5 @@ $custom-typography: mat.m2-define-typography-config(
 }
 
 .dark-theme {
-	background-image: url("./assets/fog-DT.webp");
+	background-image: url("./assets/images/fog-DT.webp");
 }
