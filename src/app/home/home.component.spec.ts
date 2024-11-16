@@ -31,7 +31,7 @@ describe("HomeComponent", (): void => {
 	it("should set OpenWeather logo", (): void => {
 		const nativeElement = fixture.debugElement.nativeElement;
 		const img: HTMLImageElement = nativeElement.querySelector("a.attribution img");
-		expect(img.src).toContain("/assets/OpenWeatherLogo.png");
+		expect(img.src).toContain("/assets/images/OpenWeatherLogo.png");
 		const a: DebugElement = fixture.debugElement.query(By.css("a.attribution"));
 		expect(a.nativeNode.href).toBe("https://openweathermap.org/");
 	});
