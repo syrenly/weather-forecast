@@ -8,7 +8,6 @@ The following enhancements will be evaluated in order to improve the application
 -   [ ] evaluate where to use the DetectionStrategy OnPush
 -   [ ] not sure if leave Angular Material or create custom components
 -   [ ] refresh button or periodic refresh of the data
--   [ ] add a background image with transparence for the HomeComponent
 -   [ ] replace [groupBy](./src/app/ui-components/forecast-five/forecast-five.component.ts) with the new Object.groupBy function when Typescript will expose it
 -   [ ] manage errors and not-found with specific components in routing
 -   [ ] find out why Edge is so reluctant to accept the integrity control made for the Google Font and icons in index.ts with https://subresourceintegrity.com/. At the moment, it is removed from the link element to let the application work
@@ -30,3 +29,4 @@ The following enhancements will be evaluated in order to improve the application
 -   [x] use Renderer2 to manipulate DOM while applying a theme
 -   [x] implementation of lazy loading for components in routes
 -   [x] defer charts rendering
+-   [x] add a background image with transparence for the HomeComponent
