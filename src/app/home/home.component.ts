@@ -1,12 +1,14 @@
 import { NgOptimizedImage } from "@angular/common";
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { Router } from "@angular/router";
-import { ICityWeather } from "../types/city-types";
+import { citySamples } from "../consts";
+import { ICityIdName, ICityWeather } from "../types/city-types";
 import { SearchbarComponent } from "../ui-components/searchbar/searchbar.component";
 import { SwitchThemeComponent } from "../ui-components/switch-theme/switch-theme.component";
+import { getRandomElements } from "./home.utils";
 /**
  * The HomeComponent is the initial page for the application.
  * - toggle button to switch between light and dark theme
@@ -29,8 +31,14 @@ import { SwitchThemeComponent } from "../ui-components/switch-theme/switch-theme
 	templateUrl: "./home.component.html",
 	styleUrl: "./home.component.scss",
 })
-export default class HomeComponent {
+export default class HomeComponent implements OnInit {
+	cities: ICityIdName[] = [];
+
 	constructor(private readonly router: Router) {}
+
+	ngOnInit(): void {
+		this.cities = getRandomElements<ICityIdName>(citySamples, 4);
+	}
 
 	navigateByCityId(cityId: number): void {
 		this.router.navigate(["forecast", cityId]);

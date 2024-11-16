@@ -30,3 +30,4 @@ The following enhancements will be evaluated in order to improve the application
 -   [x] implementation of lazy loading for components in routes
 -   [x] defer charts rendering
 -   [x] add a background image with transparence for the HomeComponent
+-   [x] randomize the cities shown on the home page
