@@ -63,13 +63,13 @@ Install docker in your machine. From the root folder of this application, run
 
 Navigate to `http://localhost:4200/`.
 
-> With this mode, the application will be built in _production_. Remember to update the license key for the OpenWeather API [here](./src//assets/configuration.prod.json) with a full working one.
+> With this mode, the application will be built in _production_. Remember to update the license key for the OpenWeather API [here](./src//assets/configurations/configuration.prod.json) with a full working one.
 
 ## Attributions
 
 The project depends on [Open Weather Map](https://openweathermap.org), which provides an API with free license. The license is limited to small number of requests and few methods.
 
-> To change the license key, replace it [here](./src/assets/configuration.json) for development or [here](./src/assets/configuration.prod.json) for production.
+> To change the license key, replace it [here](./src/assets/configurations/configuration.json) for development or [here](./src/assets/configurations/configuration.prod.json) for production.
 
 ## TODO List
 

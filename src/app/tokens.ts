@@ -34,7 +34,11 @@ export function initializeApp(
 		firstValueFrom(
 			http
 				// use different json file, based on the type of build
-				.get<IConfiguration>(isDevMode() ? "./assets/configuration.json" : "./assets/configuration.prod.json")
+				.get<IConfiguration>(
+					isDevMode()
+						? "./assets/configurations/configuration.json"
+						: "./assets/configurations/configuration.prod.json"
+				)
 				.pipe(
 					tap(jsonConfig => {
 						weatherApiKeySubject.next(jsonConfig.OpenWeatherApiKey);
