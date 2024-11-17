@@ -6,36 +6,24 @@ $padding: 1rem;
 	}
 }
 
-.row {
+.row,
+.header-row {
 	width: calc(100% - 2 * #{$padding});
 	padding: 0 $padding;
 	display: flex;
 	flex-wrap: nowrap;
 	align-items: center;
+	height: 40px;
 	div {
+		width: 20%;
+		text-align: center;
 		&.wind,
 		&.pop {
 			display: flex;
-			align-items: flex-start;
+			align-items: center;
 		}
-	}
-}
-@media (min-width: 576px) {
-	.row div {
-		width: 20%;
-	}
-}
-@media (max-width: 576px) {
-	$colFixedWidth: 50px;
-	.row div {
-		width: 100%;
-		min-width: 15%;
-		&.icon {
-			width: $colFixedWidth;
-		}
-		&.hours,
-		&.temperature {
-			max-width: $colFixedWidth;
+		.icon-placeholder {
+			width: 24px;
 		}
 	}
 }
