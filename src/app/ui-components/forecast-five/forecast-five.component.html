@@ -4,6 +4,7 @@
 			@for (day of days; track day) {
 				<mat-tab [label]="(day | date: 'MMM d') || 'N.A.'">
 					<ng-template matTabContent>
+						<ng-container *ngTemplateOutlet="secondHeader"></ng-container>
 						@for (forecast of daysDictionary[day]; track forecast.dt) {
 							<ng-container *ngTemplateOutlet="threeHours; context: { $implicit: forecast }"></ng-container>
 						}
@@ -13,6 +14,33 @@
 		</mat-tab-group>
 	</mat-card>
 }
+
+<ng-template #secondHeader>
+	<mat-divider />
+	<div class="header-row header-bg">
+		<div class="hours">
+			<span>HH:mm</span>
+		</div>
+		<div class="icon">
+			<span>Sky</span>
+		</div>
+		<div
+			class="temperature"
+			matTooltip="Temperature">
+			<span>Temp.</span>
+		</div>
+		<div
+			class="pop"
+			matTooltip="Probability of precipitation">
+			<mat-icon color="primary">umbrella</mat-icon>
+			<span>Pop</span>
+		</div>
+		<div class="wind">
+			<mat-icon color="primary">air</mat-icon>
+			<span>Wind</span>
+		</div>
+	</div>
+</ng-template>
 
 <ng-template
 	#threeHours
@@ -34,20 +62,11 @@
 		}
 		<div class="temperature">{{ forecast.main?.temp | number: "1.0-0" }} C°</div>
 		<div class="pop">
-			<mat-icon
-				color="primary"
-				matTooltip="Probability of precipitation">
-				umbrella
-			</mat-icon>
-			<span>&nbsp;{{ forecast.pop * 100 | number: "1.0-0" }}%</span>
+			<span class="icon-placeholder"></span>
+			<span>{{ forecast.pop * 100 | number: "1.0-0" }}%</span>
 		</div>
 		<div class="wind">
-			<mat-icon
-				color="primary"
-				matTooltip="Wind">
-				air
-			</mat-icon>
-			<span>&nbsp;{{ forecast.wind?.speed | number: "1.0-0" }} Km/h&nbsp;</span>
+			<span>{{ forecast.wind?.speed | number: "1.0-0" }} Km/h&nbsp;</span>
 			<mat-icon
 				color="primary"
 				matTooltip="{{ forecast.wind?.deg | toCardinalPoint }}"
