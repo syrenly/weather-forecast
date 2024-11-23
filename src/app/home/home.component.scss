@@ -44,7 +44,7 @@ $licenseHeight: 57px;
 			text-align: justify;
 		}
 		.suggestions {
-			margin-top: calc(#{$margin} * 2);
+			margin-top: $margin;
 			display: flex;
 			align-items: center;
 			flex-wrap: wrap;
