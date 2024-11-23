@@ -1,19 +1,10 @@
-import {
-	AsyncPipe,
-	DatePipe,
-	DecimalPipe,
-	JsonPipe,
-	NgOptimizedImage,
-	NgTemplateOutlet,
-	TitleCasePipe,
-} from "@angular/common";
+import { DatePipe, DecimalPipe, NgOptimizedImage, NgTemplateOutlet, TitleCasePipe } from "@angular/common";
 import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
 import { MatCardModule } from "@angular/material/card";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { FlagPipe } from "../../pipes/flag.pipe";
 import { ToCardinalPointPipe } from "../../pipes/to-cardinal-point.pipe";
 import { WeatherPipe } from "../../pipes/weather.pipe";
 import { IMainInfo } from "../../types/city-types";
@@ -26,11 +17,8 @@ import { IWeather } from "../../types/types";
 	selector: "app-forecast-five",
 	standalone: true,
 	imports: [
-		AsyncPipe,
 		DatePipe,
 		DecimalPipe,
-		FlagPipe,
-		JsonPipe,
 		MatIconModule,
 		MatCardModule,
 		MatDividerModule,

@@ -1,4 +1,4 @@
-import { AsyncPipe, NgClass, NgOptimizedImage } from "@angular/common";
+import { AsyncPipe, NgOptimizedImage } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
 import { AfterViewInit, Component, output } from "@angular/core";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
@@ -35,7 +35,6 @@ const DEFAULT_HINT = "";
 		NgOptimizedImage,
 		FlagPipe,
 		WeatherPipe,
-		NgClass,
 	],
 	templateUrl: "./searchbar.component.html",
 	styleUrl: "./searchbar.component.scss",

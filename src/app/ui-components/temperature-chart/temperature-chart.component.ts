@@ -24,7 +24,7 @@ import { ChartBase } from "../chart.base";
 @Component({
 	selector: "app-temperature-chart",
 	standalone: true,
-	imports: [MatCardModule, DatePipe],
+	imports: [MatCardModule],
 	templateUrl: "./temperature-chart.component.html",
 	styleUrl: "./temperature-chart.component.scss",
 })
