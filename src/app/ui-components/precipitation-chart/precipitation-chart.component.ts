@@ -24,7 +24,7 @@ import { ChartBase } from "../chart.base";
 @Component({
 	selector: "app-precipitation-chart",
 	standalone: true,
-	imports: [MatCardModule, DatePipe],
+	imports: [MatCardModule],
 	templateUrl: "./precipitation-chart.component.html",
 	styleUrl: "./precipitation-chart.component.scss",
 })

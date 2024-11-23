@@ -1,15 +1,11 @@
-import { AsyncPipe, DatePipe, DecimalPipe, NgOptimizedImage } from "@angular/common";
 import { Component, DestroyRef, OnInit } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { MatCardModule } from "@angular/material/card";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatIconModule } from "@angular/material/icon";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
-import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ActivatedRoute, Data, Router, RouterLink } from "@angular/router";
-import { FlagPipe } from "../pipes/flag.pipe";
-import { WeatherPipe } from "../pipes/weather.pipe";
 import { ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
 import { IWeather } from "../types/types";
@@ -33,25 +29,18 @@ import { SearchService } from "./../services/search.service";
 	selector: "app-forecast",
 	standalone: true,
 	imports: [
-		AsyncPipe,
 		CurrentWeatherComponent,
-		DecimalPipe,
-		DatePipe,
-		FlagPipe,
 		ForecastFiveComponent,
 		MatIconModule,
 		MatCardModule,
 		MatDividerModule,
 		MatProgressBarModule,
-		MatToolbarModule,
 		MatTooltipModule,
-		NgOptimizedImage,
 		PrecipitationChartComponent,
 		RouterLink,
 		SearchbarComponent,
 		SwitchThemeComponent,
 		TemperatureChartComponent,
-		WeatherPipe,
 	],
 	templateUrl: "./forecast.component.html",
 	styleUrl: "./forecast.component.scss",

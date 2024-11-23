@@ -1,9 +1,9 @@
-import { AsyncPipe, DatePipe, DecimalPipe, NgOptimizedImage, TitleCasePipe } from "@angular/common";
+import { DatePipe, DecimalPipe, NgOptimizedImage, TitleCasePipe } from "@angular/common";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { FlagPipe } from "../../pipes/flag.pipe";
+import { ToCardinalPointPipe } from "../../pipes/to-cardinal-point.pipe";
 import { WeatherPipe } from "../../pipes/weather.pipe";
 import { city } from "../../unit-test-utils/utils.mock";
 import { CurrentWeatherComponent } from "./current-weather.component";
@@ -16,15 +16,14 @@ describe("CurrentWeatherComponent", (): void => {
 		await TestBed.configureTestingModule({
 			imports: [
 				CurrentWeatherComponent,
-				AsyncPipe,
 				DatePipe,
 				DecimalPipe,
-				FlagPipe,
 				MatIconModule,
 				MatCardModule,
 				NgOptimizedImage,
 				MatTooltipModule,
 				TitleCasePipe,
+				ToCardinalPointPipe,
 				WeatherPipe,
 			],
 		}).compileComponents();
