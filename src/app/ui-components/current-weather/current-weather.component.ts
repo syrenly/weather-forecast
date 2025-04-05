@@ -12,21 +12,20 @@ import { IWeather } from "../../types/types";
  * CurrentWeatherComponent shows the current weather conditions (pressure, temperature, max/min temperature, clouds, etc)
  */
 @Component({
-	selector: "app-current-weather",
-	standalone: true,
-	imports: [
-		DatePipe,
-		DecimalPipe,
-		MatIconModule,
-		MatCardModule,
-		NgOptimizedImage,
-		MatTooltipModule,
-		TitleCasePipe,
-		ToCardinalPointPipe,
-		WeatherPipe,
-	],
-	templateUrl: "./current-weather.component.html",
-	styleUrl: "./current-weather.component.scss",
+    selector: "app-current-weather",
+    imports: [
+        DatePipe,
+        DecimalPipe,
+        MatIconModule,
+        MatCardModule,
+        NgOptimizedImage,
+        MatTooltipModule,
+        TitleCasePipe,
+        ToCardinalPointPipe,
+        WeatherPipe,
+    ],
+    templateUrl: "./current-weather.component.html",
+    styleUrl: "./current-weather.component.scss"
 })
 export class CurrentWeatherComponent {
 	// REQUIRED: current city, sent in input from the parent component

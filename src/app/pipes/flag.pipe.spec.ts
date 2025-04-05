@@ -4,11 +4,10 @@ import { By } from "@angular/platform-browser";
 import { FlagPipe } from "./flag.pipe";
 
 @Component({
-	standalone: true,
-	imports: [FlagPipe],
-	template: `
+    imports: [FlagPipe],
+    template: `
 		<div class="flag-class">{{ country | flag }}</div>
-	`,
+	`
 })
 class TestComponent {
 	country: string | undefined;
