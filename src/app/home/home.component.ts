@@ -18,18 +18,17 @@ import { getRandomElements } from "./home.utils";
  * - buttons with specific city ids
  */
 @Component({
-	selector: "app-home",
-	standalone: true,
-	imports: [
-		MatCardModule,
-		MatButtonModule,
-		NgOptimizedImage,
-		SearchbarComponent,
-		SwitchThemeComponent,
-		MatTooltipModule,
-	],
-	templateUrl: "./home.component.html",
-	styleUrl: "./home.component.scss",
+    selector: "app-home",
+    imports: [
+        MatCardModule,
+        MatButtonModule,
+        NgOptimizedImage,
+        SearchbarComponent,
+        SwitchThemeComponent,
+        MatTooltipModule,
+    ],
+    templateUrl: "./home.component.html",
+    styleUrl: "./home.component.scss"
 })
 export default class HomeComponent implements OnInit {
 	cities: ICityIdName[] = [];

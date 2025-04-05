@@ -1,5 +1,5 @@
 import { HttpClient, provideHttpClient } from "@angular/common/http";
-import { APP_INITIALIZER, ApplicationConfig } from "@angular/core";
+import { ApplicationConfig, inject, provideAppInitializer } from "@angular/core";
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
 import { provideAnimations } from "@angular/platform-browser/animations";
 import { provideRouter } from "@angular/router";
@@ -17,12 +17,10 @@ export const appConfig: ApplicationConfig = {
 		// set the license key for OpenWeather API
 		provideWeatherApiKey(),
 		// initialize the application retrieving the configuration file
-		{
-			provide: APP_INITIALIZER,
-			useFactory: initializeApp,
-			multi: true,
-			deps: [HttpClient, WEATHER_API_KEY],
-		},
+		provideAppInitializer(() => {
+        const initializerFn = (initializeApp)(inject(HttpClient), inject(WEATHER_API_KEY));
+        return initializerFn();
+      }),
 		// set outline style for material
 		{
 			provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,

@@ -21,23 +21,22 @@ const DEFAULT_HINT = "";
  * Search for the city to know which weather conditions there are. It will navigate to the ForecastComponent to show details.
  */
 @Component({
-	selector: "app-searchbar",
-	standalone: true,
-	imports: [
-		AsyncPipe,
-		MatAutocompleteModule,
-		MatFormFieldModule,
-		MatIconModule,
-		MatInputModule,
-		MatProgressSpinner,
-		MatTooltipModule,
-		ReactiveFormsModule,
-		NgOptimizedImage,
-		FlagPipe,
-		WeatherPipe,
-	],
-	templateUrl: "./searchbar.component.html",
-	styleUrl: "./searchbar.component.scss",
+    selector: "app-searchbar",
+    imports: [
+        AsyncPipe,
+        MatAutocompleteModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatProgressSpinner,
+        MatTooltipModule,
+        ReactiveFormsModule,
+        NgOptimizedImage,
+        FlagPipe,
+        WeatherPipe,
+    ],
+    templateUrl: "./searchbar.component.html",
+    styleUrl: "./searchbar.component.scss"
 })
 export class SearchbarComponent implements AfterViewInit {
 	// reference to the autocomplete form control

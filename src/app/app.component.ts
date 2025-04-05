@@ -6,12 +6,11 @@ import { routeTransitionAnimations } from "./routes/route-transition-animations"
 import { CURRENT_THEME, Theme } from "./tokens";
 
 @Component({
-	selector: "app-root",
-	standalone: true,
-	imports: [RouterOutlet],
-	templateUrl: "./app.component.html",
-	styleUrl: "./app.component.scss",
-	animations: [routeTransitionAnimations],
+    selector: "app-root",
+    imports: [RouterOutlet],
+    templateUrl: "./app.component.html",
+    styleUrl: "./app.component.scss",
+    animations: [routeTransitionAnimations]
 })
 export class AppComponent implements OnInit {
 	constructor(

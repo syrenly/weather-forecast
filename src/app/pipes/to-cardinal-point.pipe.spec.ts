@@ -4,11 +4,10 @@ import { By } from "@angular/platform-browser";
 import { ToCardinalPointPipe } from "./to-cardinal-point.pipe";
 
 @Component({
-	standalone: true,
-	imports: [ToCardinalPointPipe],
-	template: `
+    imports: [ToCardinalPointPipe],
+    template: `
 		<div class="wind-class">{{ windDirectionDegree | toCardinalPoint }}</div>
-	`,
+	`
 })
 class TestComponent {
 	windDirectionDegree: number | undefined;
