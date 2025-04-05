@@ -42,7 +42,7 @@
     "@angular/compiler-cli": "^19.2.5",
     "@types/jasmine": "~5.1.0",
     "angular-cli-ghpages": "^2.0.3",
-    "angular-eslint": "18.4.0",
+    "angular-eslint": "19.3.0",
     "eslint": "^9.13.0",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
