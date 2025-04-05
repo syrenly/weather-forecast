@@ -14,23 +14,23 @@ import { IWeather } from "../../types/types";
  * ForecastFiveComponent shows weather forecast for 5 days. Each day is shown inside a tab; every row is the summary of forecast for 3 hours in that specific day
  */
 @Component({
-    selector: "app-forecast-five",
-    imports: [
-        DatePipe,
-        DecimalPipe,
-        MatIconModule,
-        MatCardModule,
-        MatDividerModule,
-        MatTooltipModule,
-        MatTabsModule,
-        NgOptimizedImage,
-        NgTemplateOutlet,
-        TitleCasePipe,
-        ToCardinalPointPipe,
-        WeatherPipe,
-    ],
-    templateUrl: "./forecast-five.component.html",
-    styleUrl: "./forecast-five.component.scss"
+	selector: "app-forecast-five",
+	imports: [
+		DatePipe,
+		DecimalPipe,
+		MatIconModule,
+		MatCardModule,
+		MatDividerModule,
+		MatTooltipModule,
+		MatTabsModule,
+		NgOptimizedImage,
+		NgTemplateOutlet,
+		TitleCasePipe,
+		ToCardinalPointPipe,
+		WeatherPipe,
+	],
+	templateUrl: "./forecast-five.component.html",
+	styleUrl: "./forecast-five.component.scss",
 })
 export class ForecastFiveComponent implements OnChanges {
 	@Input() forecastResult: IFiveDaysForecast | undefined;

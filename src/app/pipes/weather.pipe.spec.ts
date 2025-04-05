@@ -4,10 +4,10 @@ import { By } from "@angular/platform-browser";
 import { WeatherPipe } from "./weather.pipe";
 
 @Component({
-    imports: [WeatherPipe],
-    template: `
+	imports: [WeatherPipe],
+	template: `
 		<div class="weather-class">{{ weatherIconCode | weather }}</div>
-	`
+	`,
 })
 class TestComponent {
 	weatherIconCode: string | undefined;

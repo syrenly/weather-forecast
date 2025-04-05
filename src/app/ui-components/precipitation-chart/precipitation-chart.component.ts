@@ -22,10 +22,10 @@ import { ChartBase } from "../chart.base";
  * X axis is time
  */
 @Component({
-    selector: "app-precipitation-chart",
-    imports: [MatCardModule],
-    templateUrl: "./precipitation-chart.component.html",
-    styleUrl: "./precipitation-chart.component.scss"
+	selector: "app-precipitation-chart",
+	imports: [MatCardModule],
+	templateUrl: "./precipitation-chart.component.html",
+	styleUrl: "./precipitation-chart.component.scss",
 })
 export class PrecipitationChartComponent extends ChartBase implements OnChanges, AfterViewInit {
 	@Input() forecastResult: IFiveDaysForecast | undefined;
