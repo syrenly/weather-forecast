@@ -1,6 +1,7 @@
 $header: 40px;
 $padding: 1rem;
 $margin: 1rem;
+$iconSize: 40px;
 $widthMinusYPadding: calc(100% - 2 * #{$padding});
 $widthMinusYMargin: calc(100% - #{$padding});
 
@@ -55,12 +56,13 @@ h1 {
 	display: flex;
 	align-items: center;
 	mat-icon {
-		width: 40px;
-		height: 40px;
-		font-size: 40px;
+		width: $iconSize;
+		height: $iconSize;
+		font-size: $iconSize;
 	}
 	.error-label {
 		font-size: 20px;
+		padding-left: $padding;
 	}
 }
 
