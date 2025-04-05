@@ -10,9 +10,9 @@ import { CURRENT_THEME, Theme } from "../../tokens";
  * Switch between dark and light theme. The magic is done with an Injection Token CURRENT_THEME
  */
 @Component({
-    selector: "app-switch-theme",
-    imports: [MatButtonToggleModule, FormsModule, MatIconModule, MatTooltipModule],
-    templateUrl: "./switch-theme.component.html"
+	selector: "app-switch-theme",
+	imports: [MatButtonToggleModule, FormsModule, MatIconModule, MatTooltipModule],
+	templateUrl: "./switch-theme.component.html",
 })
 export class SwitchThemeComponent implements OnInit {
 	currentTheme!: Theme;

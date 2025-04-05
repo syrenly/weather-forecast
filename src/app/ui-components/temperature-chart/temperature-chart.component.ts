@@ -22,10 +22,10 @@ import { ChartBase } from "../chart.base";
  * X axis is time
  */
 @Component({
-    selector: "app-temperature-chart",
-    imports: [MatCardModule],
-    templateUrl: "./temperature-chart.component.html",
-    styleUrl: "./temperature-chart.component.scss"
+	selector: "app-temperature-chart",
+	imports: [MatCardModule],
+	templateUrl: "./temperature-chart.component.html",
+	styleUrl: "./temperature-chart.component.scss",
 })
 export class TemperatureChartComponent extends ChartBase implements OnChanges, AfterViewInit {
 	@Input() forecastResult: IFiveDaysForecast | undefined;

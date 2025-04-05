@@ -26,23 +26,23 @@ import { SearchService } from "./../services/search.service";
  * - chart for precipitation (snow and rain)
  */
 @Component({
-    selector: "app-forecast",
-    imports: [
-        CurrentWeatherComponent,
-        ForecastFiveComponent,
-        MatIconModule,
-        MatCardModule,
-        MatDividerModule,
-        MatProgressBarModule,
-        MatTooltipModule,
-        PrecipitationChartComponent,
-        RouterLink,
-        SearchbarComponent,
-        SwitchThemeComponent,
-        TemperatureChartComponent,
-    ],
-    templateUrl: "./forecast.component.html",
-    styleUrl: "./forecast.component.scss"
+	selector: "app-forecast",
+	imports: [
+		CurrentWeatherComponent,
+		ForecastFiveComponent,
+		MatIconModule,
+		MatCardModule,
+		MatDividerModule,
+		MatProgressBarModule,
+		MatTooltipModule,
+		PrecipitationChartComponent,
+		RouterLink,
+		SearchbarComponent,
+		SwitchThemeComponent,
+		TemperatureChartComponent,
+	],
+	templateUrl: "./forecast.component.html",
+	styleUrl: "./forecast.component.scss",
 })
 export default class ForecastComponent implements OnInit {
 	city: ICityWeather | undefined;

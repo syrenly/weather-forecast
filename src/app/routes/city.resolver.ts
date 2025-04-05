@@ -10,7 +10,6 @@ export type CityResolverType =
 	| { errorStatus: number }
 	| { countryInfo: ICityWeather; forecastResult: IFiveDaysForecast };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const cityResolver: ResolveFn<Observable<CityResolverType> | RedirectCommand> = (
 	route: ActivatedRouteSnapshot
 ): Observable<CityResolverType> | RedirectCommand => {
@@ -21,6 +20,7 @@ export const cityResolver: ResolveFn<Observable<CityResolverType> | RedirectComm
 			throw Error("Id not found or not valid");
 		}
 	} catch (error) {
+		console.info("[city_resolver_error]", error);
 		return of({ errorStatus: 404 });
 	}
 	const searchService = inject(SearchService);
