@@ -18,7 +18,7 @@ The following enhancements will be evaluated in order to improve the application
 
 -   [x] add links to the specific sections/components in this TODO list (todo list inception 🤯)
 -   [x] retrieve the license key from a json configuration (better with different files for development and production) and remove the current hard-coded behavior
--   [x] _fixed with prettier+eslint_: rewrite in a more readable way the htmls of the ForecastComponent and children: unlucky choice to use Angular 17 😿. It seems that most of VSCode extensions are not updated for the new statements @if and @for. The indentation of the code is a mess
+-   [x] _fixed with prettier+eslint_: rewrite in a more readable way the html files of the ForecastComponent and children: unlucky choice to use Angular 17 😿. It seems that most of VSCode extensions are not updated for the new statements @if and @for. The indentation of the code is a mess
 -   [x] find a better place for the OpenWeather attribution
 -   [x] apply inverse animation to the navigation transition from forecasts to home
 -   [x] remove navigation logic from searchbar
