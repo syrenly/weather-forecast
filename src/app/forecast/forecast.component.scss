@@ -3,6 +3,7 @@ $padding: 1rem;
 $margin: 1rem;
 $iconSize: 40px;
 $widthMinusYPadding: calc(100% - 2 * #{$padding});
+$widthMinusHalfYPadding: calc(100% - #{$padding});
 $widthMinusYMargin: calc(100% - #{$padding});
 
 :host {
@@ -15,11 +16,11 @@ $widthMinusYMargin: calc(100% - #{$padding});
 
 .header {
 	display: flex;
-	align-items: baseline;
+	align-items: center;
 	justify-content: space-between;
 	height: $header;
 	width: $widthMinusYPadding;
-	padding: calc(#{$padding} / 2) $padding $padding $padding;
+	padding: $padding;
 	.title {
 		display: flex;
 		align-items: center;
@@ -74,7 +75,7 @@ h1 {
 	}
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 800px) {
 	app-searchbar {
 		width: 70%;
 		padding: 0 15%;
@@ -94,11 +95,14 @@ h1 {
 		height: fit-content;
 	}
 }
-@media (max-width: 1000px) {
-	app-searchbar,
+@media (max-width: 799px) {
+	app-searchbar {
+		width: $widthMinusHalfYPadding;
+		padding: 0 calc(#{$padding} / 2);
+	}
 	.content {
-		width: $widthMinusYPadding;
-		padding: 0 #{$padding};
+		width: 100%;
+		padding: 0;
 	}
 	.widget {
 		width: $widthMinusYMargin;
@@ -113,7 +117,7 @@ h1 {
 	}
 }
 @media (max-width: 700px) {
-	.header .title h3 {
+	.header .title .app-name {
 		display: none;
 		width: 0px;
 	}

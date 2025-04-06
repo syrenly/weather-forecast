@@ -8,7 +8,7 @@ Live site [here!](https://syrenly.github.io/weather-forecast/) 🔥
 
 ### Implementations
 
--   Angular 18 and standalone components only;
+-   Angular 19 and standalone components only;
 -   folders organized mainly in a "folder-by-type" way;
 -   a router exposes 2 main components: HomeComponent and ForecastComponent; guard, resolver and animations implemented;
 -   the folder _ui-components_ contains the less architectural components, designed to show or search data;
@@ -16,6 +16,7 @@ Live site [here!](https://syrenly.github.io/weather-forecast/) 🔥
 -   HomeComponent is an entry point where search cities;
 -   ForecastComponent is the core of the application, where data are displayed using charts, tabs and list;
 -   Switch for themes and the license key are managed with injection tokens;
+-   🌟 NEW! 🌟 Improved accessibility!
 
 ### Main external dependencies
 

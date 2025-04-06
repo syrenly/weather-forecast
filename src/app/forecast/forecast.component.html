@@ -1,16 +1,20 @@
 @if (navigationStarted) {
 	<mat-progress-bar mode="indeterminate" />
 }
-<div class="header">
+<div
+	class="header"
+	role="banner">
 	<div
 		class="title c-pointer"
+		role="navigation"
+		aria-label="Return home"
 		routerLink="home">
 		<mat-icon
 			color="primary"
 			matTooltip="Return home">
 			home
 		</mat-icon>
-		<h3 class="app-name">What's the weather like?</h3>
+		<div class="app-name">What's the weather like?</div>
 	</div>
 	@if (city) {
 		<h1>
@@ -23,17 +27,23 @@
 	<app-switch-theme />
 </div>
 
-<app-searchbar (itemSelected)="navigateToCity($event)" />
+<app-searchbar
+	role="search"
+	(itemSelected)="navigateToCity($event)" />
 
 <!-- error template -->
 @if (!!errorInfo) {
-	<div class="error-template">
+	<div
+		class="error-template"
+		role="main">
 		<mat-icon color="accent">{{ errorInfo.icon }}</mat-icon>
 		<div class="error-label">{{ errorInfo.text }}</div>
 	</div>
 } @else if (city) {
 	<!-- Main Content -->
-	<div class="content">
+	<div
+		class="content"
+		role="main">
 		<!-- current weather -->
 		<app-current-weather
 			class="widget"
