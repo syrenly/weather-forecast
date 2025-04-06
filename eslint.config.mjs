@@ -19,6 +19,7 @@ export default defineConfig([
 		"**/*.yaml",
 		"**/*.yml",
 		"**/*.mock.ts",
+		"**/*.spec.ts",
 		"**/coverage/",
 		"dist/*",
 		"**/Docker",
@@ -26,7 +27,6 @@ export default defineConfig([
 	]),
 	{
 		files: ["**/*.ts"],
-
 		extends: compat.extends(
 			"eslint:recommended",
 			"plugin:@typescript-eslint/recommended",
@@ -34,7 +34,6 @@ export default defineConfig([
 			"plugin:@angular-eslint/template/process-inline-templates",
 			"plugin:prettier/recommended"
 		),
-
 		rules: {
 			"@angular-eslint/directive-selector": [
 				"error",

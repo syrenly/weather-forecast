@@ -58,7 +58,6 @@ describe("TemperatureChartComponent", (): void => {
 	it("should show warn in #calculateDataSets when the data are broken", (): void => {
 		const consoleSpy = spyOn(window.console, "warn");
 		const newForecasts: IFiveDaysForecast = JSON.parse(JSON.stringify(forecastResult));
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		newForecasts.list[0].dt = null as any;
 		component.forecastResult = newForecasts;
 		component.calculateDataSets();

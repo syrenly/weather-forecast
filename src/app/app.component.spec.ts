@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { provideAnimations } from "@angular/platform-browser/animations";
+import { RouterOutlet } from "@angular/router";
 import { AppComponent } from "./app.component";
 import { provideMockTheme } from "./unit-test-utils/token.mock";
 
@@ -37,5 +38,21 @@ describe("AppComponent", (): void => {
 		const bodyElement = doc.querySelector("body");
 		expect(bodyElement.classList.contains("dark-theme")).toBeTrue();
 		expect(bodyElement.classList.contains("light-theme")).toBeFalse();
+	});
+
+	it("should return the default animation state when no animationState is provided", (): void => {
+		const mockOutlet = {
+			activatedRouteData: {},
+		} as RouterOutlet;
+		const animationState = component.getRouteTransition(mockOutlet);
+		expect(animationState).toBe("static");
+	});
+
+	it("should return the provided animation state", (): void => {
+		const mockOutlet = {
+			activatedRouteData: { animationState: "fade" },
+		} as unknown as RouterOutlet;
+		const animationState = component.getRouteTransition(mockOutlet);
+		expect(animationState).toBe("fade");
 	});
 });
