@@ -37,7 +37,7 @@ export class ForecastFiveComponent implements OnChanges {
 	mainWeather: IWeather | undefined;
 	mainInfo: IMainInfo | undefined;
 	// group all forecasts by day
-	daysDictionary: { [key: string]: IThreeHoursForecast[] } = {};
+	daysDictionary: Partial<Record<string, IThreeHoursForecast[]>> = {};
 	days: string[] = [];
 
 	ngOnChanges(changes: SimpleChanges): void {
@@ -46,7 +46,7 @@ export class ForecastFiveComponent implements OnChanges {
 			this.daysDictionary =
 				list.length === 0
 					? {}
-					: groupBy(list, (v): string => {
+					: Object.groupBy(list, (v): string => {
 							const [date] = v.dt_txt.split(" ");
 							return date;
 						});
@@ -54,15 +54,3 @@ export class ForecastFiveComponent implements OnChanges {
 		}
 	}
 }
-/** Replace this with the new Object.groupBy function when Typescript will expose it  */
-export const groupBy = <T>(
-	array: T[],
-	predicate: (value: T, index: number, array: T[]) => string
-): { [key: string]: T[] } =>
-	array.reduce(
-		(acc, value, index, array): { [key: string]: T[] } => {
-			(acc[predicate(value, index, array)] ||= []).push(value);
-			return acc;
-		},
-		{} as { [key: string]: T[] }
-	);

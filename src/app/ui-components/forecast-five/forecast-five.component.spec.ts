@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { IThreeHoursForecast } from "../../types/forecast-types";
 import { forecastResult } from "../../unit-test-utils/utils.mock";
-import { ForecastFiveComponent, groupBy } from "./forecast-five.component";
+import { ForecastFiveComponent } from "./forecast-five.component";
 
 describe("ForecastFiveComponent", (): void => {
 	let component: ForecastFiveComponent;
@@ -62,11 +63,73 @@ describe("ForecastFiveComponent", (): void => {
 		expect(component.days?.length).toBe(0);
 		expect(component.daysDictionary).toEqual({});
 	});
-	it("should test #groupBy; create a dictionary with 2 keys: even numbers and odd numbers", (): void => {
-		const array = [...Array(10).keys()];
-		const predicate = (num: number, index: number, array: number[]): string =>
-			array[index] % 2 === 0 ? "even" : "odd";
-		const groups = groupBy(array, predicate);
-		expect(groups).toEqual({ even: [0, 2, 4, 6, 8], odd: [1, 3, 5, 7, 9] });
+
+	it("should handle undefined forecastResult gracefully", (): void => {
+		component.ngOnChanges({
+			forecastResult: {
+				currentValue: undefined,
+				previousValue: null,
+				isFirstChange: (): boolean => false,
+				firstChange: false,
+			},
+		});
+		expect(component.days?.length).toBe(0);
+		expect(component.daysDictionary).toEqual({});
+	});
+
+	it("should handle forecastResult with multiple valid dates", (): void => {
+		component.ngOnChanges({
+			forecastResult: {
+				currentValue: {
+					cod: "200",
+					message: 0,
+					cnt: 3,
+					list: [
+						{ dt_txt: "2024-04-15 12:00:00" },
+						{ dt_txt: "2024-04-15 15:00:00" },
+						{ dt_txt: "2024-04-16 12:00:00" },
+					] as IThreeHoursForecast[],
+					city: null,
+				},
+				previousValue: null,
+				isFirstChange: (): boolean => false,
+				firstChange: false,
+			},
+		});
+		expect(component.days?.length).toBe(2);
+		expect(component.daysDictionary).toEqual({
+			"2024-04-15": [
+				{ dt_txt: "2024-04-15 12:00:00" },
+				{ dt_txt: "2024-04-15 15:00:00" },
+			] as IThreeHoursForecast[],
+			"2024-04-16": [{ dt_txt: "2024-04-16 12:00:00" }] as IThreeHoursForecast[],
+		});
+	});
+
+	it("should handle forecastResult with duplicate dates", (): void => {
+		component.ngOnChanges({
+			forecastResult: {
+				currentValue: {
+					cod: "200",
+					message: 0,
+					cnt: 2,
+					list: [
+						{ dt_txt: "2024-04-15 12:00:00" },
+						{ dt_txt: "2024-04-15 12:00:00" },
+					] as IThreeHoursForecast[],
+					city: null,
+				},
+				previousValue: null,
+				isFirstChange: (): boolean => false,
+				firstChange: false,
+			},
+		});
+		expect(component.days?.length).toBe(1);
+		expect(component.daysDictionary).toEqual({
+			"2024-04-15": [
+				{ dt_txt: "2024-04-15 12:00:00" },
+				{ dt_txt: "2024-04-15 12:00:00" },
+			] as IThreeHoursForecast[],
+		});
 	});
 });
