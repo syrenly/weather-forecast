@@ -1,12 +1,29 @@
-<div class="header">
+<div
+	class="header"
+	role="banner">
 	<app-switch-theme />
 </div>
-<div class="content">
+<div
+	class="content"
+	role="main">
 	<h1>What's the weather like?</h1>
 	<mat-card>
 		<mat-card-content>
-			<h3>Welcome to my Demo application for weather forecasts. Look for a city using the search input, or pick one from the list below.</h3>
-			<app-searchbar (itemSelected)="navigateToCity($event)" />
+			<p class="presentation">
+				<span>Welcome to my Demo application for weather forecasts. Look for a city using the search input, or pick one from the list below. Click</span>
+				<span>&nbsp;</span>
+				<a
+					href="https://github.com/syrenly/weather-forecast"
+					target="_blank"
+					aria-label="View source code on GitHub">
+					<span>here</span>
+				</a>
+				<span>&nbsp;</span>
+				<span>to view source code on GitHub.</span>
+			</p>
+			<app-searchbar
+				role="search"
+				(itemSelected)="navigateToCity($event)" />
 			<div class="suggestions">
 				@for (city of cities; track city.id) {
 					<button
@@ -22,15 +39,17 @@
 	</mat-card>
 </div>
 
-<a
-	href="https://openweathermap.org/"
-	class="attribution c-pointer attribution-bg"
-	matTooltip="Data provided by Open Weather">
-	<!-- NB ratio w/h of this image is 1.76 -->
-	<img
-		alt="attribution to https://openweathermap.org"
-		priority
-		width="100"
-		height="57"
-		ngSrc="./assets/images/OpenWeatherLogo.png" />
-</a>
+<div role="contentinfo">
+	<a
+		href="https://openweathermap.org/"
+		class="attribution c-pointer attribution-bg"
+		matTooltip="Data provided by Open Weather">
+		<!-- NB ratio w/h of this image is 1.76 -->
+		<img
+			alt="attribution to https://openweathermap.org"
+			priority
+			width="100"
+			height="57"
+			ngSrc="./assets/images/OpenWeatherLogo.png" />
+	</a>
+</div>

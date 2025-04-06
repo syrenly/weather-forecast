@@ -16,14 +16,11 @@ $padding: 1rem;
 	height: 40px;
 	div {
 		width: 20%;
-		text-align: center;
-		&.wind,
-		&.pop {
-			display: flex;
-			align-items: center;
-		}
-		.icon-placeholder {
-			width: 24px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		mat-icon {
+			margin-right: 0.25rem;
 		}
 	}
 }
