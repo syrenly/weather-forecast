@@ -48,3 +48,5 @@ export interface ICityInfo {
 	sunrise: number;
 	sunset: number;
 }
+
+export type IDaysDictionary = Partial<Record<string, IThreeHoursForecast[]>>;
