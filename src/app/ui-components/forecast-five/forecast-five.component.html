@@ -1,11 +1,11 @@
-@if (forecastResult && days.length > 0) {
+@if (forecastResult() && days().length > 0) {
 	<mat-card>
 		<mat-tab-group>
-			@for (day of days; track day) {
+			@for (day of days(); track day) {
 				<mat-tab [label]="(day | date: 'MMM d') || 'N.A.'">
 					<ng-template matTabContent>
 						<ng-container *ngTemplateOutlet="secondHeader"></ng-container>
-						@for (forecast of daysDictionary[day]; track forecast.dt) {
+						@for (forecast of daysDictionary()[day]; track forecast.dt) {
 							<ng-container *ngTemplateOutlet="threeHours; context: { $implicit: forecast }"></ng-container>
 						}
 					</ng-template>
@@ -46,7 +46,7 @@
 	<mat-divider />
 	<div class="row">
 		<div class="hours">{{ forecast.dt * 1000 | date: "HH:mm" }}</div>
-		@if (forecast.weather && forecast.weather[0]) {
+		@if (forecast.weather && forecast.weather[0]?.icon) {
 			<div class="icon">
 				<img
 					matTooltip="{{ forecast.weather[0].description | titlecase }}"
