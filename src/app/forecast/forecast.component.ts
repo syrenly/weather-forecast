@@ -105,7 +105,7 @@ export default class ForecastComponent implements OnInit {
 			case 404:
 				return {
 					icon: "search_off",
-					text: "The city related to the wanted forecasts was not found. Please make another search in order to retrieve the right data.",
+					text: "The city was not found. Please make another search in order to retrieve the right data.",
 				};
 			case 429:
 				return {

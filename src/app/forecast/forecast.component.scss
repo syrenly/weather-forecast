@@ -51,11 +51,11 @@ h1 {
 }
 
 .error-template {
-	height: 100%;
-	align-self: center;
-	align-content: center;
 	display: flex;
+	align-self: center;
 	align-items: center;
+	justify-content: center;
+	height: 40%;
 	mat-icon {
 		width: $iconSize;
 		height: $iconSize;
@@ -69,7 +69,8 @@ h1 {
 
 @media (min-width: 1580px) {
 	app-searchbar,
-	.content {
+	.content,
+	.error-template {
 		width: 70%;
 		padding: 0 15%;
 	}
@@ -80,6 +81,7 @@ h1 {
 		width: 70%;
 		padding: 0 15%;
 	}
+	.error-template,
 	.content {
 		width: $widthMinusYPadding;
 	}
@@ -96,6 +98,7 @@ h1 {
 	}
 }
 @media (max-width: 799px) {
+	.error-template,
 	app-searchbar {
 		width: $widthMinusHalfYPadding;
 		padding: 0 calc(#{$padding} / 2);
