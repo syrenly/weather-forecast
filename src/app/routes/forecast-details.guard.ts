@@ -5,9 +5,9 @@ import { WEATHER_API_KEY } from "../tokens";
 
 export const forecastDetailsGuard: CanActivateFn = (
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	route: ActivatedRouteSnapshot,
+	_: ActivatedRouteSnapshot,
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	state: RouterStateSnapshot
+	__: RouterStateSnapshot
 ): Observable<GuardResult> => {
 	const licenseTokenSubj = inject(WEATHER_API_KEY);
 	return licenseTokenSubj.pipe(
