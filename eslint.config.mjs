@@ -59,6 +59,7 @@ export default defineConfig([
 					allowTaggedTemplates: true,
 				},
 			],
+			"@typescript-eslint/explicit-function-return-type": "error",
 			"prettier/prettier": "error",
 			"no-magic-numbers": ["error", { ignore: [0, 1], ignoreArrayIndexes: true, ignoreEnums: true }],
 		},
