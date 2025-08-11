@@ -39,11 +39,7 @@ export function initializeApp(
 						? "./assets/configurations/configuration.json"
 						: "./assets/configurations/configuration.prod.json"
 				)
-				.pipe(
-					tap((jsonConfig: { OpenWeatherApiKey: string }): void => {
-						weatherApiKeySubject.next(jsonConfig.OpenWeatherApiKey);
-					})
-				)
+				.pipe(tap(jsonConfig => weatherApiKeySubject.next(jsonConfig.OpenWeatherApiKey)))
 		);
 }
 //#endregion

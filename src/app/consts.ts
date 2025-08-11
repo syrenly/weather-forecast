@@ -52,6 +52,7 @@ export const citySamples: ICityIdName[] = [
 	},
 ];
 
+// Error codes for HTTP requests
 export enum HttpError {
 	BadRequest = 400,
 	Unauthorized = 401,

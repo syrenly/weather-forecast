@@ -2,10 +2,10 @@ import { HttpClient, provideHttpClient } from "@angular/common/http";
 import { ApplicationConfig, inject, provideAppInitializer } from "@angular/core";
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
 import { provideAnimations } from "@angular/platform-browser/animations";
+import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
 import { provideRouter } from "@angular/router";
 import { routes } from "./routes/app.routes";
 import { WEATHER_API_KEY, initializeApp, provideCurrentTheme, provideWeatherApiKey } from "./tokens";
-import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
 
 export const appConfig: ApplicationConfig = {
 	providers: [
