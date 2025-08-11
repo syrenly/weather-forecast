@@ -15,7 +15,9 @@ import Chart from "chart.js/auto";
 import { BehaviorSubject } from "rxjs";
 import { CURRENT_THEME, Theme } from "../../tokens";
 import { IFiveDaysForecast } from "../../types/forecast-types";
+import { MILLISECONDS_IN_SECOND } from "../chart-utils";
 import { ChartBase } from "../chart.base";
+
 /**
  * TemperatureChartComponent shows with a ChartJS instance the linear graphic of the temperature (mean, max and min) in 5 days
  * Y axis is the temperature
@@ -79,7 +81,7 @@ export class TemperatureChartComponent extends ChartBase implements OnChanges, A
 				console.warn(`Date not found for forecast ${l}`);
 				return;
 			}
-			const date = this.datePipe.transform(dt * 1000, "MMM, d HH") as string;
+			const date = this.datePipe.transform(dt * MILLISECONDS_IN_SECOND, "MMM, d HH") as string;
 			this.time.push(date);
 			this.meanTemperature.push(temp);
 			this.maxTemperature.push(temp_max);

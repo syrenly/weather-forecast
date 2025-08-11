@@ -36,7 +36,7 @@ export default class HomeComponent implements OnInit {
 	constructor(private readonly router: Router) {}
 
 	ngOnInit(): void {
-		this.cities = getRandomElements<ICityIdName>(citySamples, 4);
+		this.cities = getRandomElements<ICityIdName>(citySamples);
 	}
 
 	navigateByCityId(cityId: number): void {

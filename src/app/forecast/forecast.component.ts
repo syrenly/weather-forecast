@@ -6,6 +6,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ActivatedRoute, Data, Router, RouterLink } from "@angular/router";
+import { HttpError } from "../consts";
 import { ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
 import { IWeather } from "../types/types";
@@ -92,22 +93,22 @@ export default class ForecastComponent implements OnInit {
 	 */
 	setErrorInfo(errorStatus: number): { icon: string; text: string } {
 		switch (errorStatus) {
-			case 400:
+			case HttpError.BadRequest:
 				return {
 					icon: "error_outline",
 					text: "The forecasts were not retrieved due to an error in the structure of the request. Please retry.",
 				};
-			case 401:
+			case HttpError.Unauthorized:
 				return {
 					icon: "policy",
 					text: "The forecasts were not retrieved, since the license is not valid, expired or missing.",
 				};
-			case 404:
+			case HttpError.NotFound:
 				return {
 					icon: "search_off",
 					text: "The city was not found. Please make another search in order to retrieve the right data.",
 				};
-			case 429:
+			case HttpError.TooManyRequests:
 				return {
 					icon: "event_repeat",
 					text: "The forecasts were not retrieved, because too many requests were sent to the server. Please, consider to extend the license or wait some times.",

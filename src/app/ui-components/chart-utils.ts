@@ -2,6 +2,8 @@
  * File containing consts used to style the charts
  */
 
+export const MILLISECONDS_IN_SECOND = 1000;
+
 // light color for dark mode
 const color = "#FFFFFF";
 // #region options for chartJS

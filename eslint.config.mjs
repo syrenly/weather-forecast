@@ -43,7 +43,6 @@ export default defineConfig([
 					style: "camelCase",
 				},
 			],
-
 			"@angular-eslint/component-selector": [
 				"error",
 				{
@@ -61,6 +60,7 @@ export default defineConfig([
 				},
 			],
 			"prettier/prettier": "error",
+			"no-magic-numbers": ["error", { ignore: [0, 1], ignoreArrayIndexes: true, ignoreEnums: true }],
 		},
 	},
 	{

@@ -40,7 +40,7 @@ export function initializeApp(
 						: "./assets/configurations/configuration.prod.json"
 				)
 				.pipe(
-					tap(jsonConfig => {
+					tap((jsonConfig: { OpenWeatherApiKey: string }): void => {
 						weatherApiKeySubject.next(jsonConfig.OpenWeatherApiKey);
 					})
 				)

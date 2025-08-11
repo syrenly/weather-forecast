@@ -2,6 +2,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { ActivatedRouteSnapshot, RedirectCommand, ResolveFn, Router } from "@angular/router";
 import { Observable, catchError, forkJoin, of } from "rxjs";
+import { HttpError } from "../consts";
 import { SearchService } from "../services/search.service";
 import { ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
@@ -20,8 +21,8 @@ export const cityResolver: ResolveFn<Observable<CityResolverType> | RedirectComm
 			throw Error("Id not found or not valid");
 		}
 	} catch (error) {
-		console.info("[city_resolver_error]", error);
-		return of({ errorStatus: 404 });
+		console.debug("[city_resolver_error]", error);
+		return of({ errorStatus: HttpError.NotFound });
 	}
 	const searchService = inject(SearchService);
 	const router = inject(Router);

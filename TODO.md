@@ -32,3 +32,4 @@ The following enhancements will be evaluated in order to improve the application
 -   [x] randomize the cities shown on the home page
 -   [x] implement accessibility
 -   [x] replace [groupBy](./src/app/ui-components/forecast-five/forecast-five.component.ts) with the new Object.groupBy function when it will be available
+-   [x] implemented eslint "no-magic-numbers" rule

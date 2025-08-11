@@ -93,7 +93,7 @@ describe("ForecastComponent case error status", (): void => {
 		expect(component.forecastResult).toBeUndefined();
 		expect(component.errorInfo?.icon).toBe("search_off");
 		expect(component.errorInfo?.text).toBe(
-			"The city related to the wanted forecasts was not found. Please make another search in order to retrieve the right data."
+			"The city was not found. Please make another search in order to retrieve the right data."
 		);
 	}));
 	describe("should set error info", (): void => {
@@ -115,7 +115,7 @@ describe("ForecastComponent case error status", (): void => {
 			const errorInfo = component.setErrorInfo(404);
 			expect(errorInfo.icon).toBe("search_off");
 			expect(errorInfo.text).toBe(
-				"The city related to the wanted forecasts was not found. Please make another search in order to retrieve the right data."
+				"The city was not found. Please make another search in order to retrieve the right data."
 			);
 		});
 		it("#case 429", (): void => {

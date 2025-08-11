@@ -15,6 +15,7 @@ import Chart from "chart.js/auto";
 import { BehaviorSubject } from "rxjs";
 import { CURRENT_THEME, Theme } from "../../tokens";
 import { IFiveDaysForecast } from "../../types/forecast-types";
+import { MILLISECONDS_IN_SECOND } from "../chart-utils";
 import { ChartBase } from "../chart.base";
 /**
  * PrecipitationChartComponent shows with a ChartJS instance the linear graphic of the precipitations (rain and snow) in 5 days
@@ -77,7 +78,7 @@ export class PrecipitationChartComponent extends ChartBase implements OnChanges,
 				console.warn(`Date not found for forecast ${l}`);
 				return;
 			}
-			const date = this.datePipe.transform(dt * 1000, "MMM, d HH") as string;
+			const date = this.datePipe.transform(dt * MILLISECONDS_IN_SECOND, "MMM, d HH") as string;
 			this.time.push(date);
 
 			const rain = l.rain?.["3h"] || 0;

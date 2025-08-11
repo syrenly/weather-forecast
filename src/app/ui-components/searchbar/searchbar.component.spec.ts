@@ -101,8 +101,8 @@ describe("SearchbarComponent", (): void => {
 			expect(component.autocompleteHint).toBe("Too many requests. Wait some time or extend your license");
 		});
 		it("#case server error", (): void => {
-			component.setStatus("serverError");
-			expect(component.searchStatus).toEqual("serverError");
+			component.setStatus(500);
+			expect(component.searchStatus).toBe(500);
 			expect(component.autocompleteSuffix).toEqual({
 				icon: "error_outline",
 				tooltip: "An internal error occurred",
@@ -149,7 +149,7 @@ describe("SearchbarComponent", (): void => {
 			fixture.detectChanges();
 			tick(DEFAULT_DEBOUNCE_DELAY_MILLISECONDS + 10);
 			expect(results?.length).toBe(0);
-			expect(component.searchStatus).toBe("serverError");
+			expect(component.searchStatus).toBe(500);
 		}));
 		it("should handle short input", fakeAsync((): void => {
 			let results: ICityWeather[] = [];

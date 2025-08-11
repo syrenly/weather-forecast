@@ -9,13 +9,14 @@ import { MatInputModule } from "@angular/material/input";
 import { MatProgressSpinner } from "@angular/material/progress-spinner";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { Observable, catchError, debounceTime, map, of, switchMap, tap } from "rxjs";
-import { DEFAULT_DEBOUNCE_DELAY_MILLISECONDS, EMPTY_SEARCH_RESULT } from "../../consts";
+import { DEFAULT_DEBOUNCE_DELAY_MILLISECONDS, EMPTY_SEARCH_RESULT, HttpError } from "../../consts";
 import { FlagPipe } from "../../pipes/flag.pipe";
 import { WeatherPipe } from "../../pipes/weather.pipe";
 import { SearchService } from "../../services/search.service";
 import { ICitySearchResult, ICityWeather } from "../../types/city-types";
 
-type SearchStatus = "loading" | 400 | 401 | 429 | 404 | "serverError" | "completed" | "pristine";
+type SearchStatus = "loading" | "completed" | "pristine" | HttpError;
+const MIN_CHAR_SEARCH = 3;
 const DEFAULT_HINT = "";
 /**
  * Search for the city to know which weather conditions there are. It will navigate to the ForecastComponent to show details.
@@ -62,12 +63,16 @@ export class SearchbarComponent implements AfterViewInit {
 			// make search server side
 			switchMap(
 				(value: string): Observable<ICitySearchResult> =>
-					value.length >= 3 ? this.searchService.searchCity(value) : of(EMPTY_SEARCH_RESULT)
+					value.length >= MIN_CHAR_SEARCH ? this.searchService.searchCity(value) : of(EMPTY_SEARCH_RESULT)
 			),
 			// manage errors
 			catchError((error: HttpErrorResponse): Observable<ICitySearchResult> => {
-				const hasKnownErrorStatus = error.status === 400 || error.status === 401 || error.status === 429;
-				this.setStatus(hasKnownErrorStatus ? error.status : "serverError");
+				const hasKnownErrorStatus = [
+					HttpError.BadRequest,
+					HttpError.Forbidden,
+					HttpError.TooManyRequests,
+				].includes(error.status);
+				this.setStatus(hasKnownErrorStatus ? error.status : HttpError.InternalServerError);
 				return of(EMPTY_SEARCH_RESULT);
 			}),
 			// take only the inner list
@@ -111,22 +116,22 @@ export class SearchbarComponent implements AfterViewInit {
 	 */
 	setAutocompleteSuffix(): { icon: string; tooltip: string } | undefined {
 		switch (this.searchStatus) {
-			case 400:
+			case HttpError.BadRequest:
 				return {
 					icon: "error_outline",
 					tooltip: "Request invalid",
 				};
-			case 401:
+			case HttpError.Unauthorized:
 				return {
 					icon: "policy",
 					tooltip: "Not authorized",
 				};
-			case 429:
+			case HttpError.TooManyRequests:
 				return {
 					icon: "event_repeat",
 					tooltip: "Too many requests. Retry later.",
 				};
-			case "serverError":
+			case HttpError.InternalServerError:
 				return {
 					icon: "error_outline",
 					tooltip: "An internal error occurred",
@@ -140,13 +145,13 @@ export class SearchbarComponent implements AfterViewInit {
 	 */
 	setAutocompleteHint(): string {
 		switch (this.searchStatus) {
-			case 400:
+			case HttpError.BadRequest:
 				return "The request has a wrong signature, retry";
-			case 401:
+			case HttpError.Unauthorized:
 				return "The license is not valid, expired or missing";
-			case 429:
+			case HttpError.TooManyRequests:
 				return "Too many requests. Wait some time or extend your license";
-			case "serverError":
+			case HttpError.InternalServerError:
 				return "An internal error occurred";
 			case "loading":
 				return "Searching...";
