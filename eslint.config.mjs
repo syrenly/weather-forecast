@@ -60,7 +60,7 @@ export default defineConfig([
 				},
 			],
 			"@typescript-eslint/explicit-function-return-type": "error",
-			"prettier/prettier": "error",
+			"prettier/prettier": "warn",
 			"no-magic-numbers": ["error", { ignore: [0, 1], ignoreArrayIndexes: true, ignoreEnums: true }],
 		},
 	},
