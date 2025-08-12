@@ -1,6 +1,6 @@
 # WeatherForecast
 
-👋 Hi, I’m @syrenly and welcome to [**weather-forecast**](https://syrenly.github.io/weather-forecast/) repo! It's a Demo application for weather forecasts and it was generated with [Angular CLI](https://github.com/angular/angular-cli), maintained to version 19.
+👋 Hi, I’m @syrenly and welcome to [**weather-forecast**](https://syrenly.github.io/weather-forecast/) repo! It's a Demo application for weather forecasts and it was generated with [Angular CLI](https://github.com/angular/angular-cli), maintained to version 20.
 
 ## Live site!
 
@@ -8,20 +8,20 @@ Live site [here!](https://syrenly.github.io/weather-forecast/) 🔥
 
 ### Implementations
 
--   Angular 19 and standalone components only;
--   folders organized mainly in a "folder-by-type" way;
--   a router exposes 2 main components: HomeComponent and ForecastComponent; guard, resolver and animations implemented;
--   the folder _ui-components_ contains the less architectural components, designed to show or search data;
--   [theme.scss](./src/theme.scss) hosts the 2 themes (light and dark), that can be switched using the SwitchThemeComponent from _ui-components_; the component is always available on the upper right corner of the view;
--   HomeComponent is an entry point where search cities;
--   ForecastComponent is the core of the application, where data are displayed using charts, tabs and list;
--   Switch for themes and the license key are managed with injection tokens;
--   🌟 NEW! 🌟 Improved accessibility!
+- Angular 20 and standalone components only;
+- folders organized mainly in a "folder-by-type" way;
+- a router exposes 2 main components: HomeComponent and ForecastComponent; guard, resolver and animations implemented;
+- the folder _ui-components_ contains the less architectural components, designed to show or search data;
+- [theme.scss](./src/theme.scss) hosts the 2 themes (light and dark), that can be switched using the SwitchThemeComponent from _ui-components_; the component is always available on the upper right corner of the view;
+- HomeComponent is an entry point where search cities;
+- ForecastComponent is the core of the application, where data are displayed using charts, tabs and list;
+- Switch for themes and the license key are managed with injection tokens;
+- 🌟 NEW! 🌟 Improved accessibility!
 
 ### Main external dependencies
 
--   Angular Material for theme and UI Kit;
--   ChartJS for charts;
+- Angular Material for theme and UI Kit;
+- ChartJS for charts;
 
 ## Development server
 
@@ -78,6 +78,6 @@ Explore the [TODO List](./TODO_LIST.md) to know what's next.
 
 ## Branches
 
--   [ng-17](https://github.com/syrenly/weather-forecast/tree/ng-17): implementation with Angular 17;
--   [ng-18](https://github.com/syrenly/weather-forecast/tree/ng-18): implementation with Angular 18;
--   [assignment-04-2024](https://github.com/syrenly/weather-forecast/tree/assignment-04-2024): the first implementation of the application. Updates are not planned.
+- [ng-17](https://github.com/syrenly/weather-forecast/tree/ng-17): implementation with Angular 17;
+- [ng-18](https://github.com/syrenly/weather-forecast/tree/ng-18): implementation with Angular 18;
+- [assignment-04-2024](https://github.com/syrenly/weather-forecast/tree/assignment-04-2024): the first implementation of the application. Updates are not planned.
