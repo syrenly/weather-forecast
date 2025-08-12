@@ -9,7 +9,6 @@ The following enhancements will be evaluated in order to improve the application
 -   [ ] not sure if leave Angular Material or create custom components
 -   [ ] refresh button or periodic refresh of the data
 -   [ ] manage errors and not-found with specific components in routing
--   [ ] find out why Edge is so reluctant to accept the integrity control made for the Google Font and icons in index.ts with https://subresourceintegrity.com/. At the moment, it is removed from the link element to let the application work
 
 ... of course new ideas will come!
 
@@ -33,3 +32,4 @@ The following enhancements will be evaluated in order to improve the application
 -   [x] implement accessibility
 -   [x] replace [groupBy](./src/app/ui-components/forecast-five/forecast-five.component.ts) with the new Object.groupBy function when it will be available
 -   [x] implemented eslint "no-magic-numbers" rule
+-   [x] removed integrity from Google font links, since Google shares slightly different files based on the browser where they are downloaded
