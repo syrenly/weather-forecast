@@ -7,20 +7,20 @@ import { Observable, of } from "rxjs";
 import { SearchService } from "../services/search.service";
 import { ICitySearchResult, ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
-import { city, citySearchResult, forecastResult } from "./utils.mock";
+import { mockCity, mockCitySearchResult, mockForecastResult } from "./utils.mock";
 
 @Injectable()
 export class SearchMockService {
 	searchCity(_: string): Observable<ICitySearchResult> {
-		return of(citySearchResult);
+		return of(mockCitySearchResult);
 	}
 
 	getCityWeather(_: number): Observable<ICityWeather> {
-		return of(city);
+		return of(mockCity);
 	}
 
 	getFiveDaysForecast(cityId: number): Observable<IFiveDaysForecast> {
-		return of(forecastResult);
+		return of(mockForecastResult);
 	}
 }
 
