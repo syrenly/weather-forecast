@@ -1,15 +1,7 @@
 import { HttpClient } from "@angular/common/http";
-import { InjectionToken, isDevMode, Provider } from "@angular/core";
+import { InjectionToken, Provider } from "@angular/core";
 import { BehaviorSubject, catchError, firstValueFrom, Observable, of, tap } from "rxjs";
 import { DUMMY_API_KEY } from "./consts";
-
-//#region ENVIRONMENT
-export const IS_DEV_MODE = new InjectionToken<boolean>("Is the app in development mode");
-export const provideIsDevEnvironment = (): Provider => ({
-	provide: IS_DEV_MODE,
-	useValue: isDevMode(),
-});
-//#endregion
 
 //#region WEATHER API LICENSE KEY
 export const WEATHER_API_KEY = new InjectionToken<BehaviorSubject<string>>("");
@@ -47,6 +39,10 @@ export function initializeApp(
 					isDevMode
 						? "./assets/configurations/configuration.json"
 						: "./assets/configurations/configuration.prod.json"
+				)
+				.pipe(
+					catchError((): Observable<IConfiguration> => of({ OpenWeatherApiKey: DUMMY_API_KEY })),
+					tap(jsonConfig => weatherApiKeySubject.next(jsonConfig?.OpenWeatherApiKey || DUMMY_API_KEY))
 				)
 				.pipe(
 					catchError((): Observable<IConfiguration> => of({ OpenWeatherApiKey: DUMMY_API_KEY })),
