@@ -2,6 +2,8 @@ import { Theme } from "./tokens";
 import { ICityIdName, ICitySearchResult } from "./types/city-types";
 
 export const DEFAULT_DEBOUNCE_DELAY_MILLISECONDS = 250;
+// API key to use when the real API key is not available
+export const DUMMY_API_KEY = "DUMMY_API_KEY";
 
 export const EMPTY_SEARCH_RESULT: ICitySearchResult = {
 	message: "",

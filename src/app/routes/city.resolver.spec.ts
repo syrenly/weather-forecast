@@ -12,7 +12,7 @@ import { SearchService } from "../services/search.service";
 import { ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
 import { getSearchMockProvider } from "../unit-test-utils/search.service.mock";
-import { city, forecastResult } from "../unit-test-utils/utils.mock";
+import { mockCity, mockForecastResult } from "../unit-test-utils/utils.mock";
 import { CityResolverType, cityResolver } from "./city.resolver";
 
 describe("cityResolver", (): void => {
@@ -40,8 +40,8 @@ describe("cityResolver", (): void => {
 		route.params = { id: 1 };
 		(executeResolver(route, {} as RouterStateSnapshot) as Observable<CityResolverType>).subscribe(value => {
 			const v = value as { countryInfo: ICityWeather; forecastResult: IFiveDaysForecast };
-			expect(v.countryInfo).toEqual(city);
-			expect(v.forecastResult).toEqual(forecastResult);
+			expect(v.countryInfo).toEqual(mockCity);
+			expect(v.forecastResult).toEqual(mockForecastResult);
 			expect(searchService.navigationStarted).toBeTrue();
 		});
 		tick();
@@ -86,8 +86,8 @@ describe("cityResolver", (): void => {
 
 		(executeResolver(route, {} as RouterStateSnapshot) as Observable<CityResolverType>).subscribe(value => {
 			const v = value as { countryInfo: ICityWeather; forecastResult: IFiveDaysForecast };
-			expect(v.countryInfo).toEqual(city);
-			expect(v.forecastResult).toEqual(forecastResult);
+			expect(v.countryInfo).toEqual(mockCity);
+			expect(v.forecastResult).toEqual(mockForecastResult);
 			expect(searchService.getCityWeather).toHaveBeenCalledWith(2);
 			expect(searchService.getFiveDaysForecast).toHaveBeenCalledWith(2);
 			expect(searchService.navigationStarted).toBeTrue();
