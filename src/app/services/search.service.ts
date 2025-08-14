@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Inject, Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { WEATHER_API_KEY } from "../tokens";
 import { ICitySearchResult, ICityWeather } from "../types/city-types";
@@ -20,10 +20,13 @@ export class SearchService {
 		this._navigationStarted = value;
 	}
 	private licenseKey = "";
-	constructor(
-		private httpClient: HttpClient,
-		@Inject(WEATHER_API_KEY) private readonly licenseKeySubj: BehaviorSubject<string>
-	) {
+
+	// #region Dependencies
+	private readonly licenseKeySubj: BehaviorSubject<string> = inject(WEATHER_API_KEY);
+	private readonly httpClient: HttpClient = inject(HttpClient);
+	// #endregion
+
+	constructor() {
 		this.licenseKeySubj.subscribe(key => {
 			this.licenseKey = key;
 		});

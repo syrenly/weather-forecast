@@ -1,6 +1,6 @@
 import { AsyncPipe, NgOptimizedImage } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
-import { AfterViewInit, Component, output } from "@angular/core";
+import { AfterViewInit, Component, inject, output } from "@angular/core";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -53,7 +53,9 @@ export class SearchbarComponent implements AfterViewInit {
 	// emits the selected city
 	itemSelected = output<ICityWeather>();
 
-	constructor(private readonly searchService: SearchService) {}
+	// #region Dependencies
+	private readonly searchService = inject(SearchService);
+	// #endregion
 
 	ngAfterViewInit(): void {
 		this.options$ = this.autocompleteControl.valueChanges.pipe(

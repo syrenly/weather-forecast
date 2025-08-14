@@ -1,5 +1,5 @@
 import { NgOptimizedImage } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, inject, OnInit } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatTooltipModule } from "@angular/material/tooltip";
@@ -32,8 +32,9 @@ import { getRandomElements } from "./home.utils";
 })
 export default class HomeComponent implements OnInit {
 	cities: ICityIdName[] = [];
-
-	constructor(private readonly router: Router) {}
+	// #region Dependencies
+	private readonly router = inject(Router);
+	// #endregion
 
 	ngOnInit(): void {
 		this.cities = getRandomElements<ICityIdName>(citySamples);

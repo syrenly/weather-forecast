@@ -1,11 +1,16 @@
-import { ElementRef } from "@angular/core";
+import { Component, ElementRef } from "@angular/core";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { Chart } from "chart.js";
 import { BehaviorSubject } from "rxjs";
 import { Theme } from "../tokens";
+import { provideMockTheme } from "../unit-test-utils/token.mock";
 import { ChartBase } from "./chart.base";
 
-class MockChartBase extends ChartBase {
+@Component({})
+class MockChartBaseComponent extends ChartBase {
 	canvasId = "mockCanvas";
+	override themeSubject = new BehaviorSubject<Theme>("light");
+	override elementRef = new ElementRef(document.createElement("canvas"));
 
 	createChart(): void {
 		this.chart = new Chart(this.elementRef.nativeElement, {
@@ -17,40 +22,44 @@ class MockChartBase extends ChartBase {
 }
 
 describe("ChartBase", () => {
-	let mockThemeSubject: BehaviorSubject<Theme>;
-	let mockDestroyRef: any;
-	let mockElementRef: ElementRef;
-	let chartBase: MockChartBase;
+	let component: MockChartBaseComponent;
+	let fixture: ComponentFixture<MockChartBaseComponent>;
 
-	beforeEach(() => {
-		mockThemeSubject = new BehaviorSubject<Theme>("light");
-		mockDestroyRef = {
-			destroy$: new BehaviorSubject<void>(undefined),
-			onDestroy: (): void => mockDestroyRef.destroy$.next(),
-		};
-		mockElementRef = new ElementRef(document.createElement("canvas"));
-		chartBase = new MockChartBase(mockThemeSubject, mockDestroyRef, mockElementRef);
+	beforeEach(async (): Promise<void> => {
+		await TestBed.configureTestingModule({
+			imports: [MockChartBaseComponent],
+			providers: [provideMockTheme()],
+		}).compileComponents();
+
+		fixture = TestBed.createComponent(MockChartBaseComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
 	});
 
 	it("should create the chart on initialization", () => {
-		spyOn(chartBase, "createChart").and.callThrough();
-		chartBase.ngAfterViewInit();
-		expect(chartBase.createChart).toHaveBeenCalled();
-		expect(chartBase.chart).toBeDefined();
+		spyOn(component, "createChart").and.callThrough();
+		// destroy chart if it was already created
+		if (component.chart) {
+			component.chart.destroy();
+			component.chart = undefined;
+		}
+		component.ngAfterViewInit();
+		expect(component.createChart).toHaveBeenCalled();
+		expect(component.chart).toBeDefined();
 	});
 
 	it("should update chart colors when theme changes", () => {
-		chartBase.ngAfterViewInit();
-		spyOn<any>(chartBase, "updateColors").and.callThrough();
-		mockThemeSubject.next("dark");
-		expect(chartBase["updateColors"]).toHaveBeenCalled();
-		expect(chartBase.currentTheme).toBe("dark");
+		component.ngAfterViewInit();
+		spyOn<any>(component, "updateColors").and.callThrough();
+		component.themeSubject.next("dark");
+		expect(component["updateColors"]).toHaveBeenCalled();
+		expect(component.currentTheme).toBe("dark");
 	});
 
 	it("should not update colors if chart is not defined", () => {
-		spyOn<any>(chartBase, "updateColors").and.callThrough();
-		chartBase.chart = undefined;
-		chartBase["updateColors"]();
-		expect(chartBase.chart).toBeUndefined();
+		spyOn<any>(component, "updateColors").and.callThrough();
+		component.chart = undefined;
+		component["updateColors"]();
+		expect(component.chart).toBeUndefined();
 	});
 });

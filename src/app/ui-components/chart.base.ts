@@ -1,7 +1,6 @@
-import { AfterViewInit, DestroyRef, Directive, ElementRef, Inject } from "@angular/core";
+import { AfterViewInit, DestroyRef, Directive, ElementRef, inject } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { Chart } from "chart.js";
-import { BehaviorSubject } from "rxjs";
 import { CURRENT_THEME, Theme } from "../tokens";
 import { darkOptions, lightOptions, mainOptions } from "./chart-utils";
 /**
@@ -13,12 +12,11 @@ export abstract class ChartBase implements AfterViewInit {
 	chart: Chart | undefined;
 	currentTheme!: Theme;
 
-	constructor(
-		@Inject(CURRENT_THEME)
-		protected readonly themeSubject: BehaviorSubject<Theme>,
-		protected readonly destroyRef: DestroyRef,
-		protected readonly elementRef: ElementRef
-	) {}
+	// #region Dependencies
+	readonly themeSubject = inject(CURRENT_THEME);
+	protected readonly elementRef: ElementRef = inject(ElementRef);
+	private readonly destroyRef: DestroyRef = inject(DestroyRef);
+	// #endregion
 
 	ngAfterViewInit(): void {
 		this.themeSubject.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((currentTheme): void => {

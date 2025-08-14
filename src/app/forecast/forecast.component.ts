@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit } from "@angular/core";
+import { Component, DestroyRef, inject, OnInit } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { MatCardModule } from "@angular/material/card";
 import { MatDividerModule } from "@angular/material/divider";
@@ -56,13 +56,12 @@ export default class ForecastComponent implements OnInit {
 	get navigationStarted(): boolean {
 		return this.searchService.navigationStarted;
 	}
-
-	constructor(
-		private readonly activatedRoute: ActivatedRoute,
-		private readonly router: Router,
-		private readonly destroyRef: DestroyRef,
-		private readonly searchService: SearchService
-	) {}
+	// #region Dependencies
+	private readonly activatedRoute = inject(ActivatedRoute);
+	private readonly router = inject(Router);
+	private readonly destroyRef = inject(DestroyRef);
+	private readonly searchService = inject(SearchService);
+	// #endregion
 
 	ngOnInit(): void {
 		this.activatedRoute.data.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data: Data): void => {

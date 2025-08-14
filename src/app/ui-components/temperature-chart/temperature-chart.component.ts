@@ -1,19 +1,7 @@
 import { DatePipe } from "@angular/common";
-import {
-	AfterViewInit,
-	Component,
-	DestroyRef,
-	ElementRef,
-	Inject,
-	Input,
-	LOCALE_ID,
-	OnChanges,
-	SimpleChanges,
-} from "@angular/core";
+import { AfterViewInit, Component, inject, Input, LOCALE_ID, OnChanges, SimpleChanges } from "@angular/core";
 import { MatCardModule } from "@angular/material/card";
 import Chart from "chart.js/auto";
-import { BehaviorSubject } from "rxjs";
-import { CURRENT_THEME, Theme } from "../../tokens";
 import { IFiveDaysForecast } from "../../types/forecast-types";
 import { MILLISECONDS_IN_SECOND } from "../chart-utils";
 import { ChartBase } from "../chart.base";
@@ -42,15 +30,9 @@ export class TemperatureChartComponent extends ChartBase implements OnChanges, A
 	time: string[] = [];
 	datePipe!: DatePipe;
 
-	constructor(
-		@Inject(LOCALE_ID) private readonly localeId: string,
-		@Inject(CURRENT_THEME)
-		themeSubject: BehaviorSubject<Theme>,
-		destroyRef: DestroyRef,
-		elementRef: ElementRef
-	) {
-		super(themeSubject, destroyRef, elementRef);
-	}
+	// #region Dependencies
+	private readonly localeId = inject(LOCALE_ID);
+	// #endregion
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes["forecastResult"] && !changes["forecastResult"].isFirstChange()) {

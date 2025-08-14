@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, Renderer2 } from "@angular/core";
+import { Component, inject, OnInit, Renderer2 } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
 import { themeCssClass } from "./consts";
@@ -13,11 +13,10 @@ import { CURRENT_THEME, Theme } from "./tokens";
 	animations: [routeTransitionAnimations],
 })
 export class AppComponent implements OnInit {
-	constructor(
-		@Inject(CURRENT_THEME)
-		private readonly themeSubject: BehaviorSubject<Theme>,
-		private readonly renderer: Renderer2
-	) {}
+	// #region Dependencies
+	private readonly themeSubject: BehaviorSubject<Theme> = inject(CURRENT_THEME);
+	private readonly renderer: Renderer2 = inject(Renderer2);
+	// #endregion
 
 	ngOnInit(): void {
 		this.themeSubject.subscribe((currentTheme: Theme): void => this.applyTheme(currentTheme));

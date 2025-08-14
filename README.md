@@ -41,10 +41,10 @@ Run `npm run test:coverage` to get stats about the code coverage. Current:
 
 ```
 =============================== Coverage summary ===============================
-Statements   : 97.15% ( 307/316 )
-Branches     : 91.02% ( 71/78 )
+Statements   : 97.18% ( 311/320 )
+Branches     : 92.4% ( 73/79 )
 Functions    : 92.47% ( 86/93 )
-Lines        : 98.31% ( 292/297 )
+Lines        : 98.31% ( 291/296 )
 ================================================================================
 ```
 
