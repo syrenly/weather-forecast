@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
-import { InjectionToken, Provider, isDevMode } from "@angular/core";
-import { BehaviorSubject, firstValueFrom, tap } from "rxjs";
+import { InjectionToken, isDevMode, Provider } from "@angular/core";
+import { BehaviorSubject, catchError, firstValueFrom, Observable, of, tap } from "rxjs";
+import { DUMMY_API_KEY } from "./consts";
 
 //#region WEATHER API LICENSE KEY
 export const WEATHER_API_KEY = new InjectionToken<BehaviorSubject<string>>("");
@@ -39,7 +40,10 @@ export function initializeApp(
 						? "./assets/configurations/configuration.json"
 						: "./assets/configurations/configuration.prod.json"
 				)
-				.pipe(tap(jsonConfig => weatherApiKeySubject.next(jsonConfig.OpenWeatherApiKey)))
+				.pipe(
+					catchError((): Observable<IConfiguration> => of({ OpenWeatherApiKey: DUMMY_API_KEY })),
+					tap(jsonConfig => weatherApiKeySubject.next(jsonConfig?.OpenWeatherApiKey || DUMMY_API_KEY))
+				)
 		);
 }
 //#endregion

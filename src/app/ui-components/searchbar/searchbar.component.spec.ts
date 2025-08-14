@@ -4,7 +4,7 @@ import { throwError } from "rxjs";
 import { DEFAULT_DEBOUNCE_DELAY_MILLISECONDS } from "../../consts";
 import { ICityWeather } from "../../types/city-types";
 import { getSearchMockProvider } from "../../unit-test-utils/search.service.mock";
-import { city, citySearchResult } from "../../unit-test-utils/utils.mock";
+import { mockCity, mockCitySearchResult } from "../../unit-test-utils/utils.mock";
 import { SearchbarComponent } from "./searchbar.component";
 
 describe("SearchbarComponent", (): void => {
@@ -29,10 +29,10 @@ describe("SearchbarComponent", (): void => {
 		let display = component.displayFn(null);
 		expect(display).toBe("");
 
-		display = component.displayFn(city);
+		display = component.displayFn(mockCity);
 		expect(display).toBe("Rome, IT");
 
-		const cityWithoutNames = JSON.parse(JSON.stringify(city));
+		const cityWithoutNames = JSON.parse(JSON.stringify(mockCity));
 		cityWithoutNames.name = "";
 		cityWithoutNames.sys = null;
 		display = component.displayFn(cityWithoutNames);
@@ -40,8 +40,8 @@ describe("SearchbarComponent", (): void => {
 	});
 	it("should test #onItemSelected", (): void => {
 		const emitSpy = spyOn(component.itemSelected, "emit");
-		component.onItemSelected(city);
-		expect(emitSpy).toHaveBeenCalledWith(city);
+		component.onItemSelected(mockCity);
+		expect(emitSpy).toHaveBeenCalledWith(mockCity);
 		expect(component.autocompleteControl.value).toBeNull();
 	});
 	describe("should test the search", (): void => {
@@ -56,7 +56,7 @@ describe("SearchbarComponent", (): void => {
 			input.dispatchEvent(new Event("input"));
 			fixture.detectChanges();
 			tick(DEFAULT_DEBOUNCE_DELAY_MILLISECONDS + 10);
-			expect(results).toBe(citySearchResult.list);
+			expect(results).toBe(mockCitySearchResult.list);
 		}));
 		it("should null  value", fakeAsync((): void => {
 			let results: ICityWeather[] = [];
@@ -171,7 +171,7 @@ describe("SearchbarComponent", (): void => {
 			input.value = "test";
 			input.dispatchEvent(new Event("input"));
 			fixture.detectChanges();
-			component.onItemSelected(city);
+			component.onItemSelected(mockCity);
 			expect(component.autocompleteControl.value).toBeNull();
 		});
 	});

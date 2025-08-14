@@ -28,7 +28,7 @@ describe("ForecastFiveComponent", (): void => {
 			],
 		};
 
-		fixture.componentRef.setInput("forecastResult", mockForecast);
+		fixture.componentRef.setInput("mockForecastResult", mockForecast);
 		fixture.detectChanges();
 		const daysDictionary = component.daysDictionary();
 		expect(Object.keys(daysDictionary)).toEqual(["2023-03-01", "2023-03-02"]);
@@ -36,15 +36,15 @@ describe("ForecastFiveComponent", (): void => {
 		expect(daysDictionary["2023-03-02"]?.length).toBe(1);
 	});
 
-	it("should return an empty dictionary if forecastResult is undefined", (): void => {
-		fixture.componentRef.setInput("forecastResult", undefined);
+	it("should return an empty dictionary if mockForecastResult is undefined", (): void => {
+		fixture.componentRef.setInput("mockForecastResult", undefined);
 
 		const daysDictionary = component.daysDictionary();
 		expect(daysDictionary).toEqual({});
 	});
 
-	it("should return an empty dictionary if forecastResult list is empty", (): void => {
-		fixture.componentRef.setInput("forecastResult", { list: [] });
+	it("should return an empty dictionary if mockForecastResult list is empty", (): void => {
+		fixture.componentRef.setInput("mockForecastResult", { list: [] });
 
 		const daysDictionary = component.daysDictionary();
 		expect(daysDictionary).toEqual({});
@@ -57,7 +57,7 @@ describe("ForecastFiveComponent", (): void => {
 				{ dt_txt: "2023-03-02 12:00:00", weather: "Rainy" },
 			],
 		};
-		fixture.componentRef.setInput("forecastResult", mockForecast);
+		fixture.componentRef.setInput("mockForecastResult", mockForecast);
 
 		const days = component.days();
 		expect(days).toEqual(["2023-03-01", "2023-03-02"]);
