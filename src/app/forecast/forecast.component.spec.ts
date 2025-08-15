@@ -11,7 +11,7 @@ const route = {
 	data: new BehaviorSubject({
 		0: {
 			countryInfo: mockCity,
-			mockForecastResult: mockForecastResult,
+			forecastResult: mockForecastResult,
 			animationState: "forecastState",
 		},
 	}),

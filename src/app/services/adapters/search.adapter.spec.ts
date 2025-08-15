@@ -29,7 +29,7 @@ describe("SearchAdapter", (): void => {
 			expect(result).toBeNull();
 		});
 		const req = httpMock.expectOne(
-			`https://api.openweathermap.org/data/2.5/find?q=test&type=like&appid=KEY&units=metric`
+			`https://api.openweathermap.org/data/2.5/find?q=test&appid=KEY&units=metric&type=like`
 		);
 		expect(req.request.method).toBe("GET");
 	});

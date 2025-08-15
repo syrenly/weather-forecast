@@ -28,7 +28,7 @@ describe("TemperatureChartComponent", (): void => {
 		const spyCalculate = spyOn(component, "calculateDataSets");
 		const spyCreateChart = spyOn(component, "createChart");
 		component.ngOnChanges({
-			mockForecastResult: {
+			forecastResult: {
 				currentValue: mockForecastResult,
 				previousValue: null,
 				isFirstChange: (): boolean => false,
