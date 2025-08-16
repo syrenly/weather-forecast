@@ -3,6 +3,14 @@ import { InjectionToken, Provider } from "@angular/core";
 import { BehaviorSubject, catchError, firstValueFrom, Observable, of, tap } from "rxjs";
 import { DUMMY_API_KEY } from "./consts";
 
+//#region ENVIRONMENT
+export const IS_DEV_MODE = new InjectionToken<boolean>("Is the app in development mode");
+export const provideIsDevEnvironment = (): Provider => ({
+	provide: IS_DEV_MODE,
+	useValue: isDevMode(),
+});
+//#endregion
+
 //#region WEATHER API LICENSE KEY
 export const WEATHER_API_KEY = new InjectionToken<BehaviorSubject<string>>("");
 const weatherApiKeyFn = (): BehaviorSubject<string> => new BehaviorSubject<string>("");
