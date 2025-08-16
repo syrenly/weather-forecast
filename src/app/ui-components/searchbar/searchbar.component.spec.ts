@@ -4,7 +4,7 @@ import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { throwError } from "rxjs";
 import { DEFAULT_DEBOUNCE_DELAY_MILLISECONDS } from "../../consts";
 import { ICityWeather } from "../../types/city-types";
-import { getSearchMockProvider } from "../../unit-test-utils/search.service.mock";
+import { provideMockSearchService } from "../../unit-test-utils/search.service.mock";
 import { mockCity, mockCitySearchResult } from "../../unit-test-utils/utils.mock";
 import { SearchbarComponent } from "./searchbar.component";
 
@@ -15,7 +15,7 @@ describe("SearchbarComponent", (): void => {
 	beforeEach(async (): Promise<void> => {
 		await TestBed.configureTestingModule({
 			imports: [NoopAnimationsModule, SearchbarComponent],
-			providers: [getSearchMockProvider()],
+			providers: [provideMockSearchService()],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(SearchbarComponent);
