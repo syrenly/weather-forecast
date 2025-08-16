@@ -4,8 +4,8 @@ import { DUMMY_API_KEY } from "../consts";
 import { WEATHER_API_KEY } from "../tokens";
 import { ICitySearchResult, ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
-import { MockSearchAdapter } from "./adapters/mock-search.adapter";
 import { SearchAdapter } from "./adapters/search.adapter";
+import { DummySearchAdapter } from "./dummy-adapters/dummy-search.adapter";
 /**
  * Service to retrieve info about weather in a city. It uses the OpenWeather API, which works only with a valid license key provided by the injection token @property WEATHER_API_KEY
  * The request errors are not managed here: they are managed in the specific point where the methods are called.
@@ -29,7 +29,7 @@ export class SearchService {
 	// #region Dependencies
 	private readonly licenseKeySubj: BehaviorSubject<string> = inject(WEATHER_API_KEY);
 	private readonly searchAdapter = inject(SearchAdapter);
-	private readonly mockSearchAdapter = inject(MockSearchAdapter);
+	private readonly dummySearchAdapter = inject(DummySearchAdapter);
 	// #endregion
 
 	constructor() {
@@ -44,7 +44,7 @@ export class SearchService {
 	 */
 	searchCity(queryArg: string): Observable<ICitySearchResult> {
 		return this.useMockData
-			? this.mockSearchAdapter.searchCity(queryArg)
+			? this.dummySearchAdapter.searchCity(queryArg)
 			: this.searchAdapter.searchCity(queryArg, this.licenseKey);
 	}
 	/**
@@ -53,7 +53,7 @@ export class SearchService {
 	 */
 	getCityWeather(cityId: number): Observable<ICityWeather> {
 		return this.useMockData
-			? this.mockSearchAdapter.getCityWeather()
+			? this.dummySearchAdapter.getCityWeather()
 			: this.searchAdapter.getCityWeather(cityId, this.licenseKey);
 	}
 	/**
@@ -62,7 +62,7 @@ export class SearchService {
 	 */
 	getFiveDaysForecast(cityId: number): Observable<IFiveDaysForecast> {
 		return this.useMockData
-			? this.mockSearchAdapter.getFiveDaysForecast()
+			? this.dummySearchAdapter.getFiveDaysForecast()
 			: this.searchAdapter.getFiveDaysForecast(cityId, this.licenseKey);
 	}
 }

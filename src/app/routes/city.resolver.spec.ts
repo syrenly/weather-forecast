@@ -12,7 +12,7 @@ import { Observable } from "rxjs";
 import { SearchService } from "../services/search.service";
 import { ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
-import { getSearchMockProvider } from "../unit-test-utils/search.service.mock";
+import { provideMockSearchService } from "../unit-test-utils/search.service.mock";
 import { mockCity, mockForecastResult } from "../unit-test-utils/utils.mock";
 import { CityResolverType, cityResolver } from "./city.resolver";
 
@@ -28,7 +28,7 @@ describe("cityResolver", (): void => {
 
 	beforeEach((): void => {
 		TestBed.configureTestingModule({
-			providers: [getSearchMockProvider(), Router],
+			providers: [provideMockSearchService(), Router],
 		});
 		searchService = TestBed.inject(SearchService);
 		router = TestBed.inject(Router);

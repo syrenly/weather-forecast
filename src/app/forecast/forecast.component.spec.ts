@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testin
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
-import { getSearchMockProvider } from "../unit-test-utils/search.service.mock";
+import { provideMockSearchService } from "../unit-test-utils/search.service.mock";
 import { provideMockTheme } from "../unit-test-utils/token.mock";
 import { mockCity, mockForecastResult } from "../unit-test-utils/utils.mock";
 import ForecastComponent from "./forecast.component";
@@ -26,7 +26,7 @@ describe("ForecastComponent case success route", (): void => {
 		await TestBed.configureTestingModule({
 			imports: [ForecastComponent, NoopAnimationsModule],
 			providers: [
-				getSearchMockProvider(),
+				provideMockSearchService(),
 				provideMockTheme(),
 				{ provide: ActivatedRoute, useValue: route },
 				Router,
@@ -73,7 +73,7 @@ describe("ForecastComponent case error status", (): void => {
 		await TestBed.configureTestingModule({
 			imports: [ForecastComponent, NoopAnimationsModule],
 			providers: [
-				getSearchMockProvider(),
+				provideMockSearchService(),
 				provideMockTheme(),
 				{ provide: ActivatedRoute, useValue: errorInRoute },
 			],

@@ -2,21 +2,21 @@ import { TestBed, getTestBed } from "@angular/core/testing";
 import { ICitySearchResult, ICityWeather } from "../../types/city-types";
 import { IFiveDaysForecast } from "../../types/forecast-types";
 import { mockCity, mockCitySearchResult, mockForecastResult } from "../../unit-test-utils/utils.mock";
-import { MockSearchAdapter } from "./mock-search.adapter";
+import { DummySearchAdapter } from "./dummy-search.adapter";
 
-describe("MockSearchAdapter", (): void => {
+describe("DummySearchAdapter", (): void => {
 	let injector: TestBed;
-	let service: MockSearchAdapter;
+	let service: DummySearchAdapter;
 
 	beforeEach((): void => {
 		TestBed.configureTestingModule({
 			teardown: { destroyAfterEach: false },
 			imports: [],
-			providers: [MockSearchAdapter],
+			providers: [DummySearchAdapter],
 		});
 
 		injector = getTestBed();
-		service = injector.inject(MockSearchAdapter);
+		service = injector.inject(DummySearchAdapter);
 	});
 	it("should be created", (): void => {
 		expect(service).toBeTruthy();

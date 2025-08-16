@@ -4,26 +4,26 @@
 
 import { Injectable, Provider } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { SearchService } from "../services/search.service";
+import { DummySearchAdapter } from "../services/dummy-adapters/dummy-search.adapter";
 import { ICitySearchResult, ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
 import { mockCity, mockCitySearchResult, mockForecastResult } from "./utils.mock";
 
 @Injectable()
-export class MockSearchService {
-	searchCity(_: string): Observable<ICitySearchResult> {
+export class MockDummySearchAdapter {
+	searchCity(): Observable<ICitySearchResult> {
 		return of(mockCitySearchResult);
 	}
 
-	getCityWeather(_: number): Observable<ICityWeather> {
+	getCityWeather(): Observable<ICityWeather> {
 		return of(mockCity);
 	}
 
-	getFiveDaysForecast(cityId: number): Observable<IFiveDaysForecast> {
+	getFiveDaysForecast(): Observable<IFiveDaysForecast> {
 		return of(mockForecastResult);
 	}
 }
 
-export function provideMockSearchService(): Provider {
-	return { provide: SearchService, useClass: MockSearchService };
+export function provideMockDummySearchAdapter(): Provider {
+	return { provide: DummySearchAdapter, useClass: MockDummySearchAdapter };
 }
