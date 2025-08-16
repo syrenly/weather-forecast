@@ -35,3 +35,4 @@ The following enhancements will be evaluated in order to improve the application
 - [x] implemented eslint "no-magic-numbers" rule
 - [x] removed integrity from Google font links, since Google shares slightly different files based on the browser where they are downloaded
 - [x] replaced constructor-based dependency injection with the `inject` function
+- [x] hit unit tests coverage to 100%

@@ -3,6 +3,14 @@ import { InjectionToken, isDevMode, Provider } from "@angular/core";
 import { BehaviorSubject, catchError, firstValueFrom, Observable, of, tap } from "rxjs";
 import { DUMMY_API_KEY } from "./consts";
 
+//#region ENVIRONMENT
+export const IS_DEV_MODE = new InjectionToken<boolean>("Is the app in development mode");
+export const provideIsDevEnvironment = (): Provider => ({
+	provide: IS_DEV_MODE,
+	useValue: isDevMode(),
+});
+//#endregion
+
 //#region WEATHER API LICENSE KEY
 export const WEATHER_API_KEY = new InjectionToken<BehaviorSubject<string>>("");
 const weatherApiKeyFn = (): BehaviorSubject<string> => new BehaviorSubject<string>("");
@@ -26,17 +34,17 @@ export const provideCurrentTheme = (): Provider => ({
 export interface IConfiguration {
 	OpenWeatherApiKey: string;
 }
-/** Retrieve the application configuration and update the weather api key value */
 export function initializeApp(
 	http: HttpClient,
-	weatherApiKeySubject: BehaviorSubject<string>
+	weatherApiKeySubject: BehaviorSubject<string>,
+	isDevMode: boolean
 ): () => Promise<IConfiguration> {
 	return (): Promise<IConfiguration> =>
 		firstValueFrom(
 			http
 				// use different json file, based on the type of build
 				.get<IConfiguration>(
-					isDevMode()
+					isDevMode
 						? "./assets/configurations/configuration.json"
 						: "./assets/configurations/configuration.prod.json"
 				)

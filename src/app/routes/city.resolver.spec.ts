@@ -2,6 +2,7 @@ import { TestBed, fakeAsync, tick } from "@angular/core/testing";
 import {
 	ActivatedRouteSnapshot,
 	MaybeAsync,
+	Navigation,
 	RedirectCommand,
 	ResolveFn,
 	Router,
@@ -17,6 +18,7 @@ import { CityResolverType, cityResolver } from "./city.resolver";
 
 describe("cityResolver", (): void => {
 	let searchService: SearchService;
+	let router: Router;
 	const executeResolver: ResolveFn<Observable<CityResolverType> | RedirectCommand> = (
 		...resolverParameters
 	): MaybeAsync<Observable<CityResolverType> | RedirectCommand> =>
@@ -29,13 +31,14 @@ describe("cityResolver", (): void => {
 			providers: [getSearchMockProvider(), Router],
 		});
 		searchService = TestBed.inject(SearchService);
+		router = TestBed.inject(Router);
 	});
 
 	it("should be created", (): void => {
 		expect(executeResolver).toBeTruthy();
 	});
 
-	it("should have success", fakeAsync((): void => {
+	it("should have success without cached city", fakeAsync((): void => {
 		const route = new ActivatedRouteSnapshot();
 		route.params = { id: 1 };
 		(executeResolver(route, {} as RouterStateSnapshot) as Observable<CityResolverType>).subscribe(value => {
@@ -43,6 +46,29 @@ describe("cityResolver", (): void => {
 			expect(v.countryInfo).toEqual(mockCity);
 			expect(v.forecastResult).toEqual(mockForecastResult);
 			expect(searchService.navigationStarted).toBeTrue();
+		});
+		tick();
+	}));
+
+	it("should have success with cached city", fakeAsync((): void => {
+		const route = new ActivatedRouteSnapshot();
+		const state = mockCity;
+		spyOn(router, "getCurrentNavigation").and.callFake(
+			() =>
+				({
+					extras: {
+						state,
+					},
+				}) as any as Navigation
+		);
+		const getCitySpy = spyOn(searchService, "getCityWeather");
+		route.params = { id: mockCity.id };
+		(executeResolver(route, {} as RouterStateSnapshot) as Observable<CityResolverType>).subscribe(value => {
+			const v = value as { countryInfo: ICityWeather; forecastResult: IFiveDaysForecast };
+			expect(v.countryInfo).toEqual(mockCity);
+			expect(v.forecastResult).toEqual(mockForecastResult);
+			expect(searchService.navigationStarted).toBeTrue();
+			expect(getCitySpy).not.toHaveBeenCalled();
 		});
 		tick();
 	}));

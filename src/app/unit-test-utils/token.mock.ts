@@ -1,20 +1,15 @@
+import { IS_DEV_MODE } from "./../tokens";
 /**
  * File containing mocked providers to be used in unit tests
  */
 
 import { LOCALE_ID, Provider } from "@angular/core";
-import { BehaviorSubject, EMPTY } from "rxjs";
-import { DUMMY_API_KEY } from "../consts";
+import { BehaviorSubject } from "rxjs";
 import { CURRENT_THEME, WEATHER_API_KEY } from "../tokens";
 
 export const provideMockWeatherApiKey = (): Provider => ({
 	provide: WEATHER_API_KEY,
 	useValue: new BehaviorSubject<string>("KEY"),
-});
-
-export const provideMockDummyWeatherApiKey = (): Provider => ({
-	provide: WEATHER_API_KEY,
-	useValue: new BehaviorSubject<string>(DUMMY_API_KEY),
 });
 
 export const provideMockTheme = (): Provider => ({
@@ -26,5 +21,11 @@ export const provideMockLocaleId = (): Provider => ({ provide: LOCALE_ID, useVal
 
 export const provideMockEMPTYWeatherApiKey = (): Provider => ({
 	provide: WEATHER_API_KEY,
-	useValue: EMPTY,
+	useValue: new BehaviorSubject<string>(""),
 });
+
+export const provideMockIsDevEnvironment = (): Provider => ({
+	provide: IS_DEV_MODE,
+	useValue: true,
+});
+1;

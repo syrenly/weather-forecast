@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from "@angular/common/http";
 import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { throwError } from "rxjs";
@@ -56,20 +57,74 @@ describe("SearchbarComponent", (): void => {
 			input.dispatchEvent(new Event("input"));
 			fixture.detectChanges();
 			tick(DEFAULT_DEBOUNCE_DELAY_MILLISECONDS + 10);
-			expect(results).toBe(mockCitySearchResult.list);
+			expect(results).toEqual(mockCitySearchResult.list);
 		}));
-		it("should null  value", fakeAsync((): void => {
+		it("case input null", fakeAsync((): void => {
+			let results: ICityWeather[] = [];
+			component.options$.subscribe(list => {
+				results = list;
+			});
+			component.autocompleteControl.setValue(null);
+			fixture.detectChanges();
+			tick(DEFAULT_DEBOUNCE_DELAY_MILLISECONDS + 10);
+			expect(results).toEqual([]);
+		}));
+		it("should handle short input", fakeAsync((): void => {
 			let results: ICityWeather[] = [];
 			component.options$.subscribe(list => {
 				results = list;
 			});
 			const debugElement = fixture.debugElement.nativeElement;
 			const input: HTMLInputElement = debugElement.querySelector("input");
-			input.value = null as any;
+			input.value = "ab";
 			input.dispatchEvent(new Event("input"));
 			fixture.detectChanges();
 			tick(DEFAULT_DEBOUNCE_DELAY_MILLISECONDS + 10);
 			expect(results?.length).toBe(0);
+			expect(component.searchStatus).toBe("completed");
+		}));
+		it("should reset input after item selection", (): void => {
+			const debugElement = fixture.debugElement.nativeElement;
+			const input: HTMLInputElement = debugElement.querySelector("input");
+			input.value = "test";
+			input.dispatchEvent(new Event("input"));
+			fixture.detectChanges();
+			component.onItemSelected(mockCity);
+			expect(component.autocompleteControl.value).toBeNull();
+		});
+		it("should handle known error during search", fakeAsync((): void => {
+			let results: ICityWeather[] = [];
+			spyOn<any>(component["searchService"], "searchCity").and.returnValue(
+				throwError(() => new HttpErrorResponse({ status: 400, statusText: "Server error" }))
+			);
+			component.options$.subscribe(list => {
+				results = list;
+			});
+			const debugElement = fixture.debugElement.nativeElement;
+			const input: HTMLInputElement = debugElement.querySelector("input");
+			input.value = "test";
+			input.dispatchEvent(new Event("input"));
+			fixture.detectChanges();
+			tick(DEFAULT_DEBOUNCE_DELAY_MILLISECONDS + 10);
+			expect(results?.length).toBe(0);
+			expect(component.searchStatus).toBe(400);
+		}));
+		it("should handle generic error during search", fakeAsync((): void => {
+			let results: ICityWeather[] = [];
+			spyOn<any>(component["searchService"], "searchCity").and.returnValue(
+				throwError(() => new Error("Server error"))
+			);
+			component.options$.subscribe(list => {
+				results = list;
+			});
+			const debugElement = fixture.debugElement.nativeElement;
+			const input: HTMLInputElement = debugElement.querySelector("input");
+			input.value = "test";
+			input.dispatchEvent(new Event("input"));
+			fixture.detectChanges();
+			tick(DEFAULT_DEBOUNCE_DELAY_MILLISECONDS + 10);
+			expect(results?.length).toBe(0);
+			expect(component.searchStatus).toBe(500);
 		}));
 	});
 	describe("should set status of hint and suffix of autocomplete", (): void => {
@@ -133,46 +188,6 @@ describe("SearchbarComponent", (): void => {
 			expect(component.searchStatus).toEqual("unknownError" as any);
 			expect(component.autocompleteSuffix).toBeUndefined();
 			expect(component.autocompleteHint).toBe("");
-		});
-		it("should handle error during search", fakeAsync((): void => {
-			let results: ICityWeather[] = [];
-			spyOn<any>(component["searchService"], "searchCity").and.returnValue(
-				throwError(() => new Error("Server error"))
-			);
-			component.options$.subscribe(list => {
-				results = list;
-			});
-			const debugElement = fixture.debugElement.nativeElement;
-			const input: HTMLInputElement = debugElement.querySelector("input");
-			input.value = "test";
-			input.dispatchEvent(new Event("input"));
-			fixture.detectChanges();
-			tick(DEFAULT_DEBOUNCE_DELAY_MILLISECONDS + 10);
-			expect(results?.length).toBe(0);
-			expect(component.searchStatus).toBe(500);
-		}));
-		it("should handle short input", fakeAsync((): void => {
-			let results: ICityWeather[] = [];
-			component.options$.subscribe(list => {
-				results = list;
-			});
-			const debugElement = fixture.debugElement.nativeElement;
-			const input: HTMLInputElement = debugElement.querySelector("input");
-			input.value = "ab";
-			input.dispatchEvent(new Event("input"));
-			fixture.detectChanges();
-			tick(DEFAULT_DEBOUNCE_DELAY_MILLISECONDS + 10);
-			expect(results?.length).toBe(0);
-			expect(component.searchStatus).toBe("completed");
-		}));
-		it("should reset input after item selection", (): void => {
-			const debugElement = fixture.debugElement.nativeElement;
-			const input: HTMLInputElement = debugElement.querySelector("input");
-			input.value = "test";
-			input.dispatchEvent(new Event("input"));
-			fixture.detectChanges();
-			component.onItemSelected(mockCity);
-			expect(component.autocompleteControl.value).toBeNull();
 		});
 	});
 });
