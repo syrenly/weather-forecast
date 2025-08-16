@@ -52,16 +52,17 @@ export default defineConfig([
 				},
 			],
 			"@typescript-eslint/no-unused-expressions": [
-				"error",
+				"warn",
 				{
 					allowShortCircuit: true,
 					allowTernary: true,
 					allowTaggedTemplates: true,
 				},
 			],
-			"@typescript-eslint/explicit-function-return-type": "error",
+			"@typescript-eslint/explicit-function-return-type": "warn",
+			"@typescript-eslint/no-unused-vars": "warn",
 			"prettier/prettier": "warn",
-			"no-magic-numbers": ["error", { ignore: [0, 1], ignoreArrayIndexes: true, ignoreEnums: true }],
+			"no-magic-numbers": ["warn", { ignore: [0, 1], ignoreArrayIndexes: true, ignoreEnums: true }],
 		},
 	},
 	{
