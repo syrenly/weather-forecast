@@ -5,7 +5,14 @@ import { provideAnimations } from "@angular/platform-browser/animations";
 import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
 import { provideRouter } from "@angular/router";
 import { routes } from "./routes/app.routes";
-import { WEATHER_API_KEY, initializeApp, provideCurrentTheme, provideWeatherApiKey } from "./tokens";
+import {
+	IS_DEV_MODE,
+	WEATHER_API_KEY,
+	initializeApp,
+	provideCurrentTheme,
+	provideIsDevEnvironment,
+	provideWeatherApiKey,
+} from "./tokens";
 
 export const appConfig: ApplicationConfig = {
 	providers: [
@@ -16,9 +23,11 @@ export const appConfig: ApplicationConfig = {
 		provideCurrentTheme(),
 		// set the license key for OpenWeather API
 		provideWeatherApiKey(),
+		// wrap the environment check to allow easier tests
+		provideIsDevEnvironment(),
 		// initialize the application retrieving the configuration file
 		provideAppInitializer(() => {
-			const initializerFn = initializeApp(inject(HttpClient), inject(WEATHER_API_KEY));
+			const initializerFn = initializeApp(inject(HttpClient), inject(WEATHER_API_KEY), inject(IS_DEV_MODE));
 			return initializerFn();
 		}),
 		// set outline style for material
