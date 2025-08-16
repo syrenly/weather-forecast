@@ -24,7 +24,7 @@ describe("forecastDetailsGuard - case positive", (): void => {
 	it("should be created", (): void => {
 		expect(executeGuard).toBeTruthy();
 	});
-	it("should to let proceed", fakeAsync((): void => {
+	it("should let proceed", fakeAsync((): void => {
 		(executeGuard({} as ActivatedRouteSnapshot, {} as RouterStateSnapshot) as Observable<GuardResult>).subscribe(
 			value => {
 				expect(value).toBeTrue();
@@ -49,15 +49,16 @@ describe("forecastDetailsGuard - case negative", (): void => {
 	it("should be created", (): void => {
 		expect(executeGuard).toBeTruthy();
 	});
-	it("should not to let proceed", fakeAsync((done: DoneFn): void => {
+	it("should not let proceed", fakeAsync((): void => {
 		const routerSpy = spyOn(router, "navigate");
-		(executeGuard({} as ActivatedRouteSnapshot, {} as RouterStateSnapshot) as Observable<GuardResult>).subscribe(
-			value => {
+		TestBed.runInInjectionContext(() => {
+			(
+				executeGuard({} as ActivatedRouteSnapshot, {} as RouterStateSnapshot) as Observable<GuardResult>
+			).subscribe(value => {
 				expect(value).toBeFalse();
 				expect(routerSpy).toHaveBeenCalledWith(["home"]);
-				done();
-			}
-		);
-		tick();
+			});
+			tick();
+		});
 	}));
 });
