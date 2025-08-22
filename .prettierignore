@@ -1,0 +1,13 @@
+dist/
+node_modules/
+coverage/
+.vscode/
+.angular/
+
+package-lock.json
+.editorconfig
+.gitignore
+.gitkeep
+Dockerfile
+
+*.spec.ts
