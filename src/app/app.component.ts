@@ -1,10 +1,11 @@
-import { Component, inject, OnInit, Renderer2 } from "@angular/core";
+import { Component, DestroyRef, inject, OnInit, Renderer2 } from "@angular/core";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { RouterOutlet } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
-import { themeCssClass } from "./consts";
+import { DUMMY_API_KEY, themeCssClass } from "./consts";
 import { routeTransitionAnimations } from "./routes/route-transition-animations";
-import { CURRENT_THEME, Theme } from "./tokens";
-
+import { CURRENT_THEME, Theme, WEATHER_API_KEY } from "./tokens";
 @Component({
 	selector: "app-root",
 	imports: [RouterOutlet],
@@ -15,11 +16,29 @@ import { CURRENT_THEME, Theme } from "./tokens";
 export class AppComponent implements OnInit {
 	// #region Dependencies
 	private readonly themeSubject: BehaviorSubject<Theme> = inject(CURRENT_THEME);
-	private readonly renderer: Renderer2 = inject(Renderer2);
+	private readonly licenseKeySubj: BehaviorSubject<string> = inject(WEATHER_API_KEY);
+	private readonly snackBar = inject(MatSnackBar);
+	private readonly renderer = inject(Renderer2);
+	private readonly destroyRef = inject(DestroyRef);
 	// #endregion
 
 	ngOnInit(): void {
-		this.themeSubject.subscribe((currentTheme: Theme): void => this.applyTheme(currentTheme));
+		this.themeSubject
+			.pipe(takeUntilDestroyed(this.destroyRef))
+			.subscribe((currentTheme: Theme): void => this.applyTheme(currentTheme));
+		this.licenseKeySubj.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((key: string | null): void => {
+			const message =
+				key === DUMMY_API_KEY
+					? "Using dummy API key; please visit https://openweathermap.org to get a real one"
+					: "API key found";
+			if (key === DUMMY_API_KEY) {
+				this.snackBar.open(message, "Dismiss", {
+					horizontalPosition: "center",
+					verticalPosition: "top",
+				});
+			}
+			console.info(message);
+		});
 	}
 	/**
 	 * Add "light-theme" class to body to apply light theme; "dark-theme" for the dark one
