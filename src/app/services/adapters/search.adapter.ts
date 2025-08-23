@@ -1,7 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { ICitySearchResult, ICityWeather } from "../../types/city-types";
+import { Observable, of } from "rxjs";
+import { citySamples } from "../../consts";
+import { ICityIdName, ICitySearchResult, ICityWeather } from "../../types/city-types";
 import { IFiveDaysForecast } from "../../types/forecast-types";
 import { forecastApiConfig } from "./search.config";
 
@@ -58,5 +59,12 @@ export class SearchAdapter {
 				appid: licenseKey,
 			},
 		});
+	}
+	/**
+	 * Retrieve a list of sample cities
+	 * @returns an observable of the sample cities
+	 */
+	getSampleCities(): Observable<ICityIdName[]> {
+		return of(citySamples);
 	}
 }
