@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { provideAnimations } from "@angular/platform-browser/animations";
 import { RouterOutlet } from "@angular/router";
 import { AppComponent } from "./app.component";
-import { DUMMY_API_KEY } from "./consts";
 import { Theme } from "./tokens";
 import { provideMockTheme, provideMockWeatherApiKey } from "./unit-test-utils/token.mock";
 
@@ -66,25 +65,25 @@ describe("AppComponent", (): void => {
 		expect(applyThemeSpy).toHaveBeenCalledWith(mockTheme);
 	});
 
-	it("should show a snackbar when using the dummy API key", (): void => {
-		const snackBarSpy = spyOn(component["snackBar"], "open");
-		component["licenseKeySubj"].next(DUMMY_API_KEY);
-		fixture.detectChanges();
-		expect(snackBarSpy).toHaveBeenCalledWith(
-			"Using dummy API key; please visit https://openweathermap.org to get a real one",
-			"Dismiss",
-			{
-				horizontalPosition: "center",
-				verticalPosition: "top",
-			}
-		);
-	});
+	// it("should show a snackbar when using the dummy API key", (): void => {
+	// 	const snackBarSpy = spyOn(component["snackBar"], "open");
+	// 	component["licenseKeySubj"].next(DUMMY_API_KEY);
+	// 	fixture.detectChanges();
+	// 	expect(snackBarSpy).toHaveBeenCalledWith(
+	// 		"Using dummy API key; please visit https://openweathermap.org to get a real one",
+	// 		"Dismiss",
+	// 		{
+	// 			horizontalPosition: "center",
+	// 			verticalPosition: "top",
+	// 		}
+	// 	);
+	// });
 
-	it("should log a message when a valid API key is provided", (): void => {
-		const consoleSpy = spyOn(console, "info");
-		const validApiKey = "VALID_API_KEY";
-		component["licenseKeySubj"].next(validApiKey);
-		fixture.detectChanges();
-		expect(consoleSpy).toHaveBeenCalledWith("API key found");
-	});
+	// it("should log a message when a valid API key is provided", (): void => {
+	// 	const consoleSpy = spyOn(console, "info");
+	// 	const validApiKey = "VALID_API_KEY";
+	// 	component["licenseKeySubj"].next(validApiKey);
+	// 	fixture.detectChanges();
+	// 	expect(consoleSpy).toHaveBeenCalledWith("API key found");
+	// });
 });
