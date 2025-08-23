@@ -1,13 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { inject, Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { ICitySearchResult, ICityWeather } from "../../types/city-types";
+import { dummyCitySamples } from "../../consts";
+import { ICityIdName, ICitySearchResult, ICityWeather } from "../../types/city-types";
 import { IFiveDaysForecast } from "../../types/forecast-types";
-import {
-	mockDummyCity,
-	mockDummyCitySearchResult,
-	mockDummyForecastResult,
-} from "../../unit-test-utils/dummy-utils.mock";
 
 /**
  * Adapter to retrieve mock info about weather in a city when the license key is not provided
@@ -16,16 +13,24 @@ import {
 	providedIn: "root",
 })
 export class DummySearchAdapter {
+	// #region Dependencies
+	private readonly http = inject(HttpClient);
+	// #endregion
+
 	/** Retrieve a list of mock forecast */
 	searchCity(_: string): Observable<ICitySearchResult> {
-		return of(mockDummyCitySearchResult);
+		return this.http.get<ICitySearchResult>(`assets/dummy-responses/find.json`);
 	}
 	/** Retrieve mock weather of a city */
-	getCityWeather(): Observable<ICityWeather> {
-		return of(mockDummyCity);
+	getCityWeather(cityId: number): Observable<ICityWeather> {
+		return this.http.get<ICityWeather>(`assets/dummy-responses/${cityId}.weather.json`);
 	}
 	/** Retrieve mock weather of a city for the following 5 days, every 3 hours */
-	getFiveDaysForecast(): Observable<IFiveDaysForecast> {
-		return of(mockDummyForecastResult);
+	getFiveDaysForecast(cityId: number): Observable<IFiveDaysForecast> {
+		return this.http.get<IFiveDaysForecast>(`assets/dummy-responses/${cityId}.forecast.json`);
+	}
+	/** Retrieve a list of sample cities */
+	getSampleCities(): Observable<ICityIdName[]> {
+		return of(dummyCitySamples);
 	}
 }

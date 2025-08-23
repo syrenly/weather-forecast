@@ -46,7 +46,7 @@ describe("SearchService", (): void => {
 		expect(service.navigationStarted).toBeTrue();
 	});
 
-	describe("SearchService with valid API key", () => {
+	describe("SearchService with valid API key", (): void => {
 		it("should search cities", (done: DoneFn): void => {
 			service.searchCity("test").subscribe((result: ICitySearchResult): void => {
 				expect(result).toEqual(mockCitySearchResult);
@@ -71,9 +71,9 @@ describe("SearchService", (): void => {
 		});
 	});
 
-	describe("SearchService with dummy API", () => {
-		beforeEach(() => {
-			service["licenseKey"] = DUMMY_API_KEY;
+	describe("SearchService with dummy API", (): void => {
+		beforeEach((): void => {
+			spyOnProperty<any>(service, "licenseKey").and.returnValue(DUMMY_API_KEY);
 		});
 		it("should search cities", (done: DoneFn): void => {
 			service.searchCity("test").subscribe((result: ICitySearchResult): void => {
