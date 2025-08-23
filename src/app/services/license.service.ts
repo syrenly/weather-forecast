@@ -28,7 +28,7 @@ export class LicenseService implements OnDestroy {
 			const message =
 				key === DUMMY_API_KEY
 					? "Using dummy API key; please visit https://openweathermap.org to get a real one"
-					: "API key found";
+					: "API key found for https://openweathermap.org";
 			if (key === DUMMY_API_KEY) {
 				this.snackBar.open(message, "Dismiss", {
 					horizontalPosition: "center",

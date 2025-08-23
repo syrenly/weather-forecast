@@ -111,7 +111,7 @@ describe("tokens", (): void => {
 	describe("initializeApp", (): void => {
 		it("should initialize app with configuration from dev mode", async (): Promise<void> => {
 			const weatherApiKey = TestBed.inject(tokens.WEATHER_API_KEY);
-			const initializer = tokens.initializeApp(httpClient, weatherApiKey, true);
+			const initializer = tokens.initializeApp(weatherApiKey);
 			const promise = initializer();
 
 			httpMock
@@ -123,7 +123,7 @@ describe("tokens", (): void => {
 		});
 		it("should initialize app with configuration from prod mode", async (): Promise<void> => {
 			const weatherApiKey = TestBed.inject(tokens.WEATHER_API_KEY);
-			const initializer = tokens.initializeApp(httpClient, weatherApiKey, false);
+			const initializer = tokens.initializeApp(weatherApiKey);
 			const promise = initializer();
 
 			httpMock
@@ -135,7 +135,7 @@ describe("tokens", (): void => {
 		});
 		it("should handle error and use DUMMY_API_KEY", async (): Promise<void> => {
 			const weatherApiKey = TestBed.inject(tokens.WEATHER_API_KEY);
-			const initializer = tokens.initializeApp(httpClient, weatherApiKey, true);
+			const initializer = tokens.initializeApp(weatherApiKey);
 			const promise = initializer();
 
 			httpMock.expectOne("./assets/configurations/configuration.json").error(new ProgressEvent("error"));
@@ -145,7 +145,7 @@ describe("tokens", (): void => {
 		});
 		it("should initialize app with empty configuration and DUMMY_API_KEY", async (): Promise<void> => {
 			const weatherApiKey = TestBed.inject(tokens.WEATHER_API_KEY);
-			const initializer = tokens.initializeApp(httpClient, weatherApiKey, true);
+			const initializer = tokens.initializeApp(weatherApiKey);
 			const promise = initializer();
 
 			httpMock.expectOne("./assets/configurations/configuration.json").flush(null);
