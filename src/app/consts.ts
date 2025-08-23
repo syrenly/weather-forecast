@@ -25,7 +25,7 @@ export const citySamples: ICityIdName[] = [
 		id: 3169070,
 	},
 	{
-		name: "London, IT",
+		name: "London, GB",
 		id: 2643743,
 	},
 	{
@@ -51,6 +51,34 @@ export const citySamples: ICityIdName[] = [
 	{
 		name: "Hamburg, DE",
 		id: 2911298,
+	},
+];
+
+// samples of cities to show in the home page
+export const dummyCitySamples: ICityIdName[] = [
+	{
+		name: "London, GB",
+		id: 2643743,
+	},
+	{
+		name: "Milan, IT",
+		id: 3173435,
+	},
+	{
+		name: "Venice, IT",
+		id: 316460,
+	},
+	{
+		name: "Madrid, ES",
+		id: 3117735,
+	},
+	{
+		name: "Paris, FR",
+		id: 2988507,
+	},
+	{
+		name: "Dublin, IE",
+		id: 2964574,
 	},
 ];
 

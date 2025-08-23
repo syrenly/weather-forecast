@@ -1,12 +1,13 @@
-import { HttpClient, provideHttpClient } from "@angular/common/http";
+import { provideHttpClient } from "@angular/common/http";
 import { ApplicationConfig, inject, provideAppInitializer } from "@angular/core";
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
 import { provideAnimations } from "@angular/platform-browser/animations";
 import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
 import { provideRouter } from "@angular/router";
+import { Observable } from "rxjs";
 import { routes } from "./routes/app.routes";
 import {
-	IS_DEV_MODE,
+	IConfiguration,
 	WEATHER_API_KEY,
 	initializeApp,
 	provideCurrentTheme,
@@ -26,10 +27,7 @@ export const appConfig: ApplicationConfig = {
 		// wrap the environment check to allow easier tests
 		provideIsDevEnvironment(),
 		// initialize the application retrieving the configuration file
-		provideAppInitializer(() => {
-			const initializerFn = initializeApp(inject(HttpClient), inject(WEATHER_API_KEY), inject(IS_DEV_MODE));
-			return initializerFn();
-		}),
+		provideAppInitializer((): Observable<IConfiguration> => initializeApp(inject(WEATHER_API_KEY))()),
 		// set outline style for material
 		{
 			provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,

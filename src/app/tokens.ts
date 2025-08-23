@@ -1,15 +1,7 @@
-import { HttpClient } from "@angular/common/http";
 import { InjectionToken, Provider } from "@angular/core";
-import { BehaviorSubject, catchError, firstValueFrom, Observable, of, tap } from "rxjs";
+import { BehaviorSubject, Observable, of, tap } from "rxjs";
+import { configuration } from "../configurations/configuration";
 import { DUMMY_API_KEY } from "./consts";
-
-//#region ENVIRONMENT
-export const IS_DEV_MODE = new InjectionToken<boolean>("Is the app in development mode");
-export const provideIsDevEnvironment = (): Provider => ({
-	provide: IS_DEV_MODE,
-	useValue: isDevMode(),
-});
-//#endregion
 
 //#region WEATHER API LICENSE KEY
 export const WEATHER_API_KEY = new InjectionToken<BehaviorSubject<string>>("");
@@ -34,28 +26,15 @@ export const provideCurrentTheme = (): Provider => ({
 export interface IConfiguration {
 	OpenWeatherApiKey: string;
 }
-export function initializeApp(
-	http: HttpClient,
-	weatherApiKeySubject: BehaviorSubject<string>,
-	isDevMode: boolean
-): () => Promise<IConfiguration> {
-	return (): Promise<IConfiguration> =>
-		firstValueFrom(
-			http
-				// use different json file, based on the type of build
-				.get<IConfiguration>(
-					isDevMode
-						? "./assets/configurations/configuration.json"
-						: "./assets/configurations/configuration.prod.json"
-				)
-				.pipe(
-					catchError((): Observable<IConfiguration> => of({ OpenWeatherApiKey: DUMMY_API_KEY })),
-					tap(jsonConfig => weatherApiKeySubject.next(jsonConfig?.OpenWeatherApiKey || DUMMY_API_KEY))
-				)
-				.pipe(
-					catchError((): Observable<IConfiguration> => of({ OpenWeatherApiKey: DUMMY_API_KEY })),
-					tap(jsonConfig => weatherApiKeySubject.next(jsonConfig?.OpenWeatherApiKey || DUMMY_API_KEY))
-				)
+
+export function initializeApp(weatherApiKeySubject: BehaviorSubject<string>): () => Observable<IConfiguration> {
+	return () =>
+		of(configuration).pipe(
+			tap(config => {
+				const key = config?.OpenWeatherApiKey || DUMMY_API_KEY;
+				weatherApiKeySubject.next(key);
+			})
 		);
 }
+
 //#endregion
