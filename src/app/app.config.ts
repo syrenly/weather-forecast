@@ -6,14 +6,7 @@ import { provideAnimationsAsync } from "@angular/platform-browser/animations/asy
 import { provideRouter } from "@angular/router";
 import { Observable } from "rxjs";
 import { routes } from "./routes/app.routes";
-import {
-	IConfiguration,
-	WEATHER_API_KEY,
-	initializeApp,
-	provideCurrentTheme,
-	provideIsDevEnvironment,
-	provideWeatherApiKey,
-} from "./tokens";
+import { IConfiguration, WEATHER_API_KEY, initializeApp, provideCurrentTheme, provideWeatherApiKey } from "./tokens";
 
 export const appConfig: ApplicationConfig = {
 	providers: [
@@ -24,8 +17,6 @@ export const appConfig: ApplicationConfig = {
 		provideCurrentTheme(),
 		// set the license key for OpenWeather API
 		provideWeatherApiKey(),
-		// wrap the environment check to allow easier tests
-		provideIsDevEnvironment(),
 		// initialize the application retrieving the configuration file
 		provideAppInitializer((): Observable<IConfiguration> => initializeApp(inject(WEATHER_API_KEY))()),
 		// set outline style for material

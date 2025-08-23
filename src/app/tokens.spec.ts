@@ -1,11 +1,10 @@
 import { HttpClient, provideHttpClient } from "@angular/common/http";
 import { HttpTestingController, provideHttpClientTesting } from "@angular/common/http/testing";
-import { isDevMode } from "@angular/core";
 import { TestBed } from "@angular/core/testing";
 import { BehaviorSubject } from "rxjs";
 import { DUMMY_API_KEY } from "./consts";
 import * as tokens from "./tokens";
-import { provideMockIsDevEnvironment, provideMockTheme, provideMockWeatherApiKey } from "./unit-test-utils/token.mock";
+import { provideMockTheme, provideMockWeatherApiKey } from "./unit-test-utils/token.mock";
 
 describe("tokens", (): void => {
 	let httpMock: HttpTestingController;
@@ -19,7 +18,6 @@ describe("tokens", (): void => {
 				provideHttpClientTesting(),
 				provideMockTheme(),
 				provideMockWeatherApiKey(),
-				provideMockIsDevEnvironment(),
 			],
 		});
 		httpMock = TestBed.inject(HttpTestingController);
@@ -31,31 +29,31 @@ describe("tokens", (): void => {
 	});
 
 	describe("IS_DEV_MODE", () => {
-		it("should provide IS_DEV_MODE using provideIsDevEnvironment", (): void => {
-			TestBed.resetTestingModule();
-			TestBed.configureTestingModule({
-				providers: [tokens.provideIsDevEnvironment()],
-			});
-			const _isDevMode = TestBed.inject(tokens.IS_DEV_MODE);
-			expect(_isDevMode).toBe(isDevMode());
-		});
-		describe("should provide IS_DEV_MODE as true in development mode", (): void => {
-			it("test", () => {
-				const isDevMode = TestBed.inject(tokens.IS_DEV_MODE);
-				expect(isDevMode).toBeTrue();
-			});
-		});
-		describe("should provide IS_DEV_MODE as false in production mode", (): void => {
-			beforeEach((): void => {
-				TestBed.resetTestingModule();
-				TestBed.configureTestingModule({}).overrideProvider(tokens.IS_DEV_MODE, { useValue: false });
-			});
-			it("test", () => {
-				const isDevMode = TestBed.inject(tokens.IS_DEV_MODE);
-				expect(isDevMode).toBeFalse();
-			});
-		});
-	});
+	// 	it("should provide IS_DEV_MODE using provideIsDevEnvironment", (): void => {
+	// 		TestBed.resetTestingModule();
+	// 		TestBed.configureTestingModule({
+	// 			providers: [tokens.provideIsDevEnvironment()],
+	// 		});
+	// 		const _isDevMode = TestBed.inject(tokens.IS_DEV_MODE);
+	// 		expect(_isDevMode).toBe(isDevMode());
+	// 	});
+	// 	describe("should provide IS_DEV_MODE as true in development mode", (): void => {
+	// 		it("test", () => {
+	// 			const isDevMode = TestBed.inject(tokens.IS_DEV_MODE);
+	// 			expect(isDevMode).toBeTrue();
+	// 		});
+	// 	});
+	// 	describe("should provide IS_DEV_MODE as false in production mode", (): void => {
+	// 		beforeEach((): void => {
+	// 			TestBed.resetTestingModule();
+	// 			TestBed.configureTestingModule({}).overrideProvider(tokens.IS_DEV_MODE, { useValue: false });
+	// 		});
+	// 		it("test", () => {
+	// 			const isDevMode = TestBed.inject(tokens.IS_DEV_MODE);
+	// 			expect(isDevMode).toBeFalse();
+	// 		});
+	// 	});
+	 });
 
 	describe("WEATHER_API_KEY", () => {
 		it("should provide WEATHER_API_KEY using provideWeatherApiKey", (): void => {

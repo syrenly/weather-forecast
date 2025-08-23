@@ -1,4 +1,3 @@
-import { IS_DEV_MODE } from "./../tokens";
 /**
  * File containing mocked providers to be used in unit tests
  */
@@ -23,9 +22,3 @@ export const provideMockEMPTYWeatherApiKey = (): Provider => ({
 	provide: WEATHER_API_KEY,
 	useValue: new BehaviorSubject<string>(""),
 });
-
-export const provideMockIsDevEnvironment = (): Provider => ({
-	provide: IS_DEV_MODE,
-	useValue: true,
-});
-1;
