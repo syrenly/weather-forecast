@@ -9,5 +9,3 @@ package-lock.json
 .gitignore
 .gitkeep
 Dockerfile
-
-*.spec.ts

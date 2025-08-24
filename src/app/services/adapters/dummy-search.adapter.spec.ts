@@ -46,7 +46,7 @@ describe("DummySearchAdapter", (): void => {
 		const req = httpMock.expectOne("assets/dummy-responses/1234.forecast.json");
 		expect(req.request.method).toBe("GET");
 	});
-	it("should get five days forecasts", (done: DoneFn): void => {
+	it("should get sample cities", (done: DoneFn): void => {
 		service.getSampleCities().subscribe((result: ICityIdName[]): void => {
 			expect(result).toEqual(dummyCitySamples);
 			done();

@@ -4,7 +4,7 @@
 
 import { Injectable, Provider } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { DummySearchAdapter } from "../services/dummy-adapters/dummy-search.adapter";
+import { DummySearchAdapter } from "../services/adapters/dummy-search.adapter";
 import { ICitySearchResult, ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
 import { mockCity, mockCitySearchResult, mockForecastResult } from "./utils.mock";

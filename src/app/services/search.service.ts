@@ -2,8 +2,8 @@ import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { ICityIdName, ICitySearchResult, ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
+import { DummySearchAdapter } from "./adapters/dummy-search.adapter";
 import { SearchAdapter } from "./adapters/search.adapter";
-import { DummySearchAdapter } from "./dummy-adapters/dummy-search.adapter";
 import { LicenseService } from "./license.service";
 /**
  * Service to retrieve info about weather in a city. It uses the OpenWeather API, which works only with a valid license key provided by the injection token @property WEATHER_API_KEY

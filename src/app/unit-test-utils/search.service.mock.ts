@@ -4,8 +4,9 @@
 
 import { Injectable, Provider } from "@angular/core";
 import { Observable, of } from "rxjs";
+import { citySamples } from "../consts";
 import { SearchService } from "../services/search.service";
-import { ICitySearchResult, ICityWeather } from "../types/city-types";
+import { ICityIdName, ICitySearchResult, ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
 import { mockCity, mockCitySearchResult, mockForecastResult } from "./utils.mock";
 
@@ -19,8 +20,12 @@ export class MockSearchService {
 		return of(mockCity);
 	}
 
-	getFiveDaysForecast(cityId: number): Observable<IFiveDaysForecast> {
+	getFiveDaysForecast(_: number): Observable<IFiveDaysForecast> {
 		return of(mockForecastResult);
+	}
+
+	getSampleCities(): Observable<ICityIdName[]> {
+		return of(citySamples);
 	}
 }
 

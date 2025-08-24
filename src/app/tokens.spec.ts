@@ -28,7 +28,7 @@ describe("tokens", (): void => {
 		httpMock.verify();
 	});
 
-	describe("IS_DEV_MODE", () => {
+	// describe("IS_DEV_MODE", () => {
 	// 	it("should provide IS_DEV_MODE using provideIsDevEnvironment", (): void => {
 	// 		TestBed.resetTestingModule();
 	// 		TestBed.configureTestingModule({
@@ -53,7 +53,7 @@ describe("tokens", (): void => {
 	// 			expect(isDevMode).toBeFalse();
 	// 		});
 	// 	});
-	 });
+	// });
 
 	describe("WEATHER_API_KEY", () => {
 		it("should provide WEATHER_API_KEY using provideWeatherApiKey", (): void => {

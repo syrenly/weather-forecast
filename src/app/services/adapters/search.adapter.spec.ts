@@ -1,7 +1,8 @@
 import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { HttpTestingController, provideHttpClientTesting } from "@angular/common/http/testing";
 import { TestBed, getTestBed } from "@angular/core/testing";
-import { ICitySearchResult, ICityWeather } from "../../types/city-types";
+import { citySamples } from "../../consts";
+import { ICityIdName, ICitySearchResult, ICityWeather } from "../../types/city-types";
 import { IFiveDaysForecast } from "../../types/forecast-types";
 import { SearchAdapter } from "./search.adapter";
 
@@ -46,5 +47,11 @@ describe("SearchAdapter", (): void => {
 		});
 		const req = httpMock.expectOne(`https://api.openweathermap.org/data/2.5/forecast?id=1&appid=KEY&units=metric`);
 		expect(req.request.method).toBe("GET");
+	});
+	it("should get five days forecasts", (done: DoneFn): void => {
+		service.getSampleCities().subscribe((result: ICityIdName[]): void => {
+			expect(result).toEqual(citySamples);
+			done();
+		});
 	});
 });
