@@ -28,33 +28,6 @@ describe("tokens", (): void => {
 		httpMock.verify();
 	});
 
-	// describe("IS_DEV_MODE", () => {
-	// 	it("should provide IS_DEV_MODE using provideIsDevEnvironment", (): void => {
-	// 		TestBed.resetTestingModule();
-	// 		TestBed.configureTestingModule({
-	// 			providers: [tokens.provideIsDevEnvironment()],
-	// 		});
-	// 		const _isDevMode = TestBed.inject(tokens.IS_DEV_MODE);
-	// 		expect(_isDevMode).toBe(isDevMode());
-	// 	});
-	// 	describe("should provide IS_DEV_MODE as true in development mode", (): void => {
-	// 		it("test", () => {
-	// 			const isDevMode = TestBed.inject(tokens.IS_DEV_MODE);
-	// 			expect(isDevMode).toBeTrue();
-	// 		});
-	// 	});
-	// 	describe("should provide IS_DEV_MODE as false in production mode", (): void => {
-	// 		beforeEach((): void => {
-	// 			TestBed.resetTestingModule();
-	// 			TestBed.configureTestingModule({}).overrideProvider(tokens.IS_DEV_MODE, { useValue: false });
-	// 		});
-	// 		it("test", () => {
-	// 			const isDevMode = TestBed.inject(tokens.IS_DEV_MODE);
-	// 			expect(isDevMode).toBeFalse();
-	// 		});
-	// 	});
-	// });
-
 	describe("WEATHER_API_KEY", () => {
 		it("should provide WEATHER_API_KEY using provideWeatherApiKey", (): void => {
 			TestBed.resetTestingModule();
@@ -81,6 +54,32 @@ describe("tokens", (): void => {
 		});
 	});
 
+	describe("initializeApp", () => {
+		it("should initialize the app and update WEATHER_API_KEY with the configuration value", (done): void => {
+			TestBed.resetTestingModule();
+			const mockWeatherApiKeySubject = new BehaviorSubject<string>("");
+			const initializer = tokens.initializeApp(mockWeatherApiKeySubject, {
+				OpenWeatherApiKey: "test-api-key",
+			});
+			initializer().subscribe(() => {
+				expect(mockWeatherApiKeySubject.value).toBe("test-api-key");
+				done();
+			});
+		});
+
+		it("should initialize the app and update WEATHER_API_KEY with DUMMY_API_KEY if configuration is missing", (done): void => {
+			TestBed.resetTestingModule();
+			const mockWeatherApiKeySubject = new BehaviorSubject<string>("");
+			const initializer = tokens.initializeApp(mockWeatherApiKeySubject, {
+				OpenWeatherApiKey: "",
+			});
+			initializer().subscribe(() => {
+				expect(mockWeatherApiKeySubject.value).toBe(DUMMY_API_KEY);
+				done();
+			});
+		});
+	});
+
 	describe("CURRENT_THEME", () => {
 		it("should provide CURRENT_THEME using provideCurrentTheme", (): void => {
 			TestBed.resetTestingModule();
@@ -104,52 +103,6 @@ describe("tokens", (): void => {
 			const currentTheme = TestBed.inject(tokens.CURRENT_THEME);
 			expect(currentTheme).toBeInstanceOf(BehaviorSubject);
 			expect(currentTheme.value).toBe("dark");
-		});
-	});
-	describe("initializeApp", (): void => {
-		it("should initialize app with configuration from dev mode", async (): Promise<void> => {
-			const weatherApiKey = TestBed.inject(tokens.WEATHER_API_KEY);
-			const initializer = tokens.initializeApp(weatherApiKey);
-			const promise = initializer();
-
-			httpMock
-				.expectOne("./assets/configurations/configuration.json")
-				.flush({ OpenWeatherApiKey: "test-api-key" });
-
-			await promise;
-			expect(weatherApiKey.value).toBe("test-api-key");
-		});
-		it("should initialize app with configuration from prod mode", async (): Promise<void> => {
-			const weatherApiKey = TestBed.inject(tokens.WEATHER_API_KEY);
-			const initializer = tokens.initializeApp(weatherApiKey);
-			const promise = initializer();
-
-			httpMock
-				.expectOne("./assets/configurations/configuration.prod.json")
-				.flush({ OpenWeatherApiKey: "prod-api-key" });
-
-			await promise;
-			expect(weatherApiKey.value).toBe("prod-api-key");
-		});
-		it("should handle error and use DUMMY_API_KEY", async (): Promise<void> => {
-			const weatherApiKey = TestBed.inject(tokens.WEATHER_API_KEY);
-			const initializer = tokens.initializeApp(weatherApiKey);
-			const promise = initializer();
-
-			httpMock.expectOne("./assets/configurations/configuration.json").error(new ProgressEvent("error"));
-
-			await promise;
-			expect(weatherApiKey.value).toBe(DUMMY_API_KEY);
-		});
-		it("should initialize app with empty configuration and DUMMY_API_KEY", async (): Promise<void> => {
-			const weatherApiKey = TestBed.inject(tokens.WEATHER_API_KEY);
-			const initializer = tokens.initializeApp(weatherApiKey);
-			const promise = initializer();
-
-			httpMock.expectOne("./assets/configurations/configuration.json").flush(null);
-
-			await promise;
-			expect(weatherApiKey.value).toBe(DUMMY_API_KEY);
 		});
 	});
 });

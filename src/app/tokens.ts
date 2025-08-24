@@ -1,6 +1,5 @@
 import { InjectionToken, Provider } from "@angular/core";
 import { BehaviorSubject, Observable, of, tap } from "rxjs";
-import { configuration } from "../configurations/configuration";
 import { DUMMY_API_KEY } from "./consts";
 
 //#region WEATHER API LICENSE KEY
@@ -27,7 +26,10 @@ export interface IConfiguration {
 	OpenWeatherApiKey: string;
 }
 
-export function initializeApp(weatherApiKeySubject: BehaviorSubject<string>): () => Observable<IConfiguration> {
+export function initializeApp(
+	weatherApiKeySubject: BehaviorSubject<string>,
+	configuration: IConfiguration
+): () => Observable<IConfiguration> {
 	return () =>
 		of(configuration).pipe(
 			tap(config => {
@@ -36,5 +38,4 @@ export function initializeApp(weatherApiKeySubject: BehaviorSubject<string>): ()
 			})
 		);
 }
-
 //#endregion

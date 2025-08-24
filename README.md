@@ -41,10 +41,10 @@ Run `npm run test:coverage` to get stats about the code coverage. Current:
 
 ```
 =============================== Coverage summary ===============================
-Statements   : 100% ( 342/342 )
-Branches     : 100% ( 87/87 )
-Functions    : 100% ( 104/104 )
-Lines        : 100% ( 314/314 )
+Statements   : 100% ( 383/383 )
+Branches     : 100% ( 91/91 )
+Functions    : 100% ( 126/126 )
+Lines        : 100% ( 353/353 )
 ================================================================================
 ```
 
@@ -70,7 +70,7 @@ Navigate to `http://localhost:4200/`.
 
 The project depends on [Open Weather Map](https://openweathermap.org), which provides an API with free license. The license is limited to small number of requests and few methods.
 
-> To change the license key, replace it [here](./src/assets/configurations/configuration.json) for development or [here](./src/assets/configurations/configuration.prod.json) for production.
+> To change the license key, replace it [here](./src/configurations/configuration.ts) for development or [here](./src/configurations/configuration.prod.ts) for production.
 
 ## TODO List
 
