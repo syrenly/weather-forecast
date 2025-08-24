@@ -1,5 +1,5 @@
 /**
- * File containing mocked provider for SearchService
+ * File containing mocked provider for SearchAdapter
  */
 
 import { Injectable, Provider } from "@angular/core";

@@ -10,6 +10,7 @@ The following enhancements will be evaluated in order to improve the application
 - [ ] refresh button or periodic refresh of the data
 - [ ] manage errors and not-found with specific components in routing
 - [ ] translations?
+- [ ] make the use of mock API dynamic, when the API returns 403 using a wrong/invalid license
 
 ... of course new ideas will come!
 

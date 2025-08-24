@@ -9,8 +9,8 @@ describe("LicenseService", () => {
 	let snackBar: MatSnackBar;
 	let snackBarSpy: jasmine.Spy;
 
-	describe("case use dummy api", () => {
-		beforeEach(() => {
+	describe("case use dummy api", (): void => {
+		beforeEach((): void => {
 			TestBed.configureTestingModule({
 				providers: [LicenseService, provideMockDUMMYWeatherApiKey()],
 			});
@@ -20,10 +20,10 @@ describe("LicenseService", () => {
 			service["licenseKeySubj"].next(DUMMY_API_KEY);
 		});
 
-		it("should be created", () => {
+		it("should be created", (): void => {
 			expect(service).toBeTruthy();
 		});
-		it("should test #useMockData", () => {
+		it("should test #useMockData", (): void => {
 			expect(service.useMockData).toBeTrue();
 		});
 		it("should display a snackbar message when DUMMY_API_KEY is used", () => {
@@ -36,21 +36,15 @@ describe("LicenseService", () => {
 				}
 			);
 		});
-
-		// it("should log a message when a new API key is set", () => {
-		// 	const consoleSpy = spyOn(console, "info");
-		// 	mockWeatherApiKey$.next("real-api-key");
-		// 	expect(consoleSpy).toHaveBeenCalledWith("API key found for https://openweathermap.org");
-		// });
-
 		it("should unsubscribe from WEATHER_API_KEY on destroy", () => {
 			const subscriptionSpy = spyOn(service["subscription"], "unsubscribe");
 			service.ngOnDestroy();
 			expect(subscriptionSpy).toHaveBeenCalled();
 		});
 	});
-	describe("case use real api", () => {
-		beforeEach(() => {
+
+	describe("case use real api", (): void => {
+		beforeEach((): void => {
 			TestBed.configureTestingModule({
 				providers: [LicenseService, provideMockWeatherApiKey()],
 			});
@@ -60,13 +54,13 @@ describe("LicenseService", () => {
 			service["licenseKeySubj"].next("KEY");
 		});
 
-		it("should be created", () => {
+		it("should be created", (): void => {
 			expect(service).toBeTruthy();
 		});
-		it("should test #useMockData", () => {
+		it("should test #useMockData", (): void => {
 			expect(service.useMockData).toBeFalse();
 		});
-		it("should not display a snackbar message", () => {
+		it("should not display a snackbar message", (): void => {
 			expect(snackBarSpy).not.toHaveBeenCalled();
 		});
 	});

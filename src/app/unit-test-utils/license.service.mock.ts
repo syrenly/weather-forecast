@@ -1,3 +1,7 @@
+/**
+ * File containing mocked provider for LicenseService
+ */
+
 import { Injectable, Provider } from "@angular/core";
 import { DUMMY_API_KEY } from "../consts";
 import { LicenseService } from "../services/license.service";

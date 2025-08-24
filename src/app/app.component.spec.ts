@@ -64,26 +64,4 @@ describe("AppComponent", (): void => {
 		fixture.detectChanges();
 		expect(applyThemeSpy).toHaveBeenCalledWith(mockTheme);
 	});
-
-	// it("should show a snackbar when using the dummy API key", (): void => {
-	// 	const snackBarSpy = spyOn(component["snackBar"], "open");
-	// 	component["licenseKeySubj"].next(DUMMY_API_KEY);
-	// 	fixture.detectChanges();
-	// 	expect(snackBarSpy).toHaveBeenCalledWith(
-	// 		"Using dummy API key; please visit https://openweathermap.org to get a real one",
-	// 		"Dismiss",
-	// 		{
-	// 			horizontalPosition: "center",
-	// 			verticalPosition: "top",
-	// 		}
-	// 	);
-	// });
-
-	// it("should log a message when a valid API key is provided", (): void => {
-	// 	const consoleSpy = spyOn(console, "info");
-	// 	const validApiKey = "VALID_API_KEY";
-	// 	component["licenseKeySubj"].next(validApiKey);
-	// 	fixture.detectChanges();
-	// 	expect(consoleSpy).toHaveBeenCalledWith("API key found");
-	// });
 });

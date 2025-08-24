@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
@@ -18,6 +17,7 @@ export class DummySearchAdapter {
 	// #endregion
 
 	/** Retrieve a list of mock forecast */
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	searchCity(_: string): Observable<ICitySearchResult> {
 		return this.http.get<ICitySearchResult>(`assets/dummy-responses/find.json`);
 	}

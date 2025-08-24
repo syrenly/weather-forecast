@@ -54,7 +54,7 @@ export const citySamples: ICityIdName[] = [
 	},
 ];
 
-// samples of cities to show in the home page
+// samples of cities to show in the home page when no real API key was provided
 export const dummyCitySamples: ICityIdName[] = [
 	{
 		name: "London, GB",

@@ -28,7 +28,7 @@ describe("tokens", (): void => {
 		httpMock.verify();
 	});
 
-	describe("WEATHER_API_KEY", () => {
+	describe("WEATHER_API_KEY", (): void => {
 		it("should provide WEATHER_API_KEY using provideWeatherApiKey", (): void => {
 			TestBed.resetTestingModule();
 			TestBed.configureTestingModule({
@@ -54,7 +54,7 @@ describe("tokens", (): void => {
 		});
 	});
 
-	describe("initializeApp", () => {
+	describe("initializeApp", (): void => {
 		it("should initialize the app and update WEATHER_API_KEY with the configuration value", (done): void => {
 			TestBed.resetTestingModule();
 			const mockWeatherApiKeySubject = new BehaviorSubject<string>("");
@@ -73,14 +73,14 @@ describe("tokens", (): void => {
 			const initializer = tokens.initializeApp(mockWeatherApiKeySubject, {
 				OpenWeatherApiKey: "",
 			});
-			initializer().subscribe(() => {
+			initializer().subscribe((): void => {
 				expect(mockWeatherApiKeySubject.value).toBe(DUMMY_API_KEY);
 				done();
 			});
 		});
 	});
 
-	describe("CURRENT_THEME", () => {
+	describe("CURRENT_THEME", (): void => {
 		it("should provide CURRENT_THEME using provideCurrentTheme", (): void => {
 			TestBed.resetTestingModule();
 			TestBed.configureTestingModule({
