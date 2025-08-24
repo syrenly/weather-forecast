@@ -1,1 +1,0 @@
-import{T as r,aa as o,f as n,la as s}from"./chunk-7OGJOBW4.js";function w(t){t||(t=o(s));let i=new n(e=>{if(t.destroyed){e.next();return}return t.onDestroy(e.next.bind(e))});return e=>e.pipe(r(i))}export{w as a};

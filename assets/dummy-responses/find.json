@@ -1,0 +1,202 @@
+{
+	"message": "like",
+	"cod": "200",
+	"count": 5,
+	"list": [
+		{
+			"id": 2643743,
+			"name": "London",
+			"coord": {
+				"lat": 51.5085,
+				"lon": -0.1257
+			},
+			"main": {
+				"temp": 21.5,
+				"feels_like": 21.17,
+				"temp_min": 20.56,
+				"temp_max": 22.85,
+				"pressure": 1020,
+				"humidity": 56,
+				"sea_level": 1020,
+				"grnd_level": 1015
+			},
+			"dt": 1755961756,
+			"wind": {
+				"speed": 6.17,
+				"deg": 90
+			},
+			"sys": {
+				"country": "GB"
+			},
+			"rain": null,
+			"snow": null,
+			"clouds": {
+				"all": 98
+			},
+			"weather": [
+				{
+					"id": 804,
+					"main": "Clouds",
+					"description": "overcast clouds",
+					"icon": "04d"
+				}
+			]
+		},
+		{
+			"id": 3117735,
+			"name": "Madrid",
+			"coord": {
+				"lat": 40.4165,
+				"lon": -3.7026
+			},
+			"main": {
+				"temp": 31.82,
+				"feels_like": 30.22,
+				"temp_min": 29.79,
+				"temp_max": 33.14,
+				"pressure": 1012,
+				"humidity": 26,
+				"sea_level": 1012,
+				"grnd_level": 939
+			},
+			"dt": 1755961753,
+			"wind": {
+				"speed": 3.09,
+				"deg": 0
+			},
+			"sys": {
+				"country": "ES"
+			},
+			"rain": null,
+			"snow": null,
+			"clouds": {
+				"all": 0
+			},
+			"weather": [
+				{
+					"id": 800,
+					"main": "Clear",
+					"description": "clear sky",
+					"icon": "01d"
+				}
+			]
+		},
+		{
+			"id": 3173435,
+			"name": "Milan",
+			"coord": {
+				"lat": 45.4643,
+				"lon": 9.1895
+			},
+			"main": {
+				"temp": 27.47,
+				"feels_like": 28.35,
+				"temp_min": 26.39,
+				"temp_max": 28.34,
+				"pressure": 1010,
+				"humidity": 56,
+				"sea_level": 1010,
+				"grnd_level": 996
+			},
+			"dt": 1755961760,
+			"wind": {
+				"speed": 1.54,
+				"deg": 180
+			},
+			"sys": {
+				"country": "IT"
+			},
+			"rain": null,
+			"snow": null,
+			"clouds": {
+				"all": 20
+			},
+			"weather": [
+				{
+					"id": 801,
+					"main": "Clouds",
+					"description": "few clouds",
+					"icon": "02d"
+				}
+			]
+		},
+		{
+			"id": 2964574,
+			"name": "Dublin",
+			"coord": {
+				"lat": 53.344,
+				"lon": -6.2672
+			},
+			"main": {
+				"temp": 20.18,
+				"feels_like": 20.5,
+				"temp_min": 19.22,
+				"temp_max": 20.88,
+				"pressure": 1019,
+				"humidity": 86,
+				"sea_level": 1019,
+				"grnd_level": 1004
+			},
+			"dt": 1755961757,
+			"wind": {
+				"speed": 3.6,
+				"deg": 140
+			},
+			"sys": {
+				"country": "IE"
+			},
+			"rain": null,
+			"snow": null,
+			"clouds": {
+				"all": 75
+			},
+			"weather": [
+				{
+					"id": 803,
+					"main": "Clouds",
+					"description": "broken clouds",
+					"icon": "04d"
+				}
+			]
+		},
+		{
+			"id": 2988507,
+			"name": "Paris",
+			"coord": {
+				"lat": 48.8534,
+				"lon": 2.3488
+			},
+			"main": {
+				"temp": 24.12,
+				"feels_like": 23.61,
+				"temp_min": 23.77,
+				"temp_max": 25.2,
+				"pressure": 1020,
+				"humidity": 39,
+				"sea_level": 1020,
+				"grnd_level": 1009
+			},
+			"dt": 1755961755,
+			"wind": {
+				"speed": 3.09,
+				"deg": 10
+			},
+			"sys": {
+				"country": "FR"
+			},
+			"rain": null,
+			"snow": null,
+			"clouds": {
+				"all": 0
+			},
+			"weather": [
+				{
+					"id": 800,
+					"main": "Clear",
+					"description": "clear sky",
+					"icon": "01d"
+				}
+			]
+		}
+	]
+}
