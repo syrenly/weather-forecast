@@ -2,16 +2,16 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testin
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
-import { getSearchMockProvider } from "../unit-test-utils/search.service.mock";
+import { provideMockSearchService } from "../unit-test-utils/search.service.mock";
 import { provideMockTheme } from "../unit-test-utils/token.mock";
-import { city, forecastResult } from "../unit-test-utils/utils.mock";
+import { mockCity, mockForecastResult } from "../unit-test-utils/utils.mock";
 import ForecastComponent from "./forecast.component";
 
 const route = {
 	data: new BehaviorSubject({
 		0: {
-			countryInfo: city,
-			forecastResult: forecastResult,
+			countryInfo: mockCity,
+			forecastResult: mockForecastResult,
 			animationState: "forecastState",
 		},
 	}),
@@ -26,7 +26,7 @@ describe("ForecastComponent case success route", (): void => {
 		await TestBed.configureTestingModule({
 			imports: [ForecastComponent, NoopAnimationsModule],
 			providers: [
-				getSearchMockProvider(),
+				provideMockSearchService(),
 				provideMockTheme(),
 				{ provide: ActivatedRoute, useValue: route },
 				Router,
@@ -44,15 +44,15 @@ describe("ForecastComponent case success route", (): void => {
 	});
 	it("should set data from route", fakeAsync((): void => {
 		tick(10);
-		expect(component.city).toEqual(city);
-		expect(component.forecastResult).toEqual(forecastResult);
+		expect(component.city).toEqual(mockCity);
+		expect(component.forecastResult).toEqual(mockForecastResult);
 		expect(component.errorInfo).toBeUndefined();
 	}));
 	it("should navigate to selected city adding data to navigation", (): void => {
 		const routerSpy = spyOn(router, "navigateByUrl");
-		component.navigateToCity(city);
-		expect(routerSpy).toHaveBeenCalledWith(`/forecast/${city.id}`, {
-			state: city,
+		component.navigateToCity(mockCity);
+		expect(routerSpy).toHaveBeenCalledWith(`/forecast/${mockCity.id}`, {
+			state: mockCity,
 		});
 	});
 });
@@ -73,7 +73,7 @@ describe("ForecastComponent case error status", (): void => {
 		await TestBed.configureTestingModule({
 			imports: [ForecastComponent, NoopAnimationsModule],
 			providers: [
-				getSearchMockProvider(),
+				provideMockSearchService(),
 				provideMockTheme(),
 				{ provide: ActivatedRoute, useValue: errorInRoute },
 			],
@@ -132,8 +132,8 @@ describe("ForecastComponent case error status", (): void => {
 		});
 	});
 	it("should show components when the city is valued", fakeAsync((): void => {
-		component.city = city;
-		component.forecastResult = forecastResult;
+		component.city = mockCity;
+		component.forecastResult = mockForecastResult;
 		component.errorInfo = undefined;
 		fixture.detectChanges();
 		tick();
@@ -151,8 +151,8 @@ describe("ForecastComponent case error status", (): void => {
 	it("should test #mainWeather", (): void => {
 		component.city = undefined;
 		expect(component.mainWeather).toBeUndefined();
-		component.city = city;
-		expect(component.mainWeather).toEqual(city.weather[0]);
+		component.city = mockCity;
+		expect(component.mainWeather).toEqual(mockCity.weather[0]);
 	});
 	it("should test #navigationStarted", (): void => {
 		component["searchService"].navigationStarted = true;

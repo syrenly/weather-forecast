@@ -1,4 +1,3 @@
-import { NgIf } from "@angular/common";
 import { Component } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { By } from "@angular/platform-browser";
@@ -7,10 +6,12 @@ import { routeTransitionAnimations } from "./route-transition-animations";
 
 @Component({
 	selector: "app-mock-route",
-	imports: [NgIf],
 	template: `
-		<div *ngIf="state === 'homeState'" [@animateRoute]="state" class="home">Home</div>
-		<div *ngIf="state === 'forecastState'" [@animateRoute]="state" class="forecast">Forecast</div>
+		@if (state === "homeState") {
+			<div [@animateRoute]="state" class="home">Home</div>
+		} @else if (state === "forecastState") {
+			<div [@animateRoute]="state" class="forecast">Forecast</div>
+		}
 	`,
 	animations: [routeTransitionAnimations],
 })

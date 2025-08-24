@@ -10,6 +10,7 @@ The following enhancements will be evaluated in order to improve the application
 - [ ] refresh button or periodic refresh of the data
 - [ ] manage errors and not-found with specific components in routing
 - [ ] translations?
+- [ ] make the use of mock API dynamic, when the API returns 403 using a wrong/invalid license
 
 ... of course new ideas will come!
 
@@ -35,3 +36,4 @@ The following enhancements will be evaluated in order to improve the application
 - [x] implemented eslint "no-magic-numbers" rule
 - [x] removed integrity from Google font links, since Google shares slightly different files based on the browser where they are downloaded
 - [x] replaced constructor-based dependency injection with the `inject` function
+- [x] hit unit tests coverage to 100%

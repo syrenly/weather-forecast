@@ -5,7 +5,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ToCardinalPointPipe } from "../../pipes/to-cardinal-point.pipe";
 import { WeatherPipe } from "../../pipes/weather.pipe";
-import { city } from "../../unit-test-utils/utils.mock";
+import { mockCity } from "../../unit-test-utils/utils.mock";
 import { CurrentWeatherComponent } from "./current-weather.component";
 
 describe("CurrentWeatherComponent", (): void => {
@@ -30,7 +30,7 @@ describe("CurrentWeatherComponent", (): void => {
 
 		fixture = TestBed.createComponent(CurrentWeatherComponent);
 		component = fixture.componentInstance;
-		fixture.componentRef.setInput("city", city);
+		fixture.componentRef.setInput("city", mockCity);
 		fixture.detectChanges();
 	});
 
@@ -38,8 +38,8 @@ describe("CurrentWeatherComponent", (): void => {
 		expect(component).toBeTruthy();
 	});
 	it("should set values of mainWeather and mainInfo when city changes", (): void => {
-		expect(component.mainWeather()).toEqual(city.weather[0]);
-		expect(component.mainInfo()).toEqual(city.main);
+		expect(component.mainWeather()).toEqual(mockCity.weather[0]);
+		expect(component.mainInfo()).toEqual(mockCity.main);
 		expect(component.canShowCurrentWeather).toBeTrue();
 	});
 	it("should not set values of mainWeather and mainInfo when city is null", (): void => {

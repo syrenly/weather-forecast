@@ -2,6 +2,8 @@ import { Theme } from "./tokens";
 import { ICityIdName, ICitySearchResult } from "./types/city-types";
 
 export const DEFAULT_DEBOUNCE_DELAY_MILLISECONDS = 250;
+// API key to use when the real API key is not available
+export const DUMMY_API_KEY = "DUMMY_API_KEY";
 
 export const EMPTY_SEARCH_RESULT: ICitySearchResult = {
 	message: "",
@@ -23,7 +25,7 @@ export const citySamples: ICityIdName[] = [
 		id: 3169070,
 	},
 	{
-		name: "London, IT",
+		name: "London, GB",
 		id: 2643743,
 	},
 	{
@@ -49,6 +51,34 @@ export const citySamples: ICityIdName[] = [
 	{
 		name: "Hamburg, DE",
 		id: 2911298,
+	},
+];
+
+// samples of cities to show in the home page when no real API key was provided
+export const dummyCitySamples: ICityIdName[] = [
+	{
+		name: "London, GB",
+		id: 2643743,
+	},
+	{
+		name: "Milan, IT",
+		id: 3173435,
+	},
+	{
+		name: "Venice, IT",
+		id: 316460,
+	},
+	{
+		name: "Madrid, ES",
+		id: 3117735,
+	},
+	{
+		name: "Paris, FR",
+		id: 2988507,
+	},
+	{
+		name: "Dublin, IE",
+		id: 2964574,
 	},
 ];
 

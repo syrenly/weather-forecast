@@ -5,7 +5,7 @@
 import { ICitySearchResult, ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
 
-export const mockForecastResult: IFiveDaysForecast = {
+export const mockDummyForecastResult: IFiveDaysForecast = {
 	cod: "200",
 	message: 0,
 	cnt: 40,
@@ -209,7 +209,7 @@ export const mockForecastResult: IFiveDaysForecast = {
 	},
 };
 
-export const mockCity: ICityWeather = {
+export const mockDummyCity: ICityWeather = {
 	coord: {
 		lon: 12.4839,
 		lat: 41.8947,
@@ -253,9 +253,9 @@ export const mockCity: ICityWeather = {
 	name: "Rome",
 	cod: 200,
 };
-export const mockCitySearchResult: ICitySearchResult = {
+export const mockDummyCitySearchResult: ICitySearchResult = {
 	message: "",
 	cod: "",
 	count: 1,
-	list: [mockCity],
+	list: [mockDummyCity],
 };

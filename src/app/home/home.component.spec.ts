@@ -3,9 +3,9 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { By } from "@angular/platform-browser";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { Router } from "@angular/router";
-import { getSearchMockProvider } from "../unit-test-utils/search.service.mock";
+import { provideMockSearchService } from "../unit-test-utils/search.service.mock";
 import { provideMockTheme } from "../unit-test-utils/token.mock";
-import { city } from "../unit-test-utils/utils.mock";
+import { mockCity } from "../unit-test-utils/utils.mock";
 import HomeComponent from "./home.component";
 
 describe("HomeComponent", (): void => {
@@ -16,7 +16,7 @@ describe("HomeComponent", (): void => {
 	beforeEach(async (): Promise<void> => {
 		await TestBed.configureTestingModule({
 			imports: [HomeComponent, NoopAnimationsModule],
-			providers: [provideMockTheme(), getSearchMockProvider(), Router],
+			providers: [provideMockTheme(), provideMockSearchService(), Router],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(HomeComponent);
@@ -37,15 +37,15 @@ describe("HomeComponent", (): void => {
 	});
 	it("should navigate to selected city adding data to navigation", (): void => {
 		const routerSpy = spyOn(router, "navigateByUrl");
-		component.navigateToCity(city);
-		expect(routerSpy).toHaveBeenCalledWith(`/forecast/${city.id}`, {
-			state: city,
+		component.navigateToCity(mockCity);
+		expect(routerSpy).toHaveBeenCalledWith(`/forecast/${mockCity.id}`, {
+			state: mockCity,
 		});
 	});
 	it("should navigate to selected city", (): void => {
 		const routerSpy = spyOn(router, "navigate");
-		component.navigateByCityId(city.id);
-		expect(routerSpy).toHaveBeenCalledWith(["forecast", city.id]);
+		component.navigateByCityId(mockCity.id);
+		expect(routerSpy).toHaveBeenCalledWith(["forecast", mockCity.id]);
 	});
 	it("should populate cities array", (): void => {
 		expect(component.cities.length).not.toBe(0);

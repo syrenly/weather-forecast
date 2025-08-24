@@ -1,26 +1,26 @@
 /**
- * File containing mocked provider for SearchService
+ * File containing mocked provider for SearchAdapter
  */
 
 import { Injectable, Provider } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { citySamples } from "../consts";
-import { SearchService } from "../services/search.service";
+import { SearchAdapter } from "../services/adapters/search.adapter";
 import { ICityIdName, ICitySearchResult, ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
 import { mockCity, mockCitySearchResult, mockForecastResult } from "./utils.mock";
 
 @Injectable()
-export class MockSearchService {
-	searchCity(_: string): Observable<ICitySearchResult> {
+export class MockSearchAdapter {
+	searchCity(): Observable<ICitySearchResult> {
 		return of(mockCitySearchResult);
 	}
 
-	getCityWeather(_: number): Observable<ICityWeather> {
+	getCityWeather(): Observable<ICityWeather> {
 		return of(mockCity);
 	}
 
-	getFiveDaysForecast(_: number): Observable<IFiveDaysForecast> {
+	getFiveDaysForecast(): Observable<IFiveDaysForecast> {
 		return of(mockForecastResult);
 	}
 
@@ -29,6 +29,6 @@ export class MockSearchService {
 	}
 }
 
-export function provideMockSearchService(): Provider {
-	return { provide: SearchService, useClass: MockSearchService };
+export function provideMockSearchAdapter(): Provider {
+	return { provide: SearchAdapter, useClass: MockSearchAdapter };
 }

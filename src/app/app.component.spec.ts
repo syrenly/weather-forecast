@@ -2,7 +2,8 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { provideAnimations } from "@angular/platform-browser/animations";
 import { RouterOutlet } from "@angular/router";
 import { AppComponent } from "./app.component";
-import { provideMockTheme } from "./unit-test-utils/token.mock";
+import { Theme } from "./tokens";
+import { provideMockTheme, provideMockWeatherApiKey } from "./unit-test-utils/token.mock";
 
 describe("AppComponent", (): void => {
 	let fixture: ComponentFixture<AppComponent>;
@@ -11,7 +12,7 @@ describe("AppComponent", (): void => {
 	beforeEach(async (): Promise<void> => {
 		await TestBed.configureTestingModule({
 			imports: [AppComponent],
-			providers: [provideAnimations(), provideMockTheme()],
+			providers: [provideAnimations(), provideMockTheme(), provideMockWeatherApiKey()],
 		}).compileComponents();
 		fixture = TestBed.createComponent(AppComponent);
 		component = fixture.componentInstance;
@@ -54,5 +55,13 @@ describe("AppComponent", (): void => {
 		} as unknown as RouterOutlet;
 		const animationState = component.getRouteTransition(mockOutlet);
 		expect(animationState).toBe("fade");
+	});
+
+	it("should apply the current theme on initialization", (): void => {
+		const applyThemeSpy = spyOn<any>(component, "applyTheme");
+		const mockTheme = "dark";
+		component["themeSubject"].next(mockTheme as Theme);
+		fixture.detectChanges();
+		expect(applyThemeSpy).toHaveBeenCalledWith(mockTheme);
 	});
 });

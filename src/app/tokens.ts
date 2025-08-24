@@ -1,6 +1,6 @@
-import { HttpClient } from "@angular/common/http";
-import { InjectionToken, Provider, isDevMode } from "@angular/core";
-import { BehaviorSubject, firstValueFrom, tap } from "rxjs";
+import { InjectionToken, Provider } from "@angular/core";
+import { BehaviorSubject, Observable, of, tap } from "rxjs";
+import { DUMMY_API_KEY } from "./consts";
 
 //#region WEATHER API LICENSE KEY
 export const WEATHER_API_KEY = new InjectionToken<BehaviorSubject<string>>("");
@@ -25,21 +25,17 @@ export const provideCurrentTheme = (): Provider => ({
 export interface IConfiguration {
 	OpenWeatherApiKey: string;
 }
-/** Retrieve the application configuration and update the weather api key value */
+
 export function initializeApp(
-	http: HttpClient,
-	weatherApiKeySubject: BehaviorSubject<string>
-): () => Promise<IConfiguration> {
-	return (): Promise<IConfiguration> =>
-		firstValueFrom(
-			http
-				// use different json file, based on the type of build
-				.get<IConfiguration>(
-					isDevMode()
-						? "./assets/configurations/configuration.json"
-						: "./assets/configurations/configuration.prod.json"
-				)
-				.pipe(tap(jsonConfig => weatherApiKeySubject.next(jsonConfig.OpenWeatherApiKey)))
+	weatherApiKeySubject: BehaviorSubject<string>,
+	configuration: IConfiguration
+): () => Observable<IConfiguration> {
+	return () =>
+		of(configuration).pipe(
+			tap(config => {
+				const key = config?.OpenWeatherApiKey || DUMMY_API_KEY;
+				weatherApiKeySubject.next(key);
+			})
 		);
 }
 //#endregion

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { IFiveDaysForecast } from "../../types/forecast-types";
 import { provideMockLocaleId, provideMockTheme } from "../../unit-test-utils/token.mock";
-import { forecastResult } from "../../unit-test-utils/utils.mock";
+import { mockForecastResult } from "../../unit-test-utils/utils.mock";
 import { PrecipitationChartComponent } from "./precipitation-chart.component";
 
 describe("PrecipitationChartComponent", (): void => {
@@ -16,7 +16,7 @@ describe("PrecipitationChartComponent", (): void => {
 
 		fixture = TestBed.createComponent(PrecipitationChartComponent);
 		component = fixture.componentInstance;
-		component.forecastResult = forecastResult;
+		component.forecastResult = mockForecastResult;
 		fixture.detectChanges();
 	});
 
@@ -29,7 +29,7 @@ describe("PrecipitationChartComponent", (): void => {
 		const spyCreateChart = spyOn(component, "createChart");
 		component.ngOnChanges({
 			forecastResult: {
-				currentValue: forecastResult,
+				currentValue: mockForecastResult,
 				previousValue: null,
 				isFirstChange: (): boolean => false,
 				firstChange: false,
@@ -55,8 +55,7 @@ describe("PrecipitationChartComponent", (): void => {
 	});
 	it("should show warn in #calculateDataSets when the data are broken", (): void => {
 		const consoleSpy = spyOn(window.console, "warn");
-		const newForecasts: IFiveDaysForecast = JSON.parse(JSON.stringify(forecastResult));
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		const newForecasts: IFiveDaysForecast = JSON.parse(JSON.stringify(mockForecastResult));
 		newForecasts.list[0].dt = null as any;
 		component.forecastResult = newForecasts;
 		component.calculateDataSets();

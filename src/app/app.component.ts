@@ -1,10 +1,10 @@
-import { Component, inject, OnInit, Renderer2 } from "@angular/core";
+import { Component, DestroyRef, inject, OnInit, Renderer2 } from "@angular/core";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { RouterOutlet } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
 import { themeCssClass } from "./consts";
 import { routeTransitionAnimations } from "./routes/route-transition-animations";
 import { CURRENT_THEME, Theme } from "./tokens";
-
 @Component({
 	selector: "app-root",
 	imports: [RouterOutlet],
@@ -15,11 +15,14 @@ import { CURRENT_THEME, Theme } from "./tokens";
 export class AppComponent implements OnInit {
 	// #region Dependencies
 	private readonly themeSubject: BehaviorSubject<Theme> = inject(CURRENT_THEME);
-	private readonly renderer: Renderer2 = inject(Renderer2);
+	private readonly renderer = inject(Renderer2);
+	private readonly destroyRef = inject(DestroyRef);
 	// #endregion
 
 	ngOnInit(): void {
-		this.themeSubject.subscribe((currentTheme: Theme): void => this.applyTheme(currentTheme));
+		this.themeSubject
+			.pipe(takeUntilDestroyed(this.destroyRef))
+			.subscribe((currentTheme: Theme): void => this.applyTheme(currentTheme));
 	}
 	/**
 	 * Add "light-theme" class to body to apply light theme; "dark-theme" for the dark one

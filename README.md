@@ -41,10 +41,10 @@ Run `npm run test:coverage` to get stats about the code coverage. Current:
 
 ```
 =============================== Coverage summary ===============================
-Statements   : 97.18% ( 311/320 )
-Branches     : 92.4% ( 73/79 )
-Functions    : 92.47% ( 86/93 )
-Lines        : 98.31% ( 291/296 )
+Statements   : 100% ( 383/383 )
+Branches     : 100% ( 91/91 )
+Functions    : 100% ( 126/126 )
+Lines        : 100% ( 353/353 )
 ================================================================================
 ```
 
@@ -70,7 +70,7 @@ Navigate to `http://localhost:4200/`.
 
 The project depends on [Open Weather Map](https://openweathermap.org), which provides an API with free license. The license is limited to small number of requests and few methods.
 
-> To change the license key, replace it [here](./src/assets/configurations/configuration.json) for development or [here](./src/assets/configurations/configuration.prod.json) for production.
+> To change the license key, replace it [here](./src/configurations/configuration.ts) for development or [here](./src/configurations/configuration.prod.ts) for production.
 
 ## TODO List
 
@@ -80,4 +80,5 @@ Explore the [TODO List](./TODO_LIST.md) to know what's next.
 
 - [ng-17](https://github.com/syrenly/weather-forecast/tree/ng-17): implementation with Angular 17;
 - [ng-18](https://github.com/syrenly/weather-forecast/tree/ng-18): implementation with Angular 18;
+- [ng-19](https://github.com/syrenly/weather-forecast/tree/ng-19): implementation with Angular 19;
 - [assignment-04-2024](https://github.com/syrenly/weather-forecast/tree/assignment-04-2024): the first implementation of the application. Updates are not planned.

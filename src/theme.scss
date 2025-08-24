@@ -66,6 +66,7 @@ $custom-typography: mat.m2-define-typography-config(
 //#endregion
 
 //#region Mixins
+
 // Mixin for link styles
 @mixin link-styles($primary-palette, $accent-palette, $is-light: false) {
 	@if ($is-light) {
@@ -81,12 +82,24 @@ $custom-typography: mat.m2-define-typography-config(
 		color: map.get($accent-palette, 500);
 	}
 }
+
+// warning snackbar for dummy API key
+@mixin snackbar-overrides() {
+	@include mat.snack-bar-overrides(
+		(
+			button-color: black,
+			supporting-text-color: black,
+			container-color: red,
+		)
+	);
+}
 //#endregion
 
 //#region Light Theme Styles
 .light-theme {
 	background-image: url("./assets/images/fog-LT.webp");
 	@include mat.all-component-colors($light-theme);
+	@include snackbar-overrides();
 	a {
 		@include link-styles(palettes.$light-primary-palette, palettes.$light-accent-palette, true);
 	}
@@ -102,6 +115,7 @@ $custom-typography: mat.m2-define-typography-config(
 //#region Dark Theme Styles
 .dark-theme {
 	background-image: url("./assets/images/fog-DT.webp");
+	@include snackbar-overrides();
 	a {
 		@include link-styles(palettes.$dark-primary-palette, palettes.$dark-accent-palette);
 	}
@@ -109,5 +123,4 @@ $custom-typography: mat.m2-define-typography-config(
 		background-color: $dark-background-color;
 	}
 }
-
 //#endregion
