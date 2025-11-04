@@ -30,6 +30,7 @@
 						mat-flat-button
 						type="button"
 						color="primary"
+						[attr.aria-label]="'View weather forecast for ' + city.name"
 						(click)="navigateByCityId(city.id)">
 						{{ city.name }}
 					</button>

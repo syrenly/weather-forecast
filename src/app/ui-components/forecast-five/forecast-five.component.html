@@ -1,8 +1,10 @@
 @if (forecastResult() && days().length > 0) {
 	<mat-card>
-		<mat-tab-group>
+		<mat-tab-group [attr.aria-label]="'Forecast for the next ' + days().length + ' days'">
 			@for (day of days(); track day) {
-				<mat-tab [label]="(day | date: 'MMM d') || 'N.A.'">
+				<mat-tab
+					[label]="(day | date: 'MMM d') || 'N.A.'"
+					[attr.aria-label]="'Forecast for ' + (day | date: 'fullDate')">
 					<ng-template matTabContent>
 						<ng-container *ngTemplateOutlet="secondHeader"></ng-container>
 						@for (forecast of daysDictionary()[day]; track forecast.dt) {
