@@ -11,6 +11,7 @@ The following enhancements will be evaluated in order to improve the application
 - [ ] manage errors and not-found with specific components in routing
 - [ ] translations?
 - [ ] make the use of mock API dynamic, when the API returns 403 using a wrong/invalid license
+- [ ] _started_ Add accessibility to charts and tables
 
 ... of course new ideas will come!
 
@@ -31,9 +32,9 @@ The following enhancements will be evaluated in order to improve the application
 - [x] defer charts rendering
 - [x] add a background image with transparence for the HomeComponent
 - [x] randomize the cities shown on the home page
-- [x] implement accessibility
 - [x] replace [groupBy](./src/app/ui-components/forecast-five/forecast-five.component.ts) with the new Object.groupBy function when it will be available
 - [x] implemented eslint "no-magic-numbers" rule
 - [x] removed integrity from Google font links, since Google shares slightly different files based on the browser where they are downloaded
 - [x] replaced constructor-based dependency injection with the `inject` function
 - [x] hit unit tests coverage to 100%
+- [x] first implementation of accessibility

@@ -1,13 +1,24 @@
 @if (forecastResult() && days().length > 0) {
 	<mat-card>
-		<mat-tab-group>
-			@for (day of days(); track day) {
-				<mat-tab [label]="(day | date: 'MMM d') || 'N.A.'">
+		<mat-tab-group [attr.aria-label]="'Forecast for the next ' + days().length + ' days'">
+			@for (day of days(); track day; let idx = $index) {
+				<mat-tab
+					[label]="(day | date: 'MMM d') || 'N.A.'"
+					[aria-label]="'Forecast for ' + (day | date: 'fullDate')"
+					[attr.id]="'tab-' + day"
+					[attr.aria-controls]="'tabpanel-' + day"
+					(keydown)="onKeydown($event, idx)">
 					<ng-template matTabContent>
-						<ng-container *ngTemplateOutlet="secondHeader"></ng-container>
-						@for (forecast of daysDictionary()[day]; track forecast.dt) {
-							<ng-container *ngTemplateOutlet="threeHours; context: { $implicit: forecast }"></ng-container>
-						}
+						<div
+							role="tabpanel"
+							[attr.tabindex]="tabIndex()"
+							[attr.id]="'tabpanel-' + day"
+							[attr.aria-labelledby]="'tab-' + day">
+							<ng-container *ngTemplateOutlet="secondHeader"></ng-container>
+							@for (forecast of daysDictionary()[day]; track forecast.dt) {
+								<ng-container *ngTemplateOutlet="threeHours; context: { $implicit: forecast }"></ng-container>
+							}
+						</div>
 					</ng-template>
 				</mat-tab>
 			}
