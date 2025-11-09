@@ -62,4 +62,57 @@ describe("ForecastFiveComponent", (): void => {
 		const days = component.days();
 		expect(days).toEqual(["2023-03-01", "2023-03-02"]);
 	});
+
+	describe("onKeydown", (): void => {
+		it("should update tabIndex on ARROW_RIGHT keydown", (): void => {
+			const mockForecast = {
+				list: [
+					{ dt_txt: "2023-03-01 12:00:00", weather: "Sunny" },
+					{ dt_txt: "2023-03-02 12:00:00", weather: "Rainy" },
+				],
+			};
+			fixture.componentRef.setInput("forecastResult", mockForecast);
+			fixture.detectChanges();
+
+			component.tabIndex.set(0);
+			const event = new KeyboardEvent("keydown", { key: "ArrowRight" });
+			component.onKeydown(event, 0);
+
+			expect(component.tabIndex()).toBe(1);
+		});
+
+		it("should update tabIndex on ARROW_LEFT keydown", (): void => {
+			const mockForecast = {
+				list: [
+					{ dt_txt: "2023-03-01 12:00:00", weather: "Sunny" },
+					{ dt_txt: "2023-03-02 12:00:00", weather: "Rainy" },
+				],
+			};
+			fixture.componentRef.setInput("forecastResult", mockForecast);
+			fixture.detectChanges();
+
+			component.tabIndex.set(1);
+			const event = new KeyboardEvent("keydown", { key: "ArrowLeft" });
+			component.onKeydown(event, 1);
+
+			expect(component.tabIndex()).toBe(0);
+		});
+
+		it("should not update tabIndex on other keys", (): void => {
+			const mockForecast = {
+				list: [
+					{ dt_txt: "2023-03-01 12:00:00", weather: "Sunny" },
+					{ dt_txt: "2023-03-02 12:00:00", weather: "Rainy" },
+				],
+			};
+			fixture.componentRef.setInput("forecastResult", mockForecast);
+			fixture.detectChanges();
+
+			component.tabIndex.set(0);
+			const event = new KeyboardEvent("keydown", { key: "Enter" });
+			component.onKeydown(event, 0);
+
+			expect(component.tabIndex()).toBe(0);
+		});
+	});
 });
