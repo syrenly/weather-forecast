@@ -1,6 +1,7 @@
 <mat-form-field class="autocomplete">
 	<mat-label>Search city</mat-label>
 	<mat-icon
+		aria-hidden="true"
 		matPrefix
 		color="primary">
 		search
@@ -19,6 +20,7 @@
 	} @else if (autocompleteSuffix) {
 		<mat-icon
 			matSuffix
+			aria-hidden="true"
 			color="warn"
 			matTooltip="{{ autocompleteSuffix.tooltip }}">
 			{{ autocompleteSuffix.icon }}
@@ -36,6 +38,7 @@
 				<div class="weather-option">
 					@if (option.weather.length > 0) {
 						<img
+							aria-hidden="true"
 							alt="{{ option.weather[0].description }}"
 							[matTooltip]="option.weather[0].description"
 							width="36"
@@ -45,6 +48,7 @@
 					<span class="city-name">{{ option.name }},&nbsp;{{ option.sys.country }}</span>
 					<!-- NB aspect-ratio: 1.45 -->
 					<img
+						aria-hidden="true"
 						alt="image for the flag {{ option.sys.country }}"
 						width="16"
 						height="11"
