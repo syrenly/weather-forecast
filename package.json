@@ -16,7 +16,7 @@
 		"eslint": "eslint .",
 		"eslint:fix": "eslint . --fix",
 		"build:base-href": "ng build --configuration production --base-href \"https://syrenly.github.io/weather-forecast/\"",
-		"deploy": "ngh --dir=dist/weather-forecast/browser --no-silent",
+		"deploy": "gh-pages -d dist/weather-forecast/browser",
 		"prettier:format": "prettier --write . --ignore-path .prettierignore",
 		"prettier:check": "prettier --check . --ignore-path .prettierignore"
 	},
