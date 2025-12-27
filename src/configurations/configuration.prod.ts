@@ -1,4 +1,4 @@
-import { IConfiguration } from "../app/tokens";
+import { IConfiguration } from "../app/consts/tokens";
 
 export const configuration: IConfiguration = {
 	OpenWeatherApiKey: "",

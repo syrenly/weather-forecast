@@ -4,7 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { CURRENT_THEME, Theme } from "../../tokens";
+import { CURRENT_THEME, Theme } from "../../consts/tokens";
 /**
  * Switch between dark and light theme. The magic is done with an Injection Token CURRENT_THEME
  */

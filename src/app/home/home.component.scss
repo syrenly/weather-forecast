@@ -21,7 +21,7 @@ $licenseHeight: 57px;
 .header {
 	display: flex;
 	align-items: center;
-	justify-content: end;
+	justify-content: space-between;
 	height: $headerHeight;
 	padding: calc(#{$padding} / 2) $padding;
 	width: $widthMinusPadding;

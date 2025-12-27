@@ -2,7 +2,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { throwError } from "rxjs";
-import { DEFAULT_DEBOUNCE_DELAY_MILLISECONDS } from "../../consts";
+import { DEFAULT_DEBOUNCE_DELAY_MILLISECONDS } from "../../consts/consts";
 import { ICityWeather } from "../../types/city-types";
 import { provideMockSearchService } from "../../unit-test-utils/search.service.mock";
 import { mockCity, mockCitySearchResult } from "../../unit-test-utils/utils.mock";

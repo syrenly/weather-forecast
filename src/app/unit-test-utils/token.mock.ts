@@ -4,8 +4,8 @@
 
 import { LOCALE_ID, Provider } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { DUMMY_API_KEY } from "../consts";
-import { CURRENT_THEME, WEATHER_API_KEY } from "../tokens";
+import { DUMMY_API_KEY } from "../consts/consts";
+import { CURRENT_THEME, WEATHER_API_KEY } from "../consts/tokens";
 
 export const provideMockWeatherApiKey = (): Provider => ({
 	provide: WEATHER_API_KEY,

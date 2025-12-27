@@ -1,7 +1,7 @@
 import { AfterViewInit, DestroyRef, Directive, ElementRef, inject } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { Chart } from "chart.js";
-import { CURRENT_THEME, Theme } from "../tokens";
+import { CURRENT_THEME, Theme } from "../consts/tokens";
 import { darkOptions, lightOptions, mainOptions } from "./chart-utils";
 /**
  * Base class for the components that implement a ChartJS object

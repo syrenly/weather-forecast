@@ -2,7 +2,7 @@
 import { inject } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivateFn, GuardResult, Router, RouterStateSnapshot } from "@angular/router";
 import { Observable, of, switchMap } from "rxjs";
-import { WEATHER_API_KEY } from "../tokens";
+import { WEATHER_API_KEY } from "../consts/tokens";
 
 export const forecastDetailsGuard: CanActivateFn = (
 	_: ActivatedRouteSnapshot,

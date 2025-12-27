@@ -1,0 +1,9 @@
+@if (licenseStatus$ | async; as licenseStatus) {
+	<mat-icon
+		class="c-pointer"
+		[attr.tabindex]="0"
+		[matTooltip]="licenseStatus.message"
+		[color]="licenseStatus.found ? 'primary' : 'accent'">
+		{{ licenseStatus.icon }}
+	</mat-icon>
+}

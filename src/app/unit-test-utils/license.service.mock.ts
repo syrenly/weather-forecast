@@ -3,8 +3,10 @@
  */
 
 import { Injectable, Provider } from "@angular/core";
-import { DUMMY_API_KEY } from "../consts";
+import { Observable, of } from "rxjs";
+import { DUMMY_API_KEY, LICENSE_STATUS_MESSAGES } from "../consts/consts";
 import { LicenseService } from "../services/license.service";
+import { ILicenseStatusMessage } from "../types/types";
 
 @Injectable({
 	providedIn: "root",
@@ -15,6 +17,9 @@ export class LicenseMockService {
 	}
 	get useMockData(): boolean {
 		return true;
+	}
+	getLicenseStatus(): Observable<ILicenseStatusMessage["INVALID" | "VALID"]> {
+		return of(LICENSE_STATUS_MESSAGES.INVALID);
 	}
 }
 

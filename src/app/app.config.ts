@@ -6,8 +6,14 @@ import { provideAnimationsAsync } from "@angular/platform-browser/animations/asy
 import { provideRouter } from "@angular/router";
 import { Observable } from "rxjs";
 import { configuration } from "../configurations/configuration";
+import {
+	IConfiguration,
+	WEATHER_API_KEY,
+	initializeApp,
+	provideCurrentTheme,
+	provideWeatherApiKey,
+} from "./consts/tokens";
 import { routes } from "./routes/app.routes";
-import { IConfiguration, WEATHER_API_KEY, initializeApp, provideCurrentTheme, provideWeatherApiKey } from "./tokens";
 
 export const appConfig: ApplicationConfig = {
 	providers: [

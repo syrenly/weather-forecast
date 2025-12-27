@@ -4,17 +4,20 @@
 <div
 	class="header"
 	role="banner">
-	<div
-		class="title c-pointer"
-		role="link"
-		aria-label="Return home"
-		routerLink="home">
-		<mat-icon
-			color="primary"
-			matTooltip="Return home">
-			home
-		</mat-icon>
-		<div class="app-name">What's the weather like?</div>
+	<div class="title">
+		<app-api-alert />
+		<div
+			class="c-pointer"
+			role="link"
+			aria-label="Return home"
+			routerLink="home">
+			<mat-icon
+				color="primary"
+				matTooltip="Return home">
+				home
+			</mat-icon>
+			<div class="app-name">What's the weather like?</div>
+		</div>
 	</div>
 	@if (city) {
 		<h1>
