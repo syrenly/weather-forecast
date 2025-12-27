@@ -4,7 +4,7 @@
 
 import { Injectable, Provider } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { citySamples } from "../consts";
+import { citySamples } from "../consts/consts";
 import { SearchService } from "../services/search.service";
 import { ICityIdName, ICitySearchResult, ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";

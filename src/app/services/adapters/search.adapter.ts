@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { citySamples } from "../../consts";
+import { citySamples } from "../../consts/consts";
 import { ICityIdName, ICitySearchResult, ICityWeather } from "../../types/city-types";
 import { IFiveDaysForecast } from "../../types/forecast-types";
 import { forecastApiConfig } from "./search.config";

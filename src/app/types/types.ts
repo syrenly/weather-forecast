@@ -34,3 +34,5 @@ export interface IWeather {
 	description: string;
 	icon: string;
 }
+
+export type ILicenseStatusMessage = Record<"INVALID" | "VALID", { found: boolean; message: string; icon: string }>;

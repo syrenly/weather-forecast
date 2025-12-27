@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { provideAnimations } from "@angular/platform-browser/animations";
 import { RouterOutlet } from "@angular/router";
 import { AppComponent } from "./app.component";
-import { Theme } from "./tokens";
+import { Theme } from "./consts/tokens";
 import { provideMockTheme, provideMockWeatherApiKey } from "./unit-test-utils/token.mock";
 
 describe("AppComponent", (): void => {

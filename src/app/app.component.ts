@@ -2,9 +2,9 @@ import { Component, DestroyRef, inject, OnInit, Renderer2 } from "@angular/core"
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { RouterOutlet } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
-import { themeCssClass } from "./consts";
+import { themeCssClass } from "./consts/consts";
+import { CURRENT_THEME, Theme } from "./consts/tokens";
 import { routeTransitionAnimations } from "./routes/route-transition-animations";
-import { CURRENT_THEME, Theme } from "./tokens";
 @Component({
 	selector: "app-root",
 	imports: [RouterOutlet],

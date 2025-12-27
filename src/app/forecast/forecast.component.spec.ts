@@ -2,8 +2,10 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testin
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
+import { provideMockLicenseService } from "../unit-test-utils/license.service.mock";
 import { provideMockSearchService } from "../unit-test-utils/search.service.mock";
-import { provideMockTheme } from "../unit-test-utils/token.mock";
+import { provideMockLiveAnnouncer } from "../unit-test-utils/third-party.service.mock";
+import { provideMockDUMMYWeatherApiKey, provideMockTheme } from "../unit-test-utils/token.mock";
 import { mockCity, mockForecastResult } from "../unit-test-utils/utils.mock";
 import ForecastComponent from "./forecast.component";
 
@@ -17,6 +19,15 @@ const route = {
 	}),
 };
 
+const providers = [
+	provideMockDUMMYWeatherApiKey(),
+	provideMockLicenseService(),
+	provideMockLiveAnnouncer(),
+	provideMockSearchService(),
+	provideMockTheme(),
+	Router,
+];
+
 describe("ForecastComponent case success route", (): void => {
 	let component: ForecastComponent;
 	let router: Router;
@@ -25,12 +36,7 @@ describe("ForecastComponent case success route", (): void => {
 	beforeEach(async (): Promise<void> => {
 		await TestBed.configureTestingModule({
 			imports: [ForecastComponent, NoopAnimationsModule],
-			providers: [
-				provideMockSearchService(),
-				provideMockTheme(),
-				{ provide: ActivatedRoute, useValue: route },
-				Router,
-			],
+			providers: [...providers, { provide: ActivatedRoute, useValue: route }],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(ForecastComponent);
@@ -72,11 +78,7 @@ describe("ForecastComponent case error status", (): void => {
 	beforeEach(async (): Promise<void> => {
 		await TestBed.configureTestingModule({
 			imports: [ForecastComponent, NoopAnimationsModule],
-			providers: [
-				provideMockSearchService(),
-				provideMockTheme(),
-				{ provide: ActivatedRoute, useValue: errorInRoute },
-			],
+			providers: [...providers, { provide: ActivatedRoute, useValue: errorInRoute }],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(ForecastComponent);

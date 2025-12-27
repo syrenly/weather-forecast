@@ -2,9 +2,9 @@ import { HttpClient, provideHttpClient } from "@angular/common/http";
 import { HttpTestingController, provideHttpClientTesting } from "@angular/common/http/testing";
 import { TestBed } from "@angular/core/testing";
 import { BehaviorSubject } from "rxjs";
+import { provideMockTheme, provideMockWeatherApiKey } from "../unit-test-utils/token.mock";
 import { DUMMY_API_KEY } from "./consts";
 import * as tokens from "./tokens";
-import { provideMockTheme, provideMockWeatherApiKey } from "./unit-test-utils/token.mock";
 
 describe("tokens", (): void => {
 	let httpMock: HttpTestingController;

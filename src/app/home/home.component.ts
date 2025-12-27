@@ -6,6 +6,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { Router } from "@angular/router";
 import { ICityIdName, ICityWeather } from "../types/city-types";
+import { ApiAlertComponent } from "../ui-components/api-alert/api-alert.component";
 import { SearchbarComponent } from "../ui-components/searchbar/searchbar.component";
 import { SwitchThemeComponent } from "../ui-components/switch-theme/switch-theme.component";
 import { SearchService } from "./../services/search.service";
@@ -21,12 +22,13 @@ import { getRandomElements } from "./home.utils";
 @Component({
 	selector: "app-home",
 	imports: [
-		MatCardModule,
+		ApiAlertComponent,
 		MatButtonModule,
+		MatCardModule,
+		MatTooltipModule,
 		NgOptimizedImage,
 		SearchbarComponent,
 		SwitchThemeComponent,
-		MatTooltipModule,
 	],
 	templateUrl: "./home.component.html",
 	styleUrl: "./home.component.scss",

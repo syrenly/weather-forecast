@@ -1,3 +1,4 @@
+import { LiveAnnouncer } from "@angular/cdk/a11y";
 import { Component, DestroyRef, inject, OnInit } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { MatCardModule } from "@angular/material/card";
@@ -6,10 +7,11 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ActivatedRoute, Data, Router, RouterLink } from "@angular/router";
-import { HttpError } from "../consts";
+import { HttpError, SEARCH_ERROR_MESSAGES } from "../consts/consts";
 import { ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
 import { IWeather } from "../types/types";
+import { ApiAlertComponent } from "../ui-components/api-alert/api-alert.component";
 import { CurrentWeatherComponent } from "../ui-components/current-weather/current-weather.component";
 import { ForecastFiveComponent } from "../ui-components/forecast-five/forecast-five.component";
 import { PrecipitationChartComponent } from "../ui-components/precipitation-chart/precipitation-chart.component";
@@ -29,11 +31,12 @@ import { SearchService } from "./../services/search.service";
 @Component({
 	selector: "app-forecast",
 	imports: [
+		ApiAlertComponent,
 		CurrentWeatherComponent,
 		ForecastFiveComponent,
-		MatIconModule,
 		MatCardModule,
 		MatDividerModule,
+		MatIconModule,
 		MatProgressBarModule,
 		MatTooltipModule,
 		PrecipitationChartComponent,
@@ -61,6 +64,7 @@ export default class ForecastComponent implements OnInit {
 	private readonly router = inject(Router);
 	private readonly destroyRef = inject(DestroyRef);
 	private readonly searchService = inject(SearchService);
+	private readonly liveAnnouncer = inject(LiveAnnouncer);
 	// #endregion
 
 	ngOnInit(): void {
@@ -69,6 +73,7 @@ export default class ForecastComponent implements OnInit {
 			this.searchService.navigationStarted = false;
 			if (valueData?.errorStatus) {
 				this.errorInfo = this.setErrorInfo(valueData.errorStatus);
+				this.liveAnnouncer.announce(this.errorInfo.text);
 				return;
 			}
 			const routeData: {
@@ -91,32 +96,7 @@ export default class ForecastComponent implements OnInit {
 	 * @param errorStatus the http status
 	 */
 	setErrorInfo(errorStatus: number): { icon: string; text: string } {
-		switch (errorStatus) {
-			case HttpError.BadRequest:
-				return {
-					icon: "error_outline",
-					text: "The forecasts were not retrieved due to an error in the structure of the request. Please retry.",
-				};
-			case HttpError.Unauthorized:
-				return {
-					icon: "policy",
-					text: "The forecasts were not retrieved, since the license is not valid, expired or missing.",
-				};
-			case HttpError.NotFound:
-				return {
-					icon: "search_off",
-					text: "The city was not found. Please make another search in order to retrieve the right data.",
-				};
-			case HttpError.TooManyRequests:
-				return {
-					icon: "event_repeat",
-					text: "The forecasts were not retrieved, because too many requests were sent to the server. Please, consider to extend the license or wait some times.",
-				};
-			default:
-				return {
-					icon: "error_outline",
-					text: "The forecasts were not retrieved due to an internal error.",
-				};
-		}
+		const info = SEARCH_ERROR_MESSAGES[errorStatus as HttpError];
+		return info || SEARCH_ERROR_MESSAGES["default"]!;
 	}
 }

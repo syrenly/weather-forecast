@@ -1,7 +1,7 @@
 import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { HttpTestingController, provideHttpClientTesting } from "@angular/common/http/testing";
 import { TestBed, getTestBed } from "@angular/core/testing";
-import { citySamples } from "../../consts";
+import { citySamples } from "../../consts/consts";
 import { ICityIdName, ICitySearchResult, ICityWeather } from "../../types/city-types";
 import { IFiveDaysForecast } from "../../types/forecast-types";
 import { SearchAdapter } from "./search.adapter";

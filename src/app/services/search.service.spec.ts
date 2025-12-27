@@ -1,5 +1,5 @@
 import { getTestBed, TestBed } from "@angular/core/testing";
-import { citySamples, DUMMY_API_KEY, dummyCitySamples } from "../consts";
+import { citySamples, DUMMY_API_KEY, dummyCitySamples } from "../consts/consts";
 import { ICityIdName, ICitySearchResult, ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
 import { provideMockDummySearchAdapter } from "../unit-test-utils/dummy-search.adapter.mock";

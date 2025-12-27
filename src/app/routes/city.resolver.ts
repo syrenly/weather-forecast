@@ -2,7 +2,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { ActivatedRouteSnapshot, RedirectCommand, ResolveFn, Router } from "@angular/router";
 import { Observable, catchError, forkJoin, of } from "rxjs";
-import { HttpError } from "../consts";
+import { HttpError } from "../consts/consts";
 import { SearchService } from "../services/search.service";
 import { ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";

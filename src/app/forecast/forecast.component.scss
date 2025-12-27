@@ -21,12 +21,13 @@ $widthMinusYMargin: calc(100% - #{$padding});
 	height: $header;
 	width: $widthMinusYPadding;
 	padding: $padding;
-	.title {
+	app-api-alert {
+		margin-right: calc(#{$margin} / 2);
+	}
+	.title,
+	[role="link"] {
 		display: flex;
 		align-items: center;
-		h3 {
-			margin: 0 $margin;
-		}
 	}
 }
 
@@ -34,6 +35,7 @@ h1 {
 	text-align: center;
 	margin-bottom: 0;
 }
+
 .content {
 	height: calc(100% - #{$header});
 	align-self: center;

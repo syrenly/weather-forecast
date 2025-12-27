@@ -2,7 +2,7 @@ import { Component, ElementRef } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { Chart } from "chart.js";
 import { BehaviorSubject } from "rxjs";
-import { Theme } from "../tokens";
+import { Theme } from "../consts/tokens";
 import { provideMockTheme } from "../unit-test-utils/token.mock";
 import { ChartBase } from "./chart.base";
 
