@@ -19,6 +19,7 @@
 		"sourceMap": true,
 		"strict": true,
 		"target": "es2024",
+		"types": [],
 		"useDefineForClassFields": false
 	},
 	"angularCompilerOptions": {
@@ -26,5 +27,6 @@
 		"strictInjectionParameters": true,
 		"strictInputAccessModifiers": true,
 		"strictTemplates": true
-	}
+	},
+	"exclude": ["src/**/*.spec.ts"]
 }

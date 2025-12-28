@@ -7,5 +7,5 @@
 	},
 	"files": ["src/main.ts"],
 	"include": ["src/**/*.d.ts"],
-	"exclude": ["src/**/*.mock.ts"]
+	"exclude": ["src/**/*.mock.ts", "cypress"]
 }

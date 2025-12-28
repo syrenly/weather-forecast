@@ -3,8 +3,8 @@
 	"extends": "./tsconfig.json",
 	"compilerOptions": {
 		"outDir": "./out-tsc/spec",
-		"types": ["jasmine"]
+		"types": ["jasmine", "node"]
 	},
 	"include": ["src/**/*.spec.ts", "src/**/*.d.ts"],
-	"exclude": ["src/**/*.mock.ts"]
+	"exclude": ["src/**/*.mock.ts", "cypress"]
 }

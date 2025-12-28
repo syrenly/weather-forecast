@@ -48,6 +48,10 @@ Lines        : 100% ( 368/368 )
 ================================================================================
 ```
 
+## e2e tests
+
+Run `npx cypress open` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
 ## Lint
 
 Run `ng lint` to run the Angular lint.
