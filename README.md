@@ -78,7 +78,8 @@ Explore the [TODO List](./TODO_LIST.md) to know what's next.
 
 ## Branches
 
-- [ng-17](https://github.com/syrenly/weather-forecast/tree/ng-17): implementation with Angular 17;
-- [ng-18](https://github.com/syrenly/weather-forecast/tree/ng-18): implementation with Angular 18;
+- [ng-20](https://github.com/syrenly/weather-forecast/tree/ng-20): implementation with Angular 20;
 - [ng-19](https://github.com/syrenly/weather-forecast/tree/ng-19): implementation with Angular 19;
+- [ng-18](https://github.com/syrenly/weather-forecast/tree/ng-18): implementation with Angular 18;
+- [ng-17](https://github.com/syrenly/weather-forecast/tree/ng-17): implementation with Angular 17;
 - [assignment-04-2024](https://github.com/syrenly/weather-forecast/tree/assignment-04-2024): the first implementation of the application. Updates are not planned.
