@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { By } from "@angular/platform-browser";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { Router } from "@angular/router";
+import { FocusDirective } from "../directives/focus.directive";
 import { provideMockLicenseService } from "../unit-test-utils/license.service.mock";
 import { provideMockSearchService } from "../unit-test-utils/search.service.mock";
 import { provideMockLiveAnnouncer } from "../unit-test-utils/third-party.service.mock";
@@ -17,7 +18,7 @@ describe("HomeComponent", (): void => {
 
 	beforeEach(async (): Promise<void> => {
 		await TestBed.configureTestingModule({
-			imports: [HomeComponent, NoopAnimationsModule],
+			imports: [HomeComponent, FocusDirective, NoopAnimationsModule],
 			providers: [
 				provideMockTheme(),
 				provideMockSearchService(),

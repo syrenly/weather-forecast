@@ -8,6 +8,7 @@ import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ActivatedRoute, Data, Router, RouterLink } from "@angular/router";
 import { HttpError, SEARCH_ERROR_MESSAGES } from "../consts/consts";
+import { FocusDirective } from "../directives/focus.directive";
 import { ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
 import { IWeather } from "../types/types";
@@ -33,6 +34,7 @@ import { SearchService } from "./../services/search.service";
 	imports: [
 		ApiAlertComponent,
 		CurrentWeatherComponent,
+		FocusDirective,
 		ForecastFiveComponent,
 		MatCardModule,
 		MatDividerModule,

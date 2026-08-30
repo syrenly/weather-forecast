@@ -5,6 +5,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { Router } from "@angular/router";
+import { FocusDirective } from "../directives/focus.directive";
 import { ICityIdName, ICityWeather } from "../types/city-types";
 import { ApiAlertComponent } from "../ui-components/api-alert/api-alert.component";
 import { SearchbarComponent } from "../ui-components/searchbar/searchbar.component";
@@ -23,6 +24,7 @@ import { getRandomElements } from "./home.utils";
 	selector: "app-home",
 	imports: [
 		ApiAlertComponent,
+		FocusDirective,
 		MatButtonModule,
 		MatCardModule,
 		MatTooltipModule,
