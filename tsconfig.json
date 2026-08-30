@@ -15,10 +15,12 @@
 		"noImplicitReturns": true,
 		"noPropertyAccessFromIndexSignature": true,
 		"outDir": "./dist/out-tsc",
+		"rootDir": "./src",
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,
 		"target": "es2024",
+		"types": ["jasmine"],
 		"useDefineForClassFields": false
 	},
 	"angularCompilerOptions": {
