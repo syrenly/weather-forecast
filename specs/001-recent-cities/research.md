@@ -20,7 +20,7 @@
 
 ### 3. Keep a shared fallback list of sample cities
 
-- Decision: preserve the existing sample city list as the no-history fallback and fill remaining slots with sample cities not already in the recent list.
+- Decision: preserve the existing sample city list as the source of random fallback cities: with no history all four buttons are random cities, otherwise remaining slots are filled with random sample cities not already in the recent list.
 - Rationale: this avoids an empty home screen and preserves the current experience for first-time visitors.
 - Alternatives considered:
     - Empty state only: rejected because it breaks first-visit UX and the acceptance scenarios.

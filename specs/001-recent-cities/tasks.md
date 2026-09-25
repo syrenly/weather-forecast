@@ -11,7 +11,7 @@
 **Purpose**: Create the minimal feature structure and shared constants for the city history feature.
 
 - [x] T001 Create the feature storage and home-page extension structure under `src/app/services` and `src/app/home` with the folder-by-type layout described in the plan
-- [x] T002 [P] Add the recent-city storage constant and default maximum value in `src/app/consts/consts.ts` using the existing naming and constant style
+- [x] T002 [P] Add the recent-city storage key and the maximum (4, used for both remembered cities and visible buttons) as named constants in `src/app/consts/consts.ts` using the existing naming and constant style, and replace the hard-coded `6` and storage key string in `src/app/services/recent-cities.service.ts`
 - [x] T003 [P] Extend the city type contracts in `src/app/types/city-types.ts` to cover the recent-city record, ordered history list, and minimal display fields required by the home page
 
 ---
@@ -22,24 +22,26 @@
 
 **Checkpoint**: Foundational storage logic is ready; user story work can begin in parallel.
 
-- [x] T004 Implement the recent-city history model and validation rules in `src/app/services/recent-cities.service.ts`, including "at most 6 entries", newest-first ordering, and deduplication by city id
+- [x] T004 Implement the recent-city history model and validation rules in `src/app/services/recent-cities.service.ts`, including "at most 4 entries", latest-searched city always first, and deduplication by city id
 - [x] T005 [P] Add safe browser storage read/write helpers to `src/app/services/recent-cities.service.ts` that handle missing keys, invalid JSON, blocked storage, and malformed records without crashing the app
 - [x] T006 [P] Add the service API for adding a viewed city, removing a single city, and clearing the full history in `src/app/services/recent-cities.service.ts`
-- [x] T007 Implement the fallback logic in `src/app/services/recent-cities.service.ts` that returns sample cities when no recent history exists or storage is invalid
+- [x] T007 Implement the fallback logic in `src/app/services/recent-cities.service.ts` that returns random sample cities when no recent history exists or storage is invalid
 
 ---
 
 ## Phase 3: User Story 1 - Quick access to cities I looked at before (Priority: P1) 🎯 MVP
 
-**Goal**: Show a recent-city shortcut list on the home page, newest first, with one-click navigation to the forecast route.
+**Goal**: Show at most 4 city buttons on the home page, each labeled with the city name, with the latest searched cities first and one-click navigation to the forecast route.
 
-**Independent Test**: Open the forecast for three different cities, return to the home page, and verify the list shows them in newest-first order and clicking a shortcut opens the correct forecast.
+**Independent Test**: Search three different cities (by search bar or by clicking buttons), return to the home page, and verify the first three buttons show them in newest-first order followed by one random city, and clicking a button opens the correct forecast.
 
 ### Implementation for User Story 1
 
-- [x] T008 [US1] Update the home page state and view model in `src/app/home/home.component.ts` to merge recent-city shortcuts with the current sample-city list while preserving the existing component pattern
-- [x] T009 [US1] Update `src/app/home/home.component.html` to render accessible recent-city shortcut buttons that are keyboard-operable and match the existing Angular Material styling
-- [x] T010 [US1] Wire the click navigation and route behavior in `src/app/home/home.component.ts` so each recent shortcut resolves to `/forecast/:id` and follows the existing router conventions
+- [x] T008 [US1] Update the home page state and view model in `src/app/home/home.component.ts` to merge recent cities with random sample cities (max 4 buttons) while preserving the existing component pattern
+- [x] T009 [US1] Update `src/app/home/home.component.html` to render at most 4 accessible city buttons, each showing the city name, that are keyboard-operable and match the existing Angular Material styling
+- [x] T010 [US1] Wire the click navigation and route behavior in `src/app/home/home.component.ts` so each button resolves to `/forecast/:id` and follows the existing router conventions
+- [x] T019 [US1] Record the city as searched when a city button is clicked: call `RecentCitiesService.recordCity` from `navigateByCityId` in `src/app/home/home.component.ts` (today only search selection via `navigateToCity` records it), so clicking a button moves that city to the first position without duplicates
+- [x] T020 [US1] Add or update unit tests in `src/app/home/home.component.spec.ts` and `src/app/services/recent-cities.service.spec.ts` for: maximum of 4 buttons, latest first, no duplicates after re-searching, recording on both button click and search selection, and a fifth searched city dropping the oldest
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and independently testable.
 
@@ -47,15 +49,15 @@
 
 ## Phase 4: User Story 2 - Sensible suggestions for first-time visitors (Priority: P2)
 
-**Goal**: Keep the home page useful even when the visitor has no saved history or limited history and never show an empty list.
+**Goal**: Keep the home page useful even when the visitor has no saved history or limited history: fill up to 4 buttons with random cities and never show an empty list.
 
-**Independent Test**: Clear browser storage, open the home page, and confirm the fallback sample cities are still shown; then add a partial history and verify remaining slots are filled with sample cities not already present.
+**Independent Test**: Clear browser storage, open the home page, and confirm 4 random city buttons are shown; then add a partial history and verify remaining slots are filled with random cities not already present.
 
 ### Implementation for User Story 2
 
-- [x] T011 [P] [US2] Extend the home-page composition logic in `src/app/home/home.component.ts` so recent cities are shown first and leftover slots are filled with sample cities that are not already in the recent list
+- [x] T011 [P] [US2] Extend the home-page composition logic in `src/app/home/home.component.ts` so recent cities are shown first and leftover slots are filled with random sample cities that are not already in the recent list, until 4 buttons are shown (fewer only if the sample list is smaller)
 - [x] T012 [US2] Add the no-history and partial-history fallback flow in `src/app/services/recent-cities.service.ts` so the service returns the correct ordered list when storage is empty or contains fewer than the max number of items
-- [x] T013 [US2] Update `src/app/home/home.component.html` to preserve the visible fallback list when the recent history is empty, invalid, or shorter than the configured maximum
+- [x] T013 [US2] Update `src/app/home/home.component.html` to preserve the visible fallback list when the recent history is empty, invalid, or shorter than the configured maximum, and reword the empty-state text and intro text, which still mention "recent cities" and "sample cities below", to match the random-suggestions behavior
 
 **Checkpoint**: At this point, User Stories 1 and 2 should both work independently.
 
@@ -109,6 +111,7 @@
 - User Story 2 tasks T011 and T012 can advance in parallel after the service contract exists.
 - User Story 3 tasks T014 and T015 can proceed in parallel after the service API is ready.
 - Final validation tasks T017 and T018 can run in parallel once all story work is complete.
+- T019 depends on T004 (the max of 4); T020 depends on T019.
 
 ---
 
@@ -157,4 +160,6 @@ With multiple developers:
 - [P] tasks indicate independent work that can run in parallel when different files are involved.
 - Story labels map each task to the relevant user story for traceability.
 - All tasks are intentionally scoped to the existing Angular structure, browser-storage contract, and folder-by-type layout required by the project constitution.
+- Revised 2026-09-25 after the spec change (max 4 buttons, random fallback, recording on button click and search selection). Unchecked tasks are the work still to do; T017 and T018 were reopened because they must be re-run after the changes.
+- User Story 3 (T014-T016) is unchanged by this revision; see the open question in the spec review about keeping it.
 - The generated task list is designed to be directly actionable by an LLM or developer without requiring additional design context.

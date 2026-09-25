@@ -3,6 +3,8 @@ node_modules/
 coverage/
 .vscode/
 .angular/
+.specify/
+specs/
 
 package-lock.json
 .editorconfig

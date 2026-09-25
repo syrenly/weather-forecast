@@ -16,6 +16,8 @@ export default defineConfig([
 	globalIgnores([
 		"**/.nx/",
 		".vscode/*",
+		".specify/",
+		"specs/",
 		"**/*.yaml",
 		"**/*.yml",
 		"**/*.mock.ts",

@@ -6,7 +6,7 @@
 
 **Input**: User description: "refresh button or periodic refresh of the data"
 
-## User Scenarios & Testing *(mandatory)*
+## User Scenarios & Testing _(mandatory)_
 
 ### User Story 1 - Manual refresh (Priority: P1)
 
@@ -64,7 +64,7 @@ While the forecast page is open and visible, the data refreshes by itself at a r
 - The device goes offline: refresh fails with a clear message; automatic refresh resumes when connectivity returns and the next interval elapses.
 - Automatic refresh must not run continuously in a hidden tab, to protect the limited API license quota.
 
-## Requirements *(mandatory)*
+## Requirements _(mandatory)_
 
 ### Functional Requirements
 
@@ -83,7 +83,7 @@ While the forecast page is open and visible, the data refreshes by itself at a r
 - **Forecast Snapshot**: the current weather and five-day forecast for a city together with the time they were last loaded successfully.
 - **Refresh State**: idle, refreshing, or failed (with reason), used to drive the display and prevent duplicate requests.
 
-## Success Criteria *(mandatory)*
+## Success Criteria _(mandatory)_
 
 ### Measurable Outcomes
 

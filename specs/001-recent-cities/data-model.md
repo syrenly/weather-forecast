@@ -24,23 +24,23 @@ Validation rules:
 
 Ordered, bounded collection of `RecentCity` records.
 
-| Field    | Type         | Required | Notes                                                          |
-| -------- | ------------ | -------: | -------------------------------------------------------------- |
-| items    | RecentCity[] |      Yes | Newest-first order.                                            |
-| maxItems | number       |      Yes | Default value is 6, modeled as a single configurable constant. |
+| Field    | Type         | Required | Notes                                                  |
+| -------- | ------------ | -------: | ------------------------------------------------------ |
+| items    | RecentCity[] |      Yes | Newest-first order.                                    |
+| maxItems | number       |      Yes | Value is 4, modeled as a single configurable constant. |
 
 Validation rules:
 
 - `items.length <= maxItems`.
 - No duplicate `id` values.
-- Re-adding an existing city moves it to the front and preserves only one instance.
-- Invalid or malformed stored payloads are discarded and replaced with the fallback sample list.
+- Re-adding an existing city (searched again by button click or search selection) moves it to the front and preserves only one instance; the latest searched city is always first.
+- Invalid or malformed stored payloads are discarded and replaced with random sample cities.
 
 ## Persistence model
 
 - Persistence key: `weather-forecast:recent-cities`
 - Stored format: JSON array of `RecentCity` records.
-- Storage failure handling: if storage is blocked, unavailable, or returns invalid JSON, the app falls back to default sample cities without crashing.
+- Storage failure handling: if storage is blocked, unavailable, or returns invalid JSON, the app falls back to random sample cities without crashing.
 
 ## Derived UI representation
 
@@ -57,5 +57,5 @@ A derived view model used by the home page.
 The home page computes the visible shortcut list as:
 
 1. recent cities in newest-first order,
-2. then sample cities not already included,
+2. then random sample cities not already included,
 3. capped to the configured maximum visible slots.

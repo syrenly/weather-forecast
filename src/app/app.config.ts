@@ -25,8 +25,8 @@ export const appConfig: ApplicationConfig = {
 		// set the license key for OpenWeather API
 		provideWeatherApiKey(),
 		// initialize the application retrieving the configuration file
-		provideAppInitializer(
-			(): Observable<IConfiguration> => initializeApp(inject(WEATHER_API_KEY), configuration)()
+		provideAppInitializer((): Observable<IConfiguration> =>
+			initializeApp(inject(WEATHER_API_KEY), configuration)()
 		),
 		// set outline style for material
 		{

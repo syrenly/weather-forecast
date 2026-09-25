@@ -8,8 +8,7 @@ import { ICityWeather } from "../types/city-types";
 import { IFiveDaysForecast } from "../types/forecast-types";
 
 export type CityResolverType =
-	| { errorStatus: number }
-	| { countryInfo: ICityWeather; forecastResult: IFiveDaysForecast };
+	{ errorStatus: number } | { countryInfo: ICityWeather; forecastResult: IFiveDaysForecast };
 
 export const cityResolver: ResolveFn<Observable<CityResolverType> | RedirectCommand> = (
 	route: ActivatedRouteSnapshot

@@ -4,7 +4,7 @@ import { Theme } from "./tokens";
 
 export const DEFAULT_DEBOUNCE_DELAY_MILLISECONDS = 250;
 export const RECENT_CITIES_STORAGE_KEY = "weather-forecast:recent-cities";
-export const DEFAULT_RECENT_CITIES_LIMIT = 6;
+export const DEFAULT_RECENT_CITIES_LIMIT = 4;
 // API key to use when the real API key is not available
 export const DUMMY_API_KEY = "DUMMY_API_KEY";
 

@@ -6,7 +6,7 @@
 
 ## Summary
 
-Add a recent-cities shortcut list to the home page that is persisted in browser storage, ordered newest-first, deduplicated, limited to six entries, and gracefully falls back to the sample city list when storage is unavailable, empty, or malformed. The implementation will follow the existing Angular standalone patterns, use signal-based state where appropriate, and keep the storage payload minimal and privacy-safe.
+Add up to four city buttons (each showing the city name) to the home page. Cities the visitor searched (selected from the search bar or clicked from a button) are persisted in browser storage, ordered newest-first with the latest always first, deduplicated, and limited to four entries. Free buttons are filled with random cities from the sample list, and the same random cities are shown when storage is unavailable, empty, or malformed. The implementation will follow the existing Angular standalone patterns, use signal-based state where appropriate, and keep the storage payload minimal and privacy-safe.
 
 ## Technical Context
 
@@ -22,9 +22,9 @@ Add a recent-cities shortcut list to the home page that is persisted in browser 
 
 **Project Type**: Web application / single-page Angular frontend.
 
-**Performance Goals**: Home page render time stays near-instant; recent list remains capped at six cities and no network request is required on load.
+**Performance Goals**: Home page render time stays near-instant; recent list remains capped at four cities and no network request is required on load.
 
-**Constraints**: Must keep at most six entries, never store personal data, keep the app usable when storage is blocked or invalid, and be fully keyboard operable.
+**Constraints**: Must keep at most four entries, record a city on both button click and search selection, never store personal data, keep the app usable when storage is blocked or invalid, and be fully keyboard operable.
 
 **Scale/Scope**: Small local browser state; one feature page and a minimal storage service for a bounded set of city records.
 
@@ -36,7 +36,7 @@ _GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 - Pass: Test coverage is non-negotiable — any new service or component will ship with a matching `.spec.ts` and use the project’s mock/test utilities.
 - Pass: Accessibility first — shortcuts and clear/remove controls must be keyboard accessible and have labels.
 - Pass: Code quality gates — work will follow the existing folder-by-type layout under `src/app`, with shared constants in `src/app/consts`.
-- Pass: Simplicity and graceful degradation — no new libraries are required; the app keeps showing sample cities when storage fails or history is empty.
+- Pass: Simplicity and graceful degradation — no new libraries are required; the app keeps showing random sample cities when storage fails or history is empty.
 
 ## Project Structure
 
@@ -71,7 +71,7 @@ src/
 └── index.html
 ```
 
-**Structure Decision**: Single Angular frontend app. Recent-city logic belongs in a new or expanded service under `src/app/services`, while the home page remains responsible for rendering the shortcuts and fallback sample cities. Storage and ordering rules live in service-level logic, with UI state kept in component-level signals where needed.
+**Structure Decision**: Single Angular frontend app. Recent-city logic belongs in a new or expanded service under `src/app/services`, while the home page remains responsible for rendering the shortcuts and random fallback cities. Storage and ordering rules live in service-level logic, with UI state kept in component-level signals where needed.
 
 ## Complexity Tracking
 

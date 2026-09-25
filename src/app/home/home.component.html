@@ -24,13 +24,13 @@
 				role="search"
 				(itemSelected)="navigateToCity($event)" />
 			<div class="suggestions">
-				@for (city of cities; track city.id) {
+				@for (city of cities; track city.id + "-" + $index) {
 					<button
 						mat-flat-button
 						type="button"
 						color="primary"
 						[attr.aria-label]="'View weather forecast for ' + city.name"
-						(click)="navigateByCityId(city.id)">
+						(click)="navigateByCityId(city)">
 						{{ city.name }}
 					</button>
 				}

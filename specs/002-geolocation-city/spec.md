@@ -6,7 +6,7 @@
 
 **Input**: User description: "ask users to retrieve their location and open directly their city"
 
-## User Scenarios & Testing *(mandatory)*
+## User Scenarios & Testing _(mandatory)_
 
 ### User Story 1 - See the forecast for where I am (Priority: P1)
 
@@ -65,7 +65,7 @@ The application never asks for location on its own at page load; it only asks wh
 - The application runs with bundled demo data: the nearest city among the demo cities is used, or the control explains that location lookup is not available in demo mode.
 - The detected position is never stored, logged or sent anywhere other than to the weather service to identify the city.
 
-## Requirements *(mandatory)*
+## Requirements _(mandatory)_
 
 ### Functional Requirements
 
@@ -85,7 +85,7 @@ The application never asks for location on its own at page load; it only asks wh
 - **Device Position**: the visitor's latitude and longitude, used transiently to find a city and then discarded.
 - **Nearest City**: the city returned by the weather service for the position; attributes: identifier, name, country.
 
-## Success Criteria *(mandatory)*
+## Success Criteria _(mandatory)_
 
 ### Measurable Outcomes
 

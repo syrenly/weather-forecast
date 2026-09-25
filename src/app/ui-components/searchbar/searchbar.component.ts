@@ -63,9 +63,8 @@ export class SearchbarComponent implements AfterViewInit {
 			map((value: string | null): string => value ?? ""),
 			tap((): void => this.setStatus("loading")),
 			// make search server side
-			switchMap(
-				(value: string): Observable<ICitySearchResult> =>
-					value.length >= MIN_CHAR_SEARCH ? this.searchService.searchCity(value) : of(EMPTY_SEARCH_RESULT)
+			switchMap((value: string): Observable<ICitySearchResult> =>
+				value.length >= MIN_CHAR_SEARCH ? this.searchService.searchCity(value) : of(EMPTY_SEARCH_RESULT)
 			),
 			// manage errors
 			catchError((error: HttpErrorResponse): Observable<ICitySearchResult> => {

@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
-import { citySamples } from "../consts/consts";
+import { DEFAULT_RECENT_CITIES_LIMIT, RECENT_CITIES_STORAGE_KEY, citySamples } from "../consts/consts";
 import { ICityIdName, IRecentCity } from "../types/city-types";
 
 @Injectable({
 	providedIn: "root",
 })
 export class RecentCitiesService {
-	private readonly maxCities = 6;
+	private readonly maxCities = DEFAULT_RECENT_CITIES_LIMIT;
 
 	getRecentCities(): IRecentCity[] {
 		const parsed = this.readStoredCities();
@@ -52,7 +52,7 @@ export class RecentCitiesService {
 		}
 
 		try {
-			const rawValue = storage.getItem("weather-forecast:recent-cities");
+			const rawValue = storage.getItem(RECENT_CITIES_STORAGE_KEY);
 			if (!rawValue) {
 				return [];
 			}
@@ -73,7 +73,7 @@ export class RecentCitiesService {
 		}
 
 		try {
-			storage.setItem("weather-forecast:recent-cities", JSON.stringify(cities));
+			storage.setItem(RECENT_CITIES_STORAGE_KEY, JSON.stringify(cities));
 		} catch {
 			// Ignore storage write failures so the app keeps working without crashing.
 		}

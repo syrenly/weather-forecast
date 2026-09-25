@@ -8,12 +8,14 @@ import { provideMockSearchService } from "../unit-test-utils/search.service.mock
 import { provideMockLiveAnnouncer } from "../unit-test-utils/third-party.service.mock";
 import { provideMockTheme } from "../unit-test-utils/token.mock";
 import { mockCity } from "../unit-test-utils/utils.mock";
+import { RecentCitiesService } from "./../services/recent-cities.service";
 import HomeComponent from "./home.component";
 
 describe("HomeComponent", (): void => {
 	let component: HomeComponent;
 	let router: Router;
 	let fixture: ComponentFixture<HomeComponent>;
+	let recentCitiesService: RecentCitiesService;
 
 	beforeEach(async (): Promise<void> => {
 		await TestBed.configureTestingModule({
@@ -30,6 +32,7 @@ describe("HomeComponent", (): void => {
 		fixture = TestBed.createComponent(HomeComponent);
 		component = fixture.componentInstance;
 		router = TestBed.inject(Router);
+		recentCitiesService = TestBed.inject(RecentCitiesService);
 		fixture.detectChanges();
 	});
 
@@ -45,14 +48,18 @@ describe("HomeComponent", (): void => {
 	});
 	it("should navigate to selected city adding data to navigation", (): void => {
 		const routerSpy = spyOn(router, "navigateByUrl");
+		const recordSpy = spyOn(recentCitiesService, "recordCity").and.callThrough();
 		component.navigateToCity(mockCity);
+		expect(recordSpy).toHaveBeenCalledWith({ id: mockCity.id, name: mockCity.name });
 		expect(routerSpy).toHaveBeenCalledWith(`/forecast/${mockCity.id}`, {
 			state: mockCity,
 		});
 	});
-	it("should navigate to selected city", (): void => {
+	it("should navigate to selected city and record it as recent when a button is clicked", (): void => {
 		const routerSpy = spyOn(router, "navigate");
-		component.navigateByCityId(mockCity.id);
+		const recordSpy = spyOn(recentCitiesService, "recordCity").and.callThrough();
+		component.navigateByCityId({ id: mockCity.id, name: mockCity.name });
+		expect(recordSpy).toHaveBeenCalledWith({ id: mockCity.id, name: mockCity.name });
 		expect(routerSpy).toHaveBeenCalledWith(["forecast", mockCity.id]);
 	});
 	it("should populate cities array", (): void => {

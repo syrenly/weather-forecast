@@ -52,8 +52,9 @@ export default class HomeComponent implements OnInit {
 			});
 	}
 
-	navigateByCityId(cityId: number): void {
-		this.router.navigate(["forecast", cityId]);
+	navigateByCityId(city: ICityIdName): void {
+		this.recentCitiesService.recordCity(city);
+		this.router.navigate(["forecast", city.id]);
 	}
 	navigateToCity(city: ICityWeather): void {
 		this.recentCitiesService.recordCity({ id: city.id, name: city.name });

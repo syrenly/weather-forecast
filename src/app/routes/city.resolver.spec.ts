@@ -22,8 +22,8 @@ describe("cityResolver", (): void => {
 	const executeResolver: ResolveFn<Observable<CityResolverType> | RedirectCommand> = (
 		...resolverParameters
 	): MaybeAsync<Observable<CityResolverType> | RedirectCommand> =>
-		TestBed.runInInjectionContext(
-			(): MaybeAsync<Observable<CityResolverType> | RedirectCommand> => cityResolver(...resolverParameters)
+		TestBed.runInInjectionContext((): MaybeAsync<Observable<CityResolverType> | RedirectCommand> =>
+			cityResolver(...resolverParameters)
 		);
 
 	beforeEach((): void => {
