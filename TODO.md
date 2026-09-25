@@ -5,11 +5,11 @@ The following enhancements will be evaluated in order to improve the application
 - [ ] save in the browser storage the last N selected city and suggest them inside the HomeComponent instead of the list of hard-coded cities
 - [ ] ask users to retrieve their location and open directly their city
 - [ ] _started_ integrate the signal feature
-- [ ] evaluate where to use the DetectionStrategy OnPush... or go totally zoneless
-- [ ] not sure if leave Angular Material or create custom components
+- [ ] go totally zoneless
+- [ ] replace Angular Material components with custom components. In this scope, also the dark/light theme must be edit accordingly, and Angular Material must be completely removed
 - [ ] refresh button or periodic refresh of the data
 - [ ] manage errors and not-found with specific components in routing
-- [ ] translations?
+- [ ] use i18n for translations
 - [ ] make the use of mock API dynamic, when the API returns 403 using a wrong/invalid license
 - [ ] _started_ Add accessibility to charts and tables
 

@@ -66,6 +66,21 @@ Navigate to `http://localhost:4200/`.
 
 > With this mode, the application will be built in _production_. Remember to update the license key for the OpenWeather API [here](./src//assets/configurations/configuration.prod.json) with a full working one.
 
+## Upgrading Angular
+
+Every major Angular version is preserved in its own `ng-<N>` branch (see [Branches](#branches)), and the upgrade to the next major version reaches `main` through a pull request. To upgrade from version N-1 to N:
+
+1. Make sure `main` is up to date and green: `npm run eslint`, `npm run prettier:check` and `npm run test:coverage` must pass.
+2. **Before merging anything**, preserve the current version by creating a branch from `main` and pushing it:
+   `git switch main && git pull && git switch -c ng-<N-1> && git push -u origin ng-<N-1>`
+3. Create the upgrade branch from `main`, for example `git switch -c upgrade-angular-<N> main`.
+4. Follow the [Angular update guide](https://angular.dev/update-guide) and run `ng update @angular/core@<N> @angular/cli@<N> @angular/material@<N>` one major version at a time.
+5. Fix the breaking changes, then run `npm run eslint`, `npm run prettier:check` and `npm run test:coverage`. Coverage must not drop.
+6. Open a pull request towards `main` with a title like `[Upgrade] Angular <N>`, and merge it only when the checks above pass. Never push the upgrade directly to `main`.
+7. Update the [Branches](#branches) list in this README: add the new `ng-<N-1>` branch and update the entry for `main`.
+
+The `ng-<N-1>` branch is a snapshot of the previous version: it only receives security fixes, and it is not published (GitHub Pages and the Docker image are built from `main`).
+
 ## Attributions
 
 The project depends on [Open Weather Map](https://openweathermap.org), which provides an API with free license. The license is limited to small number of requests and few methods.
@@ -78,6 +93,7 @@ Explore the [TODO List](./TODO_LIST.md) to know what's next.
 
 ## Branches
 
+- [main](https://github.com/syrenly/weather-forecast/tree/main): implementation with Angular 21 (current);
 - [ng-20](https://github.com/syrenly/weather-forecast/tree/ng-20): implementation with Angular 20;
 - [ng-19](https://github.com/syrenly/weather-forecast/tree/ng-19): implementation with Angular 19;
 - [ng-18](https://github.com/syrenly/weather-forecast/tree/ng-18): implementation with Angular 18;
