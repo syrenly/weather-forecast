@@ -9,6 +9,7 @@ import { ICityIdName, ICityWeather } from "../types/city-types";
 import { ApiAlertComponent } from "../ui-components/api-alert/api-alert.component";
 import { SearchbarComponent } from "../ui-components/searchbar/searchbar.component";
 import { SwitchThemeComponent } from "../ui-components/switch-theme/switch-theme.component";
+import { RecentCitiesService } from "./../services/recent-cities.service";
 import { SearchService } from "./../services/search.service";
 import { getRandomElements } from "./home.utils";
 /**
@@ -38,6 +39,7 @@ export default class HomeComponent implements OnInit {
 	// #region Dependencies
 	private readonly router = inject(Router);
 	private readonly searchService = inject(SearchService);
+	private readonly recentCitiesService = inject(RecentCitiesService);
 	private readonly destroyRef = inject(DestroyRef);
 	// #endregion
 
@@ -46,7 +48,7 @@ export default class HomeComponent implements OnInit {
 			.getSampleCities()
 			.pipe(takeUntilDestroyed(this.destroyRef))
 			.subscribe(cities => {
-				this.cities = getRandomElements<ICityIdName>(cities);
+				this.cities = this.recentCitiesService.getHomeCities(getRandomElements<ICityIdName>(cities));
 			});
 	}
 
@@ -54,6 +56,7 @@ export default class HomeComponent implements OnInit {
 		this.router.navigate(["forecast", cityId]);
 	}
 	navigateToCity(city: ICityWeather): void {
+		this.recentCitiesService.recordCity({ id: city.id, name: city.name });
 		this.router.navigateByUrl(`/forecast/${city.id}`, {
 			state: city,
 		});

@@ -28,6 +28,10 @@ export interface ICityIdName {
 	name: string;
 }
 
+export interface IRecentCity extends ICityIdName {
+	viewedAt: number;
+}
+
 export interface IMainInfo {
 	temp: number;
 	feels_like: number;

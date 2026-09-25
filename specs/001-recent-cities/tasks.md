@@ -10,9 +10,9 @@
 
 **Purpose**: Create the minimal feature structure and shared constants for the city history feature.
 
-- [ ] T001 Create the feature storage and home-page extension structure under `src/app/services` and `src/app/home` with the folder-by-type layout described in the plan
-- [ ] T002 [P] Add the recent-city storage constant and default maximum value in `src/app/consts/consts.ts` using the existing naming and constant style
-- [ ] T003 [P] Extend the city type contracts in `src/app/types/city-types.ts` to cover the recent-city record, ordered history list, and minimal display fields required by the home page
+- [x] T001 Create the feature storage and home-page extension structure under `src/app/services` and `src/app/home` with the folder-by-type layout described in the plan
+- [x] T002 [P] Add the recent-city storage constant and default maximum value in `src/app/consts/consts.ts` using the existing naming and constant style
+- [x] T003 [P] Extend the city type contracts in `src/app/types/city-types.ts` to cover the recent-city record, ordered history list, and minimal display fields required by the home page
 
 ---
 
@@ -22,10 +22,10 @@
 
 **Checkpoint**: Foundational storage logic is ready; user story work can begin in parallel.
 
-- [ ] T004 Implement the recent-city history model and validation rules in `src/app/services/recent-cities.service.ts`, including "at most 6 entries", newest-first ordering, and deduplication by city id
-- [ ] T005 [P] Add safe browser storage read/write helpers to `src/app/services/recent-cities.service.ts` that handle missing keys, invalid JSON, blocked storage, and malformed records without crashing the app
-- [ ] T006 [P] Add the service API for adding a viewed city, removing a single city, and clearing the full history in `src/app/services/recent-cities.service.ts`
-- [ ] T007 Implement the fallback logic in `src/app/services/recent-cities.service.ts` that returns sample cities when no recent history exists or storage is invalid
+- [x] T004 Implement the recent-city history model and validation rules in `src/app/services/recent-cities.service.ts`, including "at most 6 entries", newest-first ordering, and deduplication by city id
+- [x] T005 [P] Add safe browser storage read/write helpers to `src/app/services/recent-cities.service.ts` that handle missing keys, invalid JSON, blocked storage, and malformed records without crashing the app
+- [x] T006 [P] Add the service API for adding a viewed city, removing a single city, and clearing the full history in `src/app/services/recent-cities.service.ts`
+- [x] T007 Implement the fallback logic in `src/app/services/recent-cities.service.ts` that returns sample cities when no recent history exists or storage is invalid
 
 ---
 
@@ -37,9 +37,9 @@
 
 ### Implementation for User Story 1
 
-- [ ] T008 [US1] Update the home page state and view model in `src/app/home/home.component.ts` to merge recent-city shortcuts with the current sample-city list while preserving the existing component pattern
-- [ ] T009 [US1] Update `src/app/home/home.component.html` to render accessible recent-city shortcut buttons that are keyboard-operable and match the existing Angular Material styling
-- [ ] T010 [US1] Wire the click navigation and route behavior in `src/app/home/home.component.ts` so each recent shortcut resolves to `/forecast/:id` and follows the existing router conventions
+- [x] T008 [US1] Update the home page state and view model in `src/app/home/home.component.ts` to merge recent-city shortcuts with the current sample-city list while preserving the existing component pattern
+- [x] T009 [US1] Update `src/app/home/home.component.html` to render accessible recent-city shortcut buttons that are keyboard-operable and match the existing Angular Material styling
+- [x] T010 [US1] Wire the click navigation and route behavior in `src/app/home/home.component.ts` so each recent shortcut resolves to `/forecast/:id` and follows the existing router conventions
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and independently testable.
 
@@ -53,9 +53,9 @@
 
 ### Implementation for User Story 2
 
-- [ ] T011 [P] [US2] Extend the home-page composition logic in `src/app/home/home.component.ts` so recent cities are shown first and leftover slots are filled with sample cities that are not already in the recent list
-- [ ] T012 [US2] Add the no-history and partial-history fallback flow in `src/app/services/recent-cities.service.ts` so the service returns the correct ordered list when storage is empty or contains fewer than the max number of items
-- [ ] T013 [US2] Update `src/app/home/home.component.html` to preserve the visible fallback list when the recent history is empty, invalid, or shorter than the configured maximum
+- [x] T011 [P] [US2] Extend the home-page composition logic in `src/app/home/home.component.ts` so recent cities are shown first and leftover slots are filled with sample cities that are not already in the recent list
+- [x] T012 [US2] Add the no-history and partial-history fallback flow in `src/app/services/recent-cities.service.ts` so the service returns the correct ordered list when storage is empty or contains fewer than the max number of items
+- [x] T013 [US2] Update `src/app/home/home.component.html` to preserve the visible fallback list when the recent history is empty, invalid, or shorter than the configured maximum
 
 **Checkpoint**: At this point, User Stories 1 and 2 should both work independently.
 
@@ -69,9 +69,9 @@
 
 ### Implementation for User Story 3
 
-- [ ] T014 [P] [US3] Add the remove-one and clear-all actions to `src/app/services/recent-cities.service.ts` and persist the updated recent-city list immediately
-- [ ] T015 [US3] Add the corresponding controls and actions to `src/app/home/home.component.html` and `src/app/home/home.component.ts`, including accessible button text and keyboard support
-- [ ] T016 [US3] Ensure the home page refreshes correctly after each mutation in `src/app/home/home.component.ts` and that the invalid-storage handling remains intact across reloads
+- [x] T014 [P] [US3] Add the remove-one and clear-all actions to `src/app/services/recent-cities.service.ts` and persist the updated recent-city list immediately
+- [x] T015 [US3] Add the corresponding controls and actions to `src/app/home/home.component.html` and `src/app/home/home.component.ts`, including accessible button text and keyboard support
+- [x] T016 [US3] Ensure the home page refreshes correctly after each mutation in `src/app/home/home.component.ts` and that the invalid-storage handling remains intact across reloads
 
 **Checkpoint**: All user stories should now be independently functional.
 
@@ -81,8 +81,8 @@
 
 **Purpose**: Final validation, cleanup, and compliance checks across the whole feature.
 
-- [ ] T017 [P] Run the project validation commands required by the constitution in the repository root and fix any lint, formatting, or test regressions introduced by the recent-city feature
-- [ ] T018 [P] Validate the end-to-end quickstart scenarios in `specs/001-recent-cities/quickstart.md` against the actual home-page behavior in `src/app/home/home.component.html` and `src/app/home/home.component.ts`
+- [x] T017 [P] Run the project validation commands required by the constitution in the repository root and fix any lint, formatting, or test regressions introduced by the recent-city feature
+- [x] T018 [P] Validate the end-to-end quickstart scenarios in `specs/001-recent-cities/quickstart.md` against the actual home-page behavior in `src/app/home/home.component.html` and `src/app/home/home.component.ts`
 
 ---
 

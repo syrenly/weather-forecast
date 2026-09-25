@@ -35,6 +35,9 @@
 					</button>
 				}
 			</div>
+			@if (cities.length === 0) {
+				<p class="empty-state">No recent cities yet. Try a search or choose one of the sample cities below.</p>
+			}
 		</mat-card-content>
 	</mat-card>
 </div>
